@@ -1,0 +1,15 @@
+:global .global-class {
+}
+
+:global(.global-class-2) {
+  .local-class-inside-global {
+  }
+}
+
+:local .local-class {
+}
+
+:local(.local-class-2) {
+  .local-class-inside-local {
+  }
+}

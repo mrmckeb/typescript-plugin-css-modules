@@ -1,0 +1,17 @@
+.classA {
+}
+
+.ClassB {
+}
+
+.class-c {
+}
+
+.parent {
+  .childA {
+  }
+  .childB {
+    .nestedChild {
+    }
+  }
+}

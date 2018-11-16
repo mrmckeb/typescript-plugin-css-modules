@@ -1,0 +1,9 @@
+/.vscode
+/node_modules
+/src
+.editorconfig
+npm-debug.log
+tsconfig.json
+tslint.json
+yarn-error.log
+yarn.lock

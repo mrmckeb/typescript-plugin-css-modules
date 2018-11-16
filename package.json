@@ -1,8 +1,8 @@
 {
-  "name": "typescript-css-modules",
-  "version": "1.0.0",
+  "name": "typescript-plugin-css-modules",
+  "version": "0.1.0",
   "main": "lib/index.js",
-  "repository": "git@github.com:mrmckeb/typescript-css-modules.git",
+  "repository": "git@github.com:mrmckeb/typescript-plugin-css-modules.git",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",
   "description": "CSS modules support for TypeScript",
@@ -15,12 +15,14 @@
     "typescript"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./lib && tsc",
+    "prepublish": "yarn build",
     "test": "jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "yarn test"
     }
   },
   "jest": {

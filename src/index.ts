@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
-import { types } from 'util';
 import { isCSS as _isCSS, isRelativeCSS } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
 
@@ -18,7 +17,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
         isCSS = (fileName) => new RegExp(customMatcher).test(fileName);
       }
     } catch (e) {
-      // There doesn't appear to be a way to throw warnings yet.
+      // TODO: Provide error/warning to user.
     }
 
     // Creates new virtual source files for the CSS modules.

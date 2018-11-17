@@ -7,10 +7,16 @@ const processor = postcss(postcssIcssSelectors({ mode: 'local' }));
 
 export const getClasses = (css: string) =>
   extractICSS(processor.process(css).root).icssExports;
-export const createExports = (classes: IICSSExports) =>
-  Object.keys(classes)
-    .map((exportName) => `export const ${exportName}: string;`)
-    .join('');
+
+const exportNameToProperty = (exportName: string) => `'${exportName}': string;`;
+export const createExports = (classes: IICSSExports) => `
+declare const classes: {
+  ${Object.keys(classes)
+    .map(exportNameToProperty)
+    .join('\n  ')}
+};
+export default classes;
+`;
 
 export const getDtsSnapshot = (
   ts: typeof ts_module,

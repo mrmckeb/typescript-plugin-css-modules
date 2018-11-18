@@ -1,11 +1,15 @@
 {
   "name": "typescript-plugin-css-modules",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
-  "repository": "git@github.com:mrmckeb/typescript-plugin-css-modules.git",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",
   "description": "CSS modules support for TypeScript",
+  "homepage": "https://github.com/mrmckeb/typescript-plugin-css-modules",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrmckeb/typescript-plugin-css-modules"
+  },
   "keywords": [
     "css",
     "modules",

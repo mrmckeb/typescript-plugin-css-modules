@@ -3,6 +3,8 @@
 A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)
 for [CSS Modules](https://github.com/css-modules/css-modules).
 
+<img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/master/docs/images/example.gif" alt="typescript-plugin-css-modules example" />
+
 This project was inspired by this [`create-react-app` issue](https://github.com/facebook/create-react-app/issues/5677)
 and is based on [`css-module-types`](https://github.com/timothykang/css-module-types).
 

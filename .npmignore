@@ -2,6 +2,7 @@
 /node_modules
 /src
 /lib/**/__tests__
+/docs/
 .editorconfig
 npm-debug.log
 tsconfig.json

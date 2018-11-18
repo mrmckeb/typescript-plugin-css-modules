@@ -4,7 +4,7 @@ A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/w
 for [CSS Modules](https://github.com/css-modules/css-modules).
 
 This project was inspired by this [`create-react-app` issue](https://github.com/facebook/create-react-app/issues/5677)
-and is heavily based on [`css-module-types`](https://github.com/timothykang/css-module-types).
+and is based on [`css-module-types`](https://github.com/timothykang/css-module-types).
 
 ## Usage
 
@@ -30,7 +30,14 @@ Once installed, add this plugin to your `tsconfig.json`:
 }
 ```
 
-You can also pass in your own file extension matcher (the default matcher is shown as an example):
+### Options
+
+| Option          | Default value                  | Description                                                                                                                                           |
+| --------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `customMatcher` | `"\\.module\\.(sa\|sc\|c)ss$"` | Change the file extensions that this plugin works with.                                                                                               |
+| `camelCase`     | `false`                        | Implements the behaviour of the [`camelCase` CSS Loader option](https://github.com/webpack-contrib/css-loader#camelcase) (accepting the same values). |
+
+The below is an example that only matches "\*.m.css" files, and [camel-cases dashes](https://github.com/webpack-contrib/css-loader#camelcase).
 
 ```json
 {
@@ -39,7 +46,8 @@ You can also pass in your own file extension matcher (the default matcher is sho
       {
         "name": "typescript-plugin-css-modules",
         "options": {
-          "customMatcher": "\\.module\\.(sa|sc|c)ss$"
+          "customMatcher": "\\.m\\.css$",
+          "camelCase": "dashes"
         }
       }
     ]
@@ -47,12 +55,31 @@ You can also pass in your own file extension matcher (the default matcher is sho
 }
 ```
 
+### Visual Studio Code
+
+By default, VSCode will use it's own version of TypeScript. To make it work with this plugin, you have two options:
+
+1. Add this plugin to `"typescript.tsserver.pluginPaths"` in settings. Note that this method doesn't currently support
+   plugin options.
+
+```json
+{
+  "typescript.tsserver.pluginPaths": ["typescript-plugin-css-modules"]
+}
+```
+
+2. Use your workspace's version of TypeScript, which will load the plugins from your `tsconfig.json` file.
+   ([instructions](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript)).
+
 ### Custom definitions
 
-Depending on your project configuration, you may also need to declare modules. Where you store this is up to you. An
-example might look like: `src/@types/custom.d.ts`.
+_Note: Create React App users can skip this section if you're using `react-scripts@2.1.x` or higher._
 
-The below is an example that you can modify if you use a `customMatcher`.
+If your project doesn't already have global declarations for CSS Modules, you will need to add these to help TypeScript understand the general shape of the imported CSS.
+
+Where you store global declarations is up to you. An example might look like: `src/custom.d.ts`.
+
+The below is an example that you can copy, or modify if you use a `customMatcher`.
 
 ```ts
 declare module '*.module.css' {

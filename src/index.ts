@@ -3,16 +3,15 @@ import * as ts_module from 'typescript/lib/tsserverlibrary';
 import { isCSS as _isCSS, isRelativeCSS } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
 
-interface IOptions {
-  customMatcher?: string;
-}
-
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let isCSS = _isCSS;
   function create(info: ts.server.PluginCreateInfo) {
+    // User options for plugin.
+    const options: IOptions = info.config.options || {};
+
     // Allow custom matchers to be used, handling bad matcher patterns;
     try {
-      const { customMatcher }: IOptions = info.config.options || {};
+      const { customMatcher } = options;
       if (customMatcher) {
         isCSS = (fileName) => new RegExp(customMatcher).test(fileName);
       }
@@ -28,7 +27,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
-        scriptSnapshot = getDtsSnapshot(ts, scriptSnapshot);
+        scriptSnapshot = getDtsSnapshot(ts, scriptSnapshot, options);
       }
       const sourceFile = _createLanguageServiceSourceFile(
         fileName,
@@ -49,7 +48,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(sourceFile.fileName)) {
-        scriptSnapshot = getDtsSnapshot(ts, scriptSnapshot);
+        scriptSnapshot = getDtsSnapshot(ts, scriptSnapshot, options);
       }
       sourceFile = _updateLanguageServiceSourceFile(
         sourceFile,

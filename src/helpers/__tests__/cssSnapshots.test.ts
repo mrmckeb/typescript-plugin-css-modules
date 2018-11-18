@@ -42,8 +42,8 @@ describe('utils / cssSnapshots', () => {
 
   describe('createExports', () => {
     it('should create an exports file', () => {
-      const exportsA = createExports(classesA);
-      const exportsB = createExports(classesB);
+      const exportsA = createExports(classesA, {});
+      const exportsB = createExports(classesB, {});
       expect(exportsA).toMatchSnapshot();
       expect(exportsB).toMatchSnapshot();
     });

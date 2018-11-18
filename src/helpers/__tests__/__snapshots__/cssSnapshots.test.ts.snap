@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`utils / cssSnapshots createExports should create an exports file 1`] = `
-"
-declare const classes: {
+"declare const classes: {
   'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -16,8 +15,7 @@ export default classes;
 `;
 
 exports[`utils / cssSnapshots createExports should create an exports file 2`] = `
-"
-declare const classes: {
+"declare const classes: {
   'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;

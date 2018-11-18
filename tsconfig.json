@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    // "forceConsistentCasingInFileNames": true,
     "lib": ["esnext"],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -15,5 +16,5 @@
     "strictNullChecks": true,
     "target": "es5"
   },
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": ["src"]
 }

@@ -1,6 +1,7 @@
 /.vscode
 /node_modules
 /src
+/lib/**/__tests__
 .editorconfig
 npm-debug.log
 tsconfig.json

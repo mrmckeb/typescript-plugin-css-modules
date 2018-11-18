@@ -17,7 +17,7 @@
   "scripts": {
     "build": "rm -rf ./lib && tsc",
     "prepublish": "yarn build",
-    "test": "jest"
+    "test": "jest ./src"
   },
   "husky": {
     "hooks": {
@@ -26,6 +26,9 @@
     }
   },
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts}"
+    ],
     "preset": "ts-jest",
     "testEnvironment": "node"
   },
@@ -35,7 +38,9 @@
     "trailingComma": "all"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.118",
     "icss-utils": "^4.0.0",
+    "lodash": "^4.17.11",
     "postcss": "^7.0.5",
     "postcss-icss-selectors": "^2.0.3"
   },

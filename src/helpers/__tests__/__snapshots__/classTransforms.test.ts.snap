@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils / classTransforms should not transform classes when no option is set 1`] = `
+Array [
+  Array [
+    "class-name-a",
+  ],
+  Array [
+    "classNameB",
+  ],
+  Array [
+    "class-Name-C",
+  ],
+  Array [
+    "__class_nAmeD--",
+  ],
+]
+`;
+
+exports[`utils / classTransforms should transform classes correctly when \`camelCase\` set to \`dashes\` 1`] = `
+Array [
+  Array [
+    "class-name-a",
+    "classNameA",
+  ],
+  Array [
+    "classNameB",
+  ],
+  Array [
+    "class-Name-C",
+    "classNameC",
+  ],
+  Array [
+    "__class_nAmeD--",
+  ],
+]
+`;
+
+exports[`utils / classTransforms should transform classes correctly when \`camelCase\` set to \`dashesOnly\` 1`] = `
+Array [
+  Array [
+    "classNameA",
+  ],
+  Array [
+    "classNameB",
+  ],
+  Array [
+    "classNameC",
+  ],
+  Array [
+    "__class_nAmeD--",
+  ],
+]
+`;
+
+exports[`utils / classTransforms should transform classes correctly when \`camelCase\` set to \`only\` 1`] = `
+Array [
+  Array [
+    "classNameA",
+  ],
+  Array [
+    "classNameB",
+  ],
+  Array [
+    "classNameC",
+  ],
+  Array [
+    "classNAmeD",
+  ],
+]
+`;
+
+exports[`utils / classTransforms should transform classes correctly when \`camelCase\` set to \`true\` 1`] = `
+Array [
+  Array [
+    "class-name-a",
+    "classNameA",
+  ],
+  Array [
+    "classNameB",
+  ],
+  Array [
+    "class-Name-C",
+    "classNameC",
+  ],
+  Array [
+    "__class_nAmeD--",
+    "classNAmeD",
+  ],
+]
+`;

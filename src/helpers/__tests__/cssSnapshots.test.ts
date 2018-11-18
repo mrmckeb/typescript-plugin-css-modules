@@ -42,16 +42,10 @@ describe('utils / cssSnapshots', () => {
 
   describe('createExports', () => {
     it('should create an exports file', () => {
-      const exportsA = createExports(classesA);
-      const exportsB = createExports(classesB);
-      // tslint:disable max-line-length
-      expect(exportsA).toMatchInlineSnapshot(
-        `"export const classA: string;export const ClassB: string;export const class-c: string;export const parent: string;export const childA: string;export const childB: string;export const nestedChild: string;"`,
-      );
-      expect(exportsB).toMatchInlineSnapshot(
-        `"export const local-class-inside-global: string;export const local-class: string;export const local-class-2: string;export const local-class-inside-local: string;"`,
-      );
-      // tslint:enable max-line-length
+      const exportsA = createExports(classesA, {});
+      const exportsB = createExports(classesB, {});
+      expect(exportsA).toMatchSnapshot();
+      expect(exportsB).toMatchSnapshot();
     });
   });
 });

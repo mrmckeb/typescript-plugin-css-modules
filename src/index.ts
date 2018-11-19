@@ -71,25 +71,25 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
         containingFile,
         reusedNames,
       ) => {
-        const resolvedCSS: ts.ResolvedModuleFull[] = [];
-
-        return _resolveModuleNames(
-          moduleNames.filter((moduleName) => {
-            if (isRelativeCSS(moduleName)) {
-              resolvedCSS.push({
-                extension: ts_module.Extension.Dts,
-                resolvedFileName: path.resolve(
-                  path.dirname(containingFile),
-                  moduleName,
-                ),
-              });
-              return false;
-            }
-            return true;
-          }),
+        const resolvedModules: ts_module.ResolvedModuleFull[] = _resolveModuleNames(
+          moduleNames,
           containingFile,
           reusedNames,
-        ).concat(resolvedCSS);
+        );
+
+        return moduleNames.map((moduleName, index) => {
+          if (isRelativeCSS(moduleName)) {
+            return {
+              extension: ts_module.Extension.Dts,
+              isExternalLibraryImport: false,
+              resolvedFileName: path.resolve(
+                path.dirname(containingFile),
+                moduleName,
+              ),
+            };
+          }
+          return resolvedModules[index];
+        });
       };
     }
 

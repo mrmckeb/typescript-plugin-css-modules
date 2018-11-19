@@ -6,7 +6,7 @@
 A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)
 for [CSS Modules](https://github.com/css-modules/css-modules).
 
-<img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/master/docs/images/example.gif" alt="typescript-plugin-css-modules example" />
+<img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/master/.github/images/example.gif" alt="typescript-plugin-css-modules example" />
 
 This project was inspired by this [`create-react-app` issue](https://github.com/facebook/create-react-app/issues/5677)
 and is based on [`css-module-types`](https://github.com/timothykang/css-module-types).
@@ -73,8 +73,7 @@ By default, VSCode will use it's own version of TypeScript. To make it work with
 }
 ```
 
-2. Use your workspace's version of TypeScript, which will load the plugins from your `tsconfig.json` file.
-   ([instructions](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript)).
+2. Use your workspace's version of TypeScript, which will load the plugins from your `tsconfig.json` file. For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript).
 
 ### Custom definitions
 
@@ -102,3 +101,5 @@ declare module '*.module.sass' {
   export default classes;
 }
 ```
+
+## Contributors

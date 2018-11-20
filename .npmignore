@@ -1,8 +1,9 @@
+/.circleci
+/.github
 /.vscode
+/lib/**/__tests__
 /node_modules
 /src
-/lib/**/__tests__
-/.github
 .editorconfig
 npm-debug.log
 tsconfig.json

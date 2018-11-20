@@ -1,7 +1,8 @@
 # typescript-plugin-css-modules
 
-[![license](https://img.shields.io/npm/l/typescript-plugin-css-modules.svg)](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/develop/LICENSE)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/mrmckeb/typescript-plugin-css-modules/master.svg)](https://circleci.com/gh/mrmckeb/typescript-plugin-css-modules)
 [![npm](https://img.shields.io/npm/v/typescript-plugin-css-modules.svg)](https://www.npmjs.com/package/typescript-plugin-css-modules)
+[![license](https://img.shields.io/npm/l/typescript-plugin-css-modules.svg)](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/develop/LICENSE)
 
 A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)
 for [CSS Modules](https://github.com/css-modules/css-modules).
@@ -9,7 +10,7 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
 <img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/master/.github/images/example.gif" alt="typescript-plugin-css-modules example" />
 
 This project was inspired by this [`create-react-app` issue](https://github.com/facebook/create-react-app/issues/5677)
-and is based on [`css-module-types`](https://github.com/timothykang/css-module-types).
+and was based on [`css-module-types`](https://github.com/timothykang/css-module-types).
 
 ## Usage
 
@@ -101,5 +102,3 @@ declare module '*.module.sass' {
   export default classes;
 }
 ```
-
-## Contributors

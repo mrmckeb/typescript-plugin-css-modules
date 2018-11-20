@@ -1,4 +1,9 @@
-import { isCSS, isRelativeCSS } from '../cssExtensions';
+import {
+  isCSS,
+  isRelativeCSS,
+  setExtensionsPattern,
+  DEFAULT_EXTENSIONS_PATTERN,
+} from '../cssExtensions';
 
 describe('utils / cssExtensions', () => {
   describe('isCSS', () => {
@@ -24,6 +29,20 @@ describe('utils / cssExtensions', () => {
 
     it('should not match non-relative CSS modules', () => {
       expect(isRelativeCSS('myfile.module.css')).toBe(false);
+    });
+  });
+
+  describe('setExtensionsPattern', () => {
+    afterEach(() => setExtensionsPattern(DEFAULT_EXTENSIONS_PATTERN));
+
+    it('should overwrite default extensions pattern', () => {
+      const pattern = new RegExp('\\.css$');
+      setExtensionsPattern(pattern);
+
+      expect(isCSS('./myfile.css')).toBe(true);
+      expect(isCSS('./myfile.scss')).toBe(false);
+      expect(isRelativeCSS('../folder/myfile.css')).toBe(true);
+      expect(isRelativeCSS('../folders/myfile.scss')).toBe(false);
     });
   });
 });

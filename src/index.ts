@@ -1,23 +1,29 @@
 import * as path from 'path';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
-import { isCSS as _isCSS, isRelativeCSS } from './helpers/cssExtensions';
+import {
+  isCSS,
+  isRelativeCSS,
+  setExtensionsPattern,
+} from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
 
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
-  let isCSS = _isCSS;
   function create(info: ts.server.PluginCreateInfo) {
     // User options for plugin.
     const options: IOptions = info.config.options || {};
 
     // Allow custom matchers to be used, handling bad matcher patterns;
+    let extensionsPattern: RegExp | undefined;
     try {
       const { customMatcher } = options;
       if (customMatcher) {
-        isCSS = (fileName) => new RegExp(customMatcher).test(fileName);
+        extensionsPattern = new RegExp(customMatcher);
       }
     } catch (e) {
       // TODO: Provide error/warning to user.
     }
+
+    setExtensionsPattern(extensionsPattern);
 
     // Creates new virtual source files for the CSS modules.
     const _createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;

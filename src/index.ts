@@ -1,23 +1,18 @@
 import * as path from 'path';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
-import { isCSS as _isCSS, isRelativeCSS } from './helpers/cssExtensions';
+import { createMatchers } from './helpers/createMatchers';
+import { isCSSFn } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
 
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
-  let isCSS = _isCSS;
+  let _isCSS: isCSSFn;
   function create(info: ts.server.PluginCreateInfo) {
     // User options for plugin.
     const options: IOptions = info.config.options || {};
 
-    // Allow custom matchers to be used, handling bad matcher patterns;
-    try {
-      const { customMatcher } = options;
-      if (customMatcher) {
-        isCSS = (fileName) => new RegExp(customMatcher).test(fileName);
-      }
-    } catch (e) {
-      // TODO: Provide error/warning to user.
-    }
+    // Create matchers using options object.
+    const { isCSS, isRelativeCSS } = createMatchers(options);
+    _isCSS = isCSS;
 
     // Creates new virtual source files for the CSS modules.
     const _createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;
@@ -97,7 +92,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   }
 
   function getExternalFiles(project: ts_module.server.ConfiguredProject) {
-    return project.getFileNames().filter(isCSS);
+    return project.getFileNames().filter(_isCSS);
   }
 
   return { create, getExternalFiles };

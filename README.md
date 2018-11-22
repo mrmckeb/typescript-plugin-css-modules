@@ -66,7 +66,7 @@ The below is an example that only matches "\*.m.css" files, and [camel-cases das
 By default, VSCode will use it's own version of TypeScript. To make it work with this plugin, you have two options:
 
 1. Add this plugin to `"typescript.tsserver.pluginPaths"` in settings. Note that this method doesn't currently support
-   plugin options.
+   plugin options. This is planned for the [November update](https://github.com/Microsoft/vscode/issues/62876).
 
 ```json
 {
@@ -80,7 +80,7 @@ By default, VSCode will use it's own version of TypeScript. To make it work with
 
 _Note: Create React App users can skip this section if you're using `react-scripts@2.1.x` or higher._
 
-If your project doesn't already have global declarations for CSS Modules, you will need to add these to help TypeScript understand the general shape of the imported CSS.
+If your project doesn't already have global declarations for CSS Modules, you will need to add these to help TypeScript understand the general shape of the imported CSS during build.
 
 Where you store global declarations is up to you. An example might look like: `src/custom.d.ts`.
 

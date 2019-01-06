@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`utils / cssSnapshots createExports should create an exports file 1`] = `
+exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
+"declare const classes: {
+  
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
   'classA': string;
   'ClassB': string;
@@ -14,13 +24,40 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots createExports should create an exports file 2`] = `
+exports[`utils / cssSnapshots with file 'test.module.css' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "ClassB": "file__ClassB---2bPVi",
+  "childA": "file__childA---1hjQD",
+  "childB": "file__childB---pq4Ks",
+  "class-c": "file__class-c---DZ1TD",
+  "classA": "file__classA---2xcnJ",
+  "nestedChild": "file__nestedChild---2d15b",
+  "parent": "file__parent---1ATMj",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
   'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;
   'local-class-inside-local': string;
+  'nested-class-parent': string;
+  'child-class': string;
+  'nested-class-parent--extended': string;
 };
 export default classes;
 "
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.scss' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "file__child-class---1mwoB",
+  "local-class": "file__local-class---3KegX",
+  "local-class-2": "file__local-class-2---2h6qz",
+  "local-class-inside-global": "file__local-class-inside-global---2xH_Y",
+  "local-class-inside-local": "file__local-class-inside-local---QdL6b",
+  "nested-class-parent": "file__nested-class-parent---_ft7G",
+  "nested-class-parent--extended": "file__nested-class-parent--extended---1642l",
+}
 `;

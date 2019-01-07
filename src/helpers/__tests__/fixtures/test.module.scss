@@ -13,3 +13,14 @@
   .local-class-inside-local {
   }
 }
+
+.nested-class-parent {
+  .child-class {
+  }
+  &--extended {
+  }
+}
+
+// .commented-parent-class {
+//   .commented-child-class
+// }

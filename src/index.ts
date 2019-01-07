@@ -66,7 +66,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
         containingFile,
         reusedNames,
       ) => {
-        const resolvedModules: ts_module.ResolvedModuleFull[] = _resolveModuleNames(
+        const resolvedModules = _resolveModuleNames(
           moduleNames,
           containingFile,
           reusedNames,

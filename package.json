@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "rm -rf ./lib && tsc",
-    "prepublish": "yarn build",
+    "prepare": "yarn build",
     "test": "jest ./src"
   },
   "husky": {

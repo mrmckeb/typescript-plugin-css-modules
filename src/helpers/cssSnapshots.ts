@@ -1,13 +1,25 @@
 import { extractICSS, IICSSExports } from 'icss-utils';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
+import * as postcssNested from 'postcss-nested';
+import * as strip from 'strip-css-singleline-comments/sync';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
 import { transformClasses } from './classTransforms';
 
-const processor = postcss(postcssIcssSelectors({ mode: 'local' }));
+const processor = postcss(
+  postcssNested,
+  postcssIcssSelectors({ mode: 'local' }),
+);
 
-export const getClasses = (css: string) =>
-  extractICSS(processor.process(css).root).icssExports;
+export const getClasses = (css: string) => {
+  try {
+    const cleanCss = strip(css);
+    const processedCss = processor.process(cleanCss);
+    return extractICSS(processedCss.root).icssExports;
+  } catch (e) {
+    return {};
+  }
+};
 const classNameToProperty = (className: string) => `'${className}': string;`;
 const flattenClassNames = (
   previousValue: string[] = [],
@@ -18,7 +30,7 @@ export const createExports = (classes: IICSSExports, options: IOptions) => `\
 declare const classes: {
   ${Object.keys(classes)
     .map(transformClasses(options.camelCase))
-    .reduce(flattenClassNames)
+    .reduce(flattenClassNames, [])
     .map(classNameToProperty)
     .join('\n  ')}
 };

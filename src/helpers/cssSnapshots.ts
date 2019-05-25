@@ -2,14 +2,18 @@ import { extractICSS, IICSSExports } from 'icss-utils';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
-import * as sass from 'sass';
 import * as less from 'less';
+import * as sass from 'sass';
+import * as reserved from 'reserved-words';
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
 
+const NOT_CAMELCASE_REGEXP = /[\-_]/;
 const processor = postcss(postcssIcssSelectors({ mode: 'local' }));
 
 const classNameToProperty = (className: string) => `'${className}': string;`;
+const classNameToNamedExport = (className: string) =>
+  `export const ${className}: string;`;
 
 const flattenClassNames = (
   previousValue: string[] = [],
@@ -45,16 +49,31 @@ export const getClasses = (
   }
 };
 
-export const createExports = (classes: IICSSExports, options: Options) => `\
-declare const classes: {
-  ${Object.keys(classes)
+export const createExports = (classes: IICSSExports, options: Options) => {
+  const isCamelCase = (className: string) =>
+  !NOT_CAMELCASE_REGEXP.test(className);
+const isReservedWord = (className: string) => !reserved.check(className);
+
+  const processedClasses = Object.keys(classes)
     .map(transformClasses(options.camelCase))
-    .reduce(flattenClassNames, [])
-    .map(classNameToProperty)
-    .join('\n  ')}
+    .reduce(flattenClassNames, []);
+  const camelCasedKeys = processedClasses
+    .filter(isCamelCase)
+    .filter(isReservedWord)
+    .map(classNameToNamedExport);
+
+  const defaultExport = `\
+declare const classes: {
+  ${processedClasses.map(classNameToProperty).join('\n  ')}
 };
 export default classes;
 `;
+
+  if (camelCasedKeys.length) {
+    return defaultExport + camelCasedKeys.join('\n') + '\n';
+  }
+  return defaultExport;
+};
 
 export const getDtsSnapshot = (
   ts: typeof ts_module,

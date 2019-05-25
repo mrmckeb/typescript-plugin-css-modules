@@ -18,6 +18,15 @@
   }
 }
 
+.reserved-words {
+  .default {
+    color: rebeccapurple;
+  }
+  .const {
+    color: rebeccapurple;
+  }
+}
+
 .nested-class-parent {
   .child-class {
     color: rebeccapurple;

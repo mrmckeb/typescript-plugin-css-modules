@@ -25,12 +25,19 @@ exports[`utils / cssSnapshots with file 'test.module.css' createExports should c
   'classA': string;
   'ClassB': string;
   'class-c': string;
+  'class_d': string;
   'parent': string;
   'childA': string;
   'childB': string;
   'nestedChild': string;
 };
 export default classes;
+export const classA: string;
+export const ClassB: string;
+export const parent: string;
+export const childA: string;
+export const childB: string;
+export const nestedChild: string;
 "
 `;
 
@@ -41,6 +48,7 @@ Object {
   "childB": "file__childB---pq4Ks",
   "class-c": "file__class-c---DZ1TD",
   "classA": "file__classA---2xcnJ",
+  "class_d": "file__class_d---1mwNi",
   "nestedChild": "file__nestedChild---2d15b",
   "parent": "file__parent---1ATMj",
 }
@@ -84,6 +92,9 @@ exports[`utils / cssSnapshots with file 'test.module.scss' createExports should 
   'local-class': string;
   'local-class-2': string;
   'local-class-inside-local': string;
+  'reserved-words': string;
+  'default': string;
+  'const': string;
   'nested-class-parent': string;
   'child-class': string;
   'nested-class-parent--extended': string;
@@ -104,12 +115,15 @@ export default classes;
 exports[`utils / cssSnapshots with file 'test.module.scss' getClasses should return an object matching expected CSS 1`] = `
 Object {
   "child-class": "file__child-class---1QWYM",
+  "const": "file__const---MIe_0",
+  "default": "file__default---2RWlj",
   "local-class": "file__local-class---3SW3k",
   "local-class-2": "file__local-class-2----c5z7",
   "local-class-inside-global": "file__local-class-inside-global---1T0um",
   "local-class-inside-local": "file__local-class-inside-local---1Z9pB",
   "nested-class-parent": "file__nested-class-parent---3qXdF",
   "nested-class-parent--extended": "file__nested-class-parent--extended---qsVau",
+  "reserved-words": "file__reserved-words---_rrID",
   "section-1": "file__section-1---1IHCS",
   "section-2": "file__section-2---cLFhf",
   "section-3": "file__section-3---1ldKa",

@@ -10,6 +10,10 @@
   color: rebeccapurple;
 }
 
+.class_d {
+  color: rebeccapurple;
+}
+
 .parent {
   .childA {
     color: rebeccapurple;

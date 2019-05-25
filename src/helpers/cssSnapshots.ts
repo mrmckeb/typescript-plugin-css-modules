@@ -27,11 +27,15 @@ export const getClasses = (
   fileType: FileTypes = FileTypes.css,
 ) => {
   try {
-    const transformedCss =
-      fileType === FileTypes.less
-        ? // @ts-ignore
-          less.render(css, { syncImport: true }).css.toString()
-        : sass.renderSync({ data: css }).css.toString();
+    let transformedCss = '';
+
+    if (fileType === FileTypes.less) {
+      less.render(css, { asyncImport: true } as any, (err, output) => {
+        transformedCss = output.css.toString();
+      });
+    } else {
+      transformedCss = sass.renderSync({ data: css }).css.toString();
+    }
 
     const processedCss = processor.process(transformedCss);
 

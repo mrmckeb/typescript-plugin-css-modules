@@ -1,8 +1,9 @@
 import { createMatchers } from '../createMatchers';
+import { Options } from '../../options';
 
 describe('utils / createMatchers', () => {
   it('should match `customMatcher` regexp', () => {
-    const options: IOptions = { customMatcher: '\\.css$' };
+    const options: Options = { customMatcher: '\\.css$' };
     const { isCSS, isRelativeCSS } = createMatchers(options);
 
     expect(isCSS('./myfile.css')).toBe(true);
@@ -14,7 +15,7 @@ describe('utils / createMatchers', () => {
   });
 
   it('should handle bad `customMatcher` regexp', () => {
-    const options: IOptions = { customMatcher: '$([a' };
+    const options: Options = { customMatcher: '$([a' };
     const { isCSS, isRelativeCSS } = createMatchers(options);
 
     expect(isCSS('./myfile.module.css')).toBe(true);

@@ -1,26 +1,46 @@
 :global .global-class {
+  color: rebeccapurple;
 }
 
 :global(.global-class-2) {
   .local-class-inside-global {
+    color: rebeccapurple;
   }
 }
 
 :local .local-class {
+  color: rebeccapurple;
 }
 
 :local(.local-class-2) {
   .local-class-inside-local {
+    color: rebeccapurple;
   }
 }
 
 .nested-class-parent {
   .child-class {
+    color: rebeccapurple;
   }
   &--extended {
+    color: rebeccapurple;
+  }
+}
+
+$color: rebeccapurple !default;
+
+@for $section from 1 to 10 {
+  .section-#{$section} {
+    color: $color;
   }
 }
 
 // .commented-parent-class {
 //   .commented-child-class
 // }
+
+/*
+.commented-parent-class {
+  .commented-child-class
+}
+*/

@@ -1,32 +1,36 @@
 import { extractICSS, IICSSExports } from 'icss-utils';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
-import * as postcssNested from 'postcss-nested';
-import * as strip from 'strip-css-singleline-comments/sync';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
+import * as sass from 'sass';
 import { transformClasses } from './classTransforms';
+import { Options } from '../options';
 
-const processor = postcss(
-  postcssNested,
-  postcssIcssSelectors({ mode: 'local' }),
-);
+const processor = postcss(postcssIcssSelectors({ mode: 'local' }));
 
-export const getClasses = (css: string) => {
-  try {
-    const cleanCss = strip(css);
-    const processedCss = processor.process(cleanCss);
-    return extractICSS(processedCss.root).icssExports;
-  } catch (e) {
-    return {};
-  }
-};
 const classNameToProperty = (className: string) => `'${className}': string;`;
+
 const flattenClassNames = (
   previousValue: string[] = [],
   currentValue: string[],
 ) => previousValue.concat(currentValue);
 
-export const createExports = (classes: IICSSExports, options: IOptions) => `\
+export const getClasses = (css: string, isLess: boolean = false) => {
+  try {
+    let transformedCss: string;
+    if (isLess) {
+      transformedCss = '';
+    } else {
+      transformedCss = sass.renderSync({ data: css }).css.toString();
+    }
+    const processedCss = processor.process(transformedCss);
+    return extractICSS(processedCss.root).icssExports;
+  } catch (e) {
+    return {};
+  }
+};
+
+export const createExports = (classes: IICSSExports, options: Options) => `\
 declare const classes: {
   ${Object.keys(classes)
     .map(transformClasses(options.camelCase))
@@ -40,7 +44,7 @@ export default classes;
 export const getDtsSnapshot = (
   ts: typeof ts_module,
   scriptSnapshot: ts.IScriptSnapshot,
-  options: IOptions,
+  options: Options,
 ) => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
   const classes = getClasses(css);

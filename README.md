@@ -26,8 +26,6 @@ To install with npm:
 npm install --save typescript-plugin-css-modules
 ```
 
-## Adding the plugin
-
 Once installed, add this plugin to your `tsconfig.json`:
 
 ```json

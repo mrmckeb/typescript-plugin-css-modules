@@ -2,7 +2,11 @@ import { extractICSS, IICSSExports } from 'icss-utils';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
+<<<<<<< HEAD
 import * as sass from 'sass';
+=======
+import * as sass from 'node-sass';
+>>>>>>> Add extended Sass support
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
 

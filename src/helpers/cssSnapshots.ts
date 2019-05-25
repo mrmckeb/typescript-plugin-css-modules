@@ -2,11 +2,8 @@ import { extractICSS, IICSSExports } from 'icss-utils';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
-<<<<<<< HEAD
 import * as sass from 'sass';
-=======
-import * as sass from 'node-sass';
->>>>>>> Add extended Sass support
+import * as less from 'less';
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
 
@@ -19,15 +16,25 @@ const flattenClassNames = (
   currentValue: string[],
 ) => previousValue.concat(currentValue);
 
-export const getClasses = (css: string, isLess: boolean = false) => {
+export const enum FileTypes {
+  css = 'css',
+  sass = 'sass',
+  less = 'less',
+}
+
+export const getClasses = (
+  css: string,
+  fileType: FileTypes = FileTypes.css,
+) => {
   try {
-    let transformedCss: string;
-    if (isLess) {
-      transformedCss = '';
-    } else {
-      transformedCss = sass.renderSync({ data: css }).css.toString();
-    }
+    const transformedCss =
+      fileType === FileTypes.less
+        ? // @ts-ignore
+          less.render(css, { syncImport: true }).css.toString()
+        : sass.renderSync({ data: css }).css.toString();
+
     const processedCss = processor.process(transformedCss);
+
     return extractICSS(processedCss.root).icssExports;
   } catch (e) {
     return {};

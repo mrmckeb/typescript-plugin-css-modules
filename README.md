@@ -12,7 +12,7 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
 This project was inspired by this [`create-react-app` issue](https://github.com/facebook/create-react-app/issues/5677)
 and was based on [`css-module-types`](https://github.com/timothykang/css-module-types).
 
-## Usage
+## Installation
 
 To install with Yarn:
 
@@ -26,6 +26,8 @@ To install with npm:
 npm install --save typescript-plugin-css-modules
 ```
 
+## Adding the plugin
+
 Once installed, add this plugin to your `tsconfig.json`:
 
 ```json
@@ -34,6 +36,26 @@ Once installed, add this plugin to your `tsconfig.json`:
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   }
 }
+```
+
+### Importing CSS
+
+A default export is always provided for your CSS module.
+
+```tsx
+import styles from 'my.module.css';
+
+const a = styles.myClass;
+const b = styles['my_other-class'];
+```
+
+As of version 1.1.0, you can also use named exports for classes that don't contain hyphens or underscores. You can still access other classes via the default export.
+
+```tsx
+import styles, { myClass } from 'my.module.css';
+
+const a = myClass;
+const b = styles['my_other-class'];
 ```
 
 ### Options

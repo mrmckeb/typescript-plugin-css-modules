@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
+"declare const classes: {
+  
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
   
@@ -36,6 +46,38 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
+"declare const classes: {
+  'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.less' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "file__child-class---1mwoB",
+  "color-set": "file__color-set---9sHH_",
+  "column-1": "file__column-1---vHRb_",
+  "column-2": "file__column-2---28y1r",
+  "column-3": "file__column-3---1PsZw",
+  "column-4": "file__column-4---2qaaI",
+  "nested-class-parent": "file__nested-class-parent---_ft7G",
+  "selector-blue": "file__selector-blue---3mslq",
+  "selector-green": "file__selector-green---143xX",
+  "selector-red": "file__selector-red---Gckob",
+}
+`;
+
 exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
   'local-class-inside-global': string;
@@ -61,21 +103,21 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'test.module.scss' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "child-class": "file__child-class---1mwoB",
-  "local-class": "file__local-class---3KegX",
-  "local-class-2": "file__local-class-2---2h6qz",
-  "local-class-inside-global": "file__local-class-inside-global---2xH_Y",
-  "local-class-inside-local": "file__local-class-inside-local---QdL6b",
-  "nested-class-parent": "file__nested-class-parent---_ft7G",
-  "nested-class-parent--extended": "file__nested-class-parent--extended---1642l",
-  "section-1": "file__section-1---2EiKX",
-  "section-2": "file__section-2---2f4aZ",
-  "section-3": "file__section-3---R_Ilj",
-  "section-4": "file__section-4---3EjYO",
-  "section-5": "file__section-5---1DSe8",
-  "section-6": "file__section-6---1RoVP",
-  "section-7": "file__section-7---l5yMj",
-  "section-8": "file__section-8---3FEWv",
-  "section-9": "file__section-9---1TFYE",
+  "child-class": "file__child-class---1QWYM",
+  "local-class": "file__local-class---3SW3k",
+  "local-class-2": "file__local-class-2----c5z7",
+  "local-class-inside-global": "file__local-class-inside-global---1T0um",
+  "local-class-inside-local": "file__local-class-inside-local---1Z9pB",
+  "nested-class-parent": "file__nested-class-parent---3qXdF",
+  "nested-class-parent--extended": "file__nested-class-parent--extended---qsVau",
+  "section-1": "file__section-1---1IHCS",
+  "section-2": "file__section-2---cLFhf",
+  "section-3": "file__section-3---1ldKa",
+  "section-4": "file__section-4---2u0CG",
+  "section-5": "file__section-5---1lAYL",
+  "section-6": "file__section-6---2YZ9I",
+  "section-7": "file__section-7---3w-OF",
+  "section-8": "file__section-8---3RB8g",
+  "section-9": "file__section-9---3_Mtj",
 }
 `;

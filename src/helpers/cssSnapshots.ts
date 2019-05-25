@@ -3,6 +3,7 @@ import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
 import * as sass from 'sass';
+import * as less from 'less';
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
 
@@ -15,15 +16,29 @@ const flattenClassNames = (
   currentValue: string[],
 ) => previousValue.concat(currentValue);
 
-export const getClasses = (css: string, isLess: boolean = false) => {
+export const enum FileTypes {
+  css = 'css',
+  sass = 'sass',
+  less = 'less',
+}
+
+export const getClasses = (
+  css: string,
+  fileType: FileTypes = FileTypes.css,
+) => {
   try {
-    let transformedCss: string;
-    if (isLess) {
-      transformedCss = '';
+    let transformedCss = '';
+
+    if (fileType === FileTypes.less) {
+      less.render(css, { asyncImport: true } as any, (err, output) => {
+        transformedCss = output.css.toString();
+      });
     } else {
       transformedCss = sass.renderSync({ data: css }).css.toString();
     }
+
     const processedCss = processor.process(transformedCss);
+
     return extractICSS(processedCss.root).icssExports;
   } catch (e) {
     return {};

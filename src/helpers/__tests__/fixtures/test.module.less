@@ -1,0 +1,33 @@
+.nested-class-parent {
+  color: black;
+
+  .child-class {
+    font-size: 12px;
+  }
+}
+
+@selectors: blue, green, red;
+
+each(@selectors, {
+  .selector-@{value} {
+    color: b;
+  }
+});
+
+each(range(4), {
+  .column-@{value} {
+    height: (@value * 50px);
+  }
+})
+
+.color-set () {
+  one: blue;
+  two: green;
+  three: red;
+}
+
+.color-set  {
+  each(.color-set (), .(@v, @k, @i) {
+    @{k}-@{i}: @v;
+  });
+}

@@ -1,0 +1,35 @@
+.header {
+  color: black;
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+  }
+}
+
+@selectors: blue, green, red;
+
+each(@selectors, {
+  .sel-@{value} {
+    a: b;
+  }
+});
+
+each(range(4), {
+  .col-@{value} {
+    height: (@value * 50px);
+  }
+})
+
+.set-2() {
+  one: blue;
+  two: green;
+  three: red;
+}
+
+.set-2 {
+  each(.set-2(), .(@v, @k, @i) {
+    @{k}-@{i}: @v;
+  });
+}

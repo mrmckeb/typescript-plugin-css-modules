@@ -1,6 +1,6 @@
 {
   "name": "typescript-plugin-css-modules",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "main": "lib/index.js",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",
@@ -12,15 +12,20 @@
   },
   "keywords": [
     "css",
+    "scss",
+    "sass",
+    "less",
     "modules",
     "plugin",
     "postcss",
-    "sass",
     "typescript"
+  ],
+  "files": [
+    "lib"
   ],
   "scripts": {
     "build": "rm -rf ./lib && tsc",
-    "prepublish": "yarn build",
+    "prepublishOnly": "yarn build",
     "test": "jest ./src"
   },
   "husky": {
@@ -42,24 +47,27 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "icss-utils": "^4.0.0",
+    "icss-utils": "^4.1.0",
+    "less": "^3.9.0",
     "lodash": "^4.17.11",
-    "postcss": "^7.0.7",
+    "postcss": "^7.0.16",
     "postcss-icss-selectors": "^2.0.3",
-    "postcss-nested": "^4.1.1",
-    "strip-css-singleline-comments": "^1.1.0"
+    "reserved-words": "^0.1.2",
+    "sass": "^1.20.1"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.12",
-    "@types/lodash": "^4.14.119",
-    "@types/node": "^10.12.18",
-    "husky": "^1.3.1",
-    "jest": "^23.6.0",
-    "prettier": "^1.15.3",
-    "pretty-quick": "^1.8.0",
-    "ts-jest": "^23.10.5",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2"
+    "@types/jest": "^24.0.13",
+    "@types/less": "^3.0.0",
+    "@types/lodash": "^4.14.132",
+    "@types/node": "^10.0.0",
+    "@types/sass": "^1.16.0",
+    "husky": "^2.3.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1",
+    "pretty-quick": "^1.11.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   },
   "peerDependencies": {
     "typescript": "^3.0.0"

@@ -3,16 +3,19 @@ import * as ts_module from 'typescript/lib/tsserverlibrary';
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
+import { Options } from './options';
 
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
   function create(info: ts.server.PluginCreateInfo) {
     // User options for plugin.
-    const options: IOptions = info.config.options || {};
+    const options: Options = info.config.options || {};
 
     // Create matchers using options object.
     const { isCSS, isRelativeCSS } = createMatchers(options);
     _isCSS = isCSS;
+
+    info.project.projectService.logger.info(`******** isCSS: ${isCSS}`);
 
     // Creates new virtual source files for the CSS modules.
     const _createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;

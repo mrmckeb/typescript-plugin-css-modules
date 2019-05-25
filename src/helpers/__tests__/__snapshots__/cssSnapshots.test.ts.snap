@@ -48,17 +48,16 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
-  'header': string;
-  'navigation': string;
-  'logo': string;
-  'sel-blue': string;
-  'sel-green': string;
-  'sel-red': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'col-4': string;
-  'set-2': string;
+  'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
 };
 export default classes;
 "
@@ -66,17 +65,16 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'test.module.less' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "col-1": "file__col-1---3KHPN",
-  "col-2": "file__col-2---2CZ3R",
-  "col-3": "file__col-3---3JVkc",
-  "col-4": "file__col-4---30Kf1",
-  "header": "file__header---3sadj",
-  "logo": "file__logo---1MjcT",
-  "navigation": "file__navigation---2Wwce",
-  "sel-blue": "file__sel-blue---IEsos",
-  "sel-green": "file__sel-green---1_l-S",
-  "sel-red": "file__sel-red---3PSTf",
-  "set-2": "file__set-2---VimP3",
+  "child-class": "file__child-class---1mwoB",
+  "color-set": "file__color-set---9sHH_",
+  "column-1": "file__column-1---vHRb_",
+  "column-2": "file__column-2---28y1r",
+  "column-3": "file__column-3---1PsZw",
+  "column-4": "file__column-4---2qaaI",
+  "nested-class-parent": "file__nested-class-parent---_ft7G",
+  "selector-blue": "file__selector-blue---3mslq",
+  "selector-green": "file__selector-green---143xX",
+  "selector-red": "file__selector-red---Gckob",
 }
 `;
 

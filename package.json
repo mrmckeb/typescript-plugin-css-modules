@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "icss-utils": "^4.1.0",
+    "less": "^3.9.0",
     "lodash": "^4.17.11",
     "postcss": "^7.0.16",
     "postcss-icss-selectors": "^2.0.3",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
+    "@types/less": "^3.0.0",
     "@types/lodash": "^4.14.132",
     "@types/node": "^10.12.18",
     "@types/sass": "^1.16.0",

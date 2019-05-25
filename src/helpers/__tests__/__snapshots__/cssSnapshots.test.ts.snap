@@ -45,6 +45,15 @@ exports[`utils / cssSnapshots with file 'test.module.scss' createExports should 
   'nested-class-parent': string;
   'child-class': string;
   'nested-class-parent--extended': string;
+  'section-1': string;
+  'section-2': string;
+  'section-3': string;
+  'section-4': string;
+  'section-5': string;
+  'section-6': string;
+  'section-7': string;
+  'section-8': string;
+  'section-9': string;
 };
 export default classes;
 "
@@ -59,5 +68,14 @@ Object {
   "local-class-inside-local": "file__local-class-inside-local---QdL6b",
   "nested-class-parent": "file__nested-class-parent---_ft7G",
   "nested-class-parent--extended": "file__nested-class-parent--extended---1642l",
+  "section-1": "file__section-1---2EiKX",
+  "section-2": "file__section-2---2f4aZ",
+  "section-3": "file__section-3---R_Ilj",
+  "section-4": "file__section-4---3EjYO",
+  "section-5": "file__section-5---1DSe8",
+  "section-6": "file__section-6---1RoVP",
+  "section-7": "file__section-7---l5yMj",
+  "section-8": "file__section-8---3FEWv",
+  "section-9": "file__section-9---1TFYE",
 }
 `;

@@ -1,6 +1,7 @@
 import { createIsCSS, createIsRelativeCSS } from './cssExtensions';
+import { Options } from '../options';
 
-export const createMatchers = (options: IOptions = {}) => {
+export const createMatchers = (options: Options = {}) => {
   // Allow custom matchers to be used, and handle bad matcher patterns.
   let isCSS = createIsCSS();
   try {

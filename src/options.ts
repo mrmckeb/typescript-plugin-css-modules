@@ -1,9 +1,9 @@
-declare interface IOptions {
+export interface Options {
   camelCase?: CamelCaseOptions;
   customMatcher?: string;
 }
 
-declare type CamelCaseOptions =
+export type CamelCaseOptions =
   | true
   | 'dashes'
   | 'dashesOnly'

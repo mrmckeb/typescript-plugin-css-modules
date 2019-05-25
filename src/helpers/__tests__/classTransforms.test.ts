@@ -1,4 +1,5 @@
 import { transformClasses } from '../classTransforms';
+import { CamelCaseOptions } from '../../options';
 
 describe('utils / classTransforms', () => {
   const classNames = [

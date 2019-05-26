@@ -12,12 +12,12 @@ const testFileNames = [
 ];
 
 describe('utils / cssSnapshots', () => {
-  testFileNames.forEach((filename) => {
+  testFileNames.forEach((fileName) => {
     let classes: IICSSExports;
-    const isLess = filename.includes('less');
-    const fileType = isLess ? FileTypes.less : FileTypes.css;
+    const isLess = fileName.endsWith('less');
+    const fileType = isLess ? FileTypes.less : FileTypes.scss;
     const testFile = readFileSync(
-      join(__dirname, 'fixtures', filename),
+      join(__dirname, 'fixtures', fileName),
       'utf8',
     );
 
@@ -25,7 +25,7 @@ describe('utils / cssSnapshots', () => {
       classes = getClasses(testFile, fileType);
     });
 
-    describe(`with file '${filename}'`, () => {
+    describe(`with file '${fileName}'`, () => {
       describe('getClasses', () => {
         it('should return an object matching expected CSS', () => {
           expect(classes).toMatchSnapshot();

@@ -21,15 +21,14 @@ const flattenClassNames = (
 ) => previousValue.concat(currentValue);
 
 export const enum FileTypes {
-  css = 'css',
-  sass = 'sass',
+  scss = 'scss',
   less = 'less',
 }
 
-export const getClasses = (
-  css: string,
-  fileType: FileTypes = FileTypes.css,
-) => {
+export const getFileType = (fileName: string) =>
+  fileName.endsWith('less') ? FileTypes.less : FileTypes.scss;
+
+export const getClasses = (css: string, fileType: FileTypes) => {
   try {
     let transformedCss = '';
 
@@ -51,8 +50,8 @@ export const getClasses = (
 
 export const createExports = (classes: IICSSExports, options: Options) => {
   const isCamelCase = (className: string) =>
-  !NOT_CAMELCASE_REGEXP.test(className);
-const isReservedWord = (className: string) => !reserved.check(className);
+    !NOT_CAMELCASE_REGEXP.test(className);
+  const isReservedWord = (className: string) => !reserved.check(className);
 
   const processedClasses = Object.keys(classes)
     .map(transformClasses(options.camelCase))
@@ -77,11 +76,13 @@ export default classes;
 
 export const getDtsSnapshot = (
   ts: typeof ts_module,
+  fileName: string,
   scriptSnapshot: ts.IScriptSnapshot,
   options: Options,
 ) => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-  const classes = getClasses(css);
+  const fileType = getFileType(fileName);
+  const classes = getClasses(css, fileType);
   const dts = createExports(classes, options);
   return ts.ScriptSnapshot.fromString(dts);
 };

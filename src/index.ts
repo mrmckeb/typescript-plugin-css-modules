@@ -15,8 +15,6 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
     const { isCSS, isRelativeCSS } = createMatchers(options);
     _isCSS = isCSS;
 
-    info.project.projectService.logger.info(`******** isCSS: ${isCSS}`);
-
     // Creates new virtual source files for the CSS modules.
     const _createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;
     ts.createLanguageServiceSourceFile = (
@@ -25,7 +23,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
-        scriptSnapshot = getDtsSnapshot(ts, scriptSnapshot, options);
+        scriptSnapshot = getDtsSnapshot(ts, fileName, scriptSnapshot, options);
       }
       const sourceFile = _createLanguageServiceSourceFile(
         fileName,
@@ -46,7 +44,12 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(sourceFile.fileName)) {
-        scriptSnapshot = getDtsSnapshot(ts, scriptSnapshot, options);
+        scriptSnapshot = getDtsSnapshot(
+          ts,
+          sourceFile.fileName,
+          scriptSnapshot,
+          options,
+        );
       }
       sourceFile = _updateLanguageServiceSourceFile(
         sourceFile,

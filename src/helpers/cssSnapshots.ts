@@ -25,6 +25,9 @@ export const enum FileTypes {
   less = 'less',
 }
 
+export const getFileType = (fileName: string) =>
+  fileName.endsWith('less') ? FileTypes.less : FileTypes.scss;
+
 export const getClasses = (css: string, fileType: FileTypes) => {
   try {
     let transformedCss = '';
@@ -78,7 +81,7 @@ export const getDtsSnapshot = (
   options: Options,
 ) => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-  const fileType = fileName.endsWith('less') ? FileTypes.less : FileTypes.scss;
+  const fileType = getFileType(fileName);
   const classes = getClasses(css, fileType);
   const dts = createExports(classes, options);
   return ts.ScriptSnapshot.fromString(dts);

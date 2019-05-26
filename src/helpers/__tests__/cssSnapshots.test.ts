@@ -1,7 +1,12 @@
 import { readFileSync } from 'fs';
 import { IICSSExports } from 'icss-utils';
 import { join } from 'path';
-import { createExports, getClasses, FileTypes } from '../cssSnapshots';
+import {
+  createExports,
+  getClasses,
+  FileTypes,
+  getFileType,
+} from '../cssSnapshots';
 
 const testFileNames = [
   'test.module.css',
@@ -14,8 +19,7 @@ const testFileNames = [
 describe('utils / cssSnapshots', () => {
   testFileNames.forEach((fileName) => {
     let classes: IICSSExports;
-    const isLess = fileName.endsWith('less');
-    const fileType = isLess ? FileTypes.less : FileTypes.scss;
+    const fileType = getFileType(fileName);
     const testFile = readFileSync(
       join(__dirname, 'fixtures', fileName),
       'utf8',

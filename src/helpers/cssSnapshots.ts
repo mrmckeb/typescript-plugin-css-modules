@@ -23,10 +23,15 @@ const flattenClassNames = (
 export const enum FileTypes {
   scss = 'scss',
   less = 'less',
+  css = 'css',
 }
 
 export const getFileType = (fileName: string) =>
-  fileName.endsWith('less') ? FileTypes.less : FileTypes.scss;
+  fileName.endsWith('.css')
+    ? FileTypes.css
+    : fileName.endsWith('.less')
+    ? FileTypes.less
+    : FileTypes.scss;
 
 export const getClasses = (css: string, fileType: FileTypes) => {
   try {
@@ -36,8 +41,10 @@ export const getClasses = (css: string, fileType: FileTypes) => {
       less.render(css, { asyncImport: true } as any, (err, output) => {
         transformedCss = output.css.toString();
       });
-    } else {
+    } else if (fileType === FileTypes.scss) {
       transformedCss = sass.renderSync({ data: css }).css.toString();
+    } else {
+      transformedCss = css;
     }
 
     const processedCss = processor.process(transformedCss);

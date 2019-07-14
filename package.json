@@ -47,27 +47,27 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "icss-utils": "^4.1.0",
+    "icss-utils": "^4.1.1",
     "less": "^3.9.0",
-    "lodash": "^4.17.11",
-    "postcss": "^7.0.16",
+    "lodash": "^4.17.14",
+    "postcss": "^7.0.17",
     "postcss-icss-selectors": "^2.0.3",
     "reserved-words": "^0.1.2",
-    "sass": "^1.20.1"
+    "sass": "^1.22.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.13",
+    "@types/jest": "^24.0.15",
     "@types/less": "^3.0.0",
-    "@types/lodash": "^4.14.132",
+    "@types/lodash": "^4.14.136",
     "@types/node": "^10.0.0",
     "@types/sass": "^1.16.0",
-    "husky": "^2.3.0",
+    "husky": "^2.7.0",
     "jest": "^24.8.0",
-    "prettier": "^1.17.1",
-    "pretty-quick": "^1.11.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
   },
   "peerDependencies": {
     "typescript": "^3.0.0"

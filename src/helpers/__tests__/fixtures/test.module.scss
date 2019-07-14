@@ -44,6 +44,12 @@ $color: rebeccapurple !default;
   }
 }
 
+@import 'mixin';
+
+.class-with-mixin {
+  @include set-margin(0);
+}
+
 // .commented-parent-class {
 //   .commented-child-class
 // }

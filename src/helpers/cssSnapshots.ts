@@ -21,23 +21,39 @@ const flattenClassNames = (
 ) => previousValue.concat(currentValue);
 
 export const enum FileTypes {
-  scss = 'scss',
+  css = 'css',
   less = 'less',
+  scss = 'scss',
 }
 
-export const getFileType = (fileName: string) =>
-  fileName.endsWith('less') ? FileTypes.less : FileTypes.scss;
+export const getFileType = (fileName: string) => {
+  if (fileName.endsWith('.css')) return FileTypes.css;
+  if (fileName.endsWith('.less')) return FileTypes.less;
+  return FileTypes.scss;
+};
 
-export const getClasses = (css: string, fileType: FileTypes) => {
+const getFilePath = (fileName: string) =>
+  fileName.substring(0, fileName.lastIndexOf('/'));
+
+export const getClasses = (css: string, fileName: string) => {
   try {
+    const fileType = getFileType(fileName);
     let transformedCss = '';
 
     if (fileType === FileTypes.less) {
       less.render(css, { asyncImport: true } as any, (err, output) => {
         transformedCss = output.css.toString();
       });
+    } else if (fileType === FileTypes.scss) {
+      const filePath = getFilePath(fileName);
+      transformedCss = sass
+        .renderSync({
+          data: css,
+          includePaths: [filePath],
+        })
+        .css.toString();
     } else {
-      transformedCss = sass.renderSync({ data: css }).css.toString();
+      transformedCss = css;
     }
 
     const processedCss = processor.process(transformedCss);
@@ -81,8 +97,7 @@ export const getDtsSnapshot = (
   options: Options,
 ) => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-  const fileType = getFileType(fileName);
-  const classes = getClasses(css, fileType);
+  const classes = getClasses(css, fileName);
   const dts = createExports(classes, options);
   return ts.ScriptSnapshot.fromString(dts);
 };

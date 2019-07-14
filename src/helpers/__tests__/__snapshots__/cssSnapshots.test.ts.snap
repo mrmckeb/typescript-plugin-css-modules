@@ -107,6 +107,7 @@ exports[`utils / cssSnapshots with file 'test.module.scss' createExports should 
   'section-7': string;
   'section-8': string;
   'section-9': string;
+  'class-with-mixin': string;
 };
 export default classes;
 "
@@ -115,6 +116,7 @@ export default classes;
 exports[`utils / cssSnapshots with file 'test.module.scss' getClasses should return an object matching expected CSS 1`] = `
 Object {
   "child-class": "file__child-class---1QWYM",
+  "class-with-mixin": "file__class-with-mixin---39EVY",
   "const": "file__const---MIe_0",
   "default": "file__default---2RWlj",
   "local-class": "file__local-class---3SW3k",

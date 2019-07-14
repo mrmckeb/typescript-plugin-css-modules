@@ -14,14 +14,11 @@ const testFileNames = [
 describe('utils / cssSnapshots', () => {
   testFileNames.forEach((fileName) => {
     let classes: IICSSExports;
-    const fileType = getFileType(fileName);
-    const testFile = readFileSync(
-      join(__dirname, 'fixtures', fileName),
-      'utf8',
-    );
+    const fullFileName = join(__dirname, 'fixtures', fileName);
+    const testFile = readFileSync(fullFileName, 'utf8');
 
     beforeAll(() => {
-      classes = getClasses(testFile, fileType);
+      classes = getClasses(testFile, fullFileName);
     });
 
     describe(`with file '${fileName}'`, () => {

@@ -1,6 +1,6 @@
 {
   "name": "typescript-plugin-css-modules",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "lib/index.js",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",

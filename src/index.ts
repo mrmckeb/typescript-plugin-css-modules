@@ -1,14 +1,43 @@
+import { getPostCssConfigSync } from '@design-systems/build/';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
+
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
 import { Options } from './options';
 
+import postcss from 'postcss';
+import postcssIcssSelectors from 'postcss-icss-selectors';
+
+const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
+  css.walkRules((rule) => {
+    rule.walkAtRules((atRule) => {
+      if (atRule.name === 'mixin') {
+        atRule.remove();
+      }
+    });
+  });
+});
+
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
+
   function create(info: ts.server.PluginCreateInfo) {
+    const postcssConfig = getPostCssConfigSync({
+      cwd: info.project.getCurrentDirectory(),
+      useModules: false,
+    });
+
+    const processor = postcss([
+      removePlugin(),
+      ...postcssConfig.plugins.filter(
+        (plugin) => !['postcss-mixins'].includes(plugin.postcssPlugin),
+      ),
+      postcssIcssSelectors({ mode: 'local' }),
+    ]);
+
     // User options for plugin.
     const options: Options = info.config.options || {};
 
@@ -24,7 +53,13 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
-        scriptSnapshot = getDtsSnapshot(ts, fileName, scriptSnapshot, options);
+        scriptSnapshot = getDtsSnapshot(
+          ts,
+          processor,
+          fileName,
+          scriptSnapshot,
+          options,
+        );
       }
       const sourceFile = _createLanguageServiceSourceFile(
         fileName,
@@ -47,6 +82,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       if (isCSS(sourceFile.fileName)) {
         scriptSnapshot = getDtsSnapshot(
           ts,
+          processor,
           sourceFile.fileName,
           scriptSnapshot,
           options,

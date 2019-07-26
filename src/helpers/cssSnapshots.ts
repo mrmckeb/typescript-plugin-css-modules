@@ -1,6 +1,5 @@
 import { extractICSS, IICSSExports } from 'icss-utils';
-import * as postcss from 'postcss';
-import * as postcssIcssSelectors from 'postcss-icss-selectors';
+import postcss from 'postcss';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
 import * as less from 'less';
 import * as sass from 'sass';
@@ -9,7 +8,6 @@ import { transformClasses } from './classTransforms';
 import { Options } from '../options';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
-const processor = postcss(postcssIcssSelectors({ mode: 'local' }));
 
 const classNameToProperty = (className: string) => `'${className}': string;`;
 const classNameToNamedExport = (className: string) =>
@@ -35,7 +33,11 @@ export const getFileType = (fileName: string) => {
 const getFilePath = (fileName: string) =>
   fileName.substring(0, fileName.lastIndexOf('/'));
 
-export const getClasses = (css: string, fileName: string) => {
+export const getClasses = (
+  processor: postcss.Processor,
+  css: string,
+  fileName: string,
+) => {
   try {
     const fileType = getFileType(fileName);
     let transformedCss = '';
@@ -58,7 +60,7 @@ export const getClasses = (css: string, fileName: string) => {
 
     const processedCss = processor.process(transformedCss);
 
-    return extractICSS(processedCss.root).icssExports;
+    return processedCss.root ? extractICSS(processedCss.root).icssExports : {};
   } catch (e) {
     return {};
   }
@@ -92,12 +94,13 @@ export default classes;
 
 export const getDtsSnapshot = (
   ts: typeof ts_module,
+  processor: postcss.Processor,
   fileName: string,
   scriptSnapshot: ts.IScriptSnapshot,
   options: Options,
 ) => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-  const classes = getClasses(css, fileName);
+  const classes = getClasses(processor, css, fileName);
   const dts = createExports(classes, options);
   return ts.ScriptSnapshot.fromString(dts);
 };

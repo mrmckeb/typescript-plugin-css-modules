@@ -35,6 +35,7 @@ const getFilePath = (fileName: string) =>
 
 export const getClasses = (
   processor: postcss.Processor,
+  info: ts.server.PluginCreateInfo,
   css: string,
   fileName: string,
 ) => {
@@ -58,10 +59,16 @@ export const getClasses = (
       transformedCss = css;
     }
 
+    info.project.projectService.logger.info('CSS');
+    info.project.projectService.logger.info(transformedCss);
+
     const processedCss = processor.process(transformedCss);
 
     return processedCss.root ? extractICSS(processedCss.root).icssExports : {};
   } catch (e) {
+    info.project.projectService.logger.info('ERROR');
+    info.project.projectService.logger.info(e);
+
     return {};
   }
 };
@@ -94,13 +101,23 @@ export default classes;
 
 export const getDtsSnapshot = (
   ts: typeof ts_module,
+  info: ts.server.PluginCreateInfo,
   processor: postcss.Processor,
   fileName: string,
   scriptSnapshot: ts.IScriptSnapshot,
   options: Options,
 ) => {
-  const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-  const classes = getClasses(processor, css, fileName);
+  info.project.projectService.logger.info('look here');
+  info.project.projectService.logger.info(fileName);
+  const source = scriptSnapshot.getText(0, scriptSnapshot.getLength());
+
+  if (source.includes('declare const classes')) {
+    return ts.ScriptSnapshot.fromString(source);
+  }
+
+  const classes = getClasses(processor, info, source, fileName);
+  info.project.projectService.logger.info(JSON.stringify(classes, null, 2));
+
   const dts = createExports(classes, options);
   return ts.ScriptSnapshot.fromString(dts);
 };

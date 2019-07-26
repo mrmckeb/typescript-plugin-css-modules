@@ -25,6 +25,11 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
 
   function create(info: ts.server.PluginCreateInfo) {
+    info.project.projectService.logger.info(
+      'Starting typescript-css-modules-plugin for:',
+    );
+    info.project.projectService.logger.info(info.project.getCurrentDirectory());
+
     const postcssConfig = getPostCssConfigSync({
       cwd: info.project.getCurrentDirectory(),
       useModules: false,
@@ -53,8 +58,13 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
+        info.project.projectService.logger.info(
+          'createLanguageServiceSourceFile',
+        );
+
         scriptSnapshot = getDtsSnapshot(
           ts,
+          info,
           processor,
           fileName,
           scriptSnapshot,
@@ -80,8 +90,13 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(sourceFile.fileName)) {
+        info.project.projectService.logger.info(
+          'updateLanguageServiceSourceFile',
+        );
+
         scriptSnapshot = getDtsSnapshot(
           ts,
+          info,
           processor,
           sourceFile.fileName,
           scriptSnapshot,
@@ -179,7 +194,14 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   }
 
   function getExternalFiles(project: ts_module.server.ConfiguredProject) {
-    return project.getFileNames().filter(_isCSS);
+    project.projectService.logger.info(
+      'getExternalFiles typescript-css-modules-plugin for:',
+    );
+    project.projectService.logger.info(
+      JSON.stringify(project.getFileNames().filter(_isCSS), null, 2),
+    );
+
+    return;
   }
 
   return { create, getExternalFiles };

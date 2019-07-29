@@ -1,5 +1,5 @@
 declare module 'postcss-load-config' {
-  export interface PostCSSConfig {
+  interface PostCSSConfig {
     plugins: any[];
     options?: any;
   }
@@ -11,5 +11,5 @@ declare module 'postcss-load-config' {
 
   const load: Load;
 
-  export default load;
+  export = load;
 }

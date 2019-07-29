@@ -1,6 +1,6 @@
-import { getPostCssConfigSync } from '@design-systems/build/';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as loadPostCssConfig from 'postcss-load-config';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
 
 import { createMatchers } from './helpers/createMatchers';
@@ -8,8 +8,8 @@ import { isCSSFn } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/cssSnapshots';
 import { Options } from './options';
 
-import postcss from 'postcss';
-import postcssIcssSelectors from 'postcss-icss-selectors';
+import * as postcss from 'postcss';
+import * as postcssIcssSelectors from 'postcss-icss-selectors';
 
 const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
   css.walkRules((rule) => {
@@ -25,19 +25,15 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
 
   function create(info: ts.server.PluginCreateInfo) {
-    info.project.projectService.logger.info(
-      'Starting typescript-css-modules-plugin for:',
+    const postcssConfig = loadPostCssConfig.sync(
+      {},
+      info.project.getCurrentDirectory(),
     );
-    info.project.projectService.logger.info(info.project.getCurrentDirectory());
-
-    const postcssConfig = getPostCssConfigSync({
-      cwd: info.project.getCurrentDirectory(),
-      useModules: false,
-    });
 
     const processor = postcss([
       removePlugin(),
       ...postcssConfig.plugins.filter(
+        // Postcss mixins plugin might be async and will break the postcss sync output.
         (plugin) => !['postcss-mixins'].includes(plugin.postcssPlugin),
       ),
       postcssIcssSelectors({ mode: 'local' }),
@@ -58,13 +54,8 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
-        info.project.projectService.logger.info(
-          'createLanguageServiceSourceFile',
-        );
-
         scriptSnapshot = getDtsSnapshot(
           ts,
-          info,
           processor,
           fileName,
           scriptSnapshot,
@@ -90,13 +81,8 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(sourceFile.fileName)) {
-        info.project.projectService.logger.info(
-          'updateLanguageServiceSourceFile',
-        );
-
         scriptSnapshot = getDtsSnapshot(
           ts,
-          info,
           processor,
           sourceFile.fileName,
           scriptSnapshot,
@@ -194,14 +180,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   }
 
   function getExternalFiles(project: ts_module.server.ConfiguredProject) {
-    project.projectService.logger.info(
-      'getExternalFiles typescript-css-modules-plugin for:',
-    );
-    project.projectService.logger.info(
-      JSON.stringify(project.getFileNames().filter(_isCSS), null, 2),
-    );
-
-    return;
+    return project.getFileNames().filter(_isCSS);
   }
 
   return { create, getExternalFiles };

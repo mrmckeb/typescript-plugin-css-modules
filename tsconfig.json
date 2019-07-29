@@ -14,8 +14,7 @@
     "skipLibCheck": false,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es5",
-    "esModuleInterop": true
+    "target": "es5"
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/**"]

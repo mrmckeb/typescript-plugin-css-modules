@@ -21,14 +21,19 @@ const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
   });
 });
 
+function getPostCssConfig(dir: string) {
+  try {
+    return loadPostCssConfig.sync({}, dir);
+  } catch (error) {
+    return { plugins: [] };
+  }
+}
+
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
 
   function create(info: ts.server.PluginCreateInfo) {
-    const postcssConfig = loadPostCssConfig.sync(
-      {},
-      info.project.getCurrentDirectory(),
-    );
+    const postcssConfig = getPostCssConfig(info.project.getCurrentDirectory());
 
     const processor = postcss([
       removePlugin(),

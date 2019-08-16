@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
-import { DtsSnapshotCreator } from './helpers/cssSnapshots';
+import { DtsSnapshotCreator } from './helpers/DtsSnapshotCreator';
 import { Options } from './options';
 import { LanguageServiceLogger } from './helpers/Logger';
 

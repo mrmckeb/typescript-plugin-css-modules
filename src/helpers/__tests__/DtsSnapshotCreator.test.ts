@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { IICSSExports } from 'icss-utils';
 import { join } from 'path';
-import { DtsSnapshotCreator } from '../cssSnapshots';
+import { DtsSnapshotCreator } from '../DtsSnapshotCreator';
 
 const testFileNames = [
   'test.module.css',

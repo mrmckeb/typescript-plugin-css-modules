@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { IICSSExports } from 'icss-utils';
 import { join } from 'path';
-import { createExports, getClasses, getFileType } from '../cssSnapshots';
+import { DtsSnapshotCreator } from '../cssSnapshots';
 
 const testFileNames = [
   'test.module.css',
@@ -14,11 +14,16 @@ const testFileNames = [
 describe('utils / cssSnapshots', () => {
   testFileNames.forEach((fileName) => {
     let classes: IICSSExports;
+    let dtsSnapshotCreator: DtsSnapshotCreator;
     const fullFileName = join(__dirname, 'fixtures', fileName);
     const testFile = readFileSync(fullFileName, 'utf8');
 
     beforeAll(() => {
-      classes = getClasses(testFile, fullFileName);
+      dtsSnapshotCreator = new DtsSnapshotCreator({
+        log: jest.fn(),
+        error: jest.fn(),
+      });
+      classes = dtsSnapshotCreator.getClasses(testFile, fullFileName);
     });
 
     describe(`with file '${fileName}'`, () => {
@@ -30,7 +35,7 @@ describe('utils / cssSnapshots', () => {
 
       describe('createExports', () => {
         it('should create an exports file', () => {
-          const exports = createExports(classes, {});
+          const exports = dtsSnapshotCreator.createExports(classes, {});
           expect(exports).toMatchSnapshot();
         });
       });

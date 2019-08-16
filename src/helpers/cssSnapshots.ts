@@ -7,6 +7,7 @@ import * as sass from 'sass';
 import * as reserved from 'reserved-words';
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
+import { Logger } from './Logger';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
 const processor = postcss(postcssIcssSelectors({ mode: 'local' }));
@@ -35,69 +36,74 @@ export const getFileType = (fileName: string) => {
 const getFilePath = (fileName: string) =>
   fileName.substring(0, fileName.lastIndexOf('/'));
 
-export const getClasses = (css: string, fileName: string) => {
-  try {
-    const fileType = getFileType(fileName);
-    let transformedCss = '';
+export class DtsSnapshotCreator {
+  constructor(private readonly logger: Logger) {}
 
-    if (fileType === FileTypes.less) {
-      less.render(css, { asyncImport: true } as any, (err, output) => {
-        transformedCss = output.css.toString();
-      });
-    } else if (fileType === FileTypes.scss) {
-      const filePath = getFilePath(fileName);
-      transformedCss = sass
-        .renderSync({
-          data: css,
-          includePaths: [filePath],
-        })
-        .css.toString();
-    } else {
-      transformedCss = css;
+  getClasses(css: string, fileName: string) {
+    try {
+      const fileType = getFileType(fileName);
+      let transformedCss = '';
+
+      if (fileType === FileTypes.less) {
+        less.render(css, { asyncImport: true } as any, (err, output) => {
+          transformedCss = output.css.toString();
+        });
+      } else if (fileType === FileTypes.scss) {
+        const filePath = getFilePath(fileName);
+        transformedCss = sass
+          .renderSync({
+            data: css,
+            includePaths: [filePath],
+          })
+          .css.toString();
+      } else {
+        transformedCss = css;
+      }
+
+      const processedCss = processor.process(transformedCss);
+
+      return extractICSS(processedCss.root).icssExports;
+    } catch (e) {
+      this.logger.error(e);
+      return {};
     }
-
-    const processedCss = processor.process(transformedCss);
-
-    return extractICSS(processedCss.root).icssExports;
-  } catch (e) {
-    return {};
   }
-};
 
-export const createExports = (classes: IICSSExports, options: Options) => {
-  const isCamelCase = (className: string) =>
-    !NOT_CAMELCASE_REGEXP.test(className);
-  const isReservedWord = (className: string) => !reserved.check(className);
+  createExports(classes: IICSSExports, options: Options) {
+    const isCamelCase = (className: string) =>
+      !NOT_CAMELCASE_REGEXP.test(className);
+    const isReservedWord = (className: string) => !reserved.check(className);
 
-  const processedClasses = Object.keys(classes)
-    .map(transformClasses(options.camelCase))
-    .reduce(flattenClassNames, []);
-  const camelCasedKeys = processedClasses
-    .filter(isCamelCase)
-    .filter(isReservedWord)
-    .map(classNameToNamedExport);
+    const processedClasses = Object.keys(classes)
+      .map(transformClasses(options.camelCase))
+      .reduce(flattenClassNames, []);
+    const camelCasedKeys = processedClasses
+      .filter(isCamelCase)
+      .filter(isReservedWord)
+      .map(classNameToNamedExport);
 
-  const defaultExport = `\
+    const defaultExport = `\
 declare const classes: {
   ${processedClasses.map(classNameToProperty).join('\n  ')}
 };
 export default classes;
 `;
 
-  if (camelCasedKeys.length) {
-    return defaultExport + camelCasedKeys.join('\n') + '\n';
+    if (camelCasedKeys.length) {
+      return defaultExport + camelCasedKeys.join('\n') + '\n';
+    }
+    return defaultExport;
   }
-  return defaultExport;
-};
 
-export const getDtsSnapshot = (
-  ts: typeof ts_module,
-  fileName: string,
-  scriptSnapshot: ts.IScriptSnapshot,
-  options: Options,
-) => {
-  const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-  const classes = getClasses(css, fileName);
-  const dts = createExports(classes, options);
-  return ts.ScriptSnapshot.fromString(dts);
-};
+  getDtsSnapshot(
+    ts: typeof ts_module,
+    fileName: string,
+    scriptSnapshot: ts.IScriptSnapshot,
+    options: Options,
+  ) {
+    const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
+    const classes = this.getClasses(css, fileName);
+    const dts = this.createExports(classes, options);
+    return ts.ScriptSnapshot.fromString(dts);
+  }
+}

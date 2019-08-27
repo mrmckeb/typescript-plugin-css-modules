@@ -5,8 +5,9 @@ import * as ts_module from 'typescript/lib/tsserverlibrary';
 
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
-import { getDtsSnapshot } from './helpers/cssSnapshots';
+import { DtsSnapshotCreator } from './helpers/DtsSnapshotCreator';
 import { Options } from './options';
+import { LanguageServiceLogger } from './helpers/Logger';
 
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
@@ -33,8 +34,9 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
 
   function create(info: ts.server.PluginCreateInfo) {
+    const logger = new LanguageServiceLogger(info);
+    const dtsSnapshotCreator = new DtsSnapshotCreator(logger);
     const postcssConfig = getPostCssConfig(info.project.getCurrentDirectory());
-
     const processor = postcss([
       removePlugin(),
       ...postcssConfig.plugins.filter(
@@ -47,8 +49,10 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
     // User options for plugin.
     const options: Options = info.config.options || {};
 
+    logger.log(`options: ${JSON.stringify(options)}`);
+
     // Create matchers using options object.
-    const { isCSS, isRelativeCSS } = createMatchers(options);
+    const { isCSS, isRelativeCSS } = createMatchers(logger, options);
     _isCSS = isCSS;
 
     // Creates new virtual source files for the CSS modules.
@@ -59,7 +63,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
-        scriptSnapshot = getDtsSnapshot(
+        scriptSnapshot = dtsSnapshotCreator.getDtsSnapshot(
           ts,
           processor,
           fileName,
@@ -86,7 +90,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(sourceFile.fileName)) {
-        scriptSnapshot = getDtsSnapshot(
+        scriptSnapshot = dtsSnapshotCreator.getDtsSnapshot(
           ts,
           processor,
           sourceFile.fileName,
@@ -174,6 +178,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
               }
             }
           } catch (e) {
+            logger.error(e);
             return resolvedModules[index];
           }
           return resolvedModules[index];

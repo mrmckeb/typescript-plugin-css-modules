@@ -52,6 +52,7 @@
     "lodash": "^4.17.14",
     "postcss": "^7.0.17",
     "postcss-icss-selectors": "^2.0.3",
+    "postcss-load-config": "^2.1.0",
     "reserved-words": "^0.1.2",
     "sass": "^1.22.4"
   },

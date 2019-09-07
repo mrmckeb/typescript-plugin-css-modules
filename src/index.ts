@@ -1,17 +1,50 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as loadPostCssConfig from 'postcss-load-config';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
+
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
 import { DtsSnapshotCreator } from './helpers/DtsSnapshotCreator';
 import { Options } from './options';
 import { LanguageServiceLogger } from './helpers/Logger';
 
+import * as postcss from 'postcss';
+import * as postcssIcssSelectors from 'postcss-icss-selectors';
+
+const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
+  css.walkRules((rule) => {
+    rule.walkAtRules((atRule) => {
+      if (atRule.name === 'mixin') {
+        atRule.remove();
+      }
+    });
+  });
+});
+
+function getPostCssConfig(dir: string) {
+  try {
+    return loadPostCssConfig.sync({}, dir);
+  } catch (error) {
+    return { plugins: [] };
+  }
+}
+
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
+
   function create(info: ts.server.PluginCreateInfo) {
     const logger = new LanguageServiceLogger(info);
     const dtsSnapshotCreator = new DtsSnapshotCreator(logger);
+    const postcssConfig = getPostCssConfig(info.project.getCurrentDirectory());
+    const processor = postcss([
+      removePlugin(),
+      ...postcssConfig.plugins.filter(
+        // Postcss mixins plugin might be async and will break the postcss sync output.
+        (plugin) => !['postcss-mixins'].includes(plugin.postcssPlugin),
+      ),
+      postcssIcssSelectors({ mode: 'local' }),
+    ]);
 
     // User options for plugin.
     const options: Options = info.config.options || {};
@@ -32,6 +65,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       if (isCSS(fileName)) {
         scriptSnapshot = dtsSnapshotCreator.getDtsSnapshot(
           ts,
+          processor,
           fileName,
           scriptSnapshot,
           options,
@@ -58,6 +92,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       if (isCSS(sourceFile.fileName)) {
         scriptSnapshot = dtsSnapshotCreator.getDtsSnapshot(
           ts,
+          processor,
           sourceFile.fileName,
           scriptSnapshot,
           options,

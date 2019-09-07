@@ -1,6 +1,8 @@
 import { readFileSync } from 'fs';
 import { IICSSExports } from 'icss-utils';
 import { join } from 'path';
+import * as postcss from 'postcss';
+import * as postcssIcssSelectors from 'postcss-icss-selectors';
 import { DtsSnapshotCreator } from '../DtsSnapshotCreator';
 
 const testFileNames = [
@@ -10,6 +12,8 @@ const testFileNames = [
   'empty.module.less',
   'empty.module.scss',
 ];
+
+const processor = postcss([postcssIcssSelectors({ mode: 'local' })]);
 
 describe('utils / cssSnapshots', () => {
   testFileNames.forEach((fileName) => {
@@ -23,7 +27,11 @@ describe('utils / cssSnapshots', () => {
         log: jest.fn(),
         error: jest.fn(),
       });
-      classes = dtsSnapshotCreator.getClasses(testFile, fullFileName);
+      classes = dtsSnapshotCreator.getClasses(
+        processor,
+        testFile,
+        fullFileName,
+      );
     });
 
     describe(`with file '${fileName}'`, () => {

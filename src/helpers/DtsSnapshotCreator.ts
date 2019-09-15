@@ -103,6 +103,13 @@ export default classes;
     options: Options,
   ) {
     const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
+
+    // FIXME: Temporary workaround for https://github.com/mrmckeb/typescript-plugin-css-modules/issues/41
+    // Needs investigation for a more elegant solution.
+    if (css.match(/export default classes/)) {
+      return scriptSnapshot;
+    }
+
     const classes = this.getClasses(processor, css, fileName);
     const dts = this.createExports(classes, options);
     return ts.ScriptSnapshot.fromString(dts);

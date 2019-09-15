@@ -1,4 +1,4 @@
-import { pluginName } from './config';
+import { name } from '../../package.json';
 
 export interface Logger {
   log(msg: string): void;
@@ -9,7 +9,7 @@ export class LanguageServiceLogger implements Logger {
   constructor(private readonly info: ts.server.PluginCreateInfo) {}
 
   public log(msg: string) {
-    this.info.project.projectService.logger.info(`[${pluginName}] ${msg}`);
+    this.info.project.projectService.logger.info(`[${name}] ${msg}`);
   }
 
   public error(e: Error) {

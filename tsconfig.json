@@ -10,10 +10,10 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "outDir": "lib",
+    "resolveJsonModule": true,
     "rootDir": "src",
     "skipLibCheck": false,
     "strict": true,
-    "strictNullChecks": true,
     "target": "es5"
   },
   "include": ["src"],

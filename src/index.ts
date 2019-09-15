@@ -117,12 +117,12 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       info.languageServiceHost.resolveModuleNames = (
         moduleNames,
         containingFile,
-        reusedNames,
+        ...rest
       ) => {
         const resolvedModules = _resolveModuleNames(
           moduleNames,
           containingFile,
-          reusedNames,
+          ...rest,
         );
 
         return moduleNames.map((moduleName, index) => {

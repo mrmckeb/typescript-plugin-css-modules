@@ -83,7 +83,7 @@ The below is an example that only matches "\*.m.css" files, and [camel-cases das
 
 ### Visual Studio Code
 
-By default, VSCode will use it's own version of TypeScript. To make it work with this plugin, you have two options:
+By default, VSCode will use its own version of TypeScript. To make it work with this plugin, you have two options:
 
 1. Use your workspace's version of TypeScript, which will load plugins from your `tsconfig.json` file. This is the recommended approach. For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript).
 
@@ -126,3 +126,11 @@ declare module '*.module.less' {
   export default classes;
 }
 ```
+
+## Troubleshooting
+
+If you're having issues with this extension, you can view the TypeScript Server Log in VSCode by entering `Typescript: Open TS Server log` in the [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
+
+If that doesn't work, or you're not using VSCode, you can set the [TSS_LOG environment variable](https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29#logging).
+
+You can also include this with any issues you file on this project.

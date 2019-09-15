@@ -1,6 +1,6 @@
 import { createIsCSS, createIsRelativeCSS } from './cssExtensions';
 import { Options } from '../options';
-import { Logger } from './Logger';
+import { Logger } from './logger';
 
 export const createMatchers = (logger: Logger, options: Options = {}) => {
   // Allow custom matchers to be used, and handle bad matcher patterns.

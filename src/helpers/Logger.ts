@@ -1,19 +1,21 @@
-import { name } from '../../package.json';
+import { packageName } from '../config';
 
 export interface Logger {
-  log(msg: string): void;
-  error(e: Error): void;
+  log(message: string): void;
+  error(error: Error): void;
 }
 
-export class LanguageServiceLogger implements Logger {
-  constructor(private readonly info: ts.server.PluginCreateInfo) {}
+export const createLogger = (info: ts.server.PluginCreateInfo): Logger => {
+  const log = (message: string) => {
+    info.project.projectService.logger.info(`[${packageName}] ${message}`);
+  };
+  const error = (error: Error) => {
+    log(`Failed ${error.toString()}`);
+    log(`Stack trace: ${error.stack}`);
+  };
 
-  public log(msg: string) {
-    this.info.project.projectService.logger.info(`[${name}] ${msg}`);
-  }
-
-  public error(e: Error) {
-    this.log(`Failed ${e.toString()}`);
-    this.log(`Stack trace: ${e.stack}`);
-  }
-}
+  return {
+    log,
+    error,
+  };
+};

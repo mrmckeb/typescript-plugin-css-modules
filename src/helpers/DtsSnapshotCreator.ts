@@ -6,7 +6,7 @@ import * as sass from 'sass';
 import * as reserved from 'reserved-words';
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
-import { Logger } from './Logger';
+import { Logger } from './logger';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
 

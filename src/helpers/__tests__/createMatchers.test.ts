@@ -1,6 +1,6 @@
 import { createMatchers } from '../createMatchers';
 import { Options } from '../../options';
-import { Logger } from '../Logger';
+import { Logger } from '../logger';
 
 describe('utils / createMatchers', () => {
   const logger: Logger = { log: jest.fn(), error: jest.fn() };

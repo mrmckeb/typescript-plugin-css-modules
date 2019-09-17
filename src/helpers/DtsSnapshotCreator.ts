@@ -6,7 +6,7 @@ import * as sass from 'sass';
 import * as reserved from 'reserved-words';
 import { transformClasses } from './classTransforms';
 import { Options } from '../options';
-import { Logger } from './Logger';
+import { Logger } from './logger';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
 
@@ -103,6 +103,13 @@ export default classes;
     options: Options,
   ) {
     const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
+
+    // FIXME: Temporary workaround for https://github.com/mrmckeb/typescript-plugin-css-modules/issues/41
+    // Needs investigation for a more elegant solution.
+    if (/export default classes/.test(css)) {
+      return scriptSnapshot;
+    }
+
     const classes = this.getClasses(processor, css, fileName);
     const dts = this.createExports(classes, options);
     return ts.ScriptSnapshot.fromString(dts);

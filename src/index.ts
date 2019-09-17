@@ -2,13 +2,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as loadPostCssConfig from 'postcss-load-config';
 import * as ts_module from 'typescript/lib/tsserverlibrary';
-
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
 import { DtsSnapshotCreator } from './helpers/DtsSnapshotCreator';
 import { Options } from './options';
-import { LanguageServiceLogger } from './helpers/Logger';
-
+import { createLogger } from './helpers/logger';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
 
@@ -34,7 +32,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
 
   function create(info: ts.server.PluginCreateInfo) {
-    const logger = new LanguageServiceLogger(info);
+    const logger = createLogger(info);
     const dtsSnapshotCreator = new DtsSnapshotCreator(logger);
     const postcssConfig = getPostCssConfig(info.project.getCurrentDirectory());
     const processor = postcss([
@@ -117,12 +115,12 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       info.languageServiceHost.resolveModuleNames = (
         moduleNames,
         containingFile,
-        reusedNames,
+        ...rest
       ) => {
         const resolvedModules = _resolveModuleNames(
           moduleNames,
           containingFile,
-          reusedNames,
+          ...rest,
         );
 
         return moduleNames.map((moduleName, index) => {

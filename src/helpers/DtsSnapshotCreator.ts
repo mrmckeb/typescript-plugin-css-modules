@@ -106,7 +106,7 @@ export default classes;
 
     // FIXME: Temporary workaround for https://github.com/mrmckeb/typescript-plugin-css-modules/issues/41
     // Needs investigation for a more elegant solution.
-    if (css.match(/export default classes/)) {
+    if (/export default classes/.test(css)) {
       return scriptSnapshot;
     }
 

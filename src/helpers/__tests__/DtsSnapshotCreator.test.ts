@@ -1,7 +1,9 @@
 import { readFileSync } from 'fs';
 import { IICSSExports } from 'icss-utils';
 import { join } from 'path';
-import { createExports, getClasses, getFileType } from '../cssSnapshots';
+import * as postcss from 'postcss';
+import * as postcssIcssSelectors from 'postcss-icss-selectors';
+import { DtsSnapshotCreator } from '../DtsSnapshotCreator';
 
 const testFileNames = [
   'test.module.css',
@@ -11,14 +13,25 @@ const testFileNames = [
   'empty.module.scss',
 ];
 
+const processor = postcss([postcssIcssSelectors({ mode: 'local' })]);
+
 describe('utils / cssSnapshots', () => {
   testFileNames.forEach((fileName) => {
     let classes: IICSSExports;
+    let dtsSnapshotCreator: DtsSnapshotCreator;
     const fullFileName = join(__dirname, 'fixtures', fileName);
     const testFile = readFileSync(fullFileName, 'utf8');
 
     beforeAll(() => {
-      classes = getClasses(testFile, fullFileName);
+      dtsSnapshotCreator = new DtsSnapshotCreator({
+        log: jest.fn(),
+        error: jest.fn(),
+      });
+      classes = dtsSnapshotCreator.getClasses(
+        processor,
+        testFile,
+        fullFileName,
+      );
     });
 
     describe(`with file '${fileName}'`, () => {
@@ -30,7 +43,7 @@ describe('utils / cssSnapshots', () => {
 
       describe('createExports', () => {
         it('should create an exports file', () => {
-          const exports = createExports(classes, {});
+          const exports = dtsSnapshotCreator.createExports(classes, {});
           expect(exports).toMatchSnapshot();
         });
       });

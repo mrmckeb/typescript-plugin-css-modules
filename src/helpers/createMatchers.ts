@@ -1,7 +1,8 @@
 import { createIsCSS, createIsRelativeCSS } from './cssExtensions';
 import { Options } from '../options';
+import { Logger } from './logger';
 
-export const createMatchers = (options: Options = {}) => {
+export const createMatchers = (logger: Logger, options: Options = {}) => {
   // Allow custom matchers to be used, and handle bad matcher patterns.
   let isCSS = createIsCSS();
   try {
@@ -11,6 +12,7 @@ export const createMatchers = (options: Options = {}) => {
       isCSS = createIsCSS(customMatcherRegExp);
     }
   } catch (e) {
+    logger.error(e);
     // TODO: Provide error/warning to user.
   }
 

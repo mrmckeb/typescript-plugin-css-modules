@@ -109,14 +109,14 @@ export const nestedChild: string;
 
 exports[`utils / cssSnapshots with file 'test.module.css' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "ClassB": "file__ClassB---2bPVi",
-  "childA": "file__childA---1hjQD",
-  "childB": "file__childB---pq4Ks",
-  "class-c": "file__class-c---DZ1TD",
-  "classA": "file__classA---2xcnJ",
-  "class_d": "file__class_d---1mwNi",
-  "nestedChild": "file__nestedChild---2d15b",
-  "parent": "file__parent---1ATMj",
+  "ClassB": "test-module__ClassB---1z7xQ",
+  "childA": "test-module__childA---3PtDp",
+  "childB": "test-module__childB---33c4a",
+  "class-c": "test-module__class-c---Nme_S",
+  "classA": "test-module__classA---11Lf2",
+  "class_d": "test-module__class_d---7rY6T",
+  "nestedChild": "test-module__nestedChild---3OSwX",
+  "parent": "test-module__parent---1pNsk",
 }
 `;
 
@@ -139,16 +139,16 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'test.module.less' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "child-class": "file__child-class---1mwoB",
-  "color-set": "file__color-set---9sHH_",
-  "column-1": "file__column-1---vHRb_",
-  "column-2": "file__column-2---28y1r",
-  "column-3": "file__column-3---1PsZw",
-  "column-4": "file__column-4---2qaaI",
-  "nested-class-parent": "file__nested-class-parent---_ft7G",
-  "selector-blue": "file__selector-blue---3mslq",
-  "selector-green": "file__selector-green---143xX",
-  "selector-red": "file__selector-red---Gckob",
+  "child-class": "test-module__child-class---1Ga8C",
+  "color-set": "test-module__color-set---2h232",
+  "column-1": "test-module__column-1---3Hv-0",
+  "column-2": "test-module__column-2---1QOqJ",
+  "column-3": "test-module__column-3---1PZz0",
+  "column-4": "test-module__column-4---2XpQh",
+  "nested-class-parent": "test-module__nested-class-parent---R9jV3",
+  "selector-blue": "test-module__selector-blue---1icL9",
+  "selector-green": "test-module__selector-green---2pD8c",
+  "selector-red": "test-module__selector-red---gsEUj",
 }
 `;
 

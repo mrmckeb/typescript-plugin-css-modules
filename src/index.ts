@@ -9,7 +9,6 @@ import { Options } from './options';
 import { createLogger } from './helpers/logger';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
-import * as dotenv from 'dotenv';
 
 const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
   css.walkRules((rule) => {
@@ -28,6 +27,8 @@ function getPostCssConfig(dir: string) {
     return { plugins: [] };
   }
 }
+
+const sassPathRegex = /^SASS_PATH=(.+)/m;
 
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
@@ -185,23 +186,29 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       };
     }
 
-    // apply .env file at project root to current process environment ++ TODO: Instead, manually open .env and parse just the SASS_PATH part
     const projectDir = info.project.getCurrentDirectory();
-    dotenv.config({ path: path.resolve(projectDir, '.env') });
+    const dotenvPath = path.resolve(projectDir, '.env'); // MAYBE TODO: custom .env file name/path in Options?
 
-    // manually convert relative paths in SASS_PATH to absolute, lest they be resolved relative to process.cwd which would almost certainly be wrong
-    if (process.env.SASS_PATH) {
-      const sassPaths = process.env.SASS_PATH.split(path.delimiter);
+    // Manually open .env and parse just the SASS_PATH part,
+    // because we don't *need* to apply the full .env to this environment,
+    // and we are not sure doing so wouldn't have side effects
+    const dotenv = fs.readFileSync(dotenvPath, { encoding: 'utf8' });
+    const sassPathMatch = sassPathRegex.exec(dotenv);
 
+    if (sassPathMatch && sassPathMatch[1]) {
+      const sassPaths = sassPathMatch[1].split(path.delimiter);
+
+      // Manually convert relative paths in SASS_PATH to absolute,
+      // lest they be resolved relative to process.cwd which would almost certainly be wrong
       for (
         var i = 0, currPath = sassPaths[i];
         i < sassPaths.length;
         currPath = sassPaths[++i]
       ) {
         if (path.isAbsolute(currPath)) continue;
-        sassPaths[i] = path.resolve(projectDir, currPath); // resolve relative path against project directory
+        sassPaths[i] = path.resolve(projectDir, currPath); // resolve path relative to project directory
       }
-      // update SASS_PATH with new paths
+      // join modified array and assign to environment SASS_PATH
       process.env.SASS_PATH = sassPaths.join(path.delimiter);
     }
 

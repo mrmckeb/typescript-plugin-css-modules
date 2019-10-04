@@ -54,6 +54,16 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
+"declare const classes: {
+  
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
   'classA': string;

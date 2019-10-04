@@ -13,6 +13,7 @@ const testFileNames = [
   'empty.module.less',
   'empty.module.scss',
   'import.module.css',
+  'import.module.less',
 ];
 
 const processor = postcss([

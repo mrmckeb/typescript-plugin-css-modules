@@ -20,6 +20,40 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
+exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
+"declare const classes: {
+  'classA': string;
+  'ClassB': string;
+  'class-c': string;
+  'class_d': string;
+  'parent': string;
+  'childA': string;
+  'childB': string;
+  'nestedChild': string;
+};
+export default classes;
+export const classA: string;
+export const ClassB: string;
+export const parent: string;
+export const childA: string;
+export const childB: string;
+export const nestedChild: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.css' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "ClassB": "import-module__ClassB---1uTmq",
+  "childA": "import-module__childA---39Yod",
+  "childB": "import-module__childB---2S1Lz",
+  "class-c": "import-module__class-c---Xdyrv",
+  "classA": "import-module__classA---3-9yK",
+  "class_d": "import-module__class_d---27FnC",
+  "nestedChild": "import-module__nestedChild---HAsOX",
+  "parent": "import-module__parent---11jeJ",
+}
+`;
+
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
   'classA': string;

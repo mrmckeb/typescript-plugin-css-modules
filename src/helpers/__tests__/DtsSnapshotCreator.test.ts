@@ -3,6 +3,7 @@ import { IICSSExports } from 'icss-utils';
 import { join } from 'path';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
+import * as postcssImportSync from 'postcss-import-sync2';
 import { DtsSnapshotCreator } from '../DtsSnapshotCreator';
 
 const testFileNames = [
@@ -11,9 +12,13 @@ const testFileNames = [
   'test.module.scss',
   'empty.module.less',
   'empty.module.scss',
+  'import.module.css',
 ];
 
-const processor = postcss([postcssIcssSelectors({ mode: 'local' })]);
+const processor = postcss([
+  postcssImportSync(),
+  postcssIcssSelectors({ mode: 'local' }),
+]);
 
 describe('utils / cssSnapshots', () => {
   testFileNames.forEach((fileName) => {

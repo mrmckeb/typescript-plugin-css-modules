@@ -56,13 +56,35 @@ Object {
 
 exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
-  
+  'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
 };
 export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+exports[`utils / cssSnapshots with file 'import.module.less' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "import-module__child-class---3rUzY",
+  "color-set": "import-module__color-set---1Nz_3",
+  "column-1": "import-module__column-1---1do6Y",
+  "column-2": "import-module__column-2---HjqfU",
+  "column-3": "import-module__column-3---N5Wnb",
+  "column-4": "import-module__column-4---23ZMh",
+  "nested-class-parent": "import-module__nested-class-parent---36rk0",
+  "selector-blue": "import-module__selector-blue---1tI9n",
+  "selector-green": "import-module__selector-green---2yk8M",
+  "selector-red": "import-module__selector-red---1SN6v",
+}
+`;
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {

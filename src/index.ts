@@ -9,6 +9,7 @@ import { Options } from './options';
 import { createLogger } from './helpers/logger';
 import * as postcss from 'postcss';
 import * as postcssIcssSelectors from 'postcss-icss-selectors';
+import * as dotenv from 'dotenv';
 
 const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
   css.walkRules((rule) => {
@@ -182,6 +183,26 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
           return resolvedModules[index];
         });
       };
+    }
+
+    // apply .env file at project root to current process environment ++ TODO: Instead, manually open .env and parse just the SASS_PATH part
+    const projectDir = info.project.getCurrentDirectory();
+    dotenv.config({ path: path.resolve(projectDir, '.env') });
+
+    // manually convert relative paths in SASS_PATH to absolute, lest they be resolved relative to process.cwd which would almost certainly be wrong
+    if (process.env.SASS_PATH) {
+      const sassPaths = process.env.SASS_PATH.split(path.delimiter);
+
+      for (
+        var i = 0, currPath = sassPaths[i];
+        i < sassPaths.length;
+        currPath = sassPaths[++i]
+      ) {
+        if (path.isAbsolute(currPath)) continue;
+        sassPaths[i] = path.resolve(projectDir, currPath); // resolve relative path against project directory
+      }
+      // update SASS_PATH with new paths
+      process.env.SASS_PATH = sassPaths.join(path.delimiter);
     }
 
     return info.languageService;

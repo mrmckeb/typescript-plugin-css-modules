@@ -58,7 +58,9 @@ export class DtsSnapshotCreator {
         transformedCss = css;
       }
 
-      const processedCss = processor.process(transformedCss);
+      const processedCss = processor.process(transformedCss, {
+        from: fileName,
+      });
 
       return processedCss.root
         ? extractICSS(processedCss.root).icssExports

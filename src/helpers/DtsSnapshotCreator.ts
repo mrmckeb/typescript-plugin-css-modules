@@ -43,9 +43,13 @@ export class DtsSnapshotCreator {
       let transformedCss = '';
 
       if (fileType === FileTypes.less) {
-        less.render(css, { asyncImport: true } as any, (err, output) => {
-          transformedCss = output.css.toString();
-        });
+        less.render(
+          css,
+          { syncImport: true, filename: fileName } as any,
+          (err, output) => {
+            transformedCss = output.css.toString();
+          },
+        );
       } else if (fileType === FileTypes.scss) {
         const filePath = getFilePath(fileName);
         transformedCss = sass
@@ -58,7 +62,9 @@ export class DtsSnapshotCreator {
         transformedCss = css;
       }
 
-      const processedCss = processor.process(transformedCss);
+      const processedCss = processor.process(transformedCss, {
+        from: fileName,
+      });
 
       return processedCss.root
         ? extractICSS(processedCss.root).icssExports

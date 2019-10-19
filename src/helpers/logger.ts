@@ -1,13 +1,13 @@
-import { packageName } from '../config';
+import packageJson from '../../package.json';
 
 export interface Logger {
-  log(message: string): void;
-  error(error: Error): void;
+  log: (message: string) => void;
+  error: (error: Error) => void;
 }
 
 export const createLogger = (info: ts.server.PluginCreateInfo): Logger => {
   const log = (message: string) => {
-    info.project.projectService.logger.info(`[${packageName}] ${message}`);
+    info.project.projectService.logger.info(`[${packageJson.name}] ${message}`);
   };
   const error = (error: Error) => {
     log(`Failed ${error.toString()}`);

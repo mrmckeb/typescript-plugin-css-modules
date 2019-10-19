@@ -1,55 +1,61 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as loadPostCssConfig from 'postcss-load-config';
-import * as ts_module from 'typescript/lib/tsserverlibrary';
+import fs from 'fs';
+import path from 'path';
+import dotenv from 'dotenv';
+import postcss, { AcceptedPlugin } from 'postcss';
+import postcssIcssSelectors from 'postcss-icss-selectors';
+import postcssrc from 'postcss-load-config';
+import filter from 'postcss-filter-plugins';
+import tsModule from 'typescript/lib/tsserverlibrary';
+import { Options } from './options';
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
-import { DtsSnapshotCreator } from './helpers/DtsSnapshotCreator';
-import { Options } from './options';
+import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
-import * as postcss from 'postcss';
-import * as postcssIcssSelectors from 'postcss-icss-selectors';
 
-const removePlugin = postcss.plugin('remove-mixins', () => (css) => {
-  css.walkRules((rule) => {
-    rule.walkAtRules((atRule) => {
-      if (atRule.name === 'mixin') {
-        atRule.remove();
-      }
-    });
-  });
-});
-
-function getPostCssConfig(dir: string) {
+const getPostCssConfigPlugins = (directory: string) => {
   try {
-    return loadPostCssConfig.sync({}, dir);
+    return postcssrc.sync({}, directory).plugins;
   } catch (error) {
-    return { plugins: [] };
+    return [];
   }
-}
+};
 
-const sassPathRegex = /^SASS_PATH=(.+)/m;
-
-function init({ typescript: ts }: { typescript: typeof ts_module }) {
+function init({ typescript: ts }: { typescript: typeof tsModule }) {
   let _isCSS: isCSSFn;
 
   function create(info: ts.server.PluginCreateInfo) {
     const logger = createLogger(info);
-    const dtsSnapshotCreator = new DtsSnapshotCreator(logger);
-    const postcssConfig = getPostCssConfig(info.project.getCurrentDirectory());
-    const processor = postcss([
-      removePlugin(),
-      ...postcssConfig.plugins.filter(
-        // Postcss mixins plugin might be async and will break the postcss sync output.
-        (plugin) => !['postcss-mixins'].includes(plugin.postcssPlugin),
-      ),
-      postcssIcssSelectors({ mode: 'local' }),
-    ]);
 
     // User options for plugin.
     const options: Options = info.config.options || {};
-
     logger.log(`options: ${JSON.stringify(options)}`);
+
+    // Set environment variables, resolves #49.
+    // TODO: Add tests for this option.
+    dotenv.config(options.dotEnvOptions);
+
+    // Add postCSS config if enabled.
+    const postCssOptions = options.postCssOptions || {};
+
+    let userPlugins: AcceptedPlugin[] = [];
+    if (postCssOptions.useConfig) {
+      const postcssConfig = getPostCssConfigPlugins(
+        info.project.getCurrentDirectory(),
+      );
+      userPlugins = [
+        filter({
+          exclude: postCssOptions.excludePlugins,
+          silent: true,
+        }),
+        ...postcssConfig,
+      ];
+    }
+
+    // Create PostCSS processor.
+    const processor = postcss([
+      ...userPlugins,
+      postcssIcssSelectors({ mode: 'local' }),
+    ]);
 
     // Create matchers using options object.
     const { isCSS, isRelativeCSS } = createMatchers(logger, options);
@@ -63,12 +69,13 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(fileName)) {
-        scriptSnapshot = dtsSnapshotCreator.getDtsSnapshot(
+        scriptSnapshot = getDtsSnapshot(
           ts,
           processor,
           fileName,
           scriptSnapshot,
           options,
+          logger,
         );
       }
       const sourceFile = _createLanguageServiceSourceFile(
@@ -90,12 +97,13 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       ...rest
     ): ts.SourceFile => {
       if (isCSS(sourceFile.fileName)) {
-        scriptSnapshot = dtsSnapshotCreator.getDtsSnapshot(
+        scriptSnapshot = getDtsSnapshot(
           ts,
           processor,
           sourceFile.fileName,
           scriptSnapshot,
           options,
+          logger,
         );
       }
       sourceFile = _updateLanguageServiceSourceFile(
@@ -129,7 +137,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
           try {
             if (isRelativeCSS(moduleName)) {
               return {
-                extension: ts_module.Extension.Dts,
+                extension: tsModule.Extension.Dts,
                 isExternalLibraryImport: false,
                 resolvedFileName: path.resolve(
                   path.dirname(containingFile),
@@ -147,8 +155,12 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
               const match = '/index.ts';
 
               // An array of paths TypeScript searched for the module. All include .ts, .tsx, .d.ts, or .json extensions.
-              const failedLocations: string[] = (failedModule as any)
-                .failedLookupLocations;
+              // NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unkown.
+              // https://github.com/microsoft/TypeScript/issues/28770
+              const failedLocations: readonly string[] = ((failedModule as unknown) as {
+                failedLookupLocations: readonly string[];
+              }).failedLookupLocations;
+
               // Filter to only one extension type, and remove that extension. This leaves us with the actual filename.
               // Example: "usr/person/project/src/dir/File.module.css/index.d.ts" > "usr/person/project/src/dir/File.module.css"
               const normalizedLocations = failedLocations.reduce(
@@ -171,7 +183,7 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
 
               if (cssModulePath) {
                 return {
-                  extension: ts_module.Extension.Dts,
+                  extension: tsModule.Extension.Dts,
                   isExternalLibraryImport: false,
                   resolvedFileName: path.resolve(cssModulePath),
                 };
@@ -186,38 +198,10 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
       };
     }
 
-    const projectDir = info.project.getCurrentDirectory();
-    const dotenvPath = path.resolve(projectDir, '.env'); // MAYBE TODO: custom .env file name/path in Options?
-
-    // Manually open .env and parse just the SASS_PATH part,
-    // because we don't *need* to apply the full .env to this environment,
-    // and we are not sure doing so wouldn't have side effects
-    try {
-      const dotenv = fs.readFileSync(dotenvPath, { encoding: 'utf8' });
-      const sassPathMatch = sassPathRegex.exec(dotenv);
-
-      if (sassPathMatch && sassPathMatch[1]) {
-        const sassPaths = sassPathMatch[1].split(path.delimiter);
-
-        // Manually convert relative paths in SASS_PATH to absolute,
-        // lest they be resolved relative to process.cwd which would almost certainly be wrong
-        for (
-          var i = 0, currPath = sassPaths[i];
-          i < sassPaths.length;
-          currPath = sassPaths[++i]
-        ) {
-          if (path.isAbsolute(currPath)) continue;
-          sassPaths[i] = path.resolve(projectDir, currPath); // resolve path relative to project directory
-        }
-        // join modified array and assign to environment SASS_PATH
-        process.env.SASS_PATH = sassPaths.join(path.delimiter);
-      }
-    } catch {}
-
     return info.languageService;
   }
 
-  function getExternalFiles(project: ts_module.server.ConfiguredProject) {
+  function getExternalFiles(project: tsModule.server.ConfiguredProject) {
     return project.getFileNames().filter(_isCSS);
   }
 

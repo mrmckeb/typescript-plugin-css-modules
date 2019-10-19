@@ -28,6 +28,8 @@ function getPostCssConfig(dir: string) {
   }
 }
 
+const sassPathRegex = /^SASS_PATH=(.+)/m;
+
 function init({ typescript: ts }: { typescript: typeof ts_module }) {
   let _isCSS: isCSSFn;
 
@@ -183,6 +185,34 @@ function init({ typescript: ts }: { typescript: typeof ts_module }) {
         });
       };
     }
+
+    const projectDir = info.project.getCurrentDirectory();
+    const dotenvPath = path.resolve(projectDir, '.env'); // MAYBE TODO: custom .env file name/path in Options?
+
+    // Manually open .env and parse just the SASS_PATH part,
+    // because we don't *need* to apply the full .env to this environment,
+    // and we are not sure doing so wouldn't have side effects
+    try {
+      const dotenv = fs.readFileSync(dotenvPath, { encoding: 'utf8' });
+      const sassPathMatch = sassPathRegex.exec(dotenv);
+
+      if (sassPathMatch && sassPathMatch[1]) {
+        const sassPaths = sassPathMatch[1].split(path.delimiter);
+
+        // Manually convert relative paths in SASS_PATH to absolute,
+        // lest they be resolved relative to process.cwd which would almost certainly be wrong
+        for (
+          var i = 0, currPath = sassPaths[i];
+          i < sassPaths.length;
+          currPath = sassPaths[++i]
+        ) {
+          if (path.isAbsolute(currPath)) continue;
+          sassPaths[i] = path.resolve(projectDir, currPath); // resolve path relative to project directory
+        }
+        // join modified array and assign to environment SASS_PATH
+        process.env.SASS_PATH = sassPaths.join(path.delimiter);
+      }
+    } catch {}
 
     return info.languageService;
   }

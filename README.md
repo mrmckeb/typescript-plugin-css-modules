@@ -69,14 +69,14 @@ const b = styles['my_other-class'];
 
 Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-| Option            | Default value                      | Description                                                                                                                                           |
-| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `camelCase`       | `false`                            | Implements the behaviour of the [`camelCase` CSS Loader option](https://github.com/webpack-contrib/css-loader#camelcase) (accepting the same values). |
-| `customMatcher`   | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                                                               |
-| `customRenderer`  | `false`                            | See [`customRenderer`](#customRenderer) below.                                                                                                        |
-| `dotenvOptions`   | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).                                                                          |
-| `postCssOptions`  | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                                                                                                        |
-| `rendererOptions` | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                                                                      |
+| Option               | Default value                      | Description                                                                  |
+| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
+| `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                       |
+| `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                      |
+| `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                               |
+| `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
+| `postCssOptions`     | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                               |
+| `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |
 
 ```json
 {
@@ -85,7 +85,7 @@ Please note that no options are required. However, depending on your configurati
       {
         "name": "typescript-plugin-css-modules",
         "options": {
-          "camelCase": "dashes",
+          "classnameTransform": "dashes",
           "customMatcher": "\\.m\\.css$",
           "customRenderer": "./myRenderer.js",
           "dotenvOptions": {},
@@ -97,6 +97,12 @@ Please note that no options are required. However, depending on your configurati
   }
 }
 ```
+
+#### `classnameTransform`
+
+Implements the behaviour of the [`localsConvention`](https://github.com/webpack-contrib/css-loader#localsconvention) `css-loader` option.
+
+Options available are: `'asIs'`, `'camelCase'`, `'camelCaseOnly'`, `'dashes'`, and `'dashesOnly'`.
 
 #### `customRenderer`
 

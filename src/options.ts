@@ -13,7 +13,7 @@ export interface RendererOptions {
 }
 
 export interface Options {
-  camelCase?: CamelCaseOptions;
+  classnameTransform?: ClassnameTransformOptions;
   customMatcher?: string;
   customRenderer?: string;
   dotenvOptions?: DotenvConfigOptions;
@@ -21,12 +21,12 @@ export interface Options {
   rendererOptions?: RendererOptions;
 }
 
-export type CamelCaseOptions =
-  | true
+export type ClassnameTransformOptions =
+  | 'asIs'
+  | 'camelCase'
+  | 'camelCaseOnly'
   | 'dashes'
-  | 'dashesOnly'
-  | 'only'
-  | undefined;
+  | 'dashesOnly';
 
 export interface CustomRendererOptions {
   fileName: string;

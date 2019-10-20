@@ -20,7 +20,7 @@ export const createExports = (classes: CSSExports, options: Options) => {
   const isReservedWord = (className: string) => !reserved.check(className);
 
   const processedClasses = Object.keys(classes)
-    .map(transformClasses(options.camelCase))
+    .map(transformClasses(options.classnameTransform))
     .reduce(flattenClassNames, []);
   const camelCasedKeys = processedClasses
     .filter(isCamelCase)

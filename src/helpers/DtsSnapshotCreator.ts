@@ -57,6 +57,7 @@ export class DtsSnapshotCreator {
       }
 
       if (fileType === FileTypes.less) {
+        let error;
         less.render(
           css,
           {
@@ -65,9 +66,15 @@ export class DtsSnapshotCreator {
             ...renderOptions,
           } as any,
           (err, output) => {
-            transformedCss = output.css.toString();
+            error = err;
+            if (output) {
+              transformedCss = output.css.toString();
+            }
           },
         );
+        if (error) {
+          throw error;
+        }
       } else if (fileType === FileTypes.scss) {
         const filePath = getFilePath(fileName);
         transformedCss = sass

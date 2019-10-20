@@ -1,20 +1,21 @@
-import { camelCase } from 'lodash';
+import camelCase from 'lodash.camelcase';
+import { ClassnameTransformOptions } from '../options';
 
 // The below is based on the CSS Modules implementation found here:
 // https://github.com/webpack-contrib/css-loader/blob/master/lib/compile-exports.js
 
-const dashesCamelCase = (className: string) =>
+const dashCase = (className: string) =>
   className.replace(/-+(\w)/g, (match, firstLetter) =>
     firstLetter.toUpperCase(),
   );
 
-export const transformClasses = (camelCaseOption?: boolean | string) => (
-  className: string,
-) => {
+export const transformClasses = (
+  camelCaseOption?: ClassnameTransformOptions,
+) => (className: string) => {
   const entries: string[] = [];
 
   switch (camelCaseOption) {
-    case true: {
+    case 'camelCase': {
       entries.push(className);
       const targetClassName = camelCase(className);
       if (targetClassName !== className) {
@@ -22,20 +23,21 @@ export const transformClasses = (camelCaseOption?: boolean | string) => (
       }
       break;
     }
+    case 'camelCaseOnly':
+      entries.push(camelCase(className));
+      break;
     case 'dashes': {
       entries.push(className);
-      const targetClassName = dashesCamelCase(className);
+      const targetClassName = dashCase(className);
       if (targetClassName !== className) {
         entries.push(targetClassName);
       }
       break;
     }
-    case 'only':
-      entries.push(camelCase(className));
-      break;
     case 'dashesOnly':
-      entries.push(dashesCamelCase(className));
+      entries.push(dashCase(className));
       break;
+    case 'asIs':
     default:
       entries.push(className);
       break;

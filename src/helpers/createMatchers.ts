@@ -1,5 +1,5 @@
-import { createIsCSS, createIsRelativeCSS } from './cssExtensions';
 import { Options } from '../options';
+import { createIsCSS, createIsRelativeCSS } from './cssExtensions';
 import { Logger } from './logger';
 
 export const createMatchers = (logger: Logger, options: Options = {}) => {

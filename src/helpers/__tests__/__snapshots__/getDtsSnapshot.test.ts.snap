@@ -1,8 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
+Object {
+  "exampleFileContents": "exampleFileContents__exampleFileContents---e3Nf2",
+  "exampleFileName": "exampleFileContents__exampleFileName---yg7Zl",
+}
+`;
+
 exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
-  
+
 };
 export default classes;
 "
@@ -12,7 +19,7 @@ exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should re
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
-  
+
 };
 export default classes;
 "
@@ -22,7 +29,7 @@ exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should re
 
 exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
-  'classA': string;
+'classA': string;
   'ClassB': string;
   'class-c': string;
   'class_d': string;
@@ -56,7 +63,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
-  'nested-class-parent': string;
+'nested-class-parent': string;
   'child-class': string;
   'selector-blue': string;
   'selector-green': string;
@@ -88,7 +95,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
-  'classA': string;
+'classA': string;
   'ClassB': string;
   'class-c': string;
   'class_d': string;
@@ -122,7 +129,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
-  'nested-class-parent': string;
+'nested-class-parent': string;
   'child-class': string;
   'selector-blue': string;
   'selector-green': string;
@@ -154,7 +161,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
-  'local-class-inside-global': string;
+'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;
   'local-class-inside-local': string;

@@ -12,7 +12,7 @@
     "noImplicitThis": true,
     "outDir": "lib",
     "resolveJsonModule": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "skipLibCheck": false,
     "strict": true,
     "target": "es5"

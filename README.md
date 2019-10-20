@@ -9,21 +9,28 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
 
 <img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/master/.github/images/example.gif" alt="typescript-plugin-css-modules example" />
 
-This project was inspired by this [`create-react-app` issue](https://github.com/facebook/create-react-app/issues/5677)
-and was based on [`css-module-types`](https://github.com/timothykang/css-module-types).
+## Table of contents
+
+- [Installation](#installation)
+  - [Importing CSS](#importing-css)
+  - [Options](#options)
+  - [Visual Studio Code](#visual-studio-code)
+  - [Custom definitions](#custom-definitions)
+- [Troubleshooting](#troubleshooting)
+- [About this project](#about-this-project)
 
 ## Installation
 
 To install with Yarn:
 
 ```sh
-yarn add typescript-plugin-css-modules
+yarn add -D typescript-plugin-css-modules
 ```
 
 To install with npm:
 
 ```sh
-npm install --save typescript-plugin-css-modules
+npm install -D typescript-plugin-css-modules
 ```
 
 Once installed, add this plugin to your `tsconfig.json`:
@@ -35,6 +42,8 @@ Once installed, add this plugin to your `tsconfig.json`:
   }
 }
 ```
+
+If you're using Visual Studio Code, please also follow these [instructions](#visual-studio-code).
 
 ### Importing CSS
 
@@ -58,12 +67,16 @@ const b = styles['my_other-class'];
 
 ### Options
 
-| Option          | Default value                      | Description                                                                                                                                           |
-| --------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `customMatcher` | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Change the file extensions that this plugin works with.                                                                                               |
-| `camelCase`     | `false`                            | Implements the behaviour of the [`camelCase` CSS Loader option](https://github.com/webpack-contrib/css-loader#camelcase) (accepting the same values). |
+Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-The below is an example that only matches "\*.m.css" files, and [camel-cases dashes](https://github.com/webpack-contrib/css-loader#camelcase).
+| Option            | Default value                      | Description                                                                                                                                           |
+| ----------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camelCase`       | `false`                            | Implements the behaviour of the [`camelCase` CSS Loader option](https://github.com/webpack-contrib/css-loader#camelcase) (accepting the same values). |
+| `customMatcher`   | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                                                               |
+| `customRenderer`  | `false`                            | See [`customRenderer`](#customRenderer) below.                                                                                                        |
+| `dotenvOptions`   | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).                                                                          |
+| `postCssOptions`  | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                                                                                                        |
+| `rendererOptions` | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                                                                      |
 
 ```json
 {
@@ -72,8 +85,12 @@ The below is an example that only matches "\*.m.css" files, and [camel-cases das
       {
         "name": "typescript-plugin-css-modules",
         "options": {
+          "camelCase": "dashes",
           "customMatcher": "\\.m\\.css$",
-          "camelCase": "dashes"
+          "customRenderer": "./myRenderer.js",
+          "dotenvOptions": {},
+          "postCssOptions": {},
+          "rendererOptions": {}
         }
       }
     ]
@@ -81,13 +98,56 @@ The below is an example that only matches "\*.m.css" files, and [camel-cases das
 }
 ```
 
+#### `customRenderer`
+
+The `customRenderer` is an advanced option, letting you provide the CSS renderer.
+
+When a custom renderer is provided, not other renderers will be used.
+
+The path to the `customRenderer` must be relative to the project root (i.e. `./myRenderer.js`).
+
+The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `css` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L36-L39)). It must be synchronous, and must return valid CSS.
+
+```js
+module.exports = (css, { fileName, logger }) => {
+  try {
+    // ...process css here
+    return renderedCss;
+  } catch (error) {
+    logger.error(error.message);
+  }
+};
+```
+
+You can find an example custom renderer in our test fixtures ([`customRenderer.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customRenderer.js)).
+
+The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
+
+#### `postCssOptions`
+
+| Option           | Default value | Description                                                                                                               |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `useConfig`      | `false`       | Set to `true` to load plugins from your [PostCSS config](https://github.com/michael-ciniawsky/postcss-load-config#usage). |
+| `excludePlugins` | `false`       | Only sync plugins are supported. Use this to set an array of async plugins to exclude (i.e. `['postcss-mixins']`)         |
+
+#### `rendererOptions`
+
+| Option | Default value | Description                                                                          |
+| ------ | ------------- | ------------------------------------------------------------------------------------ |
+| `less` | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
+| `sass` | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
+
 ### Visual Studio Code
 
-By default, VSCode will use its own version of TypeScript. To make it work with this plugin, you have two options:
+#### Recommended usage
 
-1. Use your workspace's version of TypeScript, which will load plugins from your `tsconfig.json` file. This is the recommended approach. For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript).
+To use this plugin with Visual Studio Code, you should set your workspace's version of TypeScript, which will load plugins from your `tsconfig.json` file.
 
-2. Add this plugin to `"typescript.tsserver.pluginPaths"` in settings. Note that this method doesn't currently support plugin options.
+For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript).
+
+#### Alternative usage
+
+If you aren't using any [plugin options](#options), you can simple add this plugin to `"typescript.tsserver.pluginPaths"` in settings. You cannot provide plugin options with this approach.
 
 ```json
 {
@@ -101,9 +161,9 @@ _Note: Create React App users can skip this section if you're using `react-scrip
 
 If your project doesn't already have global declarations for CSS Modules, you will need to add these to help TypeScript understand the general shape of the imported CSS during build.
 
-Where you store global declarations is up to you. An example might look like: `src/custom.d.ts`.
+Where you store global declarations is up to you. An example might look like: `./src/custom.d.ts`.
 
-The below is an example that you can copy or modify. If you use a `customMatcher`, you'll need to modify it.
+The below is an example that you can copy or modify. If you use a [`customMatcher`], you'll need to modify this.
 
 ```ts
 declare module '*.module.css' {
@@ -129,8 +189,13 @@ declare module '*.module.less' {
 
 ## Troubleshooting
 
-If you're having issues with this extension, you can view the TypeScript Server Log in VSCode by entering `Typescript: Open TS Server log` in the [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
+For troubleshooting and debugging, you can view the TypeScript Server Log in Visual Studio Code by entering `Typescript: Open TS Server log` in the [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
 
-If that doesn't work, or you're not using VSCode, you can set the [TSS_LOG environment variable](https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29#logging).
+If you're not using Visual Studio Code or are having trouble with the above method, you can set the [`TSS_LOG` environment variable](https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29#logging).
 
-You can also include this with any issues you file on this project.
+You can include these logs with any issues you open for this project.
+
+## About this project
+
+This project was inspired by a Create React App [issue](https://github.com/facebook/create-react-app/issues/5677)
+and built on prior work from [`css-module-types`](https://github.com/timothykang/css-module-types).

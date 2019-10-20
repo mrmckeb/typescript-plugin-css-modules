@@ -25,6 +25,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
   function create(info: ts.server.PluginCreateInfo) {
     const logger = createLogger(info);
+    const directory = info.project.getCurrentDirectory();
 
     // User options for plugin.
     const options: Options = info.config.options || {};
@@ -32,16 +33,14 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
     // Set environment variables, resolves #49.
     // TODO: Add tests for this option.
-    dotenv.config(options.dotEnvOptions);
+    dotenv.config(options.dotenvOptions);
 
     // Add postCSS config if enabled.
     const postCssOptions = options.postCssOptions || {};
 
     let userPlugins: AcceptedPlugin[] = [];
     if (postCssOptions.useConfig) {
-      const postcssConfig = getPostCssConfigPlugins(
-        info.project.getCurrentDirectory(),
-      );
+      const postcssConfig = getPostCssConfigPlugins(directory);
       userPlugins = [
         filter({
           exclude: postCssOptions.excludePlugins,
@@ -49,6 +48,11 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
         }),
         ...postcssConfig,
       ];
+    }
+
+    // If a custom renderer is provided, resolve the path.
+    if (options.customRenderer) {
+      options.customRenderer = path.resolve(directory, options.customRenderer);
     }
 
     // Create PostCSS processor.

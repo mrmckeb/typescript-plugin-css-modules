@@ -16,7 +16,7 @@ export interface Options {
   camelCase?: CamelCaseOptions;
   customMatcher?: string;
   customRenderer?: string;
-  dotEnvOptions?: DotenvConfigOptions;
+  dotenvOptions?: DotenvConfigOptions;
   postCssOptions?: PostCssOptions;
   rendererOptions?: RendererOptions;
 }
@@ -35,5 +35,5 @@ export interface CustomRendererOptions {
 
 export type CustomRenderer = (
   css: string,
-  Options: CustomRendererOptions,
+  options: CustomRendererOptions,
 ) => string;

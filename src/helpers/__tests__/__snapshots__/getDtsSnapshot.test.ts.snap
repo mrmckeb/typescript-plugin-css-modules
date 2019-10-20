@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
+Object {
+  "exampleFileContents": "exampleFileContents__exampleFileContents---e3Nf2",
+  "exampleFileName": "exampleFileContents__exampleFileName---yg7Zl",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
+"declare const classes: {
+
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
+"declare const classes: {
+
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
+"declare const classes: {
+'classA': string;
+  'ClassB': string;
+  'class-c': string;
+  'class_d': string;
+  'parent': string;
+  'childA': string;
+  'childB': string;
+  'nestedChild': string;
+};
+export default classes;
+export const classA: string;
+export const ClassB: string;
+export const parent: string;
+export const childA: string;
+export const childB: string;
+export const nestedChild: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.css' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "ClassB": "import-module__ClassB---2LsIz",
+  "childA": "import-module__childA---2AUKk",
+  "childB": "import-module__childB---1z-Zh",
+  "class-c": "import-module__class-c---2JDAJ",
+  "classA": "import-module__classA---2fO5r",
+  "class_d": "import-module__class_d---2Dims",
+  "nestedChild": "import-module__nestedChild---1ZDxw",
+  "parent": "import-module__parent---2kdvO",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
+"declare const classes: {
+'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.less' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "import-module__child-class---2XACw",
+  "color-set": "import-module__color-set---9xoPb",
+  "column-1": "import-module__column-1---3R-BM",
+  "column-2": "import-module__column-2---J0ZdX",
+  "column-3": "import-module__column-3---3_589",
+  "column-4": "import-module__column-4---SlPDz",
+  "nested-class-parent": "import-module__nested-class-parent---14g9m",
+  "selector-blue": "import-module__selector-blue---2JSaB",
+  "selector-green": "import-module__selector-green---1cLL8",
+  "selector-red": "import-module__selector-red---2T6zy",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
+"declare const classes: {
+'classA': string;
+  'ClassB': string;
+  'class-c': string;
+  'class_d': string;
+  'parent': string;
+  'childA': string;
+  'childB': string;
+  'nestedChild': string;
+};
+export default classes;
+export const classA: string;
+export const ClassB: string;
+export const parent: string;
+export const childA: string;
+export const childB: string;
+export const nestedChild: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.css' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "ClassB": "test-module__ClassB---G7fhY",
+  "childA": "test-module__childA---26dwC",
+  "childB": "test-module__childB---13lLy",
+  "class-c": "test-module__class-c---3Ouzp",
+  "classA": "test-module__classA---KAOw8",
+  "class_d": "test-module__class_d---3pjDe",
+  "nestedChild": "test-module__nestedChild---v7rOR",
+  "parent": "test-module__parent---2tsUX",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
+"declare const classes: {
+'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.less' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "test-module__child-class---1au0d",
+  "color-set": "test-module__color-set---bEXmh",
+  "column-1": "test-module__column-1---5hXb3",
+  "column-2": "test-module__column-2---2ykNv",
+  "column-3": "test-module__column-3---2JnAp",
+  "column-4": "test-module__column-4---SG3xj",
+  "nested-class-parent": "test-module__nested-class-parent---2jIpC",
+  "selector-blue": "test-module__selector-blue---2kUKa",
+  "selector-green": "test-module__selector-green---hMr6S",
+  "selector-red": "test-module__selector-red---2hf4j",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
+"declare const classes: {
+'local-class-inside-global': string;
+  'local-class': string;
+  'local-class-2': string;
+  'local-class-inside-local': string;
+  'reserved-words': string;
+  'default': string;
+  'const': string;
+  'nested-class-parent': string;
+  'child-class': string;
+  'nested-class-parent--extended': string;
+  'section-1': string;
+  'section-2': string;
+  'section-3': string;
+  'section-4': string;
+  'section-5': string;
+  'section-6': string;
+  'section-7': string;
+  'section-8': string;
+  'section-9': string;
+  'class-with-mixin': string;
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.scss' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "test-module__child-class---s-_Mc",
+  "class-with-mixin": "test-module__class-with-mixin---1JqB_",
+  "const": "test-module__const---28kKv",
+  "default": "test-module__default---8gLb1",
+  "local-class": "test-module__local-class---1Ju3l",
+  "local-class-2": "test-module__local-class-2---3aSgy",
+  "local-class-inside-global": "test-module__local-class-inside-global---IVh9J",
+  "local-class-inside-local": "test-module__local-class-inside-local---1LKIi",
+  "nested-class-parent": "test-module__nested-class-parent---2LnTV",
+  "nested-class-parent--extended": "test-module__nested-class-parent--extended---1j85b",
+  "reserved-words": "test-module__reserved-words---1mM1m",
+  "section-1": "test-module__section-1---11Ic3",
+  "section-2": "test-module__section-2---1Uiwc",
+  "section-3": "test-module__section-3---2eZeM",
+  "section-4": "test-module__section-4---3m8sf",
+  "section-5": "test-module__section-5---1MTwN",
+  "section-6": "test-module__section-6---szUAt",
+  "section-7": "test-module__section-7---2DOBJ",
+  "section-8": "test-module__section-8---3qav2",
+  "section-9": "test-module__section-9---2EMR_",
+}
+`;

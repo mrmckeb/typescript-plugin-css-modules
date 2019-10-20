@@ -1,1 +1,4 @@
-src/helpers/__tests__/fixtures/test.module.less
+src/helpers/__tests__/fixtures/*.less
+src/helpers/__tests__/fixtures/*.css
+src/helpers/__tests__/fixtures/*.scss
+/lib/

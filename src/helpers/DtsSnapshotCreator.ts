@@ -37,15 +37,33 @@ const getFilePath = (fileName: string) =>
 export class DtsSnapshotCreator {
   constructor(private readonly logger: Logger) {}
 
-  getClasses(processor: postcss.Processor, css: string, fileName: string) {
+  getClasses(
+    processor: postcss.Processor,
+    css: string,
+    fileName: string,
+    options: Options = {},
+  ) {
     try {
       const fileType = getFileType(fileName);
       let transformedCss = '';
 
+      let renderOptions: Options['renderOptions'] | {} = {};
+      if (options.renderOptions) {
+        if (fileType === FileTypes.less && options.renderOptions.less) {
+          renderOptions = options.renderOptions.less;
+        } else if (fileType === FileTypes.scss && options.renderOptions.scss) {
+          renderOptions = options.renderOptions.scss;
+        }
+      }
+
       if (fileType === FileTypes.less) {
         less.render(
           css,
-          { syncImport: true, filename: fileName } as any,
+          {
+            syncImport: true,
+            filename: fileName,
+            ...renderOptions,
+          } as any,
           (err, output) => {
             transformedCss = output.css.toString();
           },
@@ -56,6 +74,7 @@ export class DtsSnapshotCreator {
           .renderSync({
             data: css,
             includePaths: [filePath],
+            ...options,
           })
           .css.toString();
       } else {
@@ -116,7 +135,7 @@ export default classes;
       return scriptSnapshot;
     }
 
-    const classes = this.getClasses(processor, css, fileName);
+    const classes = this.getClasses(processor, css, fileName, options);
     const dts = this.createExports(classes, options);
     return ts.ScriptSnapshot.fromString(dts);
   }

@@ -31,9 +31,27 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     const options: Options = info.config.options || {};
     logger.log(`options: ${JSON.stringify(options)}`);
 
-    // Set environment variables, resolves #49.
+    // Load environment variables like SASS_PATH.
     // TODO: Add tests for this option.
+    const dotenvOptions = options.dotenvOptions || {};
+    if (dotenvOptions) {
+      dotenvOptions.path = path.resolve(
+        directory,
+        dotenvOptions.path || '.env',
+      );
+    }
     dotenv.config(options.dotenvOptions);
+
+    // Normalise SASS_PATH array to absolute paths.
+    if (process.env.SASS_PATH) {
+      process.env.SASS_PATH = process.env.SASS_PATH.split(path.delimiter)
+        .map((sassPath) =>
+          path.isAbsolute(sassPath)
+            ? sassPath
+            : path.resolve(directory, sassPath),
+        )
+        .join(path.delimiter);
+    }
 
     // Add postCSS config if enabled.
     const postCssOptions = options.postCssOptions || {};

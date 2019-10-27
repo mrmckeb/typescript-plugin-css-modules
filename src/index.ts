@@ -40,7 +40,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
         dotenvOptions.path || '.env',
       );
     }
-    dotenv.config(options.dotenvOptions);
+    dotenv.config(dotenvOptions);
 
     // Normalise SASS_PATH array to absolute paths.
     if (process.env.SASS_PATH) {

@@ -80,4 +80,29 @@ describe('utils / cssSnapshots', () => {
       expect(mockLogger.log).toHaveBeenCalledWith('Example log');
     });
   });
+
+  describe('includePaths in sass options', () => {
+    const fullFileName = join(
+      __dirname,
+      'fixtures',
+      'include-path.module.scss',
+    );
+    const testFile = readFileSync(fullFileName, 'utf8');
+
+    it('should find external file from includePaths', () => {
+      const classes = getClasses(
+        processor,
+        testFile,
+        fullFileName,
+        {
+          rendererOptions: {
+            sass: { includePaths: [join(__dirname, 'external')] },
+          },
+        },
+        mockLogger,
+      );
+
+      expect(classes).toMatchSnapshot();
+    });
+  });
 });

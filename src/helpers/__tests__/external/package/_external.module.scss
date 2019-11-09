@@ -1,0 +1,9 @@
+@import 'mixin';
+
+.class-with-mixin {
+  @include set-margin(0);
+}
+
+.big-font {
+  font-size: 82px;
+}

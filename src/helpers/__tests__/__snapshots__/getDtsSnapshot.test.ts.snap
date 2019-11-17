@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils / cssSnapshots includePaths in sass options should find external file from includePaths 1`] = `
+Object {
+  "big-font": "include-path-module__big-font---Td7hY",
+  "class-with-mixin": "include-path-module__class-with-mixin---1u87_",
+}
+`;
+
 exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
 Object {
   "exampleFileContents": "exampleFileContents__exampleFileContents---e3Nf2",

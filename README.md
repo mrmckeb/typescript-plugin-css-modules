@@ -143,13 +143,15 @@ The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules
 | `less` | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
 | `sass` | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
 
+> For convenience, `includePaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
+
 ### Visual Studio Code
 
 #### Recommended usage
 
 To use this plugin with Visual Studio Code, you should set your workspace's version of TypeScript, which will load plugins from your `tsconfig.json` file.
 
-For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/languages/typescript#_using-the-workspace-version-of-typescript).
+For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript).
 
 #### Alternative usage
 

@@ -63,7 +63,7 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
-  describe(`with a custom renderer`, () => {
+  describe('with a custom renderer', () => {
     const fullFileName = 'exampleFileContents';
     const testFile = 'exampleFileName';
     const customRenderer = join(__dirname, 'fixtures', 'customRenderer.js');
@@ -81,7 +81,7 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
-  describe('includePaths in sass options', () => {
+  describe('with includePaths in sass options', () => {
     const fullFileName = join(
       __dirname,
       'fixtures',

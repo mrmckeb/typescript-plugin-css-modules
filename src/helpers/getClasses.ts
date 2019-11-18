@@ -52,12 +52,13 @@ export const getClasses = (
       );
     } else if (fileType === FileTypes.scss) {
       const filePath = getFilePath(fileName);
+      const { includePaths, ...sassOptions } = rendererOptions.sass || {};
 
       transformedCss = sass
         .renderSync({
           data: css,
-          includePaths: [filePath],
-          ...(rendererOptions.sass || {}),
+          includePaths: [filePath, 'node_modules', ...(includePaths || [])],
+          ...sassOptions,
         })
         .css.toString();
     } else {

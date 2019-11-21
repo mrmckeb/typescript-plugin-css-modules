@@ -4,6 +4,7 @@ import sass from 'sass';
 import { extractICSS } from 'icss-utils';
 import { Logger } from './logger';
 import { Options, CustomRenderer } from '../options';
+import path from "path";
 
 export const enum FileTypes {
   css = 'css',
@@ -17,8 +18,7 @@ export const getFileType = (fileName: string) => {
   return FileTypes.scss;
 };
 
-const getFilePath = (fileName: string) =>
-  fileName.substring(0, fileName.lastIndexOf('/'));
+const getFilePath = (fileName: string) => path.dirname(fileName);
 
 export const getClasses = (
   processor: postcss.Processor,
@@ -71,7 +71,7 @@ export const getClasses = (
 
     return processedCss.root ? extractICSS(processedCss.root).icssExports : {};
   } catch (e) {
-    console.log(e);
+    logger.log(e);
     logger.error(e);
     return {};
   }

@@ -1,10 +1,10 @@
+import path from 'path';
 import postcss from 'postcss';
 import less from 'less';
 import sass from 'sass';
 import { extractICSS } from 'icss-utils';
 import { Logger } from './logger';
 import { Options, CustomRenderer } from '../options';
-import path from "path";
 
 export const enum FileTypes {
   css = 'css',

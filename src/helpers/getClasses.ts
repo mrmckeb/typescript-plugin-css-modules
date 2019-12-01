@@ -46,7 +46,7 @@ export const getClasses = (
           ...(rendererOptions.less || {}),
         } as Less.Options,
         (error, output) => {
-          if (error) throw error;
+          if (error || output === undefined) throw error;
           transformedCss = output.css.toString();
         },
       );

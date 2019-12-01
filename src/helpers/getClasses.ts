@@ -71,7 +71,6 @@ export const getClasses = (
 
     return processedCss.root ? extractICSS(processedCss.root).icssExports : {};
   } catch (e) {
-    logger.log(e);
     logger.error(e);
     return {};
   }

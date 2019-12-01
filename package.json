@@ -1,6 +1,6 @@
 {
   "name": "typescript-plugin-css-modules",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "lib/index.js",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",
@@ -62,39 +62,42 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
+  "resolutions": {
+    "postcss": "7.0.23"
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "icss-utils": "^4.1.1",
     "less": "^3.9.0",
     "lodash.camelcase": "^4.3.0",
-    "postcss": "^7.0.17",
+    "postcss": "^7.0.23",
     "postcss-filter-plugins": "^3.0.1",
     "postcss-icss-selectors": "^2.0.3",
     "postcss-load-config": "^2.1.0",
     "reserved-words": "^0.1.2",
-    "sass": "^1.22.4"
+    "sass": "^1.23.7"
   },
   "devDependencies": {
     "@types/icss-utils": "^4.1.0",
-    "@types/jest": "^24.0.15",
-    "@types/less": "^3.0.0",
+    "@types/jest": "^24.0.23",
+    "@types/less": "^3.0.1",
     "@types/lodash.camelcase": "^4.3.6",
-    "@types/node": "^12.11.1",
-    "@types/postcss-load-config": "^2.0.0",
+    "@types/node": "^12.12.14",
+    "@types/postcss-load-config": "^2.0.1",
     "@types/postcss-nested": "^4.1.0",
     "@types/reserved-words": "^0.1.0",
     "@types/sass": "^1.16.0",
-    "@typescript-eslint/eslint-plugin": "^2.4.0",
-    "@typescript-eslint/parser": "^2.4.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "husky": "^3.0.9",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "husky": "^3.1.0",
     "jest": "^24.8.0",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "^9.5.0",
     "postcss-import-sync2": "^1.1.0",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.4"
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.2"
   },
   "peerDependencies": {
     "typescript": "^3.0.0"

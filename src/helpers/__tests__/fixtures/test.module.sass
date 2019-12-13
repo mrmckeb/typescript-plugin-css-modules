@@ -1,0 +1,51 @@
+:global .global-class 
+  color: rebeccapurple
+
+
+:global(.global-class-2) 
+  .local-class-inside-global
+    color: rebeccapurple
+  
+
+
+:local .local-class 
+  color: rebeccapurple
+
+
+:local(.local-class-2)
+  .local-class-inside-local
+    color: rebeccapurple
+  
+
+
+.reserved-words
+  .default
+    color: rebeccapurple
+
+  .const
+    color: rebeccapurple
+
+
+.nested-class-parent
+  .child-class
+    color: rebeccapurple
+
+  &--extended
+    color: rebeccapurple
+
+
+
+$color: rebeccapurple !default
+
+@for $section from 1 to 10
+  .section-#{$section}
+    color: $color
+
+@import 'mixin'
+
+.class-with-mixin
+  @include set-margin(0)
+
+// .commented-parent-class {
+//   .commented-child-class
+// }

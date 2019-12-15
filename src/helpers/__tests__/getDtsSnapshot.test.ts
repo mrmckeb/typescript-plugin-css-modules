@@ -65,19 +65,37 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
+  describe('with a Bootstrap import', () => {
+    const fullFileName = join(__dirname, 'fixtures', 'bootstrap.module.scss');
+    const testFile = readFileSync(fullFileName, 'utf8');
+
+    it('should find external files', () => {
+      const classes = getClasses(
+        processor,
+        testFile,
+        fullFileName,
+        mockOptions,
+        mockLogger,
+      );
+
+      expect(classes.test).toMatchSnapshot();
+    });
+  });
+
   describe('with a custom renderer', () => {
     const fullFileName = 'exampleFileContents';
     const testFile = 'exampleFileName';
     const customRenderer = join(__dirname, 'fixtures', 'customRenderer.js');
-    const classes = getClasses(
-      processor,
-      testFile,
-      fullFileName,
-      { customRenderer },
-      mockLogger,
-    );
 
     it('should process a file and log', () => {
+      const classes = getClasses(
+        processor,
+        testFile,
+        fullFileName,
+        { customRenderer },
+        mockLogger,
+      );
+
       expect(classes).toMatchSnapshot();
       expect(mockLogger.log).toHaveBeenCalledWith('Example log');
     });

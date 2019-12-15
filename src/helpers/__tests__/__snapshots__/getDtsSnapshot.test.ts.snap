@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`utils / cssSnapshots with a Bootstrap import should find external files 1`] = `"bootstrap-module__test---WRms9"`;
+
 exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
 Object {
   "exampleFileContents": "exampleFileContents__exampleFileContents---e3Nf2",
@@ -16,6 +18,16 @@ export default classes;
 `;
 
 exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
+"declare const classes: {
+
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.sass' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
@@ -156,6 +168,58 @@ Object {
   "selector-blue": "test-module__selector-blue---2kUKa",
   "selector-green": "test-module__selector-green---hMr6S",
   "selector-red": "test-module__selector-red---2hf4j",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.sass' createExports should create an exports file 1`] = `
+"declare const classes: {
+'local-class-inside-global': string;
+  'local-class': string;
+  'local-class-2': string;
+  'local-class-inside-local': string;
+  'reserved-words': string;
+  'default': string;
+  'const': string;
+  'nested-class-parent': string;
+  'child-class': string;
+  'nested-class-parent--extended': string;
+  'section-1': string;
+  'section-2': string;
+  'section-3': string;
+  'section-4': string;
+  'section-5': string;
+  'section-6': string;
+  'section-7': string;
+  'section-8': string;
+  'section-9': string;
+  'class-with-mixin': string;
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.sass' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "child-class": "test-module__child-class---2vfhc",
+  "class-with-mixin": "test-module__class-with-mixin---3zUq-",
+  "const": "test-module__const---39o_j",
+  "default": "test-module__default---h-tcC",
+  "local-class": "test-module__local-class---1yStp",
+  "local-class-2": "test-module__local-class-2---3xCgt",
+  "local-class-inside-global": "test-module__local-class-inside-global---Mznd5",
+  "local-class-inside-local": "test-module__local-class-inside-local---1z2Qf",
+  "nested-class-parent": "test-module__nested-class-parent---3oyeq",
+  "nested-class-parent--extended": "test-module__nested-class-parent--extended---cjRbg",
+  "reserved-words": "test-module__reserved-words---3hGie",
+  "section-1": "test-module__section-1---2QkaE",
+  "section-2": "test-module__section-2---23KHs",
+  "section-3": "test-module__section-3---2BttW",
+  "section-4": "test-module__section-4---1TrSo",
+  "section-5": "test-module__section-5---1PIYZ",
+  "section-6": "test-module__section-6---tbEch",
+  "section-7": "test-module__section-7---i7uWX",
+  "section-8": "test-module__section-8---1jfNT",
+  "section-9": "test-module__section-9---1akFT",
 }
 `;
 

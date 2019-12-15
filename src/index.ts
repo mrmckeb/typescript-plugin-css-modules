@@ -27,6 +27,9 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
 
+    // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
+    process.chdir(directory);
+
     // User options for plugin.
     const options: Options = info.config.options || {};
     logger.log(`options: ${JSON.stringify(options)}`);

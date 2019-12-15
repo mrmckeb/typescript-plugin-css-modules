@@ -58,7 +58,10 @@ export const getClasses = (
 
       transformedCss = sass
         .renderSync({
-          data: css,
+          // NOTE: Solves an issue where tilde imports fail.
+          // https://github.com/sass/dart-sass/issues/801
+          // Will strip `~` from imports, unless followed by a slash.
+          data: css.replace(/(@import ['"])~(?!\/)/gm, '$1'),
           indentedSyntax: fileType === FileTypes.sass,
           includePaths: [filePath, 'node_modules', ...(includePaths || [])],
           ...sassOptions,
@@ -74,6 +77,7 @@ export const getClasses = (
 
     return processedCss.root ? extractICSS(processedCss.root).icssExports : {};
   } catch (e) {
+    console.log(e);
     logger.error(e);
     return {};
   }

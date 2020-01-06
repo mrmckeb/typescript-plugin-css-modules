@@ -2,5 +2,6 @@
 /node_modules
 /coverage
 /lib
+package-lock.json
 npm-debug.log
 yarn-error.log

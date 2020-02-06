@@ -78,7 +78,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
     // If a custom typescript emitter is provided, resolve the path
     if (options.customTypescriptTransformer) {
-      options.customRenderer = path.resolve(
+      options.customTypescriptTransformer = path.resolve(
         directory,
         options.customTypescriptTransformer,
       );

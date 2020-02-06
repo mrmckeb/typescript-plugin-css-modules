@@ -76,6 +76,14 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       options.customRenderer = path.resolve(directory, options.customRenderer);
     }
 
+    // If a custom typescript emitter is provided, resolve the path
+    if (options.customTypescriptTransformer) {
+      options.customRenderer = path.resolve(
+        directory,
+        options.customTypescriptTransformer,
+      );
+    }
+
     // Create PostCSS processor.
     const processor = postcss([
       ...userPlugins,

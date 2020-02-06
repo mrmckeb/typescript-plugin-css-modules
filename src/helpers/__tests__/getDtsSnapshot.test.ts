@@ -58,8 +58,27 @@ describe('utils / cssSnapshots', () => {
 
       describe('createExports', () => {
         it('should create an exports file', () => {
-          const exports = createExports(classes, {});
+          const exports = createExports(classes, {}, fullFileName, mockLogger);
           expect(exports).toMatchSnapshot();
+        });
+      });
+
+      describe('with a custom typescript transformer', () => {
+        it('should transform the generated dts', () => {
+          const customTypescriptTransformer = join(
+            __dirname,
+            'fixtures',
+            'customTypescriptTransformer.js',
+          );
+          const overrideOptions: Options = { customTypescriptTransformer };
+
+          const dts = createExports(
+            classes,
+            overrideOptions,
+            fullFileName,
+            mockLogger,
+          );
+          expect(dts).toMatchSnapshot();
         });
       });
     });

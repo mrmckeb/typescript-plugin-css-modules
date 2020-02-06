@@ -19,6 +19,17 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
+exports[`utils / cssSnapshots with file 'empty.module.less' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = '';"
+`;
+
 exports[`utils / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
 "declare const classes: {
 
@@ -29,6 +40,17 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
+exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = '';"
+`;
+
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
 
@@ -38,6 +60,17 @@ export default classes;
 `;
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = '';"
+`;
 
 exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
@@ -73,6 +106,30 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with file 'import.module.css' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'classA': string;
+  'ClassB': string;
+  'class-c': string;
+  'class_d': string;
+  'parent': string;
+  'childA': string;
+  'childB': string;
+  'nestedChild': string;
+};
+export default classes;
+export const classA: string;
+export const ClassB: string;
+export const parent: string;
+export const childA: string;
+export const childB: string;
+export const nestedChild: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
+`;
+
 exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
 'nested-class-parent': string;
@@ -103,6 +160,26 @@ Object {
   "selector-green": "import-module__selector-green---1cLL8",
   "selector-red": "import-module__selector-red---2T6zy",
 }
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.less' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
@@ -139,6 +216,30 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with file 'test.module.css' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'classA': string;
+  'ClassB': string;
+  'class-c': string;
+  'class_d': string;
+  'parent': string;
+  'childA': string;
+  'childB': string;
+  'nestedChild': string;
+};
+export default classes;
+export const classA: string;
+export const ClassB: string;
+export const parent: string;
+export const childA: string;
+export const childB: string;
+export const nestedChild: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
+`;
+
 exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
 "declare const classes: {
 'nested-class-parent': string;
@@ -169,6 +270,26 @@ Object {
   "selector-green": "test-module__selector-green---hMr6S",
   "selector-red": "test-module__selector-red---2hf4j",
 }
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.less' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'nested-class-parent': string;
+  'child-class': string;
+  'selector-blue': string;
+  'selector-green': string;
+  'selector-red': string;
+  'column-1': string;
+  'column-2': string;
+  'column-3': string;
+  'column-4': string;
+  'color-set': string;
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.sass' createExports should create an exports file 1`] = `
@@ -223,6 +344,36 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with file 'test.module.sass' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'local-class-inside-global': string;
+  'local-class': string;
+  'local-class-2': string;
+  'local-class-inside-local': string;
+  'reserved-words': string;
+  'default': string;
+  'const': string;
+  'nested-class-parent': string;
+  'child-class': string;
+  'nested-class-parent--extended': string;
+  'section-1': string;
+  'section-2': string;
+  'section-3': string;
+  'section-4': string;
+  'section-5': string;
+  'section-6': string;
+  'section-7': string;
+  'section-8': string;
+  'section-9': string;
+  'class-with-mixin': string;
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin';"
+`;
+
 exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
 "declare const classes: {
 'local-class-inside-global': string;
@@ -273,6 +424,36 @@ Object {
   "section-8": "test-module__section-8---3qav2",
   "section-9": "test-module__section-9---2EMR_",
 }
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.scss' with a custom typescript transformer should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'local-class-inside-global': string;
+  'local-class': string;
+  'local-class-2': string;
+  'local-class-inside-local': string;
+  'reserved-words': string;
+  'default': string;
+  'const': string;
+  'nested-class-parent': string;
+  'child-class': string;
+  'nested-class-parent--extended': string;
+  'section-1': string;
+  'section-2': string;
+  'section-3': string;
+  'section-4': string;
+  'section-5': string;
+  'section-6': string;
+  'section-7': string;
+  'section-8': string;
+  'section-9': string;
+  'class-with-mixin': string;
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin';"
 `;
 
 exports[`utils / cssSnapshots with includePaths in sass options should find external file from includePaths 1`] = `

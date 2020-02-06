@@ -1,7 +1,8 @@
 import { CSSExports } from 'icss-utils';
 import reserved from 'reserved-words';
-import { Options } from '../options';
+import { Options, CustomTypescriptTransformer } from '../options';
 import { transformClasses } from './classTransforms';
+import { Logger } from './logger';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
 
@@ -14,7 +15,12 @@ const flattenClassNames = (
   currentValue: string[],
 ) => previousValue.concat(currentValue);
 
-export const createExports = (classes: CSSExports, options: Options) => {
+export const createExports = (
+  classes: CSSExports,
+  options: Options,
+  fileName: string,
+  logger: Logger,
+) => {
   const isCamelCase = (className: string) =>
     !NOT_CAMELCASE_REGEXP.test(className);
   const isReservedWord = (className: string) => !reserved.check(className);
@@ -27,7 +33,7 @@ export const createExports = (classes: CSSExports, options: Options) => {
     .filter(isReservedWord)
     .map(classNameToNamedExport);
 
-  const defaultExport = `\
+  let dts = `\
 declare const classes: {
 ${processedClasses.map(classNameToProperty).join('\n  ')}
 };
@@ -35,7 +41,18 @@ export default classes;
 `;
 
   if (camelCasedKeys.length) {
-    return defaultExport + camelCasedKeys.join('\n') + '\n';
+    dts += camelCasedKeys.join('\n') + '\n';
   }
-  return defaultExport;
+
+  if (options.customTypescriptTransformer) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const customTypescriptTransformer = require(options.customTypescriptTransformer) as CustomTypescriptTransformer;
+    return customTypescriptTransformer(dts, {
+      classes,
+      fileName,
+      logger,
+    });
+  }
+
+  return dts;
 };

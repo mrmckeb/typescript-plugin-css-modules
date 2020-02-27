@@ -118,7 +118,7 @@ The custom renderer itself should be a JavaScript file. The function will be cal
 ```js
 module.exports = (css, { fileName, logger }) => {
   try {
-    // ...process css here.s
+    // ...process your css here.
     return renderedCss;
   } catch (error) {
     logger.error(error.message);
@@ -138,12 +138,12 @@ When a custom template is provided, its output is used as the virtual declaratio
 
 The path to the `customTemplate` must be relative to the project root (i.e. `./customTemplate.js`).
 
-The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `dts` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L43-L52)). It must be synchronous, and must return valid TypeScript Declaration code (code found in a .d.ts file only).
+The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `dts` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L43-L52)). It must be synchronous, and must return a valid TypeScript declaration (as found in a `.d.ts` file).
 
 ```js
 module.exports = (dts, { classes, fileName, logger }) => {
   try {
-    // ...create your template here.
+    // ...generate your template here.
     return customTemplate;
   } catch (error) {
     logger.error(error.message);

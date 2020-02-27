@@ -1,5 +1,5 @@
 import path from 'path';
-import postcss, { Container, Root } from 'postcss';
+import postcss from 'postcss';
 import less from 'less';
 import sass from 'sass';
 import { extractICSS } from 'icss-utils';

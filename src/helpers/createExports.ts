@@ -1,7 +1,8 @@
 import { CSSExports } from 'icss-utils';
 import reserved from 'reserved-words';
-import { Options } from '../options';
+import { CustomTemplate, Options } from '../options';
 import { transformClasses } from './classTransforms';
+import { Logger } from './logger';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
 
@@ -14,7 +15,17 @@ const flattenClassNames = (
   currentValue: string[],
 ) => previousValue.concat(currentValue);
 
-export const createExports = (classes: CSSExports, options: Options) => {
+export const createExports = ({
+  classes,
+  fileName,
+  logger,
+  options,
+}: {
+  classes: CSSExports;
+  fileName: string;
+  logger: Logger;
+  options: Options;
+}) => {
   const isCamelCase = (className: string) =>
     !NOT_CAMELCASE_REGEXP.test(className);
   const isReservedWord = (className: string) => !reserved.check(className);
@@ -27,7 +38,7 @@ export const createExports = (classes: CSSExports, options: Options) => {
     .filter(isReservedWord)
     .map(classNameToNamedExport);
 
-  const defaultExport = `\
+  let dts = `\
 declare const classes: {
 ${processedClasses.map(classNameToProperty).join('\n  ')}
 };
@@ -35,7 +46,18 @@ export default classes;
 `;
 
   if (camelCasedKeys.length) {
-    return defaultExport + camelCasedKeys.join('\n') + '\n';
+    dts += camelCasedKeys.join('\n') + '\n';
   }
-  return defaultExport;
+
+  if (options.customTemplate) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const customTemplate = require(options.customTemplate) as CustomTemplate;
+    return customTemplate(dts, {
+      classes,
+      fileName,
+      logger,
+    });
+  }
+
+  return dts;
 };

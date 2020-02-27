@@ -1,6 +1,6 @@
 import { CSSExports } from 'icss-utils';
 import reserved from 'reserved-words';
-import { Options, CustomTypescriptTransformer } from '../options';
+import { CustomTemplate, Options } from '../options';
 import { transformClasses } from './classTransforms';
 import { Logger } from './logger';
 
@@ -15,12 +15,17 @@ const flattenClassNames = (
   currentValue: string[],
 ) => previousValue.concat(currentValue);
 
-export const createExports = (
-  classes: CSSExports,
-  options: Options,
-  fileName: string,
-  logger: Logger,
-) => {
+export const createExports = ({
+  classes,
+  fileName,
+  logger,
+  options,
+}: {
+  classes: CSSExports;
+  fileName: string;
+  logger: Logger;
+  options: Options;
+}) => {
   const isCamelCase = (className: string) =>
     !NOT_CAMELCASE_REGEXP.test(className);
   const isReservedWord = (className: string) => !reserved.check(className);
@@ -44,10 +49,10 @@ export default classes;
     dts += camelCasedKeys.join('\n') + '\n';
   }
 
-  if (options.customTypescriptTransformer) {
+  if (options.customTemplate) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const customTypescriptTransformer = require(options.customTypescriptTransformer) as CustomTypescriptTransformer;
-    return customTypescriptTransformer(dts, {
+    const customTemplate = require(options.customTemplate) as CustomTemplate;
+    return customTemplate(dts, {
       classes,
       fileName,
       logger,

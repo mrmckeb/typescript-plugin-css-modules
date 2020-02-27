@@ -1,7 +1,7 @@
 import { Options as SassOptions } from 'sass';
 import { DotenvConfigOptions } from 'dotenv/types';
-import { Logger } from './helpers/logger';
 import { CSSExports } from 'icss-utils';
+import { Logger } from './helpers/logger';
 
 export interface PostCssOptions {
   excludePlugins?: string[];
@@ -17,7 +17,7 @@ export interface Options {
   classnameTransform?: ClassnameTransformOptions;
   customMatcher?: string;
   customRenderer?: string;
-  customTypescriptTransformer?: string;
+  customTemplate?: string;
   dotenvOptions?: DotenvConfigOptions;
   postCssOptions?: PostCssOptions;
   rendererOptions?: RendererOptions;
@@ -40,13 +40,13 @@ export type CustomRenderer = (
   options: CustomRendererOptions,
 ) => string;
 
-export interface CustomTypescriptTransformerOptions {
-  fileName: string;
+export interface CustomTemplateOptions {
   classes: CSSExports;
+  fileName: string;
   logger: Logger;
 }
 
-export type CustomTypescriptTransformer = (
+export type CustomTemplate = (
   dts: string,
-  options: CustomTypescriptTransformerOptions,
+  options: CustomTemplateOptions,
 ) => string;

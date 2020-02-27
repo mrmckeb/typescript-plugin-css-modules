@@ -69,15 +69,15 @@ const b = styles['my_other-class'];
 
 Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-| Option                        | Default value                      | Description                                                                  |
-| ----------------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
-| `classnameTransform`          | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                       |
-| `customMatcher`               | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                      |
-| `customRenderer`              | `false`                            | See [`customRenderer`](#customRenderer) below.                               |
-| `customTypescriptTransformer` | `false`                            | See [`customTypescriptTransformer`](#customTypescriptTransformer) below.     |
-| `dotenvOptions`               | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
-| `postCssOptions`              | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                               |
-| `rendererOptions`             | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |
+| Option               | Default value                      | Description                                                                  |
+| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
+| `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                       |
+| `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                      |
+| `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                               |
+| `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                               |
+| `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
+| `postCssOptions`     | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                               |
+| `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |
 
 ```json
 {
@@ -118,7 +118,7 @@ The custom renderer itself should be a JavaScript file. The function will be cal
 ```js
 module.exports = (css, { fileName, logger }) => {
   try {
-    // ...process css here
+    // ...process css here.s
     return renderedCss;
   } catch (error) {
     logger.error(error.message);
@@ -130,32 +130,32 @@ You can find an example custom renderer in our test fixtures ([`customRenderer.j
 
 The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
 
-#### `customTypescriptTransformer`
+#### `customTemplate`
 
-The `customTypescriptTransformer` is an advanced option, letting you provide a transformer of the generated typescript declarations.
+The `customTemplate` is an advanced option, letting you provide a template for the generated TypeScript declarations.
 
-When a custom typescript transformer is provided, its output is used as the virtual typescript file.
+When a custom template is provided, its output is used as the virtual declaration (`*.d.ts`) file.
 
-The path to the `customTypescriptTransformer` must be relative to the project root (i.e. `./myTypescriptTransformer.js`).
+The path to the `customTemplate` must be relative to the project root (i.e. `./customTemplate.js`).
 
 The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `dts` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L43-L52)). It must be synchronous, and must return valid TypeScript Declaration code (code found in a .d.ts file only).
 
 ```js
 module.exports = (dts, { classes, fileName, logger }) => {
   try {
-    // ...transform the dts here
-    return transformedDts;
+    // ...create your template here.
+    return customTemplate;
   } catch (error) {
     logger.error(error.message);
   }
 };
 ```
 
-You can find an example custom typescript transformer in our test fixtures ([`customTypescriptTransformer.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customTypescriptTransformer.js)).
+You can find an example custom template in our test fixtures ([`customTemplate.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customTemplate.js)).
 
 The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
 
-The `classes` object represents all the classnames extracted form the CSS Module. They are available if you want to add a custom representation of the CSS classes.
+The `classes` object represents all the classnames extracted from the CSS Module. They are available if you want to add a custom representation of the CSS classes.
 
 #### `postCssOptions`
 
@@ -199,7 +199,7 @@ If your project doesn't already have global declarations for CSS Modules, you wi
 
 Where you store global declarations is up to you. An example might look like: `./src/custom.d.ts`.
 
-The below is an example that you can copy or modify. If you use a [`customMatcher`], you'll need to modify this.
+The below is an example that you can copy or modify. If you use a `customMatcher`, you'll need to modify this.
 
 ```ts
 declare module '*.module.css' {

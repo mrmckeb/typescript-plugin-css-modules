@@ -24,7 +24,7 @@ export const getDtsSnapshot = (
     return scriptSnapshot;
   }
 
-  const classes = getClasses(processor, css, fileName, options, logger);
-  const dts = createExports(classes, options, fileName, logger);
+  const classes = getClasses({ css, fileName, logger, options, processor });
+  const dts = createExports({ classes, fileName, logger, options });
   return ts.ScriptSnapshot.fromString(dts);
 };

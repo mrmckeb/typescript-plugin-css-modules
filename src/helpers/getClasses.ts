@@ -1,5 +1,5 @@
 import path from 'path';
-import postcss from 'postcss';
+import postcss, { Container, Root } from 'postcss';
 import less from 'less';
 import sass from 'sass';
 import { extractICSS } from 'icss-utils';
@@ -22,13 +22,19 @@ export const getFileType = (fileName: string) => {
 
 const getFilePath = (fileName: string) => path.dirname(fileName);
 
-export const getClasses = (
-  processor: postcss.Processor,
-  css: string,
-  fileName: string,
-  options: Options,
-  logger: Logger,
-) => {
+export const getClasses = ({
+  css,
+  fileName,
+  logger,
+  options,
+  processor,
+}: {
+  css: string;
+  fileName: string;
+  logger: Logger;
+  options: Options;
+  processor: postcss.Processor;
+}) => {
   try {
     const fileType = getFileType(fileName);
     const rendererOptions = options.rendererOptions || {};

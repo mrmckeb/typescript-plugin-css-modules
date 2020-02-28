@@ -74,6 +74,7 @@ Please note that no options are required. However, depending on your configurati
 | `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                       |
 | `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                      |
 | `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                               |
+| `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                               |
 | `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
 | `postCssOptions`     | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                               |
 | `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |
@@ -112,12 +113,12 @@ When a custom renderer is provided, not other renderers will be used.
 
 The path to the `customRenderer` must be relative to the project root (i.e. `./myRenderer.js`).
 
-The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `css` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L36-L39)). It must be synchronous, and must return valid CSS.
+The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `css` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L33-L41)). It must be synchronous, and must return valid CSS.
 
 ```js
 module.exports = (css, { fileName, logger }) => {
   try {
-    // ...process css here
+    // ...process your css here.
     return renderedCss;
   } catch (error) {
     logger.error(error.message);
@@ -128,6 +129,33 @@ module.exports = (css, { fileName, logger }) => {
 You can find an example custom renderer in our test fixtures ([`customRenderer.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customRenderer.js)).
 
 The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
+
+#### `customTemplate`
+
+The `customTemplate` is an advanced option, letting you provide a template for the generated TypeScript declarations.
+
+When a custom template is provided, its output is used as the virtual declaration (`*.d.ts`) file.
+
+The path to the `customTemplate` must be relative to the project root (i.e. `./customTemplate.js`).
+
+The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `dts` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L43-L52)). It must be synchronous, and must return a valid TypeScript declaration (as found in a `.d.ts` file).
+
+```js
+module.exports = (dts, { classes, fileName, logger }) => {
+  try {
+    // ...generate your template here.
+    return customTemplate;
+  } catch (error) {
+    logger.error(error.message);
+  }
+};
+```
+
+You can find an example custom template in our test fixtures ([`customTemplate.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customTemplate.js)).
+
+The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
+
+The `classes` object represents all the classnames extracted from the CSS Module. They are available if you want to add a custom representation of the CSS classes.
 
 #### `postCssOptions`
 
@@ -171,7 +199,7 @@ If your project doesn't already have global declarations for CSS Modules, you wi
 
 Where you store global declarations is up to you. An example might look like: `./src/custom.d.ts`.
 
-The below is an example that you can copy or modify. If you use a [`customMatcher`], you'll need to modify this.
+The below is an example that you can copy or modify. If you use a `customMatcher`, you'll need to modify this.
 
 ```ts
 declare module '*.module.css' {

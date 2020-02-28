@@ -21,12 +21,12 @@ const testFileNames = [
   'import.module.less',
 ];
 
-const mockLogger: Logger = {
+const logger: Logger = {
   log: jest.fn(),
   error: jest.fn(),
 };
 
-const mockOptions: Options = {};
+const options: Options = {};
 
 const processor = postcss([
   postcssImportSync(),
@@ -34,22 +34,22 @@ const processor = postcss([
 ]);
 
 describe('utils / cssSnapshots', () => {
-  testFileNames.forEach((fileName) => {
+  testFileNames.forEach((testFile) => {
     let classes: CSSExports;
-    const fullFileName = join(__dirname, 'fixtures', fileName);
-    const testFile = readFileSync(fullFileName, 'utf8');
+    const fileName = join(__dirname, 'fixtures', testFile);
+    const css = readFileSync(fileName, 'utf8');
 
     beforeAll(() => {
-      classes = getClasses(
+      classes = getClasses({
+        css,
+        fileName,
+        logger,
+        options,
         processor,
-        testFile,
-        fullFileName,
-        mockOptions,
-        mockLogger,
-      );
+      });
     });
 
-    describe(`with file '${fileName}'`, () => {
+    describe(`with file '${testFile}'`, () => {
       describe('getClasses', () => {
         it('should return an object matching expected CSS', () => {
           expect(classes).toMatchSnapshot();
@@ -58,69 +58,94 @@ describe('utils / cssSnapshots', () => {
 
       describe('createExports', () => {
         it('should create an exports file', () => {
-          const exports = createExports(classes, {});
+          const exports = createExports({
+            classes,
+            fileName,
+            logger,
+            options: {},
+          });
           expect(exports).toMatchSnapshot();
+        });
+      });
+
+      describe('with a custom template', () => {
+        it('should transform the generated dts', () => {
+          const customTemplate = join(
+            __dirname,
+            'fixtures',
+            'customTemplate.js',
+          );
+
+          const options: Options = { customTemplate };
+
+          const dts = createExports({
+            classes,
+            fileName,
+            logger,
+            options,
+          });
+          expect(dts).toMatchSnapshot();
         });
       });
     });
   });
 
   describe('with a Bootstrap import', () => {
-    const fullFileName = join(__dirname, 'fixtures', 'bootstrap.module.scss');
-    const testFile = readFileSync(fullFileName, 'utf8');
+    const fileName = join(__dirname, 'fixtures', 'bootstrap.module.scss');
+    const css = readFileSync(fileName, 'utf8');
 
     it('should find external files', () => {
-      const classes = getClasses(
+      const classes = getClasses({
+        css,
+        fileName,
+        logger,
+        options,
         processor,
-        testFile,
-        fullFileName,
-        mockOptions,
-        mockLogger,
-      );
+      });
 
       expect(classes.test).toMatchSnapshot();
     });
   });
 
   describe('with a custom renderer', () => {
-    const fullFileName = 'exampleFileContents';
-    const testFile = 'exampleFileName';
+    const fileName = 'exampleFileContents';
+    const css = 'exampleFileName';
     const customRenderer = join(__dirname, 'fixtures', 'customRenderer.js');
 
+    const options: Options = { customRenderer };
+
     it('should process a file and log', () => {
-      const classes = getClasses(
+      const classes = getClasses({
+        css,
+        fileName,
+        logger,
+        options,
         processor,
-        testFile,
-        fullFileName,
-        { customRenderer },
-        mockLogger,
-      );
+      });
 
       expect(classes).toMatchSnapshot();
-      expect(mockLogger.log).toHaveBeenCalledWith('Example log');
+      expect(logger.log).toHaveBeenCalledWith('Example log');
     });
   });
 
   describe('with includePaths in sass options', () => {
-    const fullFileName = join(
-      __dirname,
-      'fixtures',
-      'include-path.module.scss',
-    );
-    const testFile = readFileSync(fullFileName, 'utf8');
+    const fileName = join(__dirname, 'fixtures', 'include-path.module.scss');
+    const css = readFileSync(fileName, 'utf8');
+
+    const options: Options = {
+      rendererOptions: {
+        sass: { includePaths: [join(__dirname, 'external')] },
+      },
+    };
 
     it('should find external file from includePaths', () => {
-      const classes = getClasses(
+      const classes = getClasses({
+        css,
+        fileName,
+        logger,
+        options,
         processor,
-        testFile,
-        fullFileName,
-        {
-          rendererOptions: {
-            sass: { includePaths: [join(__dirname, 'external')] },
-          },
-        },
-        mockLogger,
-      );
+      });
 
       expect(classes).toMatchSnapshot();
     });

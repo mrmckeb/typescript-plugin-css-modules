@@ -76,6 +76,11 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       options.customRenderer = path.resolve(directory, options.customRenderer);
     }
 
+    // If a custom template is provided, resolve the path.
+    if (options.customTemplate) {
+      options.customTemplate = path.resolve(directory, options.customTemplate);
+    }
+
     // Create PostCSS processor.
     const processor = postcss([
       ...userPlugins,

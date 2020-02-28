@@ -68,7 +68,7 @@ describe('utils / cssSnapshots', () => {
         });
       });
 
-      describe('with a custom typescript transformer', () => {
+      describe('with a custom template', () => {
         it('should transform the generated dts', () => {
           const customTemplate = join(
             __dirname,

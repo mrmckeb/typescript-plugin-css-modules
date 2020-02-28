@@ -19,7 +19,7 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.less' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 
@@ -40,7 +40,7 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 
@@ -61,7 +61,7 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should return an object matching expected CSS 1`] = `Object {}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 
@@ -106,7 +106,7 @@ Object {
 }
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.css' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'import.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 'classA': string;
@@ -162,7 +162,7 @@ Object {
 }
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.less' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'import.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 'nested-class-parent': string;
@@ -216,7 +216,7 @@ Object {
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.css' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'test.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 'classA': string;
@@ -272,7 +272,7 @@ Object {
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.less' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'test.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 'nested-class-parent': string;
@@ -344,7 +344,7 @@ Object {
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.sass' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'test.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 'local-class-inside-global': string;
@@ -426,7 +426,7 @@ Object {
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.scss' with a custom typescript transformer should transform the generated dts 1`] = `
+exports[`utils / cssSnapshots with file 'test.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare const classes: {
 'local-class-inside-global': string;

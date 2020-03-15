@@ -26,6 +26,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
   function create(info: ts.server.PluginCreateInfo) {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
+    const compilerOpts = info.project.getCompilerOptions();
 
     // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
     process.chdir(directory);
@@ -106,6 +107,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           scriptSnapshot,
           options,
           logger,
+          compilerOpts,
         );
       }
       const sourceFile = _createLanguageServiceSourceFile(
@@ -134,6 +136,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           scriptSnapshot,
           options,
           logger,
+          compilerOpts,
         );
       }
       sourceFile = _updateLanguageServiceSourceFile(

@@ -3,6 +3,7 @@ import postcss from 'postcss';
 import less from 'less';
 import sass from 'sass';
 import { extractICSS } from 'icss-utils';
+import tsModule from 'typescript/lib/tsserverlibrary';
 import { Logger } from './logger';
 import { Options, CustomRenderer } from '../options';
 
@@ -28,12 +29,14 @@ export const getClasses = ({
   logger,
   options,
   processor,
+  compilerOptions,
 }: {
   css: string;
   fileName: string;
   logger: Logger;
   options: Options;
   processor: postcss.Processor;
+  compilerOptions: tsModule.CompilerOptions;
 }) => {
   try {
     const fileType = getFileType(fileName);
@@ -44,7 +47,11 @@ export const getClasses = ({
     if (options.customRenderer) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const customRenderer = require(options.customRenderer) as CustomRenderer;
-      transformedCss = customRenderer(css, { fileName, logger });
+      transformedCss = customRenderer(css, {
+        fileName,
+        logger,
+        compilerOptions,
+      });
     } else if (fileType === FileTypes.less) {
       less.render(
         css,

@@ -1,4 +1,5 @@
 import { Options as SassOptions } from 'sass';
+import tsModule from 'typescript/lib/tsserverlibrary';
 import { DotenvConfigOptions } from 'dotenv/types';
 import { CSSExports } from 'icss-utils';
 import { Logger } from './helpers/logger';
@@ -33,6 +34,7 @@ export type ClassnameTransformOptions =
 export interface CustomRendererOptions {
   fileName: string;
   logger: Logger;
+  compilerOptions: tsModule.CompilerOptions;
 }
 
 export type CustomRenderer = (

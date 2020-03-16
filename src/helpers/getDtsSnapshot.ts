@@ -12,7 +12,7 @@ export const getDtsSnapshot = (
   scriptSnapshot: ts.IScriptSnapshot,
   options: Options,
   logger: Logger,
-  compileOpts: tsModule.CompilerOptions,
+  compilerOptions: tsModule.CompilerOptions,
 ) => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
 
@@ -31,7 +31,7 @@ export const getDtsSnapshot = (
     logger,
     options,
     processor,
-    compilerOptions: compileOpts,
+    compilerOptions,
   });
   const dts = createExports({ classes, fileName, logger, options });
   return ts.ScriptSnapshot.fromString(dts);

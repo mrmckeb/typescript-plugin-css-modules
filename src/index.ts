@@ -74,7 +74,20 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
     // If a custom renderer is provided, resolve the path.
     if (options.customRenderer) {
-      options.customRenderer = path.resolve(directory, options.customRenderer);
+      if (fs.existsSync(path.resolve(directory, options.customRenderer))) {
+        options.customRenderer = path.resolve(
+          directory,
+          options.customRenderer,
+        );
+      } else if (fs.existsSync(require.resolve(options.customRenderer))) {
+        options.customRenderer = require.resolve(options.customRenderer);
+      } else {
+        logger.error(
+          new Error(
+            `Invalid 'customRenderer', '${options.customRenderer}' does not exist.`,
+          ),
+        );
+      }
     }
 
     // If a custom template is provided, resolve the path.

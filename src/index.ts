@@ -84,7 +84,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       } else {
         logger.error(
           new Error(
-            `Invalid 'customRenderer', '${options.customRenderer}' does not exist.`,
+            `The file or package for \`customRenderer\` '${options.customRenderer}' could not be resolved.`,
           ),
         );
       }

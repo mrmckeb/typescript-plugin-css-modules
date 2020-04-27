@@ -11,13 +11,22 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
 
 ## Table of contents
 
-- [Installation](#installation)
-  - [Importing CSS](#importing-css)
-  - [Options](#options)
-  - [Visual Studio Code](#visual-studio-code)
-  - [Custom definitions](#custom-definitions)
-- [Troubleshooting](#troubleshooting)
-- [About this project](#about-this-project)
+- [typescript-plugin-css-modules](#typescript-plugin-css-modules)
+  - [Table of contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Importing CSS](#importing-css)
+    - [Options](#options)
+      - [`classnameTransform`](#classnametransform)
+      - [`customRenderer`](#customrenderer)
+      - [`customTemplate`](#customtemplate)
+      - [`postCssOptions`](#postcssoptions)
+      - [`rendererOptions`](#rendereroptions)
+    - [Visual Studio Code](#visual-studio-code)
+      - [Recommended usage](#recommended-usage)
+      - [Alternative usage](#alternative-usage)
+    - [Custom definitions](#custom-definitions)
+  - [Troubleshooting](#troubleshooting)
+  - [About this project](#about-this-project)
 
 ## Installation
 
@@ -113,7 +122,7 @@ When a custom renderer is provided, not other renderers will be used.
 
 The path to the `customRenderer` must be relative to the project root (i.e. `./myRenderer.js`).
 
-The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `css` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L33-L41)). It must be synchronous, and must return valid CSS.
+The custom renderer itself should be a JavaScript file. The function will be called with three arguments: a `css` string, an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L33-L41)), and a `compilerOptions` object - which contains options as set in your `tsconfig.json`. It must be synchronous, and must return valid CSS.
 
 ```js
 module.exports = (css, { fileName, logger }) => {
@@ -129,6 +138,10 @@ module.exports = (css, { fileName, logger }) => {
 You can find an example custom renderer in our test fixtures ([`customRenderer.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customRenderer.js)).
 
 The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
+
+> If you use Webpack, note that tilde (`~`) imports not supported by Less and Sass natively.
+>
+> For Less users, this package exports a customRenderer that enables tilde imports: [`less-plugin-aliases`](https://github.com/dancon/less-plugin-aliases).
 
 #### `customTemplate`
 

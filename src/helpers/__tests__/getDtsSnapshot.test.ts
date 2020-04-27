@@ -4,6 +4,7 @@ import { join } from 'path';
 import postcss from 'postcss';
 import postcssIcssSelectors from 'postcss-icss-selectors';
 import postcssImportSync from 'postcss-import-sync2';
+import tsModule from 'typescript/lib/tsserverlibrary';
 import { getClasses } from '../getClasses';
 import { createExports } from '../createExports';
 import { Logger } from '../logger';
@@ -28,6 +29,8 @@ const logger: Logger = {
 
 const options: Options = {};
 
+const compilerOptions: tsModule.CompilerOptions = {};
+
 const processor = postcss([
   postcssImportSync(),
   postcssIcssSelectors({ mode: 'local' }),
@@ -46,6 +49,7 @@ describe('utils / cssSnapshots', () => {
         logger,
         options,
         processor,
+        compilerOptions,
       });
     });
 
@@ -101,6 +105,7 @@ describe('utils / cssSnapshots', () => {
         logger,
         options,
         processor,
+        compilerOptions,
       });
 
       expect(classes.test).toMatchSnapshot();
@@ -121,6 +126,7 @@ describe('utils / cssSnapshots', () => {
         logger,
         options,
         processor,
+        compilerOptions,
       });
 
       expect(classes).toMatchSnapshot();
@@ -145,6 +151,7 @@ describe('utils / cssSnapshots', () => {
         logger,
         options,
         processor,
+        compilerOptions,
       });
 
       expect(classes).toMatchSnapshot();

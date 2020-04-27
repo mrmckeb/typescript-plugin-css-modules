@@ -26,6 +26,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
   function create(info: ts.server.PluginCreateInfo) {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
+    const compilerOptions = info.project.getCompilerOptions();
 
     // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
     process.chdir(directory);
@@ -73,7 +74,20 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
     // If a custom renderer is provided, resolve the path.
     if (options.customRenderer) {
-      options.customRenderer = path.resolve(directory, options.customRenderer);
+      if (fs.existsSync(path.resolve(directory, options.customRenderer))) {
+        options.customRenderer = path.resolve(
+          directory,
+          options.customRenderer,
+        );
+      } else if (fs.existsSync(require.resolve(options.customRenderer))) {
+        options.customRenderer = require.resolve(options.customRenderer);
+      } else {
+        logger.error(
+          new Error(
+            `The file or package for \`customRenderer\` '${options.customRenderer}' could not be resolved.`,
+          ),
+        );
+      }
     }
 
     // If a custom template is provided, resolve the path.
@@ -106,6 +120,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           scriptSnapshot,
           options,
           logger,
+          compilerOptions,
         );
       }
       const sourceFile = _createLanguageServiceSourceFile(
@@ -134,6 +149,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           scriptSnapshot,
           options,
           logger,
+          compilerOptions,
         );
       }
       sourceFile = _updateLanguageServiceSourceFile(

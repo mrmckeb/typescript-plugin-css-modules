@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`utils / cssSnapshots with a Bootstrap import should find external files 1`] = `"bootstrap-module__test---WRms9"`;
+exports[`utils / cssSnapshots with a Bootstrap import should find external files 1`] = `"bootstrap-module__test---3KFKN"`;
 
 exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
 Object {
@@ -72,6 +72,27 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
+exports[`utils / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
+"declare const classes: {
+
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.styl' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = '';"
+`;
+
 exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
 'classA': string;
@@ -95,14 +116,14 @@ export const nestedChild: string;
 
 exports[`utils / cssSnapshots with file 'import.module.css' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "ClassB": "import-module__ClassB---2LsIz",
-  "childA": "import-module__childA---2AUKk",
-  "childB": "import-module__childB---1z-Zh",
-  "class-c": "import-module__class-c---2JDAJ",
-  "classA": "import-module__classA---2fO5r",
-  "class_d": "import-module__class_d---2Dims",
-  "nestedChild": "import-module__nestedChild---1ZDxw",
-  "parent": "import-module__parent---2kdvO",
+  "ClassB": "import-module__ClassB---1uTmq",
+  "childA": "import-module__childA---39Yod",
+  "childB": "import-module__childB---2S1Lz",
+  "class-c": "import-module__class-c---Xdyrv",
+  "classA": "import-module__classA---3-9yK",
+  "class_d": "import-module__class_d---27FnC",
+  "nestedChild": "import-module__nestedChild---HAsOX",
+  "parent": "import-module__parent---11jeJ",
 }
 `;
 
@@ -149,16 +170,16 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'import.module.less' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "child-class": "import-module__child-class---2XACw",
-  "color-set": "import-module__color-set---9xoPb",
-  "column-1": "import-module__column-1---3R-BM",
-  "column-2": "import-module__column-2---J0ZdX",
-  "column-3": "import-module__column-3---3_589",
-  "column-4": "import-module__column-4---SlPDz",
-  "nested-class-parent": "import-module__nested-class-parent---14g9m",
-  "selector-blue": "import-module__selector-blue---2JSaB",
-  "selector-green": "import-module__selector-green---1cLL8",
-  "selector-red": "import-module__selector-red---2T6zy",
+  "child-class": "import-module__child-class---3rUzY",
+  "color-set": "import-module__color-set---1Nz_3",
+  "column-1": "import-module__column-1---1do6Y",
+  "column-2": "import-module__column-2---HjqfU",
+  "column-3": "import-module__column-3---N5Wnb",
+  "column-4": "import-module__column-4---23ZMh",
+  "nested-class-parent": "import-module__nested-class-parent---36rk0",
+  "selector-blue": "import-module__selector-blue---1tI9n",
+  "selector-green": "import-module__selector-green---2yk8M",
+  "selector-red": "import-module__selector-red---1SN6v",
 }
 `;
 
@@ -180,6 +201,64 @@ export default classes;
 
 export const __cssModule: true;
 export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
+"declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.styl' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "bar": "import-module__bar---PavMt",
+  "baz": "import-module__baz---2h0QO",
+  "col-1": "import-module__col-1---k2h_y",
+  "col-2": "import-module__col-2---Rvdyk",
+  "col-3": "import-module__col-3---bhl8t",
+  "foo": "import-module__foo---3m4Gt",
+  "inside-1-name-2": "import-module__inside-1-name-2---3GMJE",
+  "inside-2-name-1": "import-module__inside-2-name-1---2Q-yK",
+  "inside-local": "import-module__inside-local---22ivP",
+  "local-class-1": "import-module__local-class-1---3Cqnu",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
@@ -205,14 +284,14 @@ export const nestedChild: string;
 
 exports[`utils / cssSnapshots with file 'test.module.css' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "ClassB": "test-module__ClassB---G7fhY",
-  "childA": "test-module__childA---26dwC",
-  "childB": "test-module__childB---13lLy",
-  "class-c": "test-module__class-c---3Ouzp",
-  "classA": "test-module__classA---KAOw8",
-  "class_d": "test-module__class_d---3pjDe",
-  "nestedChild": "test-module__nestedChild---v7rOR",
-  "parent": "test-module__parent---2tsUX",
+  "ClassB": "test-module__ClassB---1z7xQ",
+  "childA": "test-module__childA---3PtDp",
+  "childB": "test-module__childB---33c4a",
+  "class-c": "test-module__class-c---Nme_S",
+  "classA": "test-module__classA---11Lf2",
+  "class_d": "test-module__class_d---7rY6T",
+  "nestedChild": "test-module__nestedChild---3OSwX",
+  "parent": "test-module__parent---1pNsk",
 }
 `;
 
@@ -259,16 +338,16 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'test.module.less' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "child-class": "test-module__child-class---1au0d",
-  "color-set": "test-module__color-set---bEXmh",
-  "column-1": "test-module__column-1---5hXb3",
-  "column-2": "test-module__column-2---2ykNv",
-  "column-3": "test-module__column-3---2JnAp",
-  "column-4": "test-module__column-4---SG3xj",
-  "nested-class-parent": "test-module__nested-class-parent---2jIpC",
-  "selector-blue": "test-module__selector-blue---2kUKa",
-  "selector-green": "test-module__selector-green---hMr6S",
-  "selector-red": "test-module__selector-red---2hf4j",
+  "child-class": "test-module__child-class---1Ga8C",
+  "color-set": "test-module__color-set---2h232",
+  "column-1": "test-module__column-1---3Hv-0",
+  "column-2": "test-module__column-2---1QOqJ",
+  "column-3": "test-module__column-3---1PZz0",
+  "column-4": "test-module__column-4---2XpQh",
+  "nested-class-parent": "test-module__nested-class-parent---R9jV3",
+  "selector-blue": "test-module__selector-blue---1icL9",
+  "selector-green": "test-module__selector-green---2pD8c",
+  "selector-red": "test-module__selector-red---gsEUj",
 }
 `;
 
@@ -321,26 +400,26 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'test.module.sass' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "child-class": "test-module__child-class---2vfhc",
-  "class-with-mixin": "test-module__class-with-mixin---3zUq-",
-  "const": "test-module__const---39o_j",
-  "default": "test-module__default---h-tcC",
-  "local-class": "test-module__local-class---1yStp",
-  "local-class-2": "test-module__local-class-2---3xCgt",
-  "local-class-inside-global": "test-module__local-class-inside-global---Mznd5",
-  "local-class-inside-local": "test-module__local-class-inside-local---1z2Qf",
-  "nested-class-parent": "test-module__nested-class-parent---3oyeq",
-  "nested-class-parent--extended": "test-module__nested-class-parent--extended---cjRbg",
-  "reserved-words": "test-module__reserved-words---3hGie",
-  "section-1": "test-module__section-1---2QkaE",
-  "section-2": "test-module__section-2---23KHs",
-  "section-3": "test-module__section-3---2BttW",
-  "section-4": "test-module__section-4---1TrSo",
-  "section-5": "test-module__section-5---1PIYZ",
-  "section-6": "test-module__section-6---tbEch",
-  "section-7": "test-module__section-7---i7uWX",
-  "section-8": "test-module__section-8---1jfNT",
-  "section-9": "test-module__section-9---1akFT",
+  "child-class": "test-module__child-class---1Z6FR",
+  "class-with-mixin": "test-module__class-with-mixin---3VX2U",
+  "const": "test-module__const---SwQeI",
+  "default": "test-module__default---1XDkC",
+  "local-class": "test-module__local-class---3t74b",
+  "local-class-2": "test-module__local-class-2---3ZpZR",
+  "local-class-inside-global": "test-module__local-class-inside-global---3XSpm",
+  "local-class-inside-local": "test-module__local-class-inside-local---2habk",
+  "nested-class-parent": "test-module__nested-class-parent---2NZYL",
+  "nested-class-parent--extended": "test-module__nested-class-parent--extended---2qy0B",
+  "reserved-words": "test-module__reserved-words---75Ick",
+  "section-1": "test-module__section-1---SBQkq",
+  "section-2": "test-module__section-2---1Z96g",
+  "section-3": "test-module__section-3---_1k22",
+  "section-4": "test-module__section-4---1xlGf",
+  "section-5": "test-module__section-5---19rEJ",
+  "section-6": "test-module__section-6---2J7BT",
+  "section-7": "test-module__section-7---1oMBc",
+  "section-8": "test-module__section-8---3utTC",
+  "section-9": "test-module__section-9---t7Agm",
 }
 `;
 
@@ -403,26 +482,26 @@ export default classes;
 
 exports[`utils / cssSnapshots with file 'test.module.scss' getClasses should return an object matching expected CSS 1`] = `
 Object {
-  "child-class": "test-module__child-class---s-_Mc",
-  "class-with-mixin": "test-module__class-with-mixin---1JqB_",
-  "const": "test-module__const---28kKv",
-  "default": "test-module__default---8gLb1",
-  "local-class": "test-module__local-class---1Ju3l",
-  "local-class-2": "test-module__local-class-2---3aSgy",
-  "local-class-inside-global": "test-module__local-class-inside-global---IVh9J",
-  "local-class-inside-local": "test-module__local-class-inside-local---1LKIi",
-  "nested-class-parent": "test-module__nested-class-parent---2LnTV",
-  "nested-class-parent--extended": "test-module__nested-class-parent--extended---1j85b",
-  "reserved-words": "test-module__reserved-words---1mM1m",
-  "section-1": "test-module__section-1---11Ic3",
-  "section-2": "test-module__section-2---1Uiwc",
-  "section-3": "test-module__section-3---2eZeM",
-  "section-4": "test-module__section-4---3m8sf",
-  "section-5": "test-module__section-5---1MTwN",
-  "section-6": "test-module__section-6---szUAt",
-  "section-7": "test-module__section-7---2DOBJ",
-  "section-8": "test-module__section-8---3qav2",
-  "section-9": "test-module__section-9---2EMR_",
+  "child-class": "test-module__child-class---1X87n",
+  "class-with-mixin": "test-module__class-with-mixin---2sqUv",
+  "const": "test-module__const---_YsB3",
+  "default": "test-module__default---2bBi7",
+  "local-class": "test-module__local-class---2mqdW",
+  "local-class-2": "test-module__local-class-2---3V2Ud",
+  "local-class-inside-global": "test-module__local-class-inside-global---19zZ3",
+  "local-class-inside-local": "test-module__local-class-inside-local---2DBWn",
+  "nested-class-parent": "test-module__nested-class-parent---38azU",
+  "nested-class-parent--extended": "test-module__nested-class-parent--extended---2RArS",
+  "reserved-words": "test-module__reserved-words---LxD0z",
+  "section-1": "test-module__section-1---h9TrY",
+  "section-2": "test-module__section-2---pg5Dq",
+  "section-3": "test-module__section-3---141D0",
+  "section-4": "test-module__section-4---29Zqe",
+  "section-5": "test-module__section-5---2aEf7",
+  "section-6": "test-module__section-6---3L42n",
+  "section-7": "test-module__section-7---2SoUE",
+  "section-8": "test-module__section-8---HwOIP",
+  "section-9": "test-module__section-9---3MO0M",
 }
 `;
 
@@ -456,9 +535,74 @@ export const __cssModule: true;
 export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin';"
 `;
 
+exports[`utils / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
+"declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.styl' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "bar": "test-module__bar---26YdQ",
+  "baz": "test-module__baz---3qOSE",
+  "col-1": "test-module__col-1---3-pEN",
+  "col-2": "test-module__col-2---1JvKR",
+  "col-3": "test-module__col-3---2WNwC",
+  "foo": "test-module__foo---2CbfH",
+  "inside-1-name-2": "test-module__inside-1-name-2---1uX0t",
+  "inside-2-name-1": "test-module__inside-2-name-1---1asqx",
+  "inside-local": "test-module__inside-local---1XSdE",
+  "local-class-1": "test-module__local-class-1---1TLvx",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
+`;
+
 exports[`utils / cssSnapshots with includePaths in sass options should find external file from includePaths 1`] = `
 Object {
-  "big-font": "include-path-module__big-font---Td7hY",
-  "class-with-mixin": "include-path-module__class-with-mixin---1u87_",
+  "big-font": "include-path-module__big-font---3ir6c",
+  "class-with-mixin": "include-path-module__class-with-mixin---Ksqo-",
+}
+`;
+
+exports[`utils / cssSnapshots with includePaths in stylus options should find external file from includePaths 1`] = `
+Object {
+  "external-class": "include-path-module__external-class---urMTI",
+  "include-path": "include-path-module__include-path---3lUJm",
 }
 `;

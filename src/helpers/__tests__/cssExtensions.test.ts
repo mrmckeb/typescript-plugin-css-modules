@@ -7,6 +7,8 @@ describe('utils / cssExtensions', () => {
     it('should match CSS module extensions', () => {
       expect(isCSS('./myfile.module.scss')).toBe(true);
       expect(isCSS('./myfile.module.sass')).toBe(true);
+      expect(isCSS('./myfile.module.less')).toBe(true);
+      expect(isCSS('./myfile.module.styl')).toBe(true);
       expect(isCSS('./myfile.module.css')).toBe(true);
     });
 
@@ -14,6 +16,8 @@ describe('utils / cssExtensions', () => {
       expect(isCSS('./myfile.module.s')).toBe(false);
       expect(isCSS('./myfile.scss')).toBe(false);
       expect(isCSS('./myfile.sass')).toBe(false);
+      expect(isCSS('./myfile.less')).toBe(false);
+      expect(isCSS('./myfile.styl')).toBe(false);
       expect(isCSS('./myfile.css')).toBe(false);
     });
   });

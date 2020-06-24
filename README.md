@@ -198,10 +198,11 @@ The `classes` object represents all the classnames extracted from the CSS Module
 
 #### `rendererOptions`
 
-| Option | Default value | Description                                                                          |
-| ------ | ------------- | ------------------------------------------------------------------------------------ |
-| `less` | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
-| `sass` | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
+| Option   | Default value | Description                                                                          |
+| -------- | ------------- | ------------------------------------------------------------------------------------ |
+| `less`   | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
+| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
+| `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).          |
 
 > For convenience, `includePaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
 
@@ -250,6 +251,11 @@ declare module '*.module.sass' {
 }
 
 declare module '*.module.less' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
+declare module '*.module.styl' {
   const classes: { [key: string]: string };
   export default classes;
 }

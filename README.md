@@ -232,7 +232,7 @@ If your project doesn't already have global declarations for CSS Modules, you wi
 
 Where you store global declarations is up to you. An example might look like: `./src/custom.d.ts`.
 
-The below is an example that you can copy or modify. If you use a `customMatcher`, you'll need to modify this.
+The below is an example that you can copy or modify (you only declarations for exensions used in your project). If you use a `customMatcher`, you'll need to modify this.
 
 ```ts
 declare module '*.module.css' {

@@ -13,13 +13,16 @@ import { Options } from '../../options';
 const testFileNames = [
   'test.module.css',
   'test.module.less',
+  'test.module.styl',
   'test.module.scss',
   'test.module.sass',
   'empty.module.less',
   'empty.module.sass',
   'empty.module.scss',
+  'empty.module.styl',
   'import.module.css',
   'import.module.less',
+  'import.module.styl',
 ];
 
 const logger: Logger = {
@@ -141,6 +144,32 @@ describe('utils / cssSnapshots', () => {
     const options: Options = {
       rendererOptions: {
         sass: { includePaths: [join(__dirname, 'external')] },
+      },
+    };
+
+    it('should find external file from includePaths', () => {
+      const classes = getClasses({
+        css,
+        fileName,
+        logger,
+        options,
+        processor,
+        compilerOptions,
+      });
+
+      expect(classes).toMatchSnapshot();
+    });
+  });
+
+  describe('with includePaths in stylus options', () => {
+    const fileName = join(__dirname, 'fixtures', 'include-path.module.styl');
+    const css = readFileSync(fileName, 'utf8');
+
+    const options: Options = {
+      rendererOptions: {
+        stylus: {
+          paths: [join(__dirname, 'external')],
+        },
       },
     };
 

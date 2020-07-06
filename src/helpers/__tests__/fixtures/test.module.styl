@@ -1,0 +1,24 @@
+mySelectors = '.foo,.bar,.baz'
+
+{mySelectors}
+    background: #000
+
+for row in 1 2 3
+    .col-{row}
+        height: 10px * row
+
+:local(.local-class-1)
+    .inside-local
+        color rebeccapurple
+
+inside(name1, name2, indent, outside)
+    .inside-1-{name1}
+        outside(indent)
+
+    .inside-2-{name2}
+        outside(indent)
+
+inside('name-2', 'name-1', 24px, @(indent) {
+    margin-left indent
+    margin-right indent
+})

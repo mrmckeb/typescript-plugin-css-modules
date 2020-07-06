@@ -2,6 +2,7 @@ import path from 'path';
 import postcss from 'postcss';
 import less from 'less';
 import sass from 'sass';
+import stylus from 'stylus';
 import { extractICSS } from 'icss-utils';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { Logger } from './logger';
@@ -12,12 +13,14 @@ export const enum FileTypes {
   less = 'less',
   sass = 'sass',
   scss = 'scss',
+  styl = 'styl',
 }
 
 export const getFileType = (fileName: string) => {
   if (fileName.endsWith('.css')) return FileTypes.css;
   if (fileName.endsWith('.less')) return FileTypes.less;
   if (fileName.endsWith('.sass')) return FileTypes.sass;
+  if (fileName.endsWith('.styl')) return FileTypes.styl;
   return FileTypes.scss;
 };
 
@@ -80,6 +83,11 @@ export const getClasses = ({
           ...sassOptions,
         })
         .css.toString();
+    } else if (fileType === FileTypes.styl) {
+      transformedCss = stylus(css, {
+        ...(rendererOptions.stylus || {}),
+        filename: fileName,
+      }).render();
     } else {
       transformedCss = css;
     }

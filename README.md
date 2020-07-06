@@ -12,7 +12,8 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
 ## Table of contents
 
 - [typescript-plugin-css-modules](#typescript-plugin-css-modules)
-  - [Table of contents](#table-of-contents)
+  - [Table of contents](#about-this-plugin)
+  - [About this plugin](#table-of-contents)
   - [Installation](#installation)
     - [Importing CSS](#importing-css)
     - [Options](#options)
@@ -27,6 +28,22 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
     - [Custom definitions](#custom-definitions)
   - [Troubleshooting](#troubleshooting)
   - [About this project](#about-this-project)
+
+## About this plugin
+
+This plugin provides type information to IDEs and any other tools that work with [TypeScript language service plugins](https://github.com/microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin#whats-a-language-service-plugin).
+
+At this time, TypeScript does not support plugins during compilation. This means that this plugin cannot:
+
+- provide errors during compilation, or
+- add CSS module support to your project.
+
+For more information, and/or to add support for this feature, see: https://github.com/microsoft/TypeScript/issues/16607.
+
+If you need a different solution, these projects might help:
+
+- For Jest support, see https://www.npmjs.com/package/jest-css-modules-transform (one of a few options).
+- For Webpack configuration, see https://webpack.js.org/loaders/css-loader/#pure-css-css-modules-and-postcss for an example.
 
 ## Installation
 
@@ -53,6 +70,8 @@ Once installed, add this plugin to your `tsconfig.json`:
 ```
 
 If you're using Visual Studio Code, please also follow these [instructions](#visual-studio-code).
+
+As Webpack configurations vary, you may need to provide additional [options](#options) to this plugin to match your project configuration. For Create React App users, this plugin will work without additional configuration.
 
 ### Importing CSS
 
@@ -179,10 +198,11 @@ The `classes` object represents all the classnames extracted from the CSS Module
 
 #### `rendererOptions`
 
-| Option | Default value | Description                                                                          |
-| ------ | ------------- | ------------------------------------------------------------------------------------ |
-| `less` | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
-| `sass` | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
+| Option   | Default value | Description                                                                          |
+| -------- | ------------- | ------------------------------------------------------------------------------------ |
+| `less`   | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
+| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
+| `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).          |
 
 > For convenience, `includePaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
 
@@ -212,7 +232,7 @@ If your project doesn't already have global declarations for CSS Modules, you wi
 
 Where you store global declarations is up to you. An example might look like: `./src/custom.d.ts`.
 
-The below is an example that you can copy or modify. If you use a `customMatcher`, you'll need to modify this.
+The below is an example that you can copy or modify (you only declarations for exensions used in your project). If you use a `customMatcher`, you'll need to modify this.
 
 ```ts
 declare module '*.module.css' {
@@ -231,6 +251,11 @@ declare module '*.module.sass' {
 }
 
 declare module '*.module.less' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
+declare module '*.module.styl' {
   const classes: { [key: string]: string };
   export default classes;
 }

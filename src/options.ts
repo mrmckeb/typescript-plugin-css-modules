@@ -2,7 +2,11 @@ import { Options as SassOptions } from 'sass';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { DotenvConfigOptions } from 'dotenv/types';
 import { CSSExports } from 'icss-utils';
+import stylus from 'stylus';
 import { Logger } from './helpers/logger';
+
+// NOTE: Stylus doesn't directly export RenderOptions.
+type StylusRenderOptions = Parameters<typeof stylus>[1];
 
 export interface PostCssOptions {
   excludePlugins?: string[];
@@ -12,6 +16,7 @@ export interface PostCssOptions {
 export interface RendererOptions {
   less?: Partial<Less.Options>;
   sass?: Partial<SassOptions>;
+  stylus?: Partial<StylusRenderOptions>;
 }
 
 export interface Options {

@@ -72,6 +72,27 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
+exports[`utils / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
+"declare const classes: {
+
+};
+export default classes;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'empty.module.styl' getClasses should return an object matching expected CSS 1`] = `Object {}`;
+
+exports[`utils / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+
+};
+export default classes;
+
+export const __cssModule: true;
+export type AllClassNames = '';"
+`;
+
 exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare const classes: {
 'classA': string;
@@ -180,6 +201,64 @@ export default classes;
 
 export const __cssModule: true;
 export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
+"declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.styl' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "bar": "import-module__bar---2N4cR",
+  "baz": "import-module__baz---6mQbB",
+  "col-1": "import-module__col-1---2QW7j",
+  "col-2": "import-module__col-2---2CRRS",
+  "col-3": "import-module__col-3---17Luq",
+  "foo": "import-module__foo---FJflO",
+  "inside-1-name-2": "import-module__inside-1-name-2---wLnoq",
+  "inside-2-name-1": "import-module__inside-2-name-1---1GRhn",
+  "inside-local": "import-module__inside-local---1JuOc",
+  "local-class-1": "import-module__local-class-1---3QupT",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
@@ -456,9 +535,74 @@ export const __cssModule: true;
 export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin';"
 `;
 
+exports[`utils / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
+"declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.styl' getClasses should return an object matching expected CSS 1`] = `
+Object {
+  "bar": "test-module__bar---2WWom",
+  "baz": "test-module__baz---1Rs9U",
+  "col-1": "test-module__col-1---1XP3K",
+  "col-2": "test-module__col-2---2nPwS",
+  "col-3": "test-module__col-3---3CSSb",
+  "foo": "test-module__foo---2pGaO",
+  "inside-1-name-2": "test-module__inside-1-name-2---3Zdgw",
+  "inside-2-name-1": "test-module__inside-2-name-1---3PYHl",
+  "inside-local": "test-module__inside-local---2KzUE",
+  "local-class-1": "test-module__local-class-1---3piX9",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare const classes: {
+'foo': string;
+  'bar': string;
+  'baz': string;
+  'col-1': string;
+  'col-2': string;
+  'col-3': string;
+  'local-class-1': string;
+  'inside-local': string;
+  'inside-1-name-2': string;
+  'inside-2-name-1': string;
+};
+export default classes;
+export const foo: string;
+export const bar: string;
+export const baz: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
+`;
+
 exports[`utils / cssSnapshots with includePaths in sass options should find external file from includePaths 1`] = `
 Object {
   "big-font": "include-path-module__big-font---Td7hY",
   "class-with-mixin": "include-path-module__class-with-mixin---1u87_",
+}
+`;
+
+exports[`utils / cssSnapshots with includePaths in stylus options should find external file from includePaths 1`] = `
+Object {
+  "external-class": "include-path-module__external-class---ecH0A",
+  "include-path": "include-path-module__include-path---2f2uR",
 }
 `;

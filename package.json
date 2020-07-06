@@ -1,6 +1,6 @@
 {
   "name": "typescript-plugin-css-modules",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "main": "lib/index.js",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "scss",
     "sass",
     "less",
+    "stylus",
     "modules",
     "plugin",
     "postcss",
@@ -73,7 +74,8 @@
     "postcss-icss-selectors": "^2.0.3",
     "postcss-load-config": "^2.1.0",
     "reserved-words": "^0.1.2",
-    "sass": "^1.26.5"
+    "sass": "^1.26.5",
+    "stylus": "^0.54.7"
   },
   "devDependencies": {
     "@types/icss-utils": "^4.1.0",
@@ -85,6 +87,7 @@
     "@types/postcss-nested": "^4.1.0",
     "@types/reserved-words": "^0.1.0",
     "@types/sass": "^1.16.0",
+    "@types/stylus": "^0.48.33",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "bootstrap": "4.4.1",

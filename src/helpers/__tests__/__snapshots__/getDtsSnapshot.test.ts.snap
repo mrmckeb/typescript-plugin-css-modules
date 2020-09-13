@@ -10,7 +10,7 @@ Object {
 `;
 
 exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 
 };
 export default classes;
@@ -21,7 +21,7 @@ exports[`utils / cssSnapshots with file 'empty.module.less' getClasses should re
 
 exports[`utils / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 
 };
 export default classes;
@@ -31,7 +31,7 @@ export type AllClassNames = '';"
 `;
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 
 };
 export default classes;
@@ -42,7 +42,7 @@ exports[`utils / cssSnapshots with file 'empty.module.sass' getClasses should re
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 
 };
 export default classes;
@@ -52,7 +52,7 @@ export type AllClassNames = '';"
 `;
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 
 };
 export default classes;
@@ -63,7 +63,7 @@ exports[`utils / cssSnapshots with file 'empty.module.scss' getClasses should re
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 
 };
 export default classes;
@@ -73,7 +73,7 @@ export type AllClassNames = '';"
 `;
 
 exports[`utils / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 
 };
 export default classes;
@@ -84,7 +84,7 @@ exports[`utils / cssSnapshots with file 'empty.module.styl' getClasses should re
 
 exports[`utils / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 
 };
 export default classes;
@@ -94,7 +94,7 @@ export type AllClassNames = '';"
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -129,7 +129,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'import.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -152,7 +152,7 @@ export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'paren
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'nested-class-parent': string;
   'child-class': string;
   'selector-blue': string;
@@ -185,7 +185,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'import.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'nested-class-parent': string;
   'child-class': string;
   'selector-blue': string;
@@ -204,7 +204,7 @@ export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-bl
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'foo': string;
   'bar': string;
   'baz': string;
@@ -240,7 +240,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'foo': string;
   'bar': string;
   'baz': string;
@@ -262,7 +262,7 @@ export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' 
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -297,7 +297,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -320,7 +320,7 @@ export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'paren
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'nested-class-parent': string;
   'child-class': string;
   'selector-blue': string;
@@ -353,7 +353,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'nested-class-parent': string;
   'child-class': string;
   'selector-blue': string;
@@ -372,7 +372,7 @@ export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-bl
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.sass' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;
@@ -425,7 +425,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;
@@ -454,7 +454,7 @@ export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;
@@ -507,7 +507,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'local-class-inside-global': string;
   'local-class': string;
   'local-class-2': string;
@@ -536,7 +536,7 @@ export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
-"declare const classes: {
+"declare let classes: {
 'foo': string;
   'bar': string;
   'baz': string;
@@ -572,7 +572,7 @@ Object {
 
 exports[`utils / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
-declare const classes: {
+declare let classes: {
 'foo': string;
   'bar': string;
   'baz': string;

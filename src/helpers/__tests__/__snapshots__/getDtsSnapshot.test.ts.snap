@@ -95,14 +95,14 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare let classes: {
-'classA': string;
-  'ClassB': string;
-  'class-c': string;
-  'class_d': string;
-  'parent': string;
-  'childA': string;
-  'childB': string;
-  'nestedChild': string;
+  readonly 'classA': string;
+  readonly 'ClassB': string;
+  readonly 'class-c': string;
+  readonly 'class_d': string;
+  readonly 'parent': string;
+  readonly 'childA': string;
+  readonly 'childB': string;
+  readonly 'nestedChild': string;
 };
 export default classes;
 export const classA: string;
@@ -130,14 +130,14 @@ Object {
 exports[`utils / cssSnapshots with file 'import.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'classA': string;
-  'ClassB': string;
-  'class-c': string;
-  'class_d': string;
-  'parent': string;
-  'childA': string;
-  'childB': string;
-  'nestedChild': string;
+  readonly 'classA': string;
+  readonly 'ClassB': string;
+  readonly 'class-c': string;
+  readonly 'class_d': string;
+  readonly 'parent': string;
+  readonly 'childA': string;
+  readonly 'childB': string;
+  readonly 'nestedChild': string;
 };
 export default classes;
 export const classA: string;
@@ -153,16 +153,16 @@ export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'paren
 
 exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
-'nested-class-parent': string;
-  'child-class': string;
-  'selector-blue': string;
-  'selector-green': string;
-  'selector-red': string;
-  'column-1': string;
-  'column-2': string;
-  'column-3': string;
-  'column-4': string;
-  'color-set': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'selector-blue': string;
+  readonly 'selector-green': string;
+  readonly 'selector-red': string;
+  readonly 'column-1': string;
+  readonly 'column-2': string;
+  readonly 'column-3': string;
+  readonly 'column-4': string;
+  readonly 'color-set': string;
 };
 export default classes;
 "
@@ -186,16 +186,16 @@ Object {
 exports[`utils / cssSnapshots with file 'import.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'nested-class-parent': string;
-  'child-class': string;
-  'selector-blue': string;
-  'selector-green': string;
-  'selector-red': string;
-  'column-1': string;
-  'column-2': string;
-  'column-3': string;
-  'column-4': string;
-  'color-set': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'selector-blue': string;
+  readonly 'selector-green': string;
+  readonly 'selector-red': string;
+  readonly 'column-1': string;
+  readonly 'column-2': string;
+  readonly 'column-3': string;
+  readonly 'column-4': string;
+  readonly 'color-set': string;
 };
 export default classes;
 
@@ -205,16 +205,16 @@ export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-bl
 
 exports[`utils / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
-'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
+  readonly 'foo': string;
+  readonly 'bar': string;
+  readonly 'baz': string;
+  readonly 'col-1': string;
+  readonly 'col-2': string;
+  readonly 'col-3': string;
+  readonly 'local-class-1': string;
+  readonly 'inside-local': string;
+  readonly 'inside-1-name-2': string;
+  readonly 'inside-2-name-1': string;
 };
 export default classes;
 export const foo: string;
@@ -241,16 +241,16 @@ Object {
 exports[`utils / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
+  readonly 'foo': string;
+  readonly 'bar': string;
+  readonly 'baz': string;
+  readonly 'col-1': string;
+  readonly 'col-2': string;
+  readonly 'col-3': string;
+  readonly 'local-class-1': string;
+  readonly 'inside-local': string;
+  readonly 'inside-1-name-2': string;
+  readonly 'inside-2-name-1': string;
 };
 export default classes;
 export const foo: string;
@@ -263,14 +263,14 @@ export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' 
 
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare let classes: {
-'classA': string;
-  'ClassB': string;
-  'class-c': string;
-  'class_d': string;
-  'parent': string;
-  'childA': string;
-  'childB': string;
-  'nestedChild': string;
+  readonly 'classA': string;
+  readonly 'ClassB': string;
+  readonly 'class-c': string;
+  readonly 'class_d': string;
+  readonly 'parent': string;
+  readonly 'childA': string;
+  readonly 'childB': string;
+  readonly 'nestedChild': string;
 };
 export default classes;
 export const classA: string;
@@ -298,14 +298,14 @@ Object {
 exports[`utils / cssSnapshots with file 'test.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'classA': string;
-  'ClassB': string;
-  'class-c': string;
-  'class_d': string;
-  'parent': string;
-  'childA': string;
-  'childB': string;
-  'nestedChild': string;
+  readonly 'classA': string;
+  readonly 'ClassB': string;
+  readonly 'class-c': string;
+  readonly 'class_d': string;
+  readonly 'parent': string;
+  readonly 'childA': string;
+  readonly 'childB': string;
+  readonly 'nestedChild': string;
 };
 export default classes;
 export const classA: string;
@@ -321,16 +321,16 @@ export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'paren
 
 exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
-'nested-class-parent': string;
-  'child-class': string;
-  'selector-blue': string;
-  'selector-green': string;
-  'selector-red': string;
-  'column-1': string;
-  'column-2': string;
-  'column-3': string;
-  'column-4': string;
-  'color-set': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'selector-blue': string;
+  readonly 'selector-green': string;
+  readonly 'selector-red': string;
+  readonly 'column-1': string;
+  readonly 'column-2': string;
+  readonly 'column-3': string;
+  readonly 'column-4': string;
+  readonly 'color-set': string;
 };
 export default classes;
 "
@@ -354,16 +354,16 @@ Object {
 exports[`utils / cssSnapshots with file 'test.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'nested-class-parent': string;
-  'child-class': string;
-  'selector-blue': string;
-  'selector-green': string;
-  'selector-red': string;
-  'column-1': string;
-  'column-2': string;
-  'column-3': string;
-  'column-4': string;
-  'color-set': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'selector-blue': string;
+  readonly 'selector-green': string;
+  readonly 'selector-red': string;
+  readonly 'column-1': string;
+  readonly 'column-2': string;
+  readonly 'column-3': string;
+  readonly 'column-4': string;
+  readonly 'color-set': string;
 };
 export default classes;
 
@@ -373,26 +373,26 @@ export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-bl
 
 exports[`utils / cssSnapshots with file 'test.module.sass' createExports should create an exports file 1`] = `
 "declare let classes: {
-'local-class-inside-global': string;
-  'local-class': string;
-  'local-class-2': string;
-  'local-class-inside-local': string;
-  'reserved-words': string;
-  'default': string;
-  'const': string;
-  'nested-class-parent': string;
-  'child-class': string;
-  'nested-class-parent--extended': string;
-  'section-1': string;
-  'section-2': string;
-  'section-3': string;
-  'section-4': string;
-  'section-5': string;
-  'section-6': string;
-  'section-7': string;
-  'section-8': string;
-  'section-9': string;
-  'class-with-mixin': string;
+  readonly 'local-class-inside-global': string;
+  readonly 'local-class': string;
+  readonly 'local-class-2': string;
+  readonly 'local-class-inside-local': string;
+  readonly 'reserved-words': string;
+  readonly 'default': string;
+  readonly 'const': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'nested-class-parent--extended': string;
+  readonly 'section-1': string;
+  readonly 'section-2': string;
+  readonly 'section-3': string;
+  readonly 'section-4': string;
+  readonly 'section-5': string;
+  readonly 'section-6': string;
+  readonly 'section-7': string;
+  readonly 'section-8': string;
+  readonly 'section-9': string;
+  readonly 'class-with-mixin': string;
 };
 export default classes;
 "
@@ -426,26 +426,26 @@ Object {
 exports[`utils / cssSnapshots with file 'test.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'local-class-inside-global': string;
-  'local-class': string;
-  'local-class-2': string;
-  'local-class-inside-local': string;
-  'reserved-words': string;
-  'default': string;
-  'const': string;
-  'nested-class-parent': string;
-  'child-class': string;
-  'nested-class-parent--extended': string;
-  'section-1': string;
-  'section-2': string;
-  'section-3': string;
-  'section-4': string;
-  'section-5': string;
-  'section-6': string;
-  'section-7': string;
-  'section-8': string;
-  'section-9': string;
-  'class-with-mixin': string;
+  readonly 'local-class-inside-global': string;
+  readonly 'local-class': string;
+  readonly 'local-class-2': string;
+  readonly 'local-class-inside-local': string;
+  readonly 'reserved-words': string;
+  readonly 'default': string;
+  readonly 'const': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'nested-class-parent--extended': string;
+  readonly 'section-1': string;
+  readonly 'section-2': string;
+  readonly 'section-3': string;
+  readonly 'section-4': string;
+  readonly 'section-5': string;
+  readonly 'section-6': string;
+  readonly 'section-7': string;
+  readonly 'section-8': string;
+  readonly 'section-9': string;
+  readonly 'class-with-mixin': string;
 };
 export default classes;
 
@@ -455,26 +455,26 @@ export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local
 
 exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
 "declare let classes: {
-'local-class-inside-global': string;
-  'local-class': string;
-  'local-class-2': string;
-  'local-class-inside-local': string;
-  'reserved-words': string;
-  'default': string;
-  'const': string;
-  'nested-class-parent': string;
-  'child-class': string;
-  'nested-class-parent--extended': string;
-  'section-1': string;
-  'section-2': string;
-  'section-3': string;
-  'section-4': string;
-  'section-5': string;
-  'section-6': string;
-  'section-7': string;
-  'section-8': string;
-  'section-9': string;
-  'class-with-mixin': string;
+  readonly 'local-class-inside-global': string;
+  readonly 'local-class': string;
+  readonly 'local-class-2': string;
+  readonly 'local-class-inside-local': string;
+  readonly 'reserved-words': string;
+  readonly 'default': string;
+  readonly 'const': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'nested-class-parent--extended': string;
+  readonly 'section-1': string;
+  readonly 'section-2': string;
+  readonly 'section-3': string;
+  readonly 'section-4': string;
+  readonly 'section-5': string;
+  readonly 'section-6': string;
+  readonly 'section-7': string;
+  readonly 'section-8': string;
+  readonly 'section-9': string;
+  readonly 'class-with-mixin': string;
 };
 export default classes;
 "
@@ -508,26 +508,26 @@ Object {
 exports[`utils / cssSnapshots with file 'test.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'local-class-inside-global': string;
-  'local-class': string;
-  'local-class-2': string;
-  'local-class-inside-local': string;
-  'reserved-words': string;
-  'default': string;
-  'const': string;
-  'nested-class-parent': string;
-  'child-class': string;
-  'nested-class-parent--extended': string;
-  'section-1': string;
-  'section-2': string;
-  'section-3': string;
-  'section-4': string;
-  'section-5': string;
-  'section-6': string;
-  'section-7': string;
-  'section-8': string;
-  'section-9': string;
-  'class-with-mixin': string;
+  readonly 'local-class-inside-global': string;
+  readonly 'local-class': string;
+  readonly 'local-class-2': string;
+  readonly 'local-class-inside-local': string;
+  readonly 'reserved-words': string;
+  readonly 'default': string;
+  readonly 'const': string;
+  readonly 'nested-class-parent': string;
+  readonly 'child-class': string;
+  readonly 'nested-class-parent--extended': string;
+  readonly 'section-1': string;
+  readonly 'section-2': string;
+  readonly 'section-3': string;
+  readonly 'section-4': string;
+  readonly 'section-5': string;
+  readonly 'section-6': string;
+  readonly 'section-7': string;
+  readonly 'section-8': string;
+  readonly 'section-9': string;
+  readonly 'class-with-mixin': string;
 };
 export default classes;
 
@@ -537,16 +537,16 @@ export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local
 
 exports[`utils / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
-'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
+  readonly 'foo': string;
+  readonly 'bar': string;
+  readonly 'baz': string;
+  readonly 'col-1': string;
+  readonly 'col-2': string;
+  readonly 'col-3': string;
+  readonly 'local-class-1': string;
+  readonly 'inside-local': string;
+  readonly 'inside-1-name-2': string;
+  readonly 'inside-2-name-1': string;
 };
 export default classes;
 export const foo: string;
@@ -573,16 +573,16 @@ Object {
 exports[`utils / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
+  readonly 'foo': string;
+  readonly 'bar': string;
+  readonly 'baz': string;
+  readonly 'col-1': string;
+  readonly 'col-2': string;
+  readonly 'col-3': string;
+  readonly 'local-class-1': string;
+  readonly 'inside-local': string;
+  readonly 'inside-1-name-2': string;
+  readonly 'inside-2-name-1': string;
 };
 export default classes;
 export const foo: string;

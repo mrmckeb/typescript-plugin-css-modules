@@ -6,7 +6,8 @@ import { Logger } from './logger';
 
 const NOT_CAMELCASE_REGEXP = /[\-_]/;
 
-const classNameToProperty = (className: string) => `'${className}': string;`;
+const classNameToProperty = (className: string) =>
+  `  readonly '${className}': string;`;
 const classNameToNamedExport = (className: string) =>
   `export const ${className}: string;`;
 
@@ -40,7 +41,7 @@ export const createExports = ({
 
   let dts = `\
 declare let classes: {
-${processedClasses.map(classNameToProperty).join('\n  ')}
+${processedClasses.map(classNameToProperty).join('\n')}
 };
 export default classes;
 `;

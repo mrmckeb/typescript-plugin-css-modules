@@ -8,7 +8,7 @@ const NOT_CAMELCASE_REGEXP = /[\-_]/;
 
 const classNameToProperty = (className: string) => `'${className}': string;`;
 const classNameToNamedExport = (className: string) =>
-  `export const ${className}: string;`;
+  `export let ${className}: string;`;
 
 const flattenClassNames = (
   previousValue: string[] = [],
@@ -39,7 +39,7 @@ export const createExports = ({
     .map(classNameToNamedExport);
 
   let dts = `\
-declare const classes: {
+declare let classes: {
 ${processedClasses.map(classNameToProperty).join('\n  ')}
 };
 export default classes;

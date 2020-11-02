@@ -186,4 +186,29 @@ describe('utils / cssSnapshots', () => {
       expect(classes).toMatchSnapshot();
     });
   });
+
+  describe('with baseUrl and paths in compilerOptions', () => {
+    const fileName = join(__dirname, 'fixtures', 'tsconfig-paths.module.scss');
+    const css = readFileSync(fileName, 'utf8');
+    const compilerOptions = {
+      baseUrl: __dirname,
+      paths: {
+        '@scss/*': ['external/package/*'],
+        'alias.scss': ['external/package/public.module.scss'],
+      },
+    };
+
+    it('sass should find the files', () => {
+      const classes = getClasses({
+        css,
+        fileName,
+        logger,
+        options,
+        processor,
+        compilerOptions,
+      });
+
+      expect(classes).toMatchSnapshot();
+    });
+  });
 });

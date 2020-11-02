@@ -5,6 +5,7 @@ import sass from 'sass';
 import stylus from 'stylus';
 import { extractICSS } from 'icss-utils';
 import tsModule from 'typescript/lib/tsserverlibrary';
+import { createMatchPath } from 'tsconfig-paths';
 import { Logger } from './logger';
 import { Options, CustomRenderer } from '../options';
 
@@ -71,6 +72,14 @@ export const getClasses = ({
     } else if (fileType === FileTypes.scss || fileType === FileTypes.sass) {
       const filePath = getFilePath(fileName);
       const { includePaths, ...sassOptions } = rendererOptions.sass || {};
+      const { baseUrl, paths } = compilerOptions;
+      const matchPath =
+        baseUrl && paths ? createMatchPath(path.resolve(baseUrl), paths) : null;
+
+      const aliasImporter: sass.Importer = (url) => {
+        const newUrl = matchPath !== null ? matchPath(url) : undefined;
+        return newUrl ? { file: newUrl } : null;
+      };
 
       transformedCss = sass
         .renderSync({
@@ -80,6 +89,7 @@ export const getClasses = ({
           data: css.replace(/(@import ['"])~(?!\/)/gm, '$1'),
           indentedSyntax: fileType === FileTypes.sass,
           includePaths: [filePath, 'node_modules', ...(includePaths || [])],
+          importer: [aliasImporter],
           ...sassOptions,
         })
         .css.toString();

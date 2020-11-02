@@ -9,6 +9,14 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with baseUrl and paths in compilerOptions sass should find the files 1`] = `
+Object {
+  "big-font": "tsconfig-paths-module__big-font---3FOK9",
+  "class-with-mixin": "tsconfig-paths-module__class-with-mixin---Uo34z",
+  "public-module": "tsconfig-paths-module__public-module---2IHe1",
+}
+`;
+
 exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
 
@@ -105,12 +113,12 @@ exports[`utils / cssSnapshots with file 'import.module.css' createExports should
   'nestedChild': string;
 };
 export default classes;
-export const classA: string;
-export const ClassB: string;
-export const parent: string;
-export const childA: string;
-export const childB: string;
-export const nestedChild: string;
+export let classA: string;
+export let ClassB: string;
+export let parent: string;
+export let childA: string;
+export let childB: string;
+export let nestedChild: string;
 "
 `;
 
@@ -140,12 +148,12 @@ declare let classes: {
   'nestedChild': string;
 };
 export default classes;
-export const classA: string;
-export const ClassB: string;
-export const parent: string;
-export const childA: string;
-export const childB: string;
-export const nestedChild: string;
+export let classA: string;
+export let ClassB: string;
+export let parent: string;
+export let childA: string;
+export let childB: string;
+export let nestedChild: string;
 
 export const __cssModule: true;
 export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
@@ -217,9 +225,9 @@ exports[`utils / cssSnapshots with file 'import.module.styl' createExports shoul
   'inside-2-name-1': string;
 };
 export default classes;
-export const foo: string;
-export const bar: string;
-export const baz: string;
+export let foo: string;
+export let bar: string;
+export let baz: string;
 "
 `;
 
@@ -253,9 +261,9 @@ declare let classes: {
   'inside-2-name-1': string;
 };
 export default classes;
-export const foo: string;
-export const bar: string;
-export const baz: string;
+export let foo: string;
+export let bar: string;
+export let baz: string;
 
 export const __cssModule: true;
 export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
@@ -273,12 +281,12 @@ exports[`utils / cssSnapshots with file 'test.module.css' createExports should c
   'nestedChild': string;
 };
 export default classes;
-export const classA: string;
-export const ClassB: string;
-export const parent: string;
-export const childA: string;
-export const childB: string;
-export const nestedChild: string;
+export let classA: string;
+export let ClassB: string;
+export let parent: string;
+export let childA: string;
+export let childB: string;
+export let nestedChild: string;
 "
 `;
 
@@ -308,12 +316,12 @@ declare let classes: {
   'nestedChild': string;
 };
 export default classes;
-export const classA: string;
-export const ClassB: string;
-export const parent: string;
-export const childA: string;
-export const childB: string;
-export const nestedChild: string;
+export let classA: string;
+export let ClassB: string;
+export let parent: string;
+export let childA: string;
+export let childB: string;
+export let nestedChild: string;
 
 export const __cssModule: true;
 export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
@@ -549,9 +557,9 @@ exports[`utils / cssSnapshots with file 'test.module.styl' createExports should 
   'inside-2-name-1': string;
 };
 export default classes;
-export const foo: string;
-export const bar: string;
-export const baz: string;
+export let foo: string;
+export let bar: string;
+export let baz: string;
 "
 `;
 
@@ -585,9 +593,9 @@ declare let classes: {
   'inside-2-name-1': string;
 };
 export default classes;
-export const foo: string;
-export const bar: string;
-export const baz: string;
+export let foo: string;
+export let bar: string;
+export let baz: string;
 
 export const __cssModule: true;
 export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"

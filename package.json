@@ -75,7 +75,8 @@
     "postcss-load-config": "^2.1.0",
     "reserved-words": "^0.1.2",
     "sass": "^1.26.5",
-    "stylus": "^0.54.7"
+    "stylus": "^0.54.7",
+    "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
     "@types/icss-utils": "^4.1.0",

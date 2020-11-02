@@ -9,6 +9,14 @@ Object {
 }
 `;
 
+exports[`utils / cssSnapshots with baseUrl and paths in compilerOptions sass should find the files 1`] = `
+Object {
+  "big-font": "tsconfig-paths-module__big-font---3FOK9",
+  "class-with-mixin": "tsconfig-paths-module__class-with-mixin---Uo34z",
+  "public-module": "tsconfig-paths-module__public-module---2IHe1",
+}
+`;
+
 exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
 

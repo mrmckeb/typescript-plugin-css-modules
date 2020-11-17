@@ -198,11 +198,11 @@ The `classes` object represents all the classnames extracted from the CSS Module
 
 #### `rendererOptions`
 
-| Option   | Default value | Description                                                                          |
-| -------- | ------------- | ------------------------------------------------------------------------------------ |
-| `less`   | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
-| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
-| `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).          |
+| Option   | Default value                         | Description                                                                                                                                                                                                                              |
+| -------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `less`   | `{}`                                  | Set [renderer options for Less](http://lesscss.org/usage/#less-options).                                                                                                                                                                 |
+| `sass`   | `{ enableWebpackTildeImports: true }` | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). The `enableWebpackTildeImports` property enables support for [Webpack's tilde-prefixed imports](https://webpack.js.org/loaders/css-loader/#import). |
+| `stylus` | `{}`                                  | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).                                                                                                                                                              |
 
 > For convenience, `includePaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
 

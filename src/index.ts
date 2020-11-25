@@ -3,6 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import postcss, { AcceptedPlugin } from 'postcss';
 import postcssIcssSelectors from 'postcss-icss-selectors';
+import postcssIcssKeyframes from 'postcss-icss-keyframes';
 import postcssrc from 'postcss-load-config';
 import filter from 'postcss-filter-plugins';
 import tsModule from 'typescript/lib/tsserverlibrary';
@@ -99,6 +100,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     const processor = postcss([
       ...userPlugins,
       postcssIcssSelectors({ mode: 'local' }),
+      postcssIcssKeyframes(),
     ]);
 
     // Create matchers using options object.

@@ -71,6 +71,7 @@
     "lodash.camelcase": "^4.3.0",
     "postcss": "^7.0.27",
     "postcss-filter-plugins": "^3.0.1",
+    "postcss-icss-keyframes": "^0.2.1",
     "postcss-icss-selectors": "^2.0.3",
     "postcss-load-config": "^2.1.0",
     "reserved-words": "^0.1.2",

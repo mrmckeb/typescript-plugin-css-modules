@@ -111,6 +111,7 @@ exports[`utils / cssSnapshots with file 'import.module.css' createExports should
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
 export let classA: string;
@@ -119,6 +120,7 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let fadeIn: string;
 "
 `;
 
@@ -130,6 +132,7 @@ Object {
   "class-c": "import-module__class-c---2JDAJ",
   "classA": "import-module__classA---2fO5r",
   "class_d": "import-module__class_d---2Dims",
+  "fadeIn": "__import_module_css__fadeIn",
   "nestedChild": "import-module__nestedChild---1ZDxw",
   "parent": "import-module__parent---2kdvO",
 }
@@ -146,6 +149,7 @@ declare let classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
 export let classA: string;
@@ -154,9 +158,10 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let fadeIn: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'fadeIn';"
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
@@ -279,6 +284,7 @@ exports[`utils / cssSnapshots with file 'test.module.css' createExports should c
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
 export let classA: string;
@@ -287,6 +293,7 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let fadeIn: string;
 "
 `;
 
@@ -298,6 +305,7 @@ Object {
   "class-c": "test-module__class-c---3Ouzp",
   "classA": "test-module__classA---KAOw8",
   "class_d": "test-module__class_d---3pjDe",
+  "fadeIn": "__test_module_css__fadeIn",
   "nestedChild": "test-module__nestedChild---v7rOR",
   "parent": "test-module__parent---2tsUX",
 }
@@ -314,6 +322,7 @@ declare let classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
 export let classA: string;
@@ -322,9 +331,10 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let fadeIn: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'fadeIn';"
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `

@@ -7,7 +7,7 @@
 A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)
 for [CSS Modules](https://github.com/css-modules/css-modules).
 
-<img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/master/.github/images/example.gif" alt="typescript-plugin-css-modules example" />
+<img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/main/.github/images/example.gif" alt="typescript-plugin-css-modules example" />
 
 ## Table of contents
 
@@ -141,7 +141,7 @@ When a custom renderer is provided, not other renderers will be used.
 
 The path to the `customRenderer` must be relative to the project root (i.e. `./myRenderer.js`).
 
-The custom renderer itself should be a JavaScript file. The function will be called with three arguments: a `css` string, an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L33-L41)), and a `compilerOptions` object - which contains options as set in your `tsconfig.json`. It must be synchronous, and must return valid CSS.
+The custom renderer itself should be a JavaScript file. The function will be called with three arguments: a `css` string, an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/options.ts#L33-L41)), and a `compilerOptions` object - which contains options as set in your `tsconfig.json`. It must be synchronous, and must return valid CSS.
 
 ```js
 module.exports = (css, { fileName, logger }) => {
@@ -154,9 +154,9 @@ module.exports = (css, { fileName, logger }) => {
 };
 ```
 
-You can find an example custom renderer in our test fixtures ([`customRenderer.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customRenderer.js)).
+You can find an example custom renderer in our test fixtures ([`customRenderer.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/helpers/__tests__/fixtures/customRenderer.js)).
 
-The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
+The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
 
 > If you use Webpack, note that tilde (`~`) imports not supported by Less and Sass natively.
 >
@@ -172,7 +172,7 @@ When a custom template is provided, its output is used as the virtual declaratio
 
 The path to the `customTemplate` must be relative to the project root (i.e. `./customTemplate.js`).
 
-The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `dts` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/options.ts#L43-L52)). It must be synchronous, and must return a valid TypeScript declaration (as found in a `.d.ts` file).
+The custom renderer itself should be a JavaScript file. The function will be called with two arguments: a `dts` string, and an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/options.ts#L43-L52)). It must be synchronous, and must return a valid TypeScript declaration (as found in a `.d.ts` file).
 
 ```js
 module.exports = (dts, { classes, fileName, logger }) => {
@@ -185,9 +185,9 @@ module.exports = (dts, { classes, fileName, logger }) => {
 };
 ```
 
-You can find an example custom template in our test fixtures ([`customTemplate.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/__tests__/fixtures/customTemplate.js)).
+You can find an example custom template in our test fixtures ([`customTemplate.js`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/helpers/__tests__/fixtures/customTemplate.js)).
 
-The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/master/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
+The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
 
 The `classes` object represents all the classnames extracted from the CSS Module. They are available if you want to add a custom representation of the CSS classes.
 

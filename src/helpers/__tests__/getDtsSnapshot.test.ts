@@ -4,6 +4,7 @@ import { join } from 'path';
 import postcss from 'postcss';
 import postcssIcssSelectors from 'postcss-icss-selectors';
 import postcssImportSync from 'postcss-import-sync2';
+import postcssIcssKeyframes from 'postcss-icss-keyframes';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { getClasses } from '../getClasses';
 import { createExports } from '../createExports';
@@ -37,6 +38,7 @@ const compilerOptions: tsModule.CompilerOptions = {};
 const processor = postcss([
   postcssImportSync(),
   postcssIcssSelectors({ mode: 'local' }),
+  postcssIcssKeyframes(),
 ]);
 
 describe('utils / cssSnapshots', () => {

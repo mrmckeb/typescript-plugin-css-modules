@@ -13,9 +13,13 @@ export interface PostCssOptions {
   useConfig?: boolean;
 }
 
+export interface ExtraSassOptions {
+  enableWebpackTildeImports?: boolean;
+}
+
 export interface RendererOptions {
   less?: Partial<Less.Options>;
-  sass?: Partial<SassOptions>;
+  sass?: Partial<SassOptions> & ExtraSassOptions;
   stylus?: Partial<StylusRenderOptions>;
 }
 

@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import postcss from 'postcss';
 import less from 'less';
 import sass from 'sass';
@@ -26,6 +27,50 @@ export const getFileType = (fileName: string) => {
 };
 
 const getFilePath = (fileName: string) => path.dirname(fileName);
+
+// Creates a sass importer which resolves Webpack-style tilde-imports
+const webpackTildeSupportingImporter: sass.Importer = (
+  rawImportPath: string,
+  source: string,
+) => {
+  // We only care about tilde-prefixed imports that do not look like paths
+  if (!rawImportPath.startsWith('~') || rawImportPath.startsWith('~/')) {
+    return null;
+  }
+
+  // Create subpathsWithExts such that it has entries of the form
+  // node_modules/@foo/bar/baz.(scss|sass)
+  // for an import of the form ~@foo/bar/baz(.(scss|sass))?
+  const nodeModSubpath = path.join('node_modules', rawImportPath.substring(1));
+  const subpathsWithExts: string[] = [];
+  if (nodeModSubpath.endsWith('.scss') || nodeModSubpath.endsWith('.sass')) {
+    subpathsWithExts.push(nodeModSubpath);
+  } else {
+    // Look for .scss first
+    subpathsWithExts.push(`${nodeModSubpath}.scss`, `${nodeModSubpath}.sass`);
+  }
+
+  // Climbs the filesystem tree until we get to the root, looking for the first
+  // node_modules directory which has a matching module and filename.
+  let prevDir = '';
+  let dir = path.dirname(source);
+  while (prevDir !== dir) {
+    const searchPaths = subpathsWithExts.map((subpathWithExt) =>
+      path.join(dir, subpathWithExt),
+    );
+    for (const searchPath of searchPaths) {
+      if (fs.existsSync(searchPath)) {
+        return { file: searchPath };
+      }
+    }
+    prevDir = dir;
+    dir = path.dirname(dir);
+  }
+
+  // Returning null is not itself an error, it tells sass to instead try the
+  // next import resolution method if one exists
+  return null;
+};
 
 export const getClasses = ({
   css,
@@ -71,7 +116,8 @@ export const getClasses = ({
       );
     } else if (fileType === FileTypes.scss || fileType === FileTypes.sass) {
       const filePath = getFilePath(fileName);
-      const { includePaths, ...sassOptions } = rendererOptions.sass || {};
+      const { includePaths, enableWebpackTildeImports, ...sassOptions } =
+        rendererOptions.sass || {};
       const { baseUrl, paths } = compilerOptions;
       const matchPath =
         baseUrl && paths ? createMatchPath(path.resolve(baseUrl), paths) : null;
@@ -81,15 +127,17 @@ export const getClasses = ({
         return newUrl ? { file: newUrl } : null;
       };
 
+      const importers = [aliasImporter];
+      if (enableWebpackTildeImports !== false) {
+        importers.push(webpackTildeSupportingImporter);
+      }
+
       transformedCss = sass
         .renderSync({
-          // NOTE: Solves an issue where tilde imports fail.
-          // https://github.com/sass/dart-sass/issues/801
-          // Will strip `~` from imports, unless followed by a slash.
-          data: css.replace(/(@import ['"])~(?!\/)/gm, '$1'),
+          file: fileName,
           indentedSyntax: fileType === FileTypes.sass,
           includePaths: [filePath, 'node_modules', ...(includePaths || [])],
-          importer: [aliasImporter],
+          importer: importers,
           ...sassOptions,
         })
         .css.toString();

@@ -37,4 +37,17 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter('~bootstrap/scss/grid', source, done),
     ).toMatchObject({ file: 'node_modules/bootstrap/scss/_grid.scss' });
   });
+
+  it('should resolve .css files', () => {
+    expect(
+      sassTildeImporter('~bootstrap/dist/css/bootstrap-grid.css', source, done),
+    ).toMatchObject({
+      file: 'node_modules/bootstrap/dist/css/bootstrap-grid.css',
+    });
+    expect(
+      sassTildeImporter('~bootstrap/dist/css/bootstrap-grid', source, done),
+    ).toMatchObject({
+      file: 'node_modules/bootstrap/dist/css/bootstrap-grid.css',
+    });
+  });
 });

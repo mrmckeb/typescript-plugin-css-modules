@@ -26,6 +26,15 @@ export const sassTildeImporter: sass.Importer = (
     subpathsWithExts.push(`${nodeModSubpath}.scss`, `${nodeModSubpath}.sass`);
   }
 
+  // Support sass partials by including paths where the file is prefixed by an underscore.
+  const basename = path.basename(nodeModSubpath);
+  if (!basename.startsWith('_')) {
+    const partials = subpathsWithExts.map((file) =>
+      file.replace(basename, `_${basename}`),
+    );
+    subpathsWithExts.push(...partials);
+  }
+
   // Climbs the filesystem tree until we get to the root, looking for the first
   // node_modules directory which has a matching module and filename.
   let prevDir = '';

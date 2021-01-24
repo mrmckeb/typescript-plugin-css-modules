@@ -19,11 +19,28 @@ export const sassTildeImporter: sass.Importer = (
   // for an import of the form ~@foo/bar/baz(.(scss|sass))?
   const nodeModSubpath = path.join('node_modules', rawImportPath.substring(1));
   const subpathsWithExts: string[] = [];
-  if (nodeModSubpath.endsWith('.scss') || nodeModSubpath.endsWith('.sass')) {
+  if (
+    nodeModSubpath.endsWith('.scss') ||
+    nodeModSubpath.endsWith('.sass') ||
+    nodeModSubpath.endsWith('.css')
+  ) {
     subpathsWithExts.push(nodeModSubpath);
   } else {
     // Look for .scss first.
-    subpathsWithExts.push(`${nodeModSubpath}.scss`, `${nodeModSubpath}.sass`);
+    subpathsWithExts.push(
+      `${nodeModSubpath}.scss`,
+      `${nodeModSubpath}.sass`,
+      `${nodeModSubpath}.css`,
+    );
+  }
+
+  // Support sass partials by including paths where the file is prefixed by an underscore.
+  const basename = path.basename(nodeModSubpath);
+  if (!basename.startsWith('_')) {
+    const partials = subpathsWithExts.map((file) =>
+      file.replace(basename, `_${basename}`),
+    );
+    subpathsWithExts.push(...partials);
   }
 
   // Climbs the filesystem tree until we get to the root, looking for the first

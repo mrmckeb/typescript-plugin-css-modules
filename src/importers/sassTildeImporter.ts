@@ -34,6 +34,12 @@ export const sassTildeImporter: sass.Importer = (
     );
   }
 
+  // Support index files.
+  subpathsWithExts.push(
+    `${nodeModSubpath}/_index.scss`,
+    `${nodeModSubpath}/_index.sass`,
+  );
+
   // Support sass partials by including paths where the file is prefixed by an underscore.
   const basename = path.basename(nodeModSubpath);
   if (!basename.startsWith('_')) {

@@ -38,6 +38,12 @@ describe('importers / sassTildeImporter', () => {
     ).toMatchObject({ file: 'node_modules/bootstrap/scss/_grid.scss' });
   });
 
+  it('should resolve index files', () => {
+    expect(sassTildeImporter('~sass-svg', source, done)).toMatchObject({
+      file: 'node_modules/sass-svg/_index.scss',
+    });
+  });
+
   it('should resolve .css files', () => {
     expect(
       sassTildeImporter('~bootstrap/dist/css/bootstrap-grid.css', source, done),

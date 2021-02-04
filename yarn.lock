@@ -4240,12 +4240,24 @@ sane@^4.0.3:
     minimist "^1.1.1"
     walker "~1.0.5"
 
+sass-svg@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/sass-svg/-/sass-svg-1.2.0.tgz#dc7b954d073fe2416d9e069973b2ba4c658534b9"
+  integrity sha512-xEEyBGdzAGTAw3Njy8mNHoRmoD/VpXd75ENmSUh5EfvnvTUCxYta0i/PshBKZFudhfbTvfQAUiihfD+yLE0Arw==
+  dependencies:
+    sassdash "^0.9.0"
+
 sass@^1.26.5:
   version "1.26.5"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.26.5.tgz#2d7aecfbbabfa298567c8f06615b6e24d2d68099"
   integrity sha512-FG2swzaZUiX53YzZSjSakzvGtlds0lcbF+URuU9mxOv7WBh7NhXEVDa4kPKN4hN6fC2TkOTOKqiqp6d53N9X5Q==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
+
+sassdash@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/sassdash/-/sassdash-0.9.0.tgz#e2114e80af0c01639d1c6b88a3eb350740cb1169"
+  integrity sha512-1SIJltpUOCMY06uTEWrtXDtfGr39P2huhikbiAMU0v9S4PfL5StxGiz5Oo0HqyVpWZK3mAItYEntDikUSUyXeQ==
 
 sax@~1.2.4:
   version "1.2.4"

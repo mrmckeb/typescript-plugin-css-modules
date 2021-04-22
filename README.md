@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/typescript-plugin-css-modules)](https://www.npmjs.com/package/typescript-plugin-css-modules)
 [![npm](https://img.shields.io/npm/dw/typescript-plugin-css-modules)](https://www.npmjs.com/package/typescript-plugin-css-modules)
-[![license](https://img.shields.io/npm/l/typescript-plugin-css-modules)](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/develop/LICENSE)
+[![license](https://img.shields.io/github/license/mrmckeb/typescript-plugin-css-modules)](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/develop/LICENSE)
 
 A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)
 for [CSS Modules](https://github.com/css-modules/css-modules).

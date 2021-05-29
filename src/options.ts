@@ -25,6 +25,7 @@ export interface Options {
   customRenderer?: string;
   customTemplate?: string;
   dotenvOptions?: DotenvConfigOptions;
+  namedExports?: boolean;
   postCssOptions?: PostCssOptions;
   rendererOptions?: RendererOptions;
 }

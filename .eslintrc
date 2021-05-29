@@ -1,11 +1,4 @@
 {
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
-  ],
-  "root": true,
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0
-  }
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+  "root": true
 }

@@ -1,5 +1,5 @@
 declare module 'postcss-icss-selectors' {
-  import { Plugin } from 'postcss';
-  const plugin: Plugin<{ mode: 'local' | 'global' }>;
+  import { PluginCreator } from 'postcss';
+  const plugin: PluginCreator<{ mode: 'local' | 'global' }>;
   export = plugin;
 }

@@ -25,7 +25,7 @@ export const createExports = ({
   fileName: string;
   logger: Logger;
   options: Options;
-}) => {
+}): string => {
   const isCamelCase = (className: string) =>
     !NOT_CAMELCASE_REGEXP.test(className);
   const isReservedWord = (className: string) => !reserved.check(className);

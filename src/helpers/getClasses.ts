@@ -1,5 +1,5 @@
 import path from 'path';
-import postcss from 'postcss';
+import Processor from 'postcss/lib/processor';
 import less from 'less';
 import sass from 'sass';
 import stylus from 'stylus';
@@ -40,7 +40,7 @@ export const getClasses = ({
   fileName: string;
   logger: Logger;
   options: Options;
-  processor: postcss.Processor;
+  processor: Processor;
   compilerOptions: tsModule.CompilerOptions;
 }): CSSExports => {
   try {

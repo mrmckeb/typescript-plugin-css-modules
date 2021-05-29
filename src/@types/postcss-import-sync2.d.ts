@@ -1,5 +1,5 @@
 declare module 'postcss-import-sync2' {
-  import { Plugin } from 'postcss';
-  const plugin: Plugin<unknown>;
+  import { PluginCreator } from 'postcss';
+  const plugin: PluginCreator<unknown>;
   export = plugin;
 }

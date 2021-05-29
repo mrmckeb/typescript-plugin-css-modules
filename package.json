@@ -42,6 +42,9 @@
       "src/**/*.{ts}"
     ],
     "preset": "ts-jest",
+    "setupFiles": [
+      "<rootDir>/src/setup-tests.ts"
+    ],
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -62,18 +65,18 @@
     "trailingComma": "all"
   },
   "resolutions": {
-    "postcss": "7.0.27"
+    "postcss": "8.3.0"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "icss-utils": "^4.1.1",
+    "icss-utils": "^5.1.0",
     "less": "^4.1.1",
     "lodash.camelcase": "^4.3.0",
-    "postcss": "^7.0.27",
+    "postcss": "^8.3.0",
     "postcss-filter-plugins": "^3.0.1",
     "postcss-icss-keyframes": "^0.2.1",
     "postcss-icss-selectors": "^2.0.3",
-    "postcss-load-config": "^2.1.0",
+    "postcss-load-config": "^3.0.1",
     "reserved-words": "^0.1.2",
     "sass": "^1.32.13",
     "stylus": "^0.54.8",
@@ -85,8 +88,8 @@
     "@types/less": "^3.0.2",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/node": "^12.12.17",
-    "@types/postcss-load-config": "^2.0.1",
-    "@types/postcss-nested": "^4.1.0",
+    "@types/postcss-load-config": "^3.0.1",
+    "@types/postcss-nested": "^4.2.3",
     "@types/reserved-words": "^0.1.0",
     "@types/sass": "^1.16.0",
     "@types/stylus": "^0.48.34",

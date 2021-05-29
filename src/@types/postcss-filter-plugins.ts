@@ -5,6 +5,6 @@ declare module 'postcss-filter-plugins' {
     exclude?: string[];
     silent?: boolean;
   }
-  const filter: (options?: Options) => Plugin<unknown>;
+  const filter: (options?: Options) => Plugin;
   export = filter;
 }

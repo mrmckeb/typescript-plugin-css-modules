@@ -1,19 +1,19 @@
-import postcss from 'postcss';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { Options } from '../options';
 import { getClasses } from './getClasses';
 import { createExports } from './createExports';
 import { Logger } from './logger';
+import Processor from 'postcss/lib/processor';
 
 export const getDtsSnapshot = (
   ts: typeof tsModule,
-  processor: postcss.Processor,
+  processor: Processor,
   fileName: string,
   scriptSnapshot: ts.IScriptSnapshot,
   options: Options,
   logger: Logger,
   compilerOptions: tsModule.CompilerOptions,
-) => {
+): tsModule.IScriptSnapshot => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
 
   /*

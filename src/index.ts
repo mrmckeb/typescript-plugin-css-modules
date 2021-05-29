@@ -21,6 +21,7 @@ const getPostCssConfigPlugins = (directory: string) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function init({ typescript: ts }: { typescript: typeof tsModule }) {
   let _isCSS: isCSSFn;
 
@@ -166,9 +167,10 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     };
 
     if (info.languageServiceHost.resolveModuleNames) {
-      const _resolveModuleNames = info.languageServiceHost.resolveModuleNames.bind(
-        info.languageServiceHost,
-      );
+      const _resolveModuleNames =
+        info.languageServiceHost.resolveModuleNames.bind(
+          info.languageServiceHost,
+        );
 
       info.languageServiceHost.resolveModuleNames = (
         moduleNames,
@@ -195,19 +197,22 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
             } else if (isCSS(moduleName)) {
               // TODO: Move this section to a separate file and add basic tests.
               // Attempts to locate the module using TypeScript's previous search paths. These include "baseUrl" and "paths".
-              const failedModule = info.project.getResolvedModuleWithFailedLookupLocationsFromCache(
-                moduleName,
-                containingFile,
-              );
+              const failedModule =
+                info.project.getResolvedModuleWithFailedLookupLocationsFromCache(
+                  moduleName,
+                  containingFile,
+                );
               const baseUrl = info.project.getCompilerOptions().baseUrl;
               const match = '/index.ts';
 
               // An array of paths TypeScript searched for the module. All include .ts, .tsx, .d.ts, or .json extensions.
               // NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unkown.
               // https://github.com/microsoft/TypeScript/issues/28770
-              const failedLocations: readonly string[] = ((failedModule as unknown) as {
-                failedLookupLocations: readonly string[];
-              }).failedLookupLocations;
+              const failedLocations: readonly string[] = (
+                failedModule as unknown as {
+                  failedLookupLocations: readonly string[];
+                }
+              ).failedLookupLocations;
 
               // Filter to only one extension type, and remove that extension. This leaves us with the actual filename.
               // Example: "usr/person/project/src/dir/File.module.css/index.d.ts" > "usr/person/project/src/dir/File.module.css"

@@ -1,6 +1,6 @@
 declare module 'postcss-icss-keyframes' {
-  import { Plugin } from 'postcss';
-  const plugin: Plugin<{
+  import { PluginCreator } from 'postcss';
+  const plugin: PluginCreator<{
     generateScopeName: (
       keyframesName: string,
       filepath: string,

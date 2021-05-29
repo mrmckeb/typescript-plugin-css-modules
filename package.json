@@ -62,14 +62,14 @@
     "trailingComma": "all"
   },
   "resolutions": {
-    "postcss": "7.0.27"
+    "postcss": "8.2.10"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "icss-utils": "^4.1.1",
     "less": "^3.11.1",
     "lodash.camelcase": "^4.3.0",
-    "postcss": "^7.0.27",
+    "postcss": "^8.2.10",
     "postcss-filter-plugins": "^3.0.1",
     "postcss-icss-keyframes": "^0.2.1",
     "postcss-icss-selectors": "^2.0.3",

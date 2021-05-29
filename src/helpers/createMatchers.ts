@@ -1,8 +1,21 @@
 import { Options } from '../options';
-import { createIsCSS, createIsRelativeCSS } from './cssExtensions';
+import {
+  createIsCSS,
+  createIsRelativeCSS,
+  isCSSFn,
+  isRelativeCSSFn,
+} from './cssExtensions';
 import { Logger } from './logger';
 
-export const createMatchers = (logger: Logger, options: Options = {}) => {
+interface Matchers {
+  isCSS: isCSSFn;
+  isRelativeCSS: isRelativeCSSFn;
+}
+
+export const createMatchers = (
+  logger: Logger,
+  options: Options = {},
+): Matchers => {
   // Allow custom matchers to be used, and handle bad matcher patterns.
   let isCSS = createIsCSS();
   try {

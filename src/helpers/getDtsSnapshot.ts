@@ -13,7 +13,7 @@ export const getDtsSnapshot = (
   options: Options,
   logger: Logger,
   compilerOptions: tsModule.CompilerOptions,
-) => {
+): tsModule.IScriptSnapshot => {
   const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
 
   /*

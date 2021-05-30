@@ -103,6 +103,7 @@ Please note that no options are required. However, depending on your configurati
 | `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                      |
 | `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                               |
 | `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                               |
+| `namedExports`       | `true`                             | Enables named exports for compatible classnames.                             |
 | `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
 | `postCssOptions`     | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                               |
 | `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |

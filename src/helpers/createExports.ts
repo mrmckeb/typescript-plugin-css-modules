@@ -45,7 +45,7 @@ ${processedClasses.map(classNameToProperty).join('\n  ')}
 export default classes;
 `;
 
-  if (camelCasedKeys.length) {
+  if (options.namedExports !== false && camelCasedKeys.length) {
     dts += camelCasedKeys.join('\n') + '\n';
   }
 

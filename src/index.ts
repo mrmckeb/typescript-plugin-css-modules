@@ -60,14 +60,15 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     }
 
     // Add postCSS config if enabled.
-    const postCssOptions = options.postCssOptions || {};
+    const postcssOptions =
+      options.postcssOptions || options.postCssOptions || {};
 
     let userPlugins: AcceptedPlugin[] = [];
-    if (postCssOptions.useConfig) {
+    if (postcssOptions.useConfig) {
       const postcssConfig = getPostCssConfigPlugins(directory);
       userPlugins = [
         filter({
-          exclude: postCssOptions.excludePlugins,
+          exclude: postcssOptions.excludePlugins,
           silent: true,
         }),
         ...postcssConfig,

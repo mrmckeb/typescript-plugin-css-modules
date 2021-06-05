@@ -8,7 +8,7 @@ import { Logger } from './helpers/logger';
 // NOTE: Stylus doesn't directly export RenderOptions.
 type StylusRenderOptions = Parameters<typeof stylus>[1];
 
-export interface PostCssOptions {
+export interface PostcssOptions {
   excludePlugins?: string[];
   useConfig?: boolean;
 }
@@ -26,7 +26,9 @@ export interface Options {
   customTemplate?: string;
   dotenvOptions?: DotenvConfigOptions;
   namedExports?: boolean;
-  postCssOptions?: PostCssOptions;
+  postcssOptions?: PostcssOptions;
+  /** @deprecated To align with other projects. */
+  postCssOptions?: PostcssOptions;
   rendererOptions?: RendererOptions;
 }
 

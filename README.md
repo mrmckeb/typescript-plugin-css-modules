@@ -20,7 +20,7 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
       - [`classnameTransform`](#classnametransform)
       - [`customRenderer`](#customrenderer)
       - [`customTemplate`](#customtemplate)
-      - [`postCssOptions`](#postcssoptions)
+      - [`postcssOptions`](#postcssoptions)
       - [`rendererOptions`](#rendereroptions)
     - [Visual Studio Code](#visual-studio-code)
       - [Recommended usage](#recommended-usage)
@@ -105,7 +105,7 @@ Please note that no options are required. However, depending on your configurati
 | `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                               |
 | `namedExports`       | `true`                             | Enables named exports for compatible classnames.                             |
 | `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
-| `postCssOptions`     | `{}`                               | See [`postCssOptions`](#postCssOptions) below.                               |
+| `postcssOptions`     | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                               |
 | `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |
 
 ```json
@@ -119,7 +119,7 @@ Please note that no options are required. However, depending on your configurati
           "customMatcher": "\\.m\\.css$",
           "customRenderer": "./myRenderer.js",
           "dotenvOptions": {},
-          "postCssOptions": {},
+          "postcssOptions": {},
           "rendererOptions": {}
         }
       }
@@ -192,7 +192,7 @@ The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules
 
 The `classes` object represents all the classnames extracted from the CSS Module. They are available if you want to add a custom representation of the CSS classes.
 
-#### `postCssOptions`
+#### `postcssOptions`
 
 | Option           | Default value | Description                                                                                                               |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------- |

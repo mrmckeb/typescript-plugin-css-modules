@@ -210,12 +210,12 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
-  describe('with jumpToDefinition enabled', () => {
+  describe('with goToDefinition enabled', () => {
     const fileName = join(__dirname, 'fixtures', 'test.module.scss');
     const css = readFileSync(fileName, 'utf8');
     const options: Options = {
       classnameTransform: 'camelCaseOnly',
-      jumpToDefinition: true,
+      goToDefinition: true,
     };
 
     const cssExports = getCssExports({

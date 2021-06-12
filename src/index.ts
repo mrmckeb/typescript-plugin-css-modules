@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
-import postcss, { AcceptedPlugin } from 'postcss';
-import postcssIcssSelectors from 'postcss-icss-selectors';
-import postcssIcssKeyframes from 'postcss-icss-keyframes';
+import { AcceptedPlugin } from 'postcss';
 import postcssrc from 'postcss-load-config';
 import filter from 'postcss-filter-plugins';
 import tsModule from 'typescript/lib/tsserverlibrary';
@@ -12,6 +10,7 @@ import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
+import { getProcessor } from './helpers/getProcessor';
 
 const getPostCssConfigPlugins = (directory: string) => {
   try {
@@ -99,11 +98,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     }
 
     // Create PostCSS processor.
-    const processor = postcss([
-      ...userPlugins,
-      postcssIcssSelectors({ mode: 'local' }),
-      postcssIcssKeyframes(),
-    ]);
+    const processor = getProcessor(userPlugins);
 
     // Create matchers using options object.
     const { isCSS, isRelativeCSS } = createMatchers(logger, options);

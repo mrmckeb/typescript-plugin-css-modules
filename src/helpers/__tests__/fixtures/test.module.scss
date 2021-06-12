@@ -50,6 +50,17 @@ $color: rebeccapurple !default;
   @include set-margin(0);
 }
 
+.App_logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: my-animation infinite 20s linear;
+  }
+}
+
 // .commented-parent-class {
 //   .commented-child-class
 // }

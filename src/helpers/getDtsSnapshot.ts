@@ -1,7 +1,7 @@
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { Options } from '../options';
-import { getClasses } from './getClasses';
-import { createExports } from './createExports';
+import { getCssExports } from './getCssExports';
+import { createDtsExports } from './createDtsExports';
 import { Logger } from './logger';
 import Processor from 'postcss/lib/processor';
 
@@ -25,7 +25,7 @@ export const getDtsSnapshot = (
     return scriptSnapshot;
   }
 
-  const classes = getClasses({
+  const cssExports = getCssExports({
     css,
     fileName,
     logger,
@@ -33,6 +33,6 @@ export const getDtsSnapshot = (
     processor,
     compilerOptions,
   });
-  const dts = createExports({ classes, fileName, logger, options });
+  const dts = createDtsExports({ cssExports, fileName, logger, options });
   return ts.ScriptSnapshot.fromString(dts);
 };

@@ -106,8 +106,8 @@ export const getClasses = ({
       from: fileName,
     });
 
-    return processedCss.root ? extractICSS(processedCss.root).icssExports : {};
-  } catch (e) {
+    return processedCss.root ? extractICSS(processedCss.root as any).icssExports : {};
+  } catch (e: any) {
     logger.error(e);
     return {};
   }

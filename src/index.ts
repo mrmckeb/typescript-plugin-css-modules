@@ -245,7 +245,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
                 };
               }
             }
-          } catch (e) {
+          } catch (e: any) {
             logger.error(e);
             return resolvedModules[index];
           }

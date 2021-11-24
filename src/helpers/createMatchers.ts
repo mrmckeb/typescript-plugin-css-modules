@@ -24,7 +24,7 @@ export const createMatchers = (
       const customMatcherRegExp = new RegExp(customMatcher);
       isCSS = createIsCSS(customMatcherRegExp);
     }
-  } catch (e) {
+  } catch (e: any) {
     logger.error(e);
     // TODO: Provide error/warning to user.
   }

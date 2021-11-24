@@ -24,9 +24,11 @@ const getPostCssConfigPlugins = (directory: string) => {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function init({ typescript: ts }: { typescript: typeof tsModule }) {
   let _isCSS: isCSSFn;
+  let _isRelativeCSS: isCSSFn;
+  let logger: ReturnType<typeof createLogger>;
 
   function create(info: ts.server.PluginCreateInfo) {
-    const logger = createLogger(info);
+    logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();
 
@@ -108,7 +110,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     // Create matchers using options object.
     const { isCSS, isRelativeCSS } = createMatchers(logger, options);
     _isCSS = isCSS;
-
+    _isRelativeCSS = isRelativeCSS;
     // Creates new virtual source files for the CSS modules.
     const _createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;
     ts.createLanguageServiceSourceFile = (
@@ -116,7 +118,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       scriptSnapshot,
       ...rest
     ): ts.SourceFile => {
-      if (isCSS(fileName)) {
+      if (_isCSS(fileName)) {
         scriptSnapshot = getDtsSnapshot(
           ts,
           processor,
@@ -132,7 +134,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
         scriptSnapshot,
         ...rest,
       );
-      if (isCSS(fileName)) {
+      if (_isCSS(fileName)) {
         sourceFile.isDeclarationFile = true;
       }
       return sourceFile;
@@ -145,7 +147,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       scriptSnapshot,
       ...rest
     ): ts.SourceFile => {
-      if (isCSS(sourceFile.fileName)) {
+      if (_isCSS(sourceFile.fileName)) {
         scriptSnapshot = getDtsSnapshot(
           ts,
           processor,
@@ -161,7 +163,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
         scriptSnapshot,
         ...rest,
       );
-      if (isCSS(sourceFile.fileName)) {
+      if (_isCSS(sourceFile.fileName)) {
         sourceFile.isDeclarationFile = true;
       }
       return sourceFile;
@@ -186,7 +188,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
         return moduleNames.map((moduleName, index) => {
           try {
-            if (isRelativeCSS(moduleName)) {
+            if (_isRelativeCSS(moduleName)) {
               return {
                 extension: tsModule.Extension.Dts,
                 isExternalLibraryImport: false,
@@ -195,7 +197,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
                   moduleName,
                 ),
               };
-            } else if (isCSS(moduleName)) {
+            } else if (_isCSS(moduleName)) {
               // TODO: Move this section to a separate file and add basic tests.
               // Attempts to locate the module using TypeScript's previous search paths. These include "baseUrl" and "paths".
               const failedModule =
@@ -259,7 +261,13 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     return project.getFileNames().filter(_isCSS);
   }
 
-  return { create, getExternalFiles };
+  function onConfigurationChanged( options: Options ) {
+    const { isCSS, isRelativeCSS } = createMatchers(logger, options);
+    _isCSS = isCSS;
+    _isRelativeCSS = isRelativeCSS;
+  }
+
+  return { create, getExternalFiles, onConfigurationChanged };
 }
 
 export = init;

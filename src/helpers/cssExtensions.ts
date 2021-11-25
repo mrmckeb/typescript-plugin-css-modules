@@ -6,10 +6,11 @@ const DEFAULT_REGEXP = /\.module\.(((c|le|sa|sc)ss)|styl)$/;
 const isRelative = (fileName: string) => /^\.\.?($|[\\/])/.test(fileName);
 
 export const createIsCSS =
-  (customMatcher: RegExp = DEFAULT_REGEXP): isCSSFn =>
-  (fileName: string) =>
-    customMatcher.test(fileName);
+    (customMatcher: RegExp = DEFAULT_REGEXP): isCSSFn =>
+        (fileName: string) => {
+            return customMatcher.test(fileName)
+        };
 export const createIsRelativeCSS =
-  (isCSS: isCSSFn): isRelativeCSSFn =>
-  (fileName: string) =>
-    isCSS(fileName) && isRelative(fileName);
+    (isCSS: isCSSFn): isRelativeCSSFn =>
+        (fileName: string) =>
+            isCSS(fileName) && isRelative(fileName);

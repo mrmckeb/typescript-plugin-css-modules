@@ -26,9 +26,10 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
   let _isCSS: isCSSFn;
   let _isRelativeCSS: isCSSFn;
   let logger: ReturnType<typeof createLogger>;
-
+  let project: ts.server.Project;
   function create(info: ts.server.PluginCreateInfo) {
     logger = createLogger(info);
+    project = info.project;
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();
 
@@ -258,13 +259,19 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
   }
 
   function getExternalFiles(project: tsModule.server.ConfiguredProject) {
+    console.log('getExternalFiles ', project.getFileNames().filter(_isCSS));
+
     return project.getFileNames().filter(_isCSS);
   }
 
-  function onConfigurationChanged( options: Options ) {
+  function onConfigurationChanged(options: Options) {
     const { isCSS, isRelativeCSS } = createMatchers(logger, options);
     _isCSS = isCSS;
     _isRelativeCSS = isRelativeCSS;
+
+    console.log('onConfigurationChanged', JSON.stringify(options));
+    project.projectService.reloadProjects();
+
   }
 
   return { create, getExternalFiles, onConfigurationChanged };

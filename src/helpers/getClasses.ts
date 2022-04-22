@@ -6,6 +6,7 @@ import stylus from 'stylus';
 import { CSSExports, extractICSS } from 'icss-utils';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { createMatchPath } from 'tsconfig-paths';
+import { fileExistsSync } from 'tsconfig-paths/lib/filesystem';
 import { sassTildeImporter } from '../importers/sassTildeImporter';
 import { Options, CustomRenderer } from '../options';
 import { Logger } from './logger';
@@ -78,7 +79,19 @@ export const getClasses = ({
         baseUrl && paths ? createMatchPath(path.resolve(baseUrl), paths) : null;
 
       const aliasImporter: sass.Importer = (url) => {
-        const newUrl = matchPath !== null ? matchPath(url) : undefined;
+        const newUrl =
+          matchPath !== null
+            ? matchPath(
+                url,
+                undefined,
+                (name) =>
+                  fileExistsSync(name) ||
+                  fileExistsSync(
+                    path.join(path.dirname(name), '_' + path.basename(name)),
+                  ),
+                ['.scss', '.sass', '.css'],
+              )
+            : undefined;
         return newUrl ? { file: newUrl } : null;
       };
 

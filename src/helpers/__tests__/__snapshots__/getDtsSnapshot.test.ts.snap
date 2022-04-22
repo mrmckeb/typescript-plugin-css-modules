@@ -13,7 +13,9 @@ exports[`utils / cssSnapshots with baseUrl and paths in compilerOptions sass sho
 Object {
   "big-font": "tsconfig-paths-module__big-font---3FOK9",
   "class-with-mixin": "tsconfig-paths-module__class-with-mixin---Uo34z",
+  "main": "tsconfig-paths-module__main---2Ef_0",
   "public-module": "tsconfig-paths-module__public-module---2IHe1",
+  "text-bold": "tsconfig-paths-module__text-bold---h-81b",
 }
 `;
 

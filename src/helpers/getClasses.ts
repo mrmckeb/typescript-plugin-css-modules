@@ -78,7 +78,10 @@ export const getClasses = ({
         baseUrl && paths ? createMatchPath(path.resolve(baseUrl), paths) : null;
 
       const aliasImporter: sass.Importer = (url) => {
-        const newUrl = matchPath !== null ? matchPath(url) : undefined;
+        const newUrl =
+          matchPath !== null
+            ? matchPath(url, undefined, undefined, ['.scss'])
+            : undefined;
         return newUrl ? { file: newUrl } : null;
       };
 

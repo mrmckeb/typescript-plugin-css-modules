@@ -145,7 +145,7 @@ describe('utils / cssSnapshots', () => {
 
     const options: Options = {
       rendererOptions: {
-        sass: { includePaths: [join(__dirname, 'external')] },
+        sass: { loadPaths: [join(__dirname, 'external')] },
       },
     };
 

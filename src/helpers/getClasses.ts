@@ -9,6 +9,7 @@ import { createMatchPath } from 'tsconfig-paths';
 import { sassTildeImporter } from '../importers/sassTildeImporter';
 import { Options, CustomRenderer } from '../options';
 import { Logger } from './logger';
+import { pathToFileURL } from 'url';
 
 export const enum FileType {
   css = 'css',
@@ -72,27 +73,27 @@ export const getClasses = ({
       );
     } else if (fileType === FileType.scss || fileType === FileType.sass) {
       const filePath = getFilePath(fileName);
-      const { includePaths, ...sassOptions } = rendererOptions.sass || {};
+      const { loadPaths, ...sassOptions } = rendererOptions.sass || {};
       const { baseUrl, paths } = compilerOptions;
       const matchPath =
         baseUrl && paths ? createMatchPath(path.resolve(baseUrl), paths) : null;
 
-      const aliasImporter: sass.Importer = (url) => {
-        const newUrl =
-          matchPath !== null
-            ? matchPath(url, undefined, undefined, ['.scss'])
-            : undefined;
-        return newUrl ? { file: newUrl } : null;
+      const aliasImporter: sass.FileImporter<'sync'> = {
+        findFileUrl(url) {
+          const newUrl =
+            matchPath !== null
+              ? matchPath(url, undefined, undefined, [`.${FileType.scss}`])
+              : undefined;
+          return newUrl ? pathToFileURL(newUrl) : null;
+        },
       };
 
       const importers = [aliasImporter, sassTildeImporter];
 
       transformedCss = sass
-        .renderSync({
-          file: fileName,
-          indentedSyntax: fileType === FileType.sass,
-          includePaths: [filePath, 'node_modules', ...(includePaths || [])],
-          importer: importers,
+        .compile(fileName, {
+          loadPaths: [filePath, 'node_modules', ...(loadPaths || [])],
+          importers,
           ...sassOptions,
         })
         .css.toString();

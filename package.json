@@ -45,7 +45,7 @@
     "setupFiles": [
       "<rootDir>/src/setup-tests.ts"
     ],
-    "testEnvironment": "node",
+    "testEnvironment": "jest-environment-node-single-context",
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/fixtures/"
@@ -76,22 +76,22 @@
     "postcss-filter-plugins": "^3.0.1",
     "postcss-icss-keyframes": "^0.2.1",
     "postcss-icss-selectors": "^2.0.3",
-    "postcss-load-config": "^3.0.1",
+    "postcss-load-config": "^4.0.1",
     "reserved-words": "^0.1.2",
-    "sass": "^1.32.13",
+    "sass": "^1.54.4",
     "stylus": "^0.54.8",
     "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
     "@types/icss-utils": "^4.1.0",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^28.1.7",
     "@types/less": "^3.0.2",
     "@types/lodash.camelcase": "^4.3.6",
     "@types/node": "^12.12.17",
     "@types/postcss-load-config": "^3.0.1",
     "@types/postcss-nested": "^4.2.3",
     "@types/reserved-words": "^0.1.0",
-    "@types/sass": "^1.16.0",
+    "@types/sass": "^1.43.1",
     "@types/stylus": "^0.48.34",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
@@ -99,12 +99,13 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^4.2.5",
-    "jest": "^27.0.2",
+    "jest": "^28.1.3",
+    "jest-environment-node-single-context": "^28.1.0",
     "lint-staged": "^11.0.0",
-    "postcss-import-sync2": "^1.1.0",
+    "postcss-import-sync2": "^1.2.0",
     "prettier": "^2.3.0",
     "sass-svg": "1.2.0",
-    "ts-jest": "^27.0.1",
+    "ts-jest": "^28.0.8",
     "typescript": "^4.3.2"
   },
   "peerDependencies": {

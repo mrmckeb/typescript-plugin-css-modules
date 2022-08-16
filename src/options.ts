@@ -15,7 +15,7 @@ export interface PostcssOptions {
 
 export interface RendererOptions {
   less?: Partial<Less.Options>;
-  sass?: Partial<SassOptions>;
+  sass?: Partial<SassOptions<'sync'>>;
   stylus?: Partial<StylusRenderOptions>;
 }
 

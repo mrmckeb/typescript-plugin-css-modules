@@ -51,6 +51,7 @@ describe('utils / cssSnapshots', () => {
         options,
         processor,
         compilerOptions,
+        directory: __dirname,
       });
     });
 
@@ -113,6 +114,7 @@ describe('utils / cssSnapshots', () => {
         options,
         processor,
         compilerOptions,
+        directory: __dirname,
       });
 
       expect(cssExports.classes.test).toMatchSnapshot();
@@ -134,6 +136,7 @@ describe('utils / cssSnapshots', () => {
         options,
         processor,
         compilerOptions,
+        directory: __dirname,
       });
 
       expect(cssExports.classes).toMatchSnapshot();
@@ -159,6 +162,7 @@ describe('utils / cssSnapshots', () => {
         options,
         processor,
         compilerOptions,
+        directory: __dirname,
       });
 
       expect(cssExports.classes).toMatchSnapshot();
@@ -185,6 +189,7 @@ describe('utils / cssSnapshots', () => {
         options,
         processor,
         compilerOptions,
+        directory: __dirname,
       });
 
       expect(cssExports.classes).toMatchSnapshot();
@@ -210,6 +215,7 @@ describe('utils / cssSnapshots', () => {
         options,
         processor,
         compilerOptions,
+        directory: __dirname,
       });
 
       expect(cssExports.classes).toMatchSnapshot();

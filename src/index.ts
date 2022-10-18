@@ -120,6 +120,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           options,
           logger,
           compilerOptions,
+          directory,
         );
       }
       const sourceFile = _createLanguageServiceSourceFile(
@@ -149,6 +150,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           options,
           logger,
           compilerOptions,
+          directory,
         );
       }
       sourceFile = _updateLanguageServiceSourceFile(

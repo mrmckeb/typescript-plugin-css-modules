@@ -1,6 +1,6 @@
 /.vscode
 /node_modules
 /coverage
-/lib
+/dist
 npm-debug.log
 yarn-error.log

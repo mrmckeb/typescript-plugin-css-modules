@@ -1,6 +1,6 @@
 export interface Logger {
   log: (message: string) => void;
-  error: (error: Error) => void;
+  error: (error: unknown) => void;
 }
 
 export const createLogger = (info: ts.server.PluginCreateInfo): Logger => {
@@ -9,9 +9,8 @@ export const createLogger = (info: ts.server.PluginCreateInfo): Logger => {
       `[typescript-plugin-css-modules] ${message}`,
     );
   };
-  const error = (error: Error) => {
-    log(`Failed ${error.toString()}`);
-    log(`Stack trace: ${error.stack}`);
+  const error = (error: unknown) => {
+    log(`Failed with error: ${error}`);
   };
 
   return {

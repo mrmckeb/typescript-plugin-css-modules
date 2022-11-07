@@ -10,7 +10,7 @@ export const createLogger = (info: ts.server.PluginCreateInfo): Logger => {
     );
   };
   const error = (error: unknown) => {
-    log(`Failed with error: ${error}`);
+    log(`Failed with error: ${error as string}`);
   };
 
   return {

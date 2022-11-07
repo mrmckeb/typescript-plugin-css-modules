@@ -26,8 +26,8 @@
   ],
   "scripts": {
     "build": "rm -rf ./dist && tsc --project tsconfig.build.json",
-    "lint": "eslint --max-warnings 0 . && yarn prettier -c .",
-    "prepublishOnly": "yarn build",
+    "lint": "eslint --max-warnings 0 . && pnpm prettier -c .",
+    "prepublishOnly": "pnpm build",
     "test": "jest",
     "prepare": "husky install"
   },

@@ -21,7 +21,7 @@ export const getDtsSnapshot = (
    * https://github.com/mrmckeb/typescript-plugin-css-modules/issues/41
    * Needs investigation for a more elegant solution.
    */
-  if (/export default classes/.test(css)) {
+  if (css.includes('export default classes')) {
     return scriptSnapshot;
   }
 

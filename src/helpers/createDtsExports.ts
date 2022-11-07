@@ -55,7 +55,7 @@ export default classes;
     const smc = new SourceMapConsumer(cssExports.sourceMap);
 
     // Split original CSS file into lines.
-    const cssLines = cssExports.css?.split('\n') || [];
+    const cssLines = cssExports.css?.split('\n') ?? [];
 
     // Create new equal size array of empty strings.
     const dtsLines = Array.from(Array(cssLines.length), () => '');

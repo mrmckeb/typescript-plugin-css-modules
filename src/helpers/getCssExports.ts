@@ -52,7 +52,7 @@ export const getCssExports = ({
 }): CSSExportsWithSourceMap => {
   try {
     const fileType = getFileType(fileName);
-    const rendererOptions = options.rendererOptions || {};
+    const rendererOptions = options.rendererOptions ?? {};
 
     let transformedCss = '';
     let sourceMap: RawSourceMap | undefined;
@@ -73,7 +73,7 @@ export const getCssExports = ({
             {
               syncImport: true,
               filename: fileName,
-              ...(rendererOptions.less || {}),
+              ...(rendererOptions.less ?? {}),
             } as Less.Options,
             (
               error: Less.RenderError | undefined,
@@ -93,7 +93,7 @@ export const getCssExports = ({
         case FileType.scss:
         case FileType.sass: {
           const filePath = getFilePath(fileName);
-          const { loadPaths, ...sassOptions } = rendererOptions.sass || {};
+          const { loadPaths, ...sassOptions } = rendererOptions.sass ?? {};
           const { baseUrl, paths } = compilerOptions;
           const matchPath =
             baseUrl && paths
@@ -111,7 +111,7 @@ export const getCssExports = ({
 
           const result = sass.compile(fileName, {
             importers,
-            loadPaths: [filePath, 'node_modules', ...(loadPaths || [])],
+            loadPaths: [filePath, 'node_modules', ...(loadPaths ?? [])],
             sourceMap: true,
             // sourceMapIncludeSources: true,
             ...sassOptions,
@@ -124,7 +124,7 @@ export const getCssExports = ({
 
         case FileType.styl:
           transformedCss = stylus(css, {
-            ...(rendererOptions.stylus || {}),
+            ...(rendererOptions.stylus ?? {}),
             filename: fileName,
           }).render();
           break;

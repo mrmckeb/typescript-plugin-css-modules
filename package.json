@@ -31,21 +31,6 @@
     "test": "jest",
     "prepare": "husky install"
   },
-  "jest": {
-    "clearMocks": true,
-    "collectCoverageFrom": [
-      "src/**/*.{ts}"
-    ],
-    "preset": "ts-jest",
-    "setupFiles": [
-      "<rootDir>/src/setup-tests.ts"
-    ],
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/fixtures/"
-    ]
-  },
   "lint-staged": {
     "./src/**/*.ts": [
       "eslint --fix",
@@ -91,6 +76,7 @@
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
     "jest": "^29.2.2",
+    "jest-environment-node-single-context": "^29.0.0",
     "lint-staged": "^13.0.3",
     "postcss-import-sync2": "^1.2.0",
     "postcss-nested": "^4.2.3",

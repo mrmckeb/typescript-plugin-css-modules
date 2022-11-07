@@ -68,7 +68,7 @@ export default classes;
         transformClasses(options.classnameTransform)(className)[0],
         hashedClassName,
       ])
-      .filter(([className]) => isValidVariable(className as string));
+      .filter(([className]) => isValidVariable(className));
 
     filteredClasses.forEach(([className, hashedClassName]) => {
       const matchedLine = cssLines.findIndex((line) =>

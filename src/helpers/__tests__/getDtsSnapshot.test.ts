@@ -99,6 +99,12 @@ describe('utils / cssSnapshots', () => {
     const fileName = join(__dirname, 'fixtures', 'bootstrap.module.scss');
     const css = readFileSync(fileName, 'utf8');
 
+    beforeAll(() => {
+      // Hides output for deprecation, fixed in an upcoming release.
+      // https://github.com/twbs/bootstrap/issues/37430
+      jest.spyOn(process.stderr, 'write').mockImplementation();
+    });
+
     it('should find external files', () => {
       const cssExports = getCssExports({
         css,
@@ -141,7 +147,7 @@ describe('utils / cssSnapshots', () => {
 
     const options: Options = {
       rendererOptions: {
-        sass: { includePaths: [join(__dirname, 'external')] },
+        sass: { loadPaths: [join(__dirname, 'external')] },
       },
     };
 
@@ -231,7 +237,7 @@ describe('utils / cssSnapshots', () => {
       expect(cssExports).toMatchSnapshot();
     });
 
-    it.only('should return a line-accurate dts file', () => {
+    it('should return a line-accurate dts file', () => {
       const dts = createDtsExports({
         cssExports,
         fileName,

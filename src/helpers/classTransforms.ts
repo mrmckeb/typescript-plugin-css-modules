@@ -5,7 +5,7 @@ import { ClassnameTransformOptions } from '../options';
 // https://github.com/webpack-contrib/css-loader/blob/master/lib/compile-exports.js
 
 const dashCase = (className: string): string =>
-  className.replace(/-+(\w)/g, (_match, firstLetter) =>
+  className.replace(/-+(\w)/g, (_match: string, firstLetter: string) =>
     firstLetter.toUpperCase(),
   );
 

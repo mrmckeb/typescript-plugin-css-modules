@@ -25,6 +25,7 @@ export interface Options {
   customRenderer?: string;
   customTemplate?: string;
   dotenvOptions?: DotenvConfigOptions;
+  goToDefinition?: boolean;
   namedExports?: boolean;
   postcssOptions?: PostcssOptions;
   /** @deprecated To align with other projects. */

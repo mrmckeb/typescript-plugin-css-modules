@@ -97,16 +97,17 @@ const b = styles['my_other-class'];
 
 Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-| Option               | Default value                      | Description                                                                  |
-| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
-| `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                       |
-| `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                      |
-| `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                               |
-| `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                               |
-| `namedExports`       | `true`                             | Enables named exports for compatible classnames.                             |
-| `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). |
-| `postcssOptions`     | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                               |
-| `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                             |
+| Option               | Default value                      | Description                                                                                                |
+| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                                                     |
+| `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                    |
+| `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                                                             |
+| `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                                                             |
+| `jumpToDefinition`   | `false`                            | Enables jump to definition, with limited compatibility. See [`jumpToDefinition`](#jumpToDefinition) below. |
+| `namedExports`       | `true`                             | Enables named exports for compatible classnames.                                                           |
+| `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).                               |
+| `postcssOptions`     | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                                                             |
+| `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                           |
 
 ```json
 {
@@ -142,7 +143,7 @@ When a custom renderer is provided, not other renderers will be used.
 
 The path to the `customRenderer` must be relative to the project root (i.e. `./myRenderer.js`).
 
-The custom renderer itself should be a JavaScript file. The function will be called with three arguments: a `css` string, an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/options.ts#L33-L41)), and a `compilerOptions` object - which contains options as set in your `tsconfig.json`. It must be synchronous, and must return valid CSS.
+The custom renderer itself should be a JavaScript file. The function will be called with three arguments: a `css` string, an `options` object (see [`options.ts`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/options.ts#L22-L34)), and a `compilerOptions` object - which contains options as set in your `tsconfig.json`. It must be synchronous, and must return valid CSS.
 
 ```js
 module.exports = (css, { fileName, logger }) => {
@@ -191,6 +192,12 @@ You can find an example custom template in our test fixtures ([`customTemplate.j
 The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/src/helpers/logger.ts) is provided for [debugging](#troubleshooting).
 
 The `classes` object represents all the classnames extracted from the CSS Module. They are available if you want to add a custom representation of the CSS classes.
+
+#### `jumpToDefinition`
+
+This allows an editor like Visual Studio Code to jump to a classname's definition (file and line).
+
+This is experimental, and only works with Sass (for now) and may not always work as expected.
 
 #### `postcssOptions`
 

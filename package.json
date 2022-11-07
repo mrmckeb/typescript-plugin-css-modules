@@ -28,7 +28,7 @@
     "build": "rm -rf ./lib && tsc",
     "lint": "eslint --max-warnings 0 . && yarn prettier -c .",
     "prepublishOnly": "yarn build",
-    "test": "jest ./src"
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -79,6 +79,7 @@
     "postcss-load-config": "^3.0.1",
     "reserved-words": "^0.1.2",
     "sass": "^1.32.13",
+    "source-map-js": "^0.6.2",
     "stylus": "^0.54.8",
     "tsconfig-paths": "^3.9.0"
   },

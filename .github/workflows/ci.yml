@@ -18,8 +18,5 @@ jobs:
         run: pnpm lint
       - name: Test
         run: pnpm test
-      - name: Build (TypeScript 4.x)
+      - name: Build
         run: pnpm build
-      - name: Build (TypeScript 3.x)
-        run: |
-          pnpm build

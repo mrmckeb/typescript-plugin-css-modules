@@ -1,4 +1,2 @@
-src/helpers/__tests__/fixtures/*.less
-src/helpers/__tests__/fixtures/*.css
-src/helpers/__tests__/fixtures/*.scss
-/lib/
+pnpm-lock.yaml
+/dist/

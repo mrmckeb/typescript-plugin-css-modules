@@ -6,6 +6,7 @@
   "license": "MIT",
   "description": "CSS modules support for TypeScript",
   "homepage": "https://github.com/mrmckeb/typescript-plugin-css-modules",
+  "packageManager": "pnpm@7.16.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/mrmckeb/typescript-plugin-css-modules"

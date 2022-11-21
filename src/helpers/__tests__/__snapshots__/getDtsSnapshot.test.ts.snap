@@ -833,9 +833,9 @@ exports[`utils / cssSnapshots with goToDefinition enabled should return an objec
     "mappings": "AAAA;EACE,oBAAA;ACCF;;ADGE;EACE,oBAAA;ACAJ;;ADIA;EACE,oBAAA;ACDF;;ADKE;EACE,oBAAA;ACFJ;;ADOE;EACE,oBAAA;ACJJ;;ADME;EACE,oBAAA;ACJJ;;ADSE;EACE,oBAAA;ACNJ;;ADQE;EACE,oBAAA;ACNJ;;ADaE;EACE,oBAJI;ACNR;;ADSE;EACE,oBAJI;ACFR;;ADKE;EACE,oBAJI;ACER;;ADCE;EACE,oBAJI;ACMR;;ADHE;EACE,oBAJI;ACUR;;ADPE;EACE,oBAJI;ACcR;;ADXE;EACE,oBAJI;ACkBR;;ADfE;EACE,oBAJI;ACsBR;;ADnBE;EACE,oBAJI;AC0BR;;ADhBA;EE/CE,SFgDoB;ACmBtB;;ADhBA;EACE,cAAA;EACA,oBAAA;ACmBF;;ADhBA;EACE;IACE,2CAAA;ECmBF;AACF;;ADZA;;;;CAAA",
     "names": [],
     "sources": [
-      "file:///Users/mrmckeb/Development/typescript-plugin-css-modules/src/helpers/__tests__/fixtures/test.module.scss",
+      "file://[cwd]/src/helpers/__tests__/fixtures/test.module.scss",
       "src/helpers/__tests__/fixtures/test.module.scss",
-      "file:///Users/mrmckeb/Development/typescript-plugin-css-modules/src/helpers/__tests__/fixtures/_mixin.scss",
+      "file://[cwd]/src/helpers/__tests__/fixtures/_mixin.scss",
     ],
     "version": 3,
   },

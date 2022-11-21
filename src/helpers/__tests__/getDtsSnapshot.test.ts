@@ -234,6 +234,12 @@ describe('utils / cssSnapshots', () => {
     });
 
     it('should return an object with classes, css, and a source map', () => {
+      if (cssExports.sourceMap?.sources) {
+        const cwd = process.cwd();
+        cssExports.sourceMap.sources = cssExports.sourceMap.sources.map((src) =>
+          src.replace(cwd, '[cwd]'),
+        );
+      }
       expect(cssExports).toMatchSnapshot();
     });
 

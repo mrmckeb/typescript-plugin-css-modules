@@ -231,7 +231,7 @@ describe('utils / cssSnapshots', () => {
       expect(cssExports).toMatchSnapshot();
     });
 
-    it.only('should return a line-accurate dts file', () => {
+    it('should return a line-accurate dts file', () => {
       const dts = createDtsExports({
         cssExports,
         fileName,

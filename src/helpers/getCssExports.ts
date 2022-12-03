@@ -75,10 +75,7 @@ export const getCssExports = ({
               filename: fileName,
               ...(rendererOptions.less ?? {}),
             } as Less.Options,
-            (
-              error: Less.RenderError | undefined,
-              output: Less.RenderOutput | undefined,
-            ) => {
+            (error?: Less.RenderError, output?: Less.RenderOutput) => {
               if (error) {
                 throw new Error(error.message);
               }
@@ -113,7 +110,6 @@ export const getCssExports = ({
             importers,
             loadPaths: [filePath, 'node_modules', ...(loadPaths ?? [])],
             sourceMap: true,
-            // sourceMapIncludeSources: true,
             ...sassOptions,
           });
 

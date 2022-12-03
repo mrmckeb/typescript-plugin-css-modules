@@ -48,9 +48,7 @@ export default classes;
     dts += filteredClasses.join('\n') + '\n';
   }
 
-  if (options.goToDefinition) {
-    if (!cssExports.sourceMap) return dts;
-
+  if (options.goToDefinition && cssExports.sourceMap) {
     // Create a new source map consumer.
     const smc = new SourceMapConsumer(cssExports.sourceMap);
 

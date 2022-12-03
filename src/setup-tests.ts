@@ -1,5 +1,6 @@
 // TODO: Remove this when the related issue is resolved.
 // https://github.com/css-modules/postcss-icss-keyframes/issues/3
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const warn = global.console.warn;
 global.console.warn = (...args: unknown[]) => {
   const isPostCSSDeprecationWarning =

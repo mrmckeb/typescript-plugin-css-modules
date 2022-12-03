@@ -16,7 +16,7 @@ describe('utils / classTransforms', () => {
     'asIs',
   ];
 
-  it(`should not transform classes when no option is set`, () => {
+  it('should not transform classes when no option is set', () => {
     const transformer = transformClasses();
     const transformedClasses = classNames.map(transformer);
     expect(transformedClasses).toMatchSnapshot();

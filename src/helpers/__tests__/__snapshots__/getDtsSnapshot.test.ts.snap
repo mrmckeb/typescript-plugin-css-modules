@@ -3,14 +3,14 @@
 exports[`utils / cssSnapshots with a Bootstrap import should find external files 1`] = `"bootstrap-module__test---WRms9"`;
 
 exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
-Object {
+{
   "exampleFileContents": "exampleFileContents__exampleFileContents---e3Nf2",
   "exampleFileName": "exampleFileContents__exampleFileName---yg7Zl",
 }
 `;
 
 exports[`utils / cssSnapshots with baseUrl and paths in compilerOptions sass should find the files 1`] = `
-Object {
+{
   "big-font": "tsconfig-paths-module__big-font---3FOK9",
   "class-with-mixin": "tsconfig-paths-module__class-with-mixin---Uo34z",
   "public-module": "tsconfig-paths-module__public-module---2IHe1",
@@ -19,18 +19,18 @@ Object {
 
 exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.less' getCssExports should return an object matching expected CSS 1`] = `Object {}`;
+exports[`utils / cssSnapshots with file 'empty.module.less' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
 exports[`utils / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -40,18 +40,18 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.sass' getCssExports should return an object matching expected CSS 1`] = `Object {}`;
+exports[`utils / cssSnapshots with file 'empty.module.sass' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -61,18 +61,18 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.scss' getCssExports should return an object matching expected CSS 1`] = `Object {}`;
+exports[`utils / cssSnapshots with file 'empty.module.scss' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -82,18 +82,18 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.styl' getCssExports should return an object matching expected CSS 1`] = `Object {}`;
+exports[`utils / cssSnapshots with file 'empty.module.styl' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
 exports[`utils / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -126,7 +126,7 @@ export let nestedChild: string;
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.css' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "ClassB": "import-module__ClassB---2LsIz",
   "childA": "import-module__childA---2AUKk",
   "childB": "import-module__childB---1z-Zh",
@@ -184,7 +184,7 @@ export default classes;
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.less' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "child-class": "import-module__child-class---2XACw",
   "color-set": "import-module__color-set---9xoPb",
   "column-1": "import-module__column-1---3R-BM",
@@ -239,7 +239,7 @@ export let baz: string;
 `;
 
 exports[`utils / cssSnapshots with file 'import.module.styl' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "bar": "import-module__bar---2N4cR",
   "baz": "import-module__baz---6mQbB",
   "col-1": "import-module__col-1---2QW7j",
@@ -301,7 +301,7 @@ export let nestedChild: string;
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.css' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "ClassB": "test-module__ClassB---G7fhY",
   "childA": "test-module__childA---26dwC",
   "childB": "test-module__childB---13lLy",
@@ -359,7 +359,7 @@ export default classes;
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.less' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "child-class": "test-module__child-class---1au0d",
   "color-set": "test-module__color-set---bEXmh",
   "column-1": "test-module__column-1---5hXb3",
@@ -421,7 +421,7 @@ export default classes;
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.sass' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "child-class": "test-module__child-class---2vfhc",
   "class-with-mixin": "test-module__class-with-mixin---3zUq-",
   "const": "test-module__const---39o_j",
@@ -497,13 +497,18 @@ exports[`utils / cssSnapshots with file 'test.module.scss' createExports should 
   'section-8': string;
   'section-9': string;
   'class-with-mixin': string;
+  'App_logo': string;
+  'App-logo': string;
 };
 export default classes;
+export let App_logo: string;
 "
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.scss' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
+  "App-logo": "test-module__App-logo---3S1C4",
+  "App_logo": "test-module__App_logo---1llXs",
   "child-class": "test-module__child-class---s-_Mc",
   "class-with-mixin": "test-module__class-with-mixin---1JqB_",
   "const": "test-module__const---28kKv",
@@ -550,11 +555,14 @@ declare let classes: {
   'section-8': string;
   'section-9': string;
   'class-with-mixin': string;
+  'App_logo': string;
+  'App-logo': string;
 };
 export default classes;
+export let App_logo: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin';"
+export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin' | 'App_logo' | 'App-logo';"
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
@@ -578,7 +586,7 @@ export let baz: string;
 `;
 
 exports[`utils / cssSnapshots with file 'test.module.styl' getCssExports should return an object matching expected CSS 1`] = `
-Object {
+{
   "bar": "test-module__bar---2WWom",
   "baz": "test-module__baz---1Rs9U",
   "col-1": "test-module__col-1---1XP3K",
@@ -703,19 +711,146 @@ export let appLogo: string;
 
 
 
-
 "
 `;
 
+exports[`utils / cssSnapshots with goToDefinition enabled should return an object with classes, css, and a source map 1`] = `
+{
+  "classes": {
+    "App-logo": "test-module__App-logo---3S1C4",
+    "App_logo": "test-module__App_logo---1llXs",
+    "child-class": "test-module__child-class---s-_Mc",
+    "class-with-mixin": "test-module__class-with-mixin---1JqB_",
+    "const": "test-module__const---28kKv",
+    "default": "test-module__default---8gLb1",
+    "local-class": "test-module__local-class---1Ju3l",
+    "local-class-2": "test-module__local-class-2---3aSgy",
+    "local-class-inside-global": "test-module__local-class-inside-global---IVh9J",
+    "local-class-inside-local": "test-module__local-class-inside-local---1LKIi",
+    "nested-class-parent": "test-module__nested-class-parent---2LnTV",
+    "nested-class-parent--extended": "test-module__nested-class-parent--extended---1j85b",
+    "reserved-words": "test-module__reserved-words---1mM1m",
+    "section-1": "test-module__section-1---11Ic3",
+    "section-2": "test-module__section-2---1Uiwc",
+    "section-3": "test-module__section-3---2eZeM",
+    "section-4": "test-module__section-4---3m8sf",
+    "section-5": "test-module__section-5---1MTwN",
+    "section-6": "test-module__section-6---szUAt",
+    "section-7": "test-module__section-7---2DOBJ",
+    "section-8": "test-module__section-8---3qav2",
+    "section-9": "test-module__section-9---2EMR_",
+  },
+  "css": ".global-class {
+  color: rebeccapurple;
+}
+
+.global-class-2 .test-module__local-class-inside-global---IVh9J {
+  color: rebeccapurple;
+}
+
+.test-module__local-class---1Ju3l {
+  color: rebeccapurple;
+}
+
+.test-module__local-class-2---3aSgy .test-module__local-class-inside-local---1LKIi {
+  color: rebeccapurple;
+}
+
+.test-module__reserved-words---1mM1m .test-module__default---8gLb1 {
+  color: rebeccapurple;
+}
+
+.test-module__reserved-words---1mM1m .test-module__const---28kKv {
+  color: rebeccapurple;
+}
+
+.test-module__nested-class-parent---2LnTV .test-module__child-class---s-_Mc {
+  color: rebeccapurple;
+}
+
+.test-module__nested-class-parent--extended---1j85b {
+  color: rebeccapurple;
+}
+
+.test-module__section-1---11Ic3 {
+  color: rebeccapurple;
+}
+
+.test-module__section-2---1Uiwc {
+  color: rebeccapurple;
+}
+
+.test-module__section-3---2eZeM {
+  color: rebeccapurple;
+}
+
+.test-module__section-4---3m8sf {
+  color: rebeccapurple;
+}
+
+.test-module__section-5---1MTwN {
+  color: rebeccapurple;
+}
+
+.test-module__section-6---szUAt {
+  color: rebeccapurple;
+}
+
+.test-module__section-7---2DOBJ {
+  color: rebeccapurple;
+}
+
+.test-module__section-8---3qav2 {
+  color: rebeccapurple;
+}
+
+.test-module__section-9---2EMR_ {
+  color: rebeccapurple;
+}
+
+.test-module__class-with-mixin---1JqB_ {
+  margin: 0;
+}
+
+.test-module__App_logo---1llXs {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .test-module__App-logo---3S1C4 {
+    animation: my-animation infinite 20s linear;
+  }
+}
+
+/*
+.commented-parent-class {
+  .commented-child-class
+}
+*/",
+  "sourceMap": {
+    "file": "src/helpers/__tests__/fixtures/test.module.scss",
+    "mappings": "AAAA;EACE,oBAAA;ACCF;;ADGE;EACE,oBAAA;ACAJ;;ADIA;EACE,oBAAA;ACDF;;ADKE;EACE,oBAAA;ACFJ;;ADOE;EACE,oBAAA;ACJJ;;ADME;EACE,oBAAA;ACJJ;;ADSE;EACE,oBAAA;ACNJ;;ADQE;EACE,oBAAA;ACNJ;;ADaE;EACE,oBAJI;ACNR;;ADSE;EACE,oBAJI;ACFR;;ADKE;EACE,oBAJI;ACER;;ADCE;EACE,oBAJI;ACMR;;ADHE;EACE,oBAJI;ACUR;;ADPE;EACE,oBAJI;ACcR;;ADXE;EACE,oBAJI;ACkBR;;ADfE;EACE,oBAJI;ACsBR;;ADnBE;EACE,oBAJI;AC0BR;;ADhBA;EE/CE,SFgDoB;ACmBtB;;ADhBA;EACE,cAAA;EACA,oBAAA;ACmBF;;ADhBA;EACE;IACE,2CAAA;ECmBF;AACF;;ADZA;;;;CAAA",
+    "names": [],
+    "sources": [
+      "file://[cwd]/src/helpers/__tests__/fixtures/test.module.scss",
+      "src/helpers/__tests__/fixtures/test.module.scss",
+      "file://[cwd]/src/helpers/__tests__/fixtures/_mixin.scss",
+    ],
+    "version": 3,
+  },
+}
+`;
+
 exports[`utils / cssSnapshots with includePaths in sass options should find external file from includePaths 1`] = `
-Object {
+{
   "big-font": "include-path-module__big-font---Td7hY",
   "class-with-mixin": "include-path-module__class-with-mixin---1u87_",
 }
 `;
 
 exports[`utils / cssSnapshots with includePaths in stylus options should find external file from includePaths 1`] = `
-Object {
+{
   "external-class": "include-path-module__external-class---ecH0A",
   "include-path": "include-path-module__include-path---2f2uR",
 }

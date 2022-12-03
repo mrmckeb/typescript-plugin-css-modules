@@ -20,13 +20,14 @@ each(range(4), {
   }
 })
 
+/* prettier-ignore */
 .color-set () {
   one: blue;
   two: green;
   three: red;
 }
 
-.color-set  {
+.color-set {
   each(.color-set (), .(@v, @k, @i) {
     @{k}-@{i}: @v;
   });

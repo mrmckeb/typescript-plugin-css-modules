@@ -1,6 +1,6 @@
 import { Options as SassOptions } from 'sass';
 import tsModule from 'typescript/lib/tsserverlibrary';
-import { DotenvConfigOptions } from 'dotenv/types';
+import { DotenvConfigOptions } from 'dotenv';
 import { CSSExports } from 'icss-utils';
 import stylus from 'stylus';
 import { Logger } from './helpers/logger';
@@ -15,7 +15,7 @@ export interface PostcssOptions {
 
 export interface RendererOptions {
   less?: Partial<Less.Options>;
-  sass?: Partial<SassOptions>;
+  sass?: Partial<SassOptions<'sync'>>;
   stylus?: Partial<StylusRenderOptions>;
 }
 

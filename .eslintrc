@@ -1,4 +1,15 @@
 {
-  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
-  "root": true
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict"
+  ],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "ignorePatterns": ["dist", "jest.config.js", "src/helpers/__tests__/fixtures"]
 }

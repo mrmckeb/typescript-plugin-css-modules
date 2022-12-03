@@ -52,10 +52,10 @@ export const getCssExports = ({
 }): CSSExportsWithSourceMap => {
   try {
     const fileType = getFileType(fileName);
-    const rendererOptions = options.rendererOptions || {};
+    const rendererOptions = options.rendererOptions ?? {};
 
     let transformedCss = '';
-    let sourceMap: string | undefined;
+    let sourceMap: RawSourceMap | undefined;
 
     if (options.customRenderer) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -73,48 +73,54 @@ export const getCssExports = ({
             {
               syncImport: true,
               filename: fileName,
-              ...(rendererOptions.less || {}),
+              ...(rendererOptions.less ?? {}),
             } as Less.Options,
-            (error, output) => {
-              if (error || output === undefined) throw error;
+            (error?: Less.RenderError, output?: Less.RenderOutput) => {
+              if (error) {
+                throw new Error(error.message);
+              }
+              if (output === undefined) {
+                throw new Error('No Less output.');
+              }
               transformedCss = output.css.toString();
             },
           );
           break;
 
         case FileType.scss:
-        case FileType.sass:
+        case FileType.sass: {
           const filePath = getFilePath(fileName);
-          const { includePaths, ...sassOptions } = rendererOptions.sass || {};
+          const { loadPaths, ...sassOptions } = rendererOptions.sass ?? {};
           const { baseUrl, paths } = compilerOptions;
           const matchPath =
             baseUrl && paths
               ? createMatchPath(path.resolve(baseUrl), paths)
               : null;
 
-          const aliasImporter: sass.Importer = (url) => {
-            const newUrl = matchPath !== null ? matchPath(url) : undefined;
-            return newUrl ? { file: newUrl } : null;
+          const aliasImporter: sass.FileImporter<'sync'> = {
+            findFileUrl(url) {
+              const newUrl = matchPath !== null ? matchPath(url) : undefined;
+              return newUrl ? new URL(`file://${newUrl}`) : null;
+            },
           };
 
           const importers = [aliasImporter, sassTildeImporter];
 
-          const result = sass.renderSync({
-            file: fileName,
-            indentedSyntax: fileType === FileType.sass,
-            includePaths: [filePath, 'node_modules', ...(includePaths || [])],
-            sourceMap: 'm.map',
-            importer: importers,
+          const result = sass.compile(fileName, {
+            importers,
+            loadPaths: [filePath, 'node_modules', ...(loadPaths ?? [])],
+            sourceMap: true,
             ...sassOptions,
           });
 
+          sourceMap = result.sourceMap;
           transformedCss = result.css.toString();
-          sourceMap = result.map?.toString();
           break;
+        }
 
         case FileType.styl:
           transformedCss = stylus(css, {
-            ...(rendererOptions.stylus || {}),
+            ...(rendererOptions.stylus ?? {}),
             filename: fileName,
           }).render();
           break;
@@ -134,13 +140,12 @@ export const getCssExports = ({
     });
 
     return {
-      classes: processedCss.root
-        ? extractICSS(processedCss.root).icssExports
-        : {},
+      classes: extractICSS(processedCss.root).icssExports,
       css: processedCss.css,
       sourceMap: processedCss.map.toJSON(),
     };
   } catch (e) {
+    console.error(e);
     logger.error(e);
     return { classes: {} };
   }

@@ -20,7 +20,6 @@ const getPostCssConfigPlugins = (directory: string) => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function init({ typescript: ts }: { typescript: typeof tsModule }) {
   let _isCSS: isCSSFn;
 
@@ -33,16 +32,18 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     process.chdir(directory);
 
     // User options for plugin.
-    const options: Options = info.config.options || {};
+
+    const config = info.config as { options?: Options };
+    const options = config.options ?? {};
     logger.log(`options: ${JSON.stringify(options)}`);
 
     // Load environment variables like SASS_PATH.
     // TODO: Add tests for this option.
-    const dotenvOptions = options.dotenvOptions || {};
+    const dotenvOptions = options.dotenvOptions;
     if (dotenvOptions) {
       dotenvOptions.path = path.resolve(
         directory,
-        dotenvOptions.path || '.env',
+        dotenvOptions.path ?? '.env',
       );
     }
     dotenv.config(dotenvOptions);
@@ -60,7 +61,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
     // Add postCSS config if enabled.
     const postcssOptions =
-      options.postcssOptions || options.postCssOptions || {};
+      options.postcssOptions ?? options.postCssOptions ?? {};
 
     let userPlugins: AcceptedPlugin[] = [];
     if (postcssOptions.useConfig) {
@@ -212,7 +213,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
               // Filter to only one extension type, and remove that extension. This leaves us with the actual filename.
               // Example: "usr/person/project/src/dir/File.module.css/index.d.ts" > "usr/person/project/src/dir/File.module.css"
-              const normalizedLocations = failedLocations.reduce(
+              const normalizedLocations = failedLocations.reduce<string[]>(
                 (locations, location) => {
                   if (
                     (baseUrl ? location.includes(baseUrl) : true) &&
@@ -222,7 +223,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
                   }
                   return locations;
                 },
-                [] as string[],
+                [],
               );
 
               // Find the imported CSS module, if it exists.

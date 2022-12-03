@@ -48,14 +48,12 @@ export default classes;
     dts += filteredClasses.join('\n') + '\n';
   }
 
-  if (options.goToDefinition) {
-    if (!cssExports.sourceMap) return dts;
-
+  if (options.goToDefinition && cssExports.sourceMap) {
     // Create a new source map consumer.
     const smc = new SourceMapConsumer(cssExports.sourceMap);
 
     // Split original CSS file into lines.
-    const cssLines = cssExports.css?.split('\n') || [];
+    const cssLines = cssExports.css?.split('\n') ?? [];
 
     // Create new equal size array of empty strings.
     const dtsLines = Array.from(Array(cssLines.length), () => '');
@@ -68,7 +66,7 @@ export default classes;
         transformClasses(options.classnameTransform)(className)[0],
         hashedClassName,
       ])
-      .filter(([className]) => isValidVariable(className as string));
+      .filter(([className]) => isValidVariable(className));
 
     filteredClasses.forEach(([className, hashedClassName]) => {
       const matchedLine = cssLines.findIndex((line) =>

@@ -97,17 +97,17 @@ const b = styles['my_other-class'];
 
 Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-| Option               | Default value                      | Description                                                                                                |
-| -------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                                                     |
-| `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                    |
-| `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                                                             |
-| `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                                                             |
-| `jumpToDefinition`   | `false`                            | Enables jump to definition, with limited compatibility. See [`jumpToDefinition`](#jumpToDefinition) below. |
-| `namedExports`       | `true`                             | Enables named exports for compatible classnames.                                                           |
-| `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).                               |
-| `postcssOptions`     | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                                                             |
-| `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                           |
+| Option               | Default value                      | Description                                                                                            |
+| -------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `classnameTransform` | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                                                 |
+| `customMatcher`      | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                |
+| `customRenderer`     | `false`                            | See [`customRenderer`](#customRenderer) below.                                                         |
+| `customTemplate`     | `false`                            | See [`customTemplate`](#customTemplate) below.                                                         |
+| `goToDefinition`     | `false`                            | Enables jump to definition, with limited compatibility. See [`goToDefinition`](#goToDefinition) below. |
+| `namedExports`       | `true`                             | Enables named exports for compatible classnames.                                                       |
+| `dotenvOptions`      | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).                           |
+| `postcssOptions`     | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                                                         |
+| `rendererOptions`    | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                       |
 
 ```json
 {
@@ -193,7 +193,7 @@ The [internal `logger`](https://github.com/mrmckeb/typescript-plugin-css-modules
 
 The `classes` object represents all the classnames extracted from the CSS Module. They are available if you want to add a custom representation of the CSS classes.
 
-#### `jumpToDefinition`
+#### `goToDefinition`
 
 This allows an editor like Visual Studio Code to jump to a classname's definition (file and line).
 

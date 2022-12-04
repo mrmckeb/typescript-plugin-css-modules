@@ -215,7 +215,7 @@ This is experimental, and only works with Sass (for now) and may not always work
 | `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
 | `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).          |
 
-> For convenience, `includePaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
+> For convenience, `loadPaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
 
 ### Visual Studio Code
 

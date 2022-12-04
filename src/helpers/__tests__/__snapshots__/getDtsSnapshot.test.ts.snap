@@ -842,14 +842,14 @@ exports[`utils / cssSnapshots with goToDefinition enabled should return an objec
 }
 `;
 
-exports[`utils / cssSnapshots with includePaths in sass options should find external file from includePaths 1`] = `
+exports[`utils / cssSnapshots with loadPaths in sass options should find external file from loadPaths 1`] = `
 {
   "big-font": "include-path-module__big-font---Td7hY",
   "class-with-mixin": "include-path-module__class-with-mixin---1u87_",
 }
 `;
 
-exports[`utils / cssSnapshots with includePaths in stylus options should find external file from includePaths 1`] = `
+exports[`utils / cssSnapshots with loadPaths in stylus options should find external file from loadPaths 1`] = `
 {
   "external-class": "include-path-module__external-class---ecH0A",
   "include-path": "include-path-module__include-path---2f2uR",

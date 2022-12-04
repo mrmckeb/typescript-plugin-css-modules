@@ -27,8 +27,9 @@ export interface Options {
   dotenvOptions?: DotenvConfigOptions;
   goToDefinition?: boolean;
   namedExports?: boolean;
+  noUncheckedIndexedAccess?: boolean;
   postcssOptions?: PostcssOptions;
-  /** @deprecated To align with other projects. */
+  /** @deprecated To align with naming in other projects. */
   postCssOptions?: PostcssOptions;
   rendererOptions?: RendererOptions;
 }

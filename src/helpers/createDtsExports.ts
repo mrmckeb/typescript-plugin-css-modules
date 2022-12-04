@@ -8,10 +8,6 @@ import { Logger } from './logger';
 const isValidVariable = (className: string) =>
   VALID_VARIABLE_REGEXP.test(className);
 
-const classNameToProperty = (className: string) => `'${className}': string;`;
-const classNameToNamedExport = (className: string) =>
-  `export let ${className}: string;`;
-
 const flattenClassNames = (
   previousValue: string[] = [],
   currentValue: string[],
@@ -29,6 +25,13 @@ export const createDtsExports = ({
   options: Options;
 }): string => {
   const classes = cssExports.classes;
+
+  const possiblyUndefined = Boolean(options.noUncheckedIndexedAccess);
+
+  const classNameToProperty = (className: string) =>
+    `'${className}'${possiblyUndefined ? '?' : ''}: string;`;
+  const classNameToNamedExport = (className: string) =>
+    `export let ${className}${possiblyUndefined ? '?' : ''}: string;`;
 
   const processedClasses = Object.keys(classes)
     .map(transformClasses(options.classnameTransform))

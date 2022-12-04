@@ -855,3 +855,52 @@ exports[`utils / cssSnapshots with includePaths in stylus options should find ex
   "include-path": "include-path-module__include-path---2f2uR",
 }
 `;
+
+exports[`utils / cssSnapshots with noUncheckedIndexedAccess enabled should return a dts file with only possibly undefined strings 1`] = `
+"declare let classes: {
+  'localClassInsideGlobal'?: string;
+  'localClass'?: string;
+  'localClass2'?: string;
+  'localClassInsideLocal'?: string;
+  'reservedWords'?: string;
+  'default'?: string;
+  'const'?: string;
+  'nestedClassParent'?: string;
+  'childClass'?: string;
+  'nestedClassParentExtended'?: string;
+  'section1'?: string;
+  'section2'?: string;
+  'section3'?: string;
+  'section4'?: string;
+  'section5'?: string;
+  'section6'?: string;
+  'section7'?: string;
+  'section8'?: string;
+  'section9'?: string;
+  'classWithMixin'?: string;
+  'appLogo'?: string;
+  'appLogo'?: string;
+};
+export default classes;
+export let localClassInsideGlobal?: string;
+export let localClass?: string;
+export let localClass2?: string;
+export let localClassInsideLocal?: string;
+export let reservedWords?: string;
+export let nestedClassParent?: string;
+export let childClass?: string;
+export let nestedClassParentExtended?: string;
+export let section1?: string;
+export let section2?: string;
+export let section3?: string;
+export let section4?: string;
+export let section5?: string;
+export let section6?: string;
+export let section7?: string;
+export let section8?: string;
+export let section9?: string;
+export let classWithMixin?: string;
+export let appLogo?: string;
+export let appLogo?: string;
+"
+`;

@@ -253,4 +253,33 @@ describe('utils / cssSnapshots', () => {
       expect(dts).toMatchSnapshot();
     });
   });
+
+  describe('with noUncheckedIndexedAccess enabled', () => {
+    const fileName = join(__dirname, 'fixtures', 'test.module.scss');
+    const css = readFileSync(fileName, 'utf8');
+    const options: Options = {
+      classnameTransform: 'camelCaseOnly',
+      noUncheckedIndexedAccess: true,
+    };
+
+    const cssExports = getCssExports({
+      css,
+      fileName,
+      logger,
+      options,
+      processor,
+      compilerOptions,
+    });
+
+    it('should return a dts file with only possibly undefined strings', () => {
+      const dts = createDtsExports({
+        cssExports,
+        fileName,
+        logger,
+        options,
+      });
+      expect(dts).not.toMatch(/\w'?: string/);
+      expect(dts).toMatchSnapshot();
+    });
+  });
 });

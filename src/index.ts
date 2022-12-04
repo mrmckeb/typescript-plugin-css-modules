@@ -32,9 +32,8 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     process.chdir(directory);
 
     // User options for plugin.
-
-    const config = info.config as { options?: Options };
-    const options = config.options ?? {};
+    const options: Options =
+      (info.config as { options?: Options }).options ?? {};
     logger.log(`options: ${JSON.stringify(options)}`);
 
     // Load environment variables like SASS_PATH.

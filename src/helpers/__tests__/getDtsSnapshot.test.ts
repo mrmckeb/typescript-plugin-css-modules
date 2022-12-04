@@ -144,7 +144,7 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
-  describe('with includePaths in sass options', () => {
+  describe('with loadPaths in sass options', () => {
     const fileName = join(__dirname, 'fixtures', 'include-path.module.scss');
     const css = readFileSync(fileName, 'utf8');
 
@@ -154,7 +154,7 @@ describe('utils / cssSnapshots', () => {
       },
     };
 
-    it('should find external file from includePaths', () => {
+    it('should find external file from loadPaths', () => {
       const cssExports = getCssExports({
         css,
         fileName,
@@ -169,7 +169,7 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
-  describe('with includePaths in stylus options', () => {
+  describe('with loadPaths in stylus options', () => {
     const fileName = join(__dirname, 'fixtures', 'include-path.module.styl');
     const css = readFileSync(fileName, 'utf8');
 
@@ -181,7 +181,7 @@ describe('utils / cssSnapshots', () => {
       },
     };
 
-    it('should find external file from includePaths', () => {
+    it('should find external file from loadPaths', () => {
       const cssExports = getCssExports({
         css,
         fileName,

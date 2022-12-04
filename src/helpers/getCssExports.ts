@@ -42,6 +42,7 @@ export const getCssExports = ({
   options,
   processor,
   compilerOptions,
+  directory,
 }: {
   css: string;
   fileName: string;
@@ -49,6 +50,7 @@ export const getCssExports = ({
   options: Options;
   processor: Processor;
   compilerOptions: tsModule.CompilerOptions;
+  directory: string;
 }): CSSExportsWithSourceMap => {
   try {
     const fileType = getFileType(fileName);
@@ -73,6 +75,7 @@ export const getCssExports = ({
             {
               syncImport: true,
               filename: fileName,
+              paths: [directory],
               ...(rendererOptions.less ?? {}),
             } as Less.Options,
             (error?: Less.RenderError, output?: Less.RenderOutput) => {
@@ -91,7 +94,7 @@ export const getCssExports = ({
         case FileType.sass: {
           const filePath = getFilePath(fileName);
           const { loadPaths, ...sassOptions } = rendererOptions.sass ?? {};
-          const { baseUrl, paths } = compilerOptions;
+          const { baseUrl = directory, paths } = compilerOptions;
           const matchPath =
             baseUrl && paths
               ? createMatchPath(path.resolve(baseUrl), paths)

@@ -33,7 +33,7 @@ export const createDtsExports = ({
   const classNameToNamedExport = (className: string) =>
     `export let ${className}${possiblyUndefined ? '?' : ''}: string;`;
 
-  const processedClasses = Object.keys(classes)
+  const processedClasses = classes
     .map(transformClasses(options.classnameTransform))
     .reduce(flattenClassNames, []);
   const filteredClasses = processedClasses
@@ -64,28 +64,28 @@ export default classes;
     const dtsLines = Array.from(Array(cssLines.length), () => '');
 
     // Create a list of filtered classnames and hashed classnames.
-    const filteredClasses = Object.entries(cssExports.classes)
-      .map(([className, hashedClassName]) => [
+    const filteredClasses = cssExports.classes
+      .map((className) => [
+        className,
         // TODO: Improve this. It may return multiple valid classnames and we
         // want to handle all of those.
         transformClasses(options.classnameTransform)(className)[0],
-        hashedClassName,
       ])
-      .filter(([className]) => isValidVariable(className));
+      .filter(([, className]) => isValidVariable(className));
 
-    filteredClasses.forEach(([className, hashedClassName]) => {
+    filteredClasses.forEach(([className, transformedClassName]) => {
       const matchedLine = cssLines.findIndex((line) =>
-        line.includes(hashedClassName),
+        line.includes(className),
       );
       const matchedColumn =
-        matchedLine && cssLines[matchedLine].indexOf(hashedClassName);
+        matchedLine && cssLines[matchedLine].indexOf(className);
       const { line: lineNumber } = smc.originalPositionFor({
         // Lines start at 1, not 0.
         line: matchedLine >= 0 ? matchedLine + 1 : 1,
         column: matchedColumn >= 0 ? matchedColumn : 0,
       });
       dtsLines[lineNumber ? lineNumber - 1 : 0] +=
-        classNameToNamedExport(className);
+        classNameToNamedExport(transformedClassName);
     });
 
     dts = dtsLines.join('\n');

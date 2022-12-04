@@ -34,3 +34,7 @@
     opacity: 1;
   }
 }
+
+@nest .classB & {
+  color: rebeccapurple;
+}

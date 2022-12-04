@@ -3,7 +3,7 @@ import Processor from 'postcss/lib/processor';
 import less from 'less';
 import sass from 'sass';
 import stylus from 'stylus';
-import { CSSExports, extractICSS } from 'icss-utils';
+import { parse } from 'css-selector-tokenizer';
 import { RawSourceMap } from 'source-map-js';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { createMatchPath } from 'tsconfig-paths';
@@ -30,7 +30,7 @@ export const getFileType = (fileName: string): FileType => {
 const getFilePath = (fileName: string) => path.dirname(fileName);
 
 export interface CSSExportsWithSourceMap {
-  classes: CSSExports;
+  classes: string[];
   css?: string;
   sourceMap?: RawSourceMap;
 }
@@ -145,14 +145,20 @@ export const getCssExports = ({
       },
     });
 
+    const tokens = parse(processedCss.css).nodes[0].nodes;
+    console.log(tokens);
+    const classes = tokens
+      .filter((token) => token.type === 'class')
+      .map((token) => token.name ?? '');
+
     return {
-      classes: extractICSS(processedCss.root).icssExports,
+      classes: Array.from(new Set(classes)).sort(),
       css: processedCss.css,
       sourceMap: processedCss.map.toJSON(),
     };
   } catch (e) {
     console.error(e);
     logger.error(e);
-    return { classes: {} };
+    return { classes: [] };
   }
 };

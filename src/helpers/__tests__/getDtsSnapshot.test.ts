@@ -117,7 +117,7 @@ describe('utils / cssSnapshots', () => {
         directory: __dirname,
       });
 
-      expect(cssExports.classes.test).toMatchSnapshot();
+      expect(cssExports.classes[0]).toMatchSnapshot();
     });
   });
 

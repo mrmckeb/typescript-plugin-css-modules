@@ -1,7 +1,6 @@
 import { Options as SassOptions } from 'sass';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { DotenvConfigOptions } from 'dotenv';
-import { CSSExports } from 'icss-utils';
 import stylus from 'stylus';
 import { Logger } from './helpers/logger';
 
@@ -54,7 +53,7 @@ export type CustomRenderer = (
 ) => string;
 
 export interface CustomTemplateOptions {
-  classes: CSSExports;
+  classes: string[];
   fileName: string;
   logger: Logger;
 }

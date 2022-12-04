@@ -237,6 +237,7 @@ describe('utils / cssSnapshots', () => {
       options,
       processor,
       compilerOptions,
+      directory: __dirname,
     });
 
     it('should return an object with classes, css, and a source map', () => {
@@ -275,6 +276,7 @@ describe('utils / cssSnapshots', () => {
       options,
       processor,
       compilerOptions,
+      directory: __dirname,
     });
 
     it('should return a dts file with only possibly undefined strings', () => {

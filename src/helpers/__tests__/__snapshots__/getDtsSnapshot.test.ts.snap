@@ -9,7 +9,7 @@ exports[`utils / cssSnapshots with a custom renderer should process a file and l
 }
 `;
 
-exports[`utils / cssSnapshots with allowAdditionalClassnames enabled should return a dts file that allows any string value 1`] = `
+exports[`utils / cssSnapshots with allowUnknownClassnames enabled should return a dts file that allows any string value 1`] = `
 "declare let classes: {
   'localClassInsideGlobal': string;
   'localClass': string;
@@ -69,7 +69,7 @@ exports[`utils / cssSnapshots with baseUrl and paths in compilerOptions sass sho
 
 exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -80,7 +80,7 @@ exports[`utils / cssSnapshots with file 'empty.module.less' getCssExports should
 exports[`utils / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -90,7 +90,7 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -101,7 +101,7 @@ exports[`utils / cssSnapshots with file 'empty.module.sass' getCssExports should
 exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -111,7 +111,7 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -122,7 +122,7 @@ exports[`utils / cssSnapshots with file 'empty.module.scss' getCssExports should
 exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -132,7 +132,7 @@ export type AllClassNames = '';"
 
 exports[`utils / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -143,7 +143,7 @@ exports[`utils / cssSnapshots with file 'empty.module.styl' getCssExports should
 exports[`utils / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 

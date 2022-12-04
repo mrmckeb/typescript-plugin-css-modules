@@ -291,12 +291,12 @@ describe('utils / cssSnapshots', () => {
     });
   });
 
-  describe('with allowAdditionalClassnames enabled', () => {
+  describe('with allowUnknownClassnames enabled', () => {
     const fileName = join(__dirname, 'fixtures', 'test.module.scss');
     const css = readFileSync(fileName, 'utf8');
     const options: Options = {
       classnameTransform: 'camelCaseOnly',
-      allowAdditionalClassnames: true,
+      allowUnknownClassnames: true,
     };
 
     const cssExports = getCssExports({

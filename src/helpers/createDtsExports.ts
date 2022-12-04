@@ -5,8 +5,8 @@ import { CSSExportsWithSourceMap } from './getCssExports';
 import { VALID_VARIABLE_REGEXP } from './validVarRegexp';
 import { Logger } from './logger';
 
-const isValidVariable = (className: string) =>
-  VALID_VARIABLE_REGEXP.test(className);
+const isValidVariable = (classname: string) =>
+  VALID_VARIABLE_REGEXP.test(classname);
 
 const flattenClassNames = (
   previousValue: string[] = [],
@@ -28,22 +28,22 @@ export const createDtsExports = ({
 
   const possiblyUndefined = Boolean(options.noUncheckedIndexedAccess);
 
-  const classNameToProperty = (className: string) =>
-    `'${className}'${possiblyUndefined ? '?' : ''}: string;`;
-  const classNameToNamedExport = (className: string) =>
-    `export let ${className}${possiblyUndefined ? '?' : ''}: string;`;
+  const classnameToProperty = (classname: string) =>
+    `'${classname}'${possiblyUndefined ? '?' : ''}: string;`;
+  const classnameToNamedExport = (classname: string) =>
+    `export let ${classname}${possiblyUndefined ? '?' : ''}: string;`;
 
   const processedClasses = Object.keys(classes)
     .map(transformClasses(options.classnameTransform))
     .reduce(flattenClassNames, []);
   const filteredClasses = processedClasses
     .filter(isValidVariable)
-    .map(classNameToNamedExport);
+    .map(classnameToNamedExport);
 
   let dts = `\
 declare let classes: {
-  ${processedClasses.map(classNameToProperty).join('\n  ')}${
-    options.allowAdditionalClassnames ? '\n  [key: string]: string;' : ''
+  ${processedClasses.map(classnameToProperty).join('\n  ')}${
+    options.allowUnknownClassnames ? '\n  [key: string]: string;' : ''
   }
 };
 export default classes;
@@ -65,15 +65,15 @@ export default classes;
 
     // Create a list of filtered classnames and hashed classnames.
     const filteredClasses = Object.entries(cssExports.classes)
-      .map(([className, hashedClassName]) => [
+      .map(([classname, hashedClassname]) => [
         // TODO: Improve this. It may return multiple valid classnames and we
         // want to handle all of those.
-        transformClasses(options.classnameTransform)(className)[0],
-        hashedClassName,
+        transformClasses(options.classnameTransform)(classname)[0],
+        hashedClassname,
       ])
-      .filter(([className]) => isValidVariable(className));
+      .filter(([classname]) => isValidVariable(classname));
 
-    filteredClasses.forEach(([className, hashedClassName]) => {
+    filteredClasses.forEach(([classname, hashedClassName]) => {
       const matchedLine = cssLines.findIndex((line) =>
         line.includes(hashedClassName),
       );
@@ -85,7 +85,7 @@ export default classes;
         column: matchedColumn >= 0 ? matchedColumn : 0,
       });
       dtsLines[lineNumber ? lineNumber - 1 : 0] +=
-        classNameToNamedExport(className);
+        classnameToNamedExport(classname);
     });
 
     dts = dtsLines.join('\n');

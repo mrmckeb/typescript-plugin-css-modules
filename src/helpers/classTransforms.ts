@@ -4,42 +4,42 @@ import { ClassnameTransformOptions } from '../options';
 // The below is based on the CSS Modules implementation found here:
 // https://github.com/webpack-contrib/css-loader
 
-const dashCase = (className: string): string =>
-  className.replace(/-+(\w)/g, (_match: string, firstLetter: string) =>
+const dashCase = (classname: string): string =>
+  classname.replace(/-+(\w)/g, (_match: string, firstLetter: string) =>
     firstLetter.toUpperCase(),
   );
 
 export const transformClasses =
   (camelCaseOption?: ClassnameTransformOptions) =>
-  (className: string): string[] => {
+  (classname: string): string[] => {
     const entries: string[] = [];
 
     switch (camelCaseOption) {
       case 'camelCase': {
-        entries.push(className);
-        const targetClassName = camelCase(className);
-        if (targetClassName !== className) {
+        entries.push(classname);
+        const targetClassName = camelCase(classname);
+        if (targetClassName !== classname) {
           entries.push(targetClassName);
         }
         break;
       }
       case 'camelCaseOnly':
-        entries.push(camelCase(className));
+        entries.push(camelCase(classname));
         break;
       case 'dashes': {
-        entries.push(className);
-        const targetClassName = dashCase(className);
-        if (targetClassName !== className) {
+        entries.push(classname);
+        const targetClassName = dashCase(classname);
+        if (targetClassName !== classname) {
           entries.push(targetClassName);
         }
         break;
       }
       case 'dashesOnly':
-        entries.push(dashCase(className));
+        entries.push(dashCase(classname));
         break;
       case 'asIs':
       default:
-        entries.push(className);
+        entries.push(classname);
         break;
     }
 

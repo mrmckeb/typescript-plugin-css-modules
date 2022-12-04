@@ -42,7 +42,9 @@ export const createDtsExports = ({
 
   let dts = `\
 declare let classes: {
-  ${processedClasses.map(classNameToProperty).join('\n  ')}
+  ${processedClasses.map(classNameToProperty).join('\n  ')}${
+    options.allowAdditionalClasses ? '\n  [key: string]: string;' : ''
+  }
 };
 export default classes;
 `;

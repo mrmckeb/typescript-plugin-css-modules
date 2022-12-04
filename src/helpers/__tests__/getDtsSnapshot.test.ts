@@ -290,4 +290,33 @@ describe('utils / cssSnapshots', () => {
       expect(dts).toMatchSnapshot();
     });
   });
+
+  describe('with allowAdditionalClasses enabled', () => {
+    const fileName = join(__dirname, 'fixtures', 'test.module.scss');
+    const css = readFileSync(fileName, 'utf8');
+    const options: Options = {
+      classnameTransform: 'camelCaseOnly',
+      allowAdditionalClasses: true,
+    };
+
+    const cssExports = getCssExports({
+      css,
+      fileName,
+      logger,
+      options,
+      processor,
+      compilerOptions,
+      directory: __dirname,
+    });
+
+    it('should return a dts file that allows any string value', () => {
+      const dts = createDtsExports({
+        cssExports,
+        fileName,
+        logger,
+        options,
+      });
+      expect(dts).toMatchSnapshot();
+    });
+  });
 });

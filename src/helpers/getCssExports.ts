@@ -99,7 +99,10 @@ export const getCssExports = ({
 
           const aliasImporter: sass.FileImporter<'sync'> = {
             findFileUrl(url) {
-              const newUrl = matchPath !== null ? matchPath(url) : undefined;
+              const newUrl =
+                matchPath !== null
+                  ? matchPath(url, undefined, undefined, ['.sass', '.scss'])
+                  : undefined;
               return newUrl ? new URL(`file://${newUrl}`) : null;
             },
           };

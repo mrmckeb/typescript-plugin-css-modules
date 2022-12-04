@@ -20,7 +20,7 @@ export interface RendererOptions {
 }
 
 export interface Options {
-  allowAdditionalClasses?: boolean;
+  allowUnknownClassnames?: boolean;
   classnameTransform?: ClassnameTransformOptions;
   customMatcher?: string;
   customRenderer?: string;

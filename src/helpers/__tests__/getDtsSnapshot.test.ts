@@ -286,7 +286,6 @@ describe('utils / cssSnapshots', () => {
         logger,
         options,
       });
-      expect(dts).not.toMatch(/\w'?: string/);
       expect(dts).toMatchSnapshot();
     });
   });

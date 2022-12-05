@@ -31,7 +31,9 @@ export const createDtsExports = ({
   const classnameToProperty = (classname: string) =>
     `'${classname}'${possiblyUndefined ? '?' : ''}: string;`;
   const classnameToNamedExport = (classname: string) =>
-    `export let ${classname}${possiblyUndefined ? '?' : ''}: string;`;
+    `export let ${classname}: string${
+      possiblyUndefined ? ' | undefined' : ''
+    };`;
 
   const processedClasses = Object.keys(classes)
     .map(transformClasses(options.classnameTransform))

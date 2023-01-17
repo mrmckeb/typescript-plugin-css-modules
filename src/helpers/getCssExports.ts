@@ -76,6 +76,7 @@ export const getCssExports = ({
               syncImport: true,
               filename: fileName,
               paths: [directory],
+              sourceMap: true,
               ...(rendererOptions.less ?? {}),
             } as Less.Options,
             (error?: Less.RenderError, output?: Less.RenderOutput) => {
@@ -85,6 +86,9 @@ export const getCssExports = ({
               if (output === undefined) {
                 throw new Error('No Less output.');
               }
+
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+              sourceMap = JSON.parse(output.map ?? "undefined") as RawSourceMap | undefined;
               transformedCss = output.css.toString();
             },
           );

@@ -41,9 +41,13 @@ export const sassTildeImporter: sass.FileImporter<'sync'> = {
     // Support sass partials by including paths where the file is prefixed by an underscore.
     const basename = path.basename(nodeModSubpath);
     if (!basename.startsWith('_')) {
-      const partials = subpathsWithExts.map((file) =>
-        file.replace(basename, `_${basename}`),
-      );
+      const partials = subpathsWithExts.map((file) => {
+        const parts = path.parse(file);
+        const replacement = '_'.concat(parts.name);
+        parts.base = parts.base.replace(parts.name, replacement);
+        parts.name = replacement;
+        return path.format(parts);
+      });
       subpathsWithExts.push(...partials);
     }
 

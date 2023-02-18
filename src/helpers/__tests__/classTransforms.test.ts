@@ -1,7 +1,7 @@
 import { transformClasses } from '../classTransforms';
 import { ClassnameTransformOptions } from '../../options';
 
-describe('utils / classTransforms', () => {
+describe('helpers / classTransforms', () => {
   const classnames = [
     'class-name-a',
     'classNameB',

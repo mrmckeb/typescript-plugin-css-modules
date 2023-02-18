@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`utils / cssSnapshots with a Bootstrap import should find external files 1`] = `"bootstrap-module__test---WRms9"`;
+exports[`helpers / cssSnapshots with a Bootstrap import should find external files 1`] = `"test"`;
 
-exports[`utils / cssSnapshots with a custom renderer should process a file and log 1`] = `
+exports[`helpers / cssSnapshots with a custom renderer should process a file and log 1`] = `
 {
-  "exampleFileContents": "exampleFileContents__exampleFileContents---e3Nf2",
-  "exampleFileName": "exampleFileContents__exampleFileName---yg7Zl",
+  "exampleFileContents": "exampleFileContents",
+  "exampleFileName": "exampleFileName",
 }
 `;
 
-exports[`utils / cssSnapshots with allowUnknownClassnames enabled should return a dts file that allows any string value 1`] = `
+exports[`helpers / cssSnapshots with allowUnknownClassnames enabled should return a dts file that allows any string value 1`] = `
 "declare let classes: {
   'localClassInsideGlobal': string;
   'localClass': string;
@@ -33,6 +33,7 @@ exports[`utils / cssSnapshots with allowUnknownClassnames enabled should return 
   'classWithMixin': string;
   'appLogo': string;
   'appLogo': string;
+  'myAnimation': string;
   [key: string]: string;
 };
 export default classes;
@@ -56,18 +57,19 @@ export let section9: string;
 export let classWithMixin: string;
 export let appLogo: string;
 export let appLogo: string;
+export let myAnimation: string;
 "
 `;
 
-exports[`utils / cssSnapshots with baseUrl and paths in compilerOptions sass should find the files 1`] = `
+exports[`helpers / cssSnapshots with baseUrl and paths in compilerOptions sass should find the files 1`] = `
 {
-  "big-font": "tsconfig-paths-module__big-font---3FOK9",
-  "class-with-mixin": "tsconfig-paths-module__class-with-mixin---Uo34z",
-  "public-module": "tsconfig-paths-module__public-module---2IHe1",
+  "big-font": "big-font",
+  "class-with-mixin": "class-with-mixin",
+  "public-module": "public-module",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
   
 };
@@ -75,9 +77,9 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.less' getCssExports should return an object matching expected CSS 1`] = `{}`;
+exports[`helpers / cssSnapshots with file 'empty.module.less' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   
@@ -88,7 +90,7 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
 "declare let classes: {
   
 };
@@ -96,9 +98,9 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.sass' getCssExports should return an object matching expected CSS 1`] = `{}`;
+exports[`helpers / cssSnapshots with file 'empty.module.sass' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   
@@ -109,7 +111,7 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare let classes: {
   
 };
@@ -117,9 +119,9 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.scss' getCssExports should return an object matching expected CSS 1`] = `{}`;
+exports[`helpers / cssSnapshots with file 'empty.module.scss' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   
@@ -130,7 +132,7 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
   
 };
@@ -138,9 +140,9 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'empty.module.styl' getCssExports should return an object matching expected CSS 1`] = `{}`;
+exports[`helpers / cssSnapshots with file 'empty.module.styl' getCssExports should return an object matching expected CSS 1`] = `{}`;
 
-exports[`utils / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   
@@ -151,9 +153,8 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare let classes: {
-  'fadeIn': string;
   'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -162,9 +163,9 @@ exports[`utils / cssSnapshots with file 'import.module.css' createExports should
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
-export let fadeIn: string;
 export let classA: string;
 export let ClassB: string;
 export let class_d: string;
@@ -172,27 +173,27 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let fadeIn: string;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.css' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.css' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "ClassB": "import-module__ClassB---2LsIz",
-  "childA": "import-module__childA---2AUKk",
-  "childB": "import-module__childB---1z-Zh",
-  "class-c": "import-module__class-c---2JDAJ",
-  "classA": "import-module__classA---2fO5r",
-  "class_d": "import-module__class_d---2Dims",
-  "fadeIn": "__import_module_css__fadeIn",
-  "nestedChild": "import-module__nestedChild---1ZDxw",
-  "parent": "import-module__parent---2kdvO",
+  "ClassB": "ClassB",
+  "childA": "childA",
+  "childB": "childB",
+  "class-c": "class-c",
+  "classA": "classA",
+  "class_d": "class_d",
+  "fadeIn": "fadeIn",
+  "nestedChild": "nestedChild",
+  "parent": "parent",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.css' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-  'fadeIn': string;
   'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -201,9 +202,9 @@ declare let classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
-export let fadeIn: string;
 export let classA: string;
 export let ClassB: string;
 export let class_d: string;
@@ -211,12 +212,13 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let fadeIn: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'fadeIn' | 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'fadeIn';"
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
   'nested-class-parent': string;
   'child-class': string;
@@ -233,22 +235,22 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.less' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.less' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "child-class": "import-module__child-class---2XACw",
-  "color-set": "import-module__color-set---9xoPb",
-  "column-1": "import-module__column-1---3R-BM",
-  "column-2": "import-module__column-2---J0ZdX",
-  "column-3": "import-module__column-3---3_589",
-  "column-4": "import-module__column-4---SlPDz",
-  "nested-class-parent": "import-module__nested-class-parent---14g9m",
-  "selector-blue": "import-module__selector-blue---2JSaB",
-  "selector-green": "import-module__selector-green---1cLL8",
-  "selector-red": "import-module__selector-red---2T6zy",
+  "child-class": "child-class",
+  "color-set": "color-set",
+  "column-1": "column-1",
+  "column-2": "column-2",
+  "column-3": "column-3",
+  "column-4": "column-4",
+  "nested-class-parent": "nested-class-parent",
+  "selector-blue": "selector-blue",
+  "selector-green": "selector-green",
+  "selector-red": "selector-red",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.less' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   'nested-class-parent': string;
@@ -268,7 +270,7 @@ export const __cssModule: true;
 export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
   'foo': string;
   'bar': string;
@@ -288,22 +290,22 @@ export let baz: string;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.styl' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.styl' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "bar": "import-module__bar---2N4cR",
-  "baz": "import-module__baz---6mQbB",
-  "col-1": "import-module__col-1---2QW7j",
-  "col-2": "import-module__col-2---2CRRS",
-  "col-3": "import-module__col-3---17Luq",
-  "foo": "import-module__foo---FJflO",
-  "inside-1-name-2": "import-module__inside-1-name-2---wLnoq",
-  "inside-2-name-1": "import-module__inside-2-name-1---1GRhn",
-  "inside-local": "import-module__inside-local---1JuOc",
-  "local-class-1": "import-module__local-class-1---3QupT",
+  "bar": "bar",
+  "baz": "baz",
+  "col-1": "col-1",
+  "col-2": "col-2",
+  "col-3": "col-3",
+  "foo": "foo",
+  "inside-1-name-2": "inside-1-name-2",
+  "inside-2-name-1": "inside-2-name-1",
+  "inside-local": "inside-local",
+  "local-class-1": "local-class-1",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   'foo': string;
@@ -326,48 +328,58 @@ export const __cssModule: true;
 export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'postcss.module.css' createExports should create an exports file 1`] = `
 "declare let classes: {
-  'fadeIn': string;
   'classA': string;
-  'ClassB': string;
-  'class-c': string;
-  'class_d': string;
+  'nestedA': string;
+  'nested_B': string;
+  'deeplyNested': string;
+  'nested-c': string;
   'parent': string;
-  'childA': string;
-  'childB': string;
-  'nestedChild': string;
 };
 export default classes;
-export let fadeIn: string;
 export let classA: string;
-export let ClassB: string;
-export let class_d: string;
+export let nestedA: string;
+export let nested_B: string;
+export let deeplyNested: string;
 export let parent: string;
-export let childA: string;
-export let childB: string;
-export let nestedChild: string;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.css' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'postcss.module.css' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "ClassB": "test-module__ClassB---G7fhY",
-  "childA": "test-module__childA---26dwC",
-  "childB": "test-module__childB---13lLy",
-  "class-c": "test-module__class-c---3Ouzp",
-  "classA": "test-module__classA---KAOw8",
-  "class_d": "test-module__class_d---3pjDe",
-  "fadeIn": "__test_module_css__fadeIn",
-  "nestedChild": "test-module__nestedChild---v7rOR",
-  "parent": "test-module__parent---2tsUX",
+  "classA": "classA",
+  "deeplyNested": "deeplyNested",
+  "nested-c": "nested-c",
+  "nestedA": "nestedA",
+  "nested_B": "nested_B",
+  "parent": "parent",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.css' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'postcss.module.css' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-  'fadeIn': string;
+  'classA': string;
+  'nestedA': string;
+  'nested_B': string;
+  'deeplyNested': string;
+  'nested-c': string;
+  'parent': string;
+};
+export default classes;
+export let classA: string;
+export let nestedA: string;
+export let nested_B: string;
+export let deeplyNested: string;
+export let parent: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'classA' | 'nestedA' | 'nested_B' | 'deeplyNested' | 'nested-c' | 'parent';"
+`;
+
+exports[`helpers / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
+"declare let classes: {
   'classA': string;
   'ClassB': string;
   'class-c': string;
@@ -376,9 +388,9 @@ declare let classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'fadeIn': string;
 };
 export default classes;
-export let fadeIn: string;
 export let classA: string;
 export let ClassB: string;
 export let class_d: string;
@@ -386,12 +398,52 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
-
-export const __cssModule: true;
-export type AllClassNames = 'fadeIn' | 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild';"
+export let fadeIn: string;
+"
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.css' getCssExports should return an object matching expected CSS 1`] = `
+{
+  "ClassB": "ClassB",
+  "childA": "childA",
+  "childB": "childB",
+  "class-c": "class-c",
+  "classA": "classA",
+  "class_d": "class_d",
+  "fadeIn": "fadeIn",
+  "nestedChild": "nestedChild",
+  "parent": "parent",
+}
+`;
+
+exports[`helpers / cssSnapshots with file 'test.module.css' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare let classes: {
+  'classA': string;
+  'ClassB': string;
+  'class-c': string;
+  'class_d': string;
+  'parent': string;
+  'childA': string;
+  'childB': string;
+  'nestedChild': string;
+  'fadeIn': string;
+};
+export default classes;
+export let classA: string;
+export let ClassB: string;
+export let class_d: string;
+export let parent: string;
+export let childA: string;
+export let childB: string;
+export let nestedChild: string;
+export let fadeIn: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'fadeIn';"
+`;
+
+exports[`helpers / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
   'nested-class-parent': string;
   'child-class': string;
@@ -408,22 +460,22 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.less' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.less' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "child-class": "test-module__child-class---1au0d",
-  "color-set": "test-module__color-set---bEXmh",
-  "column-1": "test-module__column-1---5hXb3",
-  "column-2": "test-module__column-2---2ykNv",
-  "column-3": "test-module__column-3---2JnAp",
-  "column-4": "test-module__column-4---SG3xj",
-  "nested-class-parent": "test-module__nested-class-parent---2jIpC",
-  "selector-blue": "test-module__selector-blue---2kUKa",
-  "selector-green": "test-module__selector-green---hMr6S",
-  "selector-red": "test-module__selector-red---2hf4j",
+  "child-class": "child-class",
+  "color-set": "color-set",
+  "column-1": "column-1",
+  "column-2": "column-2",
+  "column-3": "column-3",
+  "column-4": "column-4",
+  "nested-class-parent": "nested-class-parent",
+  "selector-blue": "selector-blue",
+  "selector-green": "selector-green",
+  "selector-red": "selector-red",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.less' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   'nested-class-parent': string;
@@ -443,7 +495,7 @@ export const __cssModule: true;
 export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.sass' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.sass' createExports should create an exports file 1`] = `
 "declare let classes: {
   'local-class-inside-global': string;
   'local-class': string;
@@ -470,32 +522,32 @@ export default classes;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.sass' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.sass' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "child-class": "test-module__child-class---2vfhc",
-  "class-with-mixin": "test-module__class-with-mixin---3zUq-",
-  "const": "test-module__const---39o_j",
-  "default": "test-module__default---h-tcC",
-  "local-class": "test-module__local-class---1yStp",
-  "local-class-2": "test-module__local-class-2---3xCgt",
-  "local-class-inside-global": "test-module__local-class-inside-global---Mznd5",
-  "local-class-inside-local": "test-module__local-class-inside-local---1z2Qf",
-  "nested-class-parent": "test-module__nested-class-parent---3oyeq",
-  "nested-class-parent--extended": "test-module__nested-class-parent--extended---cjRbg",
-  "reserved-words": "test-module__reserved-words---3hGie",
-  "section-1": "test-module__section-1---2QkaE",
-  "section-2": "test-module__section-2---23KHs",
-  "section-3": "test-module__section-3---2BttW",
-  "section-4": "test-module__section-4---1TrSo",
-  "section-5": "test-module__section-5---1PIYZ",
-  "section-6": "test-module__section-6---tbEch",
-  "section-7": "test-module__section-7---i7uWX",
-  "section-8": "test-module__section-8---1jfNT",
-  "section-9": "test-module__section-9---1akFT",
+  "child-class": "child-class",
+  "class-with-mixin": "class-with-mixin",
+  "const": "const",
+  "default": "default",
+  "local-class": "local-class",
+  "local-class-2": "local-class-2",
+  "local-class-inside-global": "local-class-inside-global",
+  "local-class-inside-local": "local-class-inside-local",
+  "nested-class-parent": "nested-class-parent",
+  "nested-class-parent--extended": "nested-class-parent--extended",
+  "reserved-words": "reserved-words",
+  "section-1": "section-1",
+  "section-2": "section-2",
+  "section-3": "section-3",
+  "section-4": "section-4",
+  "section-5": "section-5",
+  "section-6": "section-6",
+  "section-7": "section-7",
+  "section-8": "section-8",
+  "section-9": "section-9",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.sass' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   'local-class-inside-global': string;
@@ -525,7 +577,7 @@ export const __cssModule: true;
 export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin';"
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.scss' createExports should create an exports file 1`] = `
 "declare let classes: {
   'local-class-inside-global': string;
   'local-class': string;
@@ -549,40 +601,42 @@ exports[`utils / cssSnapshots with file 'test.module.scss' createExports should 
   'class-with-mixin': string;
   'App_logo': string;
   'App-logo': string;
+  'my-animation': string;
 };
 export default classes;
 export let App_logo: string;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.scss' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.scss' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "App-logo": "test-module__App-logo---3S1C4",
-  "App_logo": "test-module__App_logo---1llXs",
-  "child-class": "test-module__child-class---s-_Mc",
-  "class-with-mixin": "test-module__class-with-mixin---1JqB_",
-  "const": "test-module__const---28kKv",
-  "default": "test-module__default---8gLb1",
-  "local-class": "test-module__local-class---1Ju3l",
-  "local-class-2": "test-module__local-class-2---3aSgy",
-  "local-class-inside-global": "test-module__local-class-inside-global---IVh9J",
-  "local-class-inside-local": "test-module__local-class-inside-local---1LKIi",
-  "nested-class-parent": "test-module__nested-class-parent---2LnTV",
-  "nested-class-parent--extended": "test-module__nested-class-parent--extended---1j85b",
-  "reserved-words": "test-module__reserved-words---1mM1m",
-  "section-1": "test-module__section-1---11Ic3",
-  "section-2": "test-module__section-2---1Uiwc",
-  "section-3": "test-module__section-3---2eZeM",
-  "section-4": "test-module__section-4---3m8sf",
-  "section-5": "test-module__section-5---1MTwN",
-  "section-6": "test-module__section-6---szUAt",
-  "section-7": "test-module__section-7---2DOBJ",
-  "section-8": "test-module__section-8---3qav2",
-  "section-9": "test-module__section-9---2EMR_",
+  "App-logo": "App-logo",
+  "App_logo": "App_logo",
+  "child-class": "child-class",
+  "class-with-mixin": "class-with-mixin",
+  "const": "const",
+  "default": "default",
+  "local-class": "local-class",
+  "local-class-2": "local-class-2",
+  "local-class-inside-global": "local-class-inside-global",
+  "local-class-inside-local": "local-class-inside-local",
+  "my-animation": "my-animation",
+  "nested-class-parent": "nested-class-parent",
+  "nested-class-parent--extended": "nested-class-parent--extended",
+  "reserved-words": "reserved-words",
+  "section-1": "section-1",
+  "section-2": "section-2",
+  "section-3": "section-3",
+  "section-4": "section-4",
+  "section-5": "section-5",
+  "section-6": "section-6",
+  "section-7": "section-7",
+  "section-8": "section-8",
+  "section-9": "section-9",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.scss' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   'local-class-inside-global': string;
@@ -607,15 +661,16 @@ declare let classes: {
   'class-with-mixin': string;
   'App_logo': string;
   'App-logo': string;
+  'my-animation': string;
 };
 export default classes;
 export let App_logo: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin' | 'App_logo' | 'App-logo';"
+export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin' | 'App_logo' | 'App-logo' | 'my-animation';"
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
   'foo': string;
   'bar': string;
@@ -635,22 +690,22 @@ export let baz: string;
 "
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.styl' getCssExports should return an object matching expected CSS 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.styl' getCssExports should return an object matching expected CSS 1`] = `
 {
-  "bar": "test-module__bar---2WWom",
-  "baz": "test-module__baz---1Rs9U",
-  "col-1": "test-module__col-1---1XP3K",
-  "col-2": "test-module__col-2---2nPwS",
-  "col-3": "test-module__col-3---3CSSb",
-  "foo": "test-module__foo---2pGaO",
-  "inside-1-name-2": "test-module__inside-1-name-2---3Zdgw",
-  "inside-2-name-1": "test-module__inside-2-name-1---3PYHl",
-  "inside-local": "test-module__inside-local---2KzUE",
-  "local-class-1": "test-module__local-class-1---3piX9",
+  "bar": "bar",
+  "baz": "baz",
+  "col-1": "col-1",
+  "col-2": "col-2",
+  "col-3": "col-3",
+  "foo": "foo",
+  "inside-1-name-2": "inside-1-name-2",
+  "inside-2-name-1": "inside-2-name-1",
+  "inside-local": "inside-local",
+  "local-class-1": "local-class-1",
 }
 `;
 
-exports[`utils / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
+exports[`helpers / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
   'foo': string;
@@ -673,7 +728,7 @@ export const __cssModule: true;
 export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
-exports[`utils / cssSnapshots with goToDefinition enabled should return a line-accurate dts file 1`] = `
+exports[`helpers / cssSnapshots with goToDefinition enabled should return a line-accurate dts file 1`] = `
 "
 
 
@@ -733,7 +788,7 @@ export let appLogo: string;
 
 
 export let appLogo: string;
-
+export let myAnimation: string;
 
 
 
@@ -764,111 +819,112 @@ export let appLogo: string;
 "
 `;
 
-exports[`utils / cssSnapshots with goToDefinition enabled should return an object with classes, css, and a source map 1`] = `
+exports[`helpers / cssSnapshots with goToDefinition enabled should return an object with classes, css, and a source map 1`] = `
 {
   "classes": {
-    "App-logo": "test-module__App-logo---3S1C4",
-    "App_logo": "test-module__App_logo---1llXs",
-    "child-class": "test-module__child-class---s-_Mc",
-    "class-with-mixin": "test-module__class-with-mixin---1JqB_",
-    "const": "test-module__const---28kKv",
-    "default": "test-module__default---8gLb1",
-    "local-class": "test-module__local-class---1Ju3l",
-    "local-class-2": "test-module__local-class-2---3aSgy",
-    "local-class-inside-global": "test-module__local-class-inside-global---IVh9J",
-    "local-class-inside-local": "test-module__local-class-inside-local---1LKIi",
-    "nested-class-parent": "test-module__nested-class-parent---2LnTV",
-    "nested-class-parent--extended": "test-module__nested-class-parent--extended---1j85b",
-    "reserved-words": "test-module__reserved-words---1mM1m",
-    "section-1": "test-module__section-1---11Ic3",
-    "section-2": "test-module__section-2---1Uiwc",
-    "section-3": "test-module__section-3---2eZeM",
-    "section-4": "test-module__section-4---3m8sf",
-    "section-5": "test-module__section-5---1MTwN",
-    "section-6": "test-module__section-6---szUAt",
-    "section-7": "test-module__section-7---2DOBJ",
-    "section-8": "test-module__section-8---3qav2",
-    "section-9": "test-module__section-9---2EMR_",
+    "App-logo": "App-logo",
+    "App_logo": "App_logo",
+    "child-class": "child-class",
+    "class-with-mixin": "class-with-mixin",
+    "const": "const",
+    "default": "default",
+    "local-class": "local-class",
+    "local-class-2": "local-class-2",
+    "local-class-inside-global": "local-class-inside-global",
+    "local-class-inside-local": "local-class-inside-local",
+    "my-animation": "my-animation",
+    "nested-class-parent": "nested-class-parent",
+    "nested-class-parent--extended": "nested-class-parent--extended",
+    "reserved-words": "reserved-words",
+    "section-1": "section-1",
+    "section-2": "section-2",
+    "section-3": "section-3",
+    "section-4": "section-4",
+    "section-5": "section-5",
+    "section-6": "section-6",
+    "section-7": "section-7",
+    "section-8": "section-8",
+    "section-9": "section-9",
   },
   "css": ".global-class {
   color: rebeccapurple;
 }
 
-.global-class-2 .test-module__local-class-inside-global---IVh9J {
+.global-class-2 .local-class-inside-global {
   color: rebeccapurple;
 }
 
-.test-module__local-class---1Ju3l {
+.local-class {
   color: rebeccapurple;
 }
 
-.test-module__local-class-2---3aSgy .test-module__local-class-inside-local---1LKIi {
+.local-class-2 .local-class-inside-local {
   color: rebeccapurple;
 }
 
-.test-module__reserved-words---1mM1m .test-module__default---8gLb1 {
+.reserved-words .default {
   color: rebeccapurple;
 }
 
-.test-module__reserved-words---1mM1m .test-module__const---28kKv {
+.reserved-words .const {
   color: rebeccapurple;
 }
 
-.test-module__nested-class-parent---2LnTV .test-module__child-class---s-_Mc {
+.nested-class-parent .child-class {
   color: rebeccapurple;
 }
 
-.test-module__nested-class-parent--extended---1j85b {
+.nested-class-parent--extended {
   color: rebeccapurple;
 }
 
-.test-module__section-1---11Ic3 {
+.section-1 {
   color: rebeccapurple;
 }
 
-.test-module__section-2---1Uiwc {
+.section-2 {
   color: rebeccapurple;
 }
 
-.test-module__section-3---2eZeM {
+.section-3 {
   color: rebeccapurple;
 }
 
-.test-module__section-4---3m8sf {
+.section-4 {
   color: rebeccapurple;
 }
 
-.test-module__section-5---1MTwN {
+.section-5 {
   color: rebeccapurple;
 }
 
-.test-module__section-6---szUAt {
+.section-6 {
   color: rebeccapurple;
 }
 
-.test-module__section-7---2DOBJ {
+.section-7 {
   color: rebeccapurple;
 }
 
-.test-module__section-8---3qav2 {
+.section-8 {
   color: rebeccapurple;
 }
 
-.test-module__section-9---2EMR_ {
+.section-9 {
   color: rebeccapurple;
 }
 
-.test-module__class-with-mixin---1JqB_ {
+.class-with-mixin {
   margin: 0;
 }
 
-.test-module__App_logo---1llXs {
+.App_logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .test-module__App-logo---3S1C4 {
+  .App-logo {
     animation: my-animation infinite 20s linear;
   }
 }
@@ -892,21 +948,21 @@ exports[`utils / cssSnapshots with goToDefinition enabled should return an objec
 }
 `;
 
-exports[`utils / cssSnapshots with loadPaths in sass options should find external file from loadPaths 1`] = `
+exports[`helpers / cssSnapshots with loadPaths in sass options should find external file from loadPaths 1`] = `
 {
-  "big-font": "include-path-module__big-font---Td7hY",
-  "class-with-mixin": "include-path-module__class-with-mixin---1u87_",
+  "big-font": "big-font",
+  "class-with-mixin": "class-with-mixin",
 }
 `;
 
-exports[`utils / cssSnapshots with loadPaths in stylus options should find external file from loadPaths 1`] = `
+exports[`helpers / cssSnapshots with loadPaths in stylus options should find external file from loadPaths 1`] = `
 {
-  "external-class": "include-path-module__external-class---ecH0A",
-  "include-path": "include-path-module__include-path---2f2uR",
+  "external-class": "external-class",
+  "include-path": "include-path",
 }
 `;
 
-exports[`utils / cssSnapshots with noUncheckedIndexedAccess enabled should return a dts file with only possibly undefined strings 1`] = `
+exports[`helpers / cssSnapshots with noUncheckedIndexedAccess enabled should return a dts file with only possibly undefined strings 1`] = `
 "declare let classes: {
   'localClassInsideGlobal'?: string;
   'localClass'?: string;
@@ -930,6 +986,7 @@ exports[`utils / cssSnapshots with noUncheckedIndexedAccess enabled should retur
   'classWithMixin'?: string;
   'appLogo'?: string;
   'appLogo'?: string;
+  'myAnimation'?: string;
 };
 export default classes;
 export let localClassInsideGlobal: string | undefined;
@@ -952,5 +1009,6 @@ export let section9: string | undefined;
 export let classWithMixin: string | undefined;
 export let appLogo: string | undefined;
 export let appLogo: string | undefined;
+export let myAnimation: string | undefined;
 "
 `;

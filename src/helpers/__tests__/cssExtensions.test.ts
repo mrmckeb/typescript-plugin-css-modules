@@ -1,6 +1,6 @@
 import { createIsCSS, createIsRelativeCSS } from '../cssExtensions';
 
-describe('utils / cssExtensions', () => {
+describe('helpers / cssExtensions', () => {
   describe('isCSS', () => {
     const isCSS = createIsCSS();
 

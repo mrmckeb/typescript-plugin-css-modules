@@ -67,25 +67,27 @@ export default classes;
 
     // Create a list of filtered classnames and hashed classnames.
     const filteredClasses = Object.entries(cssExports.classes)
-      .map(([classname, hashedClassname]) => [
+      .map(([classname, originalClassname]) => [
         // TODO: Improve this. It may return multiple valid classnames and we
         // want to handle all of those.
         transformClasses(options.classnameTransform)(classname)[0],
-        hashedClassname,
+        originalClassname,
       ])
       .filter(([classname]) => isValidVariable(classname));
 
-    filteredClasses.forEach(([classname, hashedClassName]) => {
-      const matchedLine = cssLines.findIndex((line) =>
-        line.includes(hashedClassName),
-      );
+    filteredClasses.forEach(([classname, originalClassname]) => {
+      const classRegexp = new RegExp(`${originalClassname}[\\s{]`, 'g');
+
+      const matchedLine = cssLines.findIndex((line) => classRegexp.test(line));
       const matchedColumn =
-        matchedLine && cssLines[matchedLine].indexOf(hashedClassName);
+        matchedLine && cssLines[matchedLine].indexOf(originalClassname);
+
       const { line: lineNumber } = smc.originalPositionFor({
         // Lines start at 1, not 0.
         line: matchedLine >= 0 ? matchedLine + 1 : 1,
         column: matchedColumn >= 0 ? matchedColumn : 0,
       });
+
       dtsLines[lineNumber ? lineNumber - 1 : 0] +=
         classnameToNamedExport(classname);
     });

@@ -1,15 +1,15 @@
 import postcss, { AcceptedPlugin } from 'postcss';
 import Processor from 'postcss/lib/processor';
-import postcssIcssKeyframes from 'postcss-icss-keyframes';
-import postcssIcssSelectors from 'postcss-icss-selectors';
+import postcssLocalByDefault from 'postcss-modules-local-by-default';
+import postcssModulesScope from 'postcss-modules-scope';
 
 export const getProcessor = (
   additionalPlugins: AcceptedPlugin[] = [],
 ): Processor =>
   postcss([
     ...additionalPlugins,
-    postcssIcssKeyframes(),
-    postcssIcssSelectors({
-      mode: 'local',
+    postcssLocalByDefault(),
+    postcssModulesScope({
+      generateScopedName: (name) => name,
     }),
   ]);

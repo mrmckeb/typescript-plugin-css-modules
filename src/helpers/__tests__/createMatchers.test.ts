@@ -7,7 +7,7 @@ const mockLogger: Logger = {
   error: jest.fn(),
 };
 
-describe('utils / createMatchers', () => {
+describe('helpers / createMatchers', () => {
   it('should match `customMatcher` regexp', () => {
     const options: Options = { customMatcher: '\\.css$' };
     const { isCSS, isRelativeCSS } = createMatchers(mockLogger, options);

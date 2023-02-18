@@ -328,6 +328,56 @@ export const __cssModule: true;
 export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
+exports[`utils / cssSnapshots with file 'postcss.module.css' createExports should create an exports file 1`] = `
+"declare let classes: {
+  'classA': string;
+  'nestedA': string;
+  'nested_B': string;
+  'deeplyNested': string;
+  'nested-c': string;
+  'parent': string;
+};
+export default classes;
+export let classA: string;
+export let nestedA: string;
+export let nested_B: string;
+export let deeplyNested: string;
+export let parent: string;
+"
+`;
+
+exports[`utils / cssSnapshots with file 'postcss.module.css' getCssExports should return an object matching expected CSS 1`] = `
+{
+  "classA": "classA",
+  "deeplyNested": "deeplyNested",
+  "nested-c": "nested-c",
+  "nestedA": "nestedA",
+  "nested_B": "nested_B",
+  "parent": "parent",
+}
+`;
+
+exports[`utils / cssSnapshots with file 'postcss.module.css' with a custom template should transform the generated dts 1`] = `
+"/* eslint-disable */
+declare let classes: {
+  'classA': string;
+  'nestedA': string;
+  'nested_B': string;
+  'deeplyNested': string;
+  'nested-c': string;
+  'parent': string;
+};
+export default classes;
+export let classA: string;
+export let nestedA: string;
+export let nested_B: string;
+export let deeplyNested: string;
+export let parent: string;
+
+export const __cssModule: true;
+export type AllClassNames = 'classA' | 'nestedA' | 'nested_B' | 'deeplyNested' | 'nested-c' | 'parent';"
+`;
+
 exports[`utils / cssSnapshots with file 'test.module.css' createExports should create an exports file 1`] = `
 "declare let classes: {
   'classA': string;

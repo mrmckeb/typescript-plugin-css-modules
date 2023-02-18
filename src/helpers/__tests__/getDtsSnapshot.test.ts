@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import postcssImportSync from 'postcss-import-sync2';
+import postcssPresetEnv from 'postcss-preset-env';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { CSSExportsWithSourceMap, getCssExports } from '../getCssExports';
 import { createDtsExports } from '../createDtsExports';
@@ -16,6 +17,7 @@ const testFileNames = [
   'import.module.css',
   'import.module.less',
   'import.module.styl',
+  'postcss.module.css',
   'test.module.css',
   'test.module.less',
   'test.module.sass',
@@ -35,6 +37,12 @@ const compilerOptions: tsModule.CompilerOptions = {};
 const processor = getProcessor([
   // For testing PostCSS import support/functionality.
   postcssImportSync(),
+  postcssPresetEnv({
+    stage: 3,
+    features: {
+      'nesting-rules': true,
+    },
+  }),
 ]);
 
 describe('utils / cssSnapshots', () => {

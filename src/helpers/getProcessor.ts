@@ -1,15 +1,15 @@
 import postcss, { AcceptedPlugin } from 'postcss';
 import Processor from 'postcss/lib/processor';
-import modulesScope from 'postcss-modules-scope';
-import localByDefault from 'postcss-modules-local-by-default';
+import postcssLocalByDefault from 'postcss-modules-local-by-default';
+import postcssModulesScope from 'postcss-modules-scope';
 
 export const getProcessor = (
   additionalPlugins: AcceptedPlugin[] = [],
 ): Processor =>
   postcss([
     ...additionalPlugins,
-    localByDefault(),
-    modulesScope({
+    postcssLocalByDefault(),
+    postcssModulesScope({
       generateScopedName: (name) => name,
     }),
   ]);

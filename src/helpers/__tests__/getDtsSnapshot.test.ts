@@ -45,7 +45,7 @@ const processor = getProcessor([
   }),
 ]);
 
-describe('utils / cssSnapshots', () => {
+describe('helpers / cssSnapshots', () => {
   testFileNames.forEach((testFile) => {
     let cssExports: CSSExportsWithSourceMap;
     const fileName = join(__dirname, 'fixtures', testFile);

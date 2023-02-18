@@ -3,7 +3,6 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { AcceptedPlugin } from 'postcss';
 import postcssrc from 'postcss-load-config';
-import filter from 'postcss-filter-plugins';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { Options } from './options';
 import { createMatchers } from './helpers/createMatchers';
@@ -11,6 +10,7 @@ import { isCSSFn } from './helpers/cssExtensions';
 import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
 import { getProcessor } from './helpers/getProcessor';
+import { filterPlugins } from './helpers/filterPlugins';
 
 const getPostCssConfigPlugins = (directory: string) => {
   try {
@@ -64,14 +64,11 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
 
     let userPlugins: AcceptedPlugin[] = [];
     if (postcssOptions.useConfig) {
-      const postcssConfig = getPostCssConfigPlugins(directory);
-      userPlugins = [
-        filter({
-          exclude: postcssOptions.excludePlugins,
-          silent: true,
-        }),
-        ...postcssConfig,
-      ];
+      const postcssConfigPlugins = getPostCssConfigPlugins(directory);
+      userPlugins = filterPlugins({
+        plugins: postcssConfigPlugins,
+        exclude: postcssOptions.excludePlugins,
+      });
     }
 
     // If a custom renderer is provided, resolve the path.

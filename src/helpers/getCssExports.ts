@@ -88,7 +88,9 @@ export const getCssExports = ({
               }
 
               // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              sourceMap = JSON.parse(output.map ?? "undefined") as RawSourceMap | undefined;
+              sourceMap = JSON.parse(output.map ?? 'undefined') as
+                | RawSourceMap
+                | undefined;
               transformedCss = output.css.toString();
             },
           );

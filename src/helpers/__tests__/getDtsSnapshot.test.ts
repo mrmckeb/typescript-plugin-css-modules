@@ -230,8 +230,12 @@ describe('helpers / cssSnapshots', () => {
     });
   });
 
-  describe('with goToDefinition enabled', () => {
-    const fileName = join(__dirname, 'fixtures', 'test.module.scss');
+  describe.each([
+    ['CSS', 'css'],
+    ['Less', 'less'],
+    ['Sass', 'scss'],
+  ])('with goToDefinition enabled with %s', (_, extension) => {
+    const fileName = join(__dirname, 'fixtures', `test.module.${extension}`);
     const css = readFileSync(fileName, 'utf8');
     const options: Options = {
       classnameTransform: 'camelCaseOnly',

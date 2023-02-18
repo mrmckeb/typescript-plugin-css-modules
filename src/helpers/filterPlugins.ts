@@ -6,7 +6,9 @@ interface FilterPluginsOptions {
 }
 
 export const filterPlugins = ({ plugins, exclude }: FilterPluginsOptions) =>
-  plugins.filter(
-    (plugin) =>
-      'postcssPlugin' in plugin && !exclude.includes(plugin.postcssPlugin),
-  );
+  exclude
+    ? plugins.filter(
+        (plugin) =>
+          'postcssPlugin' in plugin && !exclude.includes(plugin.postcssPlugin),
+      )
+    : plugins;

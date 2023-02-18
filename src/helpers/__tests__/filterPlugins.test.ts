@@ -17,5 +17,10 @@ describe('helpers / filterPlugins', () => {
         }),
       ).toHaveLength(0);
     });
+
+    it('should return all plugins if `exclude` was not set', () => {
+      const plugins = [postcssPresetEnv(), postcssModulesScope()];
+      expect(filterPlugins({ plugins })).toHaveLength(2);
+    });
   });
 });

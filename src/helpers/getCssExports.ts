@@ -87,10 +87,14 @@ export const getCssExports = ({
                 throw new Error('No Less output.');
               }
 
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              sourceMap = JSON.parse(output.map ?? 'undefined') as
-                | RawSourceMap
-                | undefined;
+              // This is typed as a `string`, but may be undefined.
+              const stringSourceMap = output.map as string | undefined;
+
+              sourceMap =
+                typeof stringSourceMap === 'string'
+                  ? (JSON.parse(stringSourceMap) as RawSourceMap)
+                  : undefined;
+
               transformedCss = output.css.toString();
             },
           );

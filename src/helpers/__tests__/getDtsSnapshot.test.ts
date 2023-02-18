@@ -9,11 +9,6 @@ import { getProcessor } from '../getProcessor';
 import { Options } from '../../options';
 
 const testFileNames = [
-  'test.module.css',
-  'test.module.less',
-  'test.module.styl',
-  'test.module.scss',
-  'test.module.sass',
   'empty.module.less',
   'empty.module.sass',
   'empty.module.scss',
@@ -21,6 +16,11 @@ const testFileNames = [
   'import.module.css',
   'import.module.less',
   'import.module.styl',
+  'test.module.css',
+  'test.module.less',
+  'test.module.sass',
+  'test.module.scss',
+  'test.module.styl',
 ];
 
 const logger: Logger = {

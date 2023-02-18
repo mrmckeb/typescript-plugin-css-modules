@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { sassTildeImporter } from '../sassTildeImporter';
+import { sassTildeImporter, resolveUrls } from '../sassTildeImporter';
 
 const getAbsoluteFileUrl = (expected: string) =>
   `file://${join(process.cwd(), expected)}`;
@@ -59,6 +59,12 @@ describe('importers / sassTildeImporter', () => {
         })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/bootstrap/scss/_grid.scss'));
+    expect(resolveUrls('~sass-mq/mq.scss')).toContain(
+      'node_modules/sass-mq/_mq.scss',
+    );
+    expect(resolveUrls('~sass-mq/mq')).toContain(
+      'node_modules/sass-mq/_mq.scss',
+    );
   });
 
   it('should resolve index files', () => {

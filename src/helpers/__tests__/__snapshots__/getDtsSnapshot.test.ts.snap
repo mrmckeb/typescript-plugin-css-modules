@@ -71,7 +71,7 @@ exports[`helpers / cssSnapshots with baseUrl and paths in compilerOptions sass s
 
 exports[`helpers / cssSnapshots with file 'empty.module.less' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -82,7 +82,7 @@ exports[`helpers / cssSnapshots with file 'empty.module.less' getCssExports shou
 exports[`helpers / cssSnapshots with file 'empty.module.less' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -92,7 +92,7 @@ export type AllClassNames = '';"
 
 exports[`helpers / cssSnapshots with file 'empty.module.sass' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -103,7 +103,7 @@ exports[`helpers / cssSnapshots with file 'empty.module.sass' getCssExports shou
 exports[`helpers / cssSnapshots with file 'empty.module.sass' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -113,7 +113,7 @@ export type AllClassNames = '';"
 
 exports[`helpers / cssSnapshots with file 'empty.module.scss' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -124,7 +124,7 @@ exports[`helpers / cssSnapshots with file 'empty.module.scss' getCssExports shou
 exports[`helpers / cssSnapshots with file 'empty.module.scss' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 
@@ -134,7 +134,7 @@ export type AllClassNames = '';"
 
 exports[`helpers / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
 "declare let classes: {
-
+  
 };
 export default classes;
 "
@@ -145,7 +145,7 @@ exports[`helpers / cssSnapshots with file 'empty.module.styl' getCssExports shou
 exports[`helpers / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
 "/* eslint-disable */
 declare let classes: {
-
+  
 };
 export default classes;
 

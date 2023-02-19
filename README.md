@@ -97,19 +97,19 @@ const b = styles['my_other-class'];
 
 Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-| Option                     | Default value                      | Description                                                                                            |
-| -------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `allowUnknownClassnames`   | `false`                            | Disables TypeScript warnings on unknown classnames (for default imports only).                         |
-| `classnameTransform`       | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                                                 |
-| `customMatcher`            | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                |
-| `customRenderer`           | `false`                            | See [`customRenderer`](#customRenderer) below.                                                         |
-| `customTemplate`           | `false`                            | See [`customTemplate`](#customTemplate) below.                                                         |
-| `goToDefinition`           | `false`                            | Enables jump to definition, with limited compatibility. See [`goToDefinition`](#goToDefinition) below. |
-| `noUncheckedIndexedAccess` | `false`                            | Enable for compatibility with TypeScript's `noUncheckedIndexedAccess`.                                 |
-| `namedExports`             | `true`                             | Enables named exports for compatible classnames.                                                       |
-| `dotenvOptions`            | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).                           |
-| `postcssOptions`           | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                                                         |
-| `rendererOptions`          | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                       |
+| Option                     | Default value                      | Description                                                                    |
+| -------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ |
+| `allowUnknownClassnames`   | `false`                            | Disables TypeScript warnings on unknown classnames (for default imports only). |
+| `classnameTransform`       | `asIs`                             | See [`classnameTransform`](#classnameTransform) below.                         |
+| `customMatcher`            | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                        |
+| `customRenderer`           | `false`                            | See [`customRenderer`](#customRenderer) below.                                 |
+| `customTemplate`           | `false`                            | See [`customTemplate`](#customTemplate) below.                                 |
+| `goToDefinition`           | `false`                            | Enables jump to definition. See [`goToDefinition`](#goToDefinition) below.     |
+| `noUncheckedIndexedAccess` | `false`                            | Enable for compatibility with TypeScript's `noUncheckedIndexedAccess`.         |
+| `namedExports`             | `true`                             | Enables named exports for compatible classnames.                               |
+| `dotenvOptions`            | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options).   |
+| `postcssOptions`           | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                                 |
+| `rendererOptions`          | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                               |
 
 ```json
 {
@@ -199,7 +199,7 @@ The `classes` object represents all the classnames extracted from the CSS Module
 
 This allows an editor like Visual Studio Code to go to a classname's definition (file and line).
 
-This is experimental, and only works with Sass (for now) and may not always work as expected.
+This is experimental, and may not always work as expected. It currently supports CSS/PostCSS, Less, and Sass. Please raise an issue if you find something isn't working.
 
 #### `postcssOptions`
 

@@ -728,7 +728,242 @@ export const __cssModule: true;
 export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
-exports[`helpers / cssSnapshots with goToDefinition enabled should return a line-accurate dts file 1`] = `
+exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should return a line-accurate dts file 1`] = `
+"export let classA: string;
+
+
+
+export let classB: string;
+
+
+
+export let classC: string;
+
+
+
+export let classD: string;
+
+
+
+
+
+export let parent: string;export let childA: string;
+
+
+
+export let childB: string;export let nestedChild: string;
+
+
+
+
+
+export let fadeIn: string;
+
+
+
+
+
+"
+`;
+
+exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should return an object with classes, css, and a source map 1`] = `
+{
+  "classes": {
+    "ClassB": "ClassB",
+    "childA": "childA",
+    "childB": "childB",
+    "class-c": "class-c",
+    "classA": "classA",
+    "class_d": "class_d",
+    "fadeIn": "fadeIn",
+    "nestedChild": "nestedChild",
+    "parent": "parent",
+  },
+  "css": ".classA {
+  color: rebeccapurple;
+}
+
+.ClassB {
+  color: rebeccapurple;
+}
+
+.class-c {
+  color: rebeccapurple;
+}
+
+.class_d {
+  @mixin postcss-mixin;
+  color: rebeccapurple;
+}
+
+.parent .childA {
+    color: rebeccapurple;
+  }
+
+.parent .childB .nestedChild {
+      color: rebeccapurple;
+    }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=src/helpers/__tests__/fixtures/test.module.css.map */",
+  "sourceMap": {
+    "file": "src/helpers/__tests__/fixtures/test.module.css",
+    "mappings": "AAAA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;EACpB,oBAAoB;AACtB;;AAGE;IACE,oBAAoB;EACtB;;AAEE;MACE,oBAAoB;IACtB;;AAIJ;EACE;IACE,UAAU;EACZ;EACA;IACE,UAAU;EACZ;AACF",
+    "names": [],
+    "sources": [
+      "src/helpers/__tests__/fixtures/test.module.css",
+    ],
+    "sourcesContent": [
+      ".classA {
+  color: rebeccapurple;
+}
+
+.ClassB {
+  color: rebeccapurple;
+}
+
+.class-c {
+  color: rebeccapurple;
+}
+
+.class_d {
+  @mixin postcss-mixin;
+  color: rebeccapurple;
+}
+
+.parent {
+  .childA {
+    color: rebeccapurple;
+  }
+  .childB {
+    .nestedChild {
+      color: rebeccapurple;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+",
+    ],
+    "version": 3,
+  },
+}
+`;
+
+exports[`helpers / cssSnapshots with goToDefinition enabled with Less should return a line-accurate dts file 1`] = `
+"export let nestedClassParent: string;export let childClass: string;export let selectorBlue: string;export let selectorGreen: string;export let selectorRed: string;export let column1: string;export let column2: string;export let column3: string;export let column4: string;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export let colorSet: string;
+
+
+
+"
+`;
+
+exports[`helpers / cssSnapshots with goToDefinition enabled with Less should return an object with classes, css, and a source map 1`] = `
+{
+  "classes": {
+    "child-class": "child-class",
+    "color-set": "color-set",
+    "column-1": "column-1",
+    "column-2": "column-2",
+    "column-3": "column-3",
+    "column-4": "column-4",
+    "nested-class-parent": "nested-class-parent",
+    "selector-blue": "selector-blue",
+    "selector-green": "selector-green",
+    "selector-red": "selector-red",
+  },
+  "css": ".nested-class-parent {
+  color: black;
+}
+.nested-class-parent .child-class {
+  font-size: 12px;
+}
+.selector-blue {
+  color: b;
+}
+.selector-green {
+  color: b;
+}
+.selector-red {
+  color: b;
+}
+.column-1 {
+  height: 50px;
+}
+.column-2 {
+  height: 100px;
+}
+.column-3 {
+  height: 150px;
+}
+.column-4 {
+  height: 200px;
+}
+/* prettier-ignore */
+.color-set {
+  one-1: blue;
+  two-2: green;
+  three-3: red;
+}
+",
+  "sourceMap": {
+    "file": "src/helpers/__tests__/fixtures/test.module.less",
+    "mappings": "AAAA;EACE,YAAA;ACCF;ADFA;EAII,eAAA;ACCJ;ADLC;EAYG,QAAA;ACJJ;ADRC;EAYG,QAAA;ACDJ;ADXC;EAYG,QAAA;ACEJ;ADdC;EAkBG,YAAA;ACDJ;ADjBC;EAkBG,aAAA;ACEJ;ADpBC;EAkBG,aAAA;ACKJ;ADvBC;EAkBG,aAAA;ACQJ;AACA,oBAAoB;ADEpB;EAEI,WAAA;EAAA,YAAA;EAAA,YAAA;ACCJ",
+    "names": [],
+    "sources": [
+      "[cwd]/src/helpers/__tests__/fixtures/test.module.less",
+      "src/helpers/__tests__/fixtures/test.module.less",
+    ],
+    "version": 3,
+  },
+}
+`;
+
+exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should return a line-accurate dts file 1`] = `
 "
 
 
@@ -819,7 +1054,7 @@ export let myAnimation: string;
 "
 `;
 
-exports[`helpers / cssSnapshots with goToDefinition enabled should return an object with classes, css, and a source map 1`] = `
+exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should return an object with classes, css, and a source map 1`] = `
 {
   "classes": {
     "App-logo": "App-logo",

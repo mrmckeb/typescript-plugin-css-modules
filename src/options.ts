@@ -20,6 +20,7 @@ export interface RendererOptions {
 }
 
 export interface Options {
+  additonalData?: string;
   allowUnknownClassnames?: boolean;
   classnameTransform?: ClassnameTransformOptions;
   customMatcher?: string;

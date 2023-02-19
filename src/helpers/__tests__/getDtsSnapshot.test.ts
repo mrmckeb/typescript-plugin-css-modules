@@ -330,4 +330,32 @@ describe('helpers / cssSnapshots', () => {
       expect(dts).toMatchSnapshot();
     });
   });
+
+  describe('with additonalData enabled', () => {
+    const fileName = join(__dirname, 'fixtures', 'test.module.scss');
+    const css = readFileSync(fileName, 'utf8');
+    const options: Options = {
+      additonalData: '.my-data {\n  color: red;\n}\n\n',
+    };
+
+    const cssExports = getCssExports({
+      css,
+      fileName,
+      logger,
+      options,
+      processor,
+      compilerOptions,
+      directory: __dirname,
+    });
+
+    it('should return a dts file that contains additional data', () => {
+      const dts = createDtsExports({
+        cssExports,
+        fileName,
+        logger,
+        options,
+      });
+      expect(dts).toContain('my-data');
+    });
+  });
 });

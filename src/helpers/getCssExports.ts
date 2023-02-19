@@ -52,17 +52,19 @@ export const getCssExports = ({
   compilerOptions: tsModule.CompilerOptions;
   directory: string;
 }): CSSExportsWithSourceMap => {
+  const rawCss = options.additonalData ? options.additonalData + css : css;
+
+  const fileType = getFileType(fileName);
+  const rendererOptions = options.rendererOptions ?? {};
+
+  let transformedCss = '';
+  let sourceMap: RawSourceMap | undefined;
+
   try {
-    const fileType = getFileType(fileName);
-    const rendererOptions = options.rendererOptions ?? {};
-
-    let transformedCss = '';
-    let sourceMap: RawSourceMap | undefined;
-
     if (options.customRenderer) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const customRenderer = require(options.customRenderer) as CustomRenderer;
-      transformedCss = customRenderer(css, {
+      transformedCss = customRenderer(rawCss, {
         fileName,
         logger,
         compilerOptions,
@@ -71,7 +73,7 @@ export const getCssExports = ({
       switch (fileType) {
         case FileType.less:
           less.render(
-            css,
+            rawCss,
             {
               syncImport: true,
               filename: fileName,
@@ -122,10 +124,12 @@ export const getCssExports = ({
 
           const importers = [aliasImporter, sassTildeImporter];
 
-          const result = sass.compile(fileName, {
+          const result = sass.compileString(rawCss, {
             importers,
             loadPaths: [filePath, 'node_modules', ...(loadPaths ?? [])],
             sourceMap: true,
+            syntax: fileType === FileType.sass ? 'indented' : 'scss',
+            url: new URL(`file://${fileName}`),
             ...sassOptions,
           });
 
@@ -135,14 +139,14 @@ export const getCssExports = ({
         }
 
         case FileType.styl:
-          transformedCss = stylus(css, {
+          transformedCss = stylus(rawCss, {
             ...(rendererOptions.stylus ?? {}),
             filename: fileName,
           }).render();
           break;
 
         default:
-          transformedCss = css;
+          transformedCss = rawCss;
           break;
       }
     }

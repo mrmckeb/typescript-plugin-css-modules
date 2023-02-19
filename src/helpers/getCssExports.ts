@@ -52,7 +52,7 @@ export const getCssExports = ({
   compilerOptions: tsModule.CompilerOptions;
   directory: string;
 }): CSSExportsWithSourceMap => {
-  const rawCss = options.additonalData ? options.additonalData + css : css;
+  const rawCss = options.additionalData ? options.additionalData + css : css;
 
   const fileType = getFileType(fileName);
   const rendererOptions = options.rendererOptions ?? {};

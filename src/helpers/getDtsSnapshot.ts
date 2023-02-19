@@ -9,7 +9,7 @@ export const getDtsSnapshot = (
   ts: typeof tsModule,
   processor: Processor,
   fileName: string,
-  scriptSnapshot: ts.IScriptSnapshot,
+  scriptSnapshot: tsModule.IScriptSnapshot,
   options: Options,
   logger: Logger,
   compilerOptions: tsModule.CompilerOptions,

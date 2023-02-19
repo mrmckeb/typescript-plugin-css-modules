@@ -3,7 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { AcceptedPlugin } from 'postcss';
 import postcssrc from 'postcss-load-config';
-import tsModule from 'typescript/lib/tsserverlibrary';
+import tsModule, { server } from 'typescript/lib/tsserverlibrary';
 import { Options } from './options';
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
@@ -11,6 +11,7 @@ import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
 import { getProcessor } from './helpers/getProcessor';
 import { filterPlugins } from './helpers/filterPlugins';
+import { LanguageService, SourceFile } from 'typescript';
 
 const getPostCssConfigPlugins = (directory: string) => {
   try {
@@ -23,7 +24,7 @@ const getPostCssConfigPlugins = (directory: string) => {
 function init({ typescript: ts }: { typescript: typeof tsModule }) {
   let _isCSS: isCSSFn;
 
-  function create(info: ts.server.PluginCreateInfo) {
+  function create(info: server.PluginCreateInfo): LanguageService {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();
@@ -107,7 +108,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       fileName,
       scriptSnapshot,
       ...rest
-    ): ts.SourceFile => {
+    ): SourceFile => {
       if (isCSS(fileName)) {
         scriptSnapshot = getDtsSnapshot(
           ts,
@@ -137,7 +138,7 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       sourceFile,
       scriptSnapshot,
       ...rest
-    ): ts.SourceFile => {
+    ): SourceFile => {
       if (isCSS(sourceFile.fileName)) {
         scriptSnapshot = getDtsSnapshot(
           ts,
@@ -189,11 +190,15 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
                   moduleName,
                 ),
               };
-            } else if (isCSS(moduleName)) {
+            } else if (
+              isCSS(moduleName) &&
+              info.languageServiceHost
+                .getResolvedModuleWithFailedLookupLocationsFromCache
+            ) {
               // TODO: Move this section to a separate file and add basic tests.
               // Attempts to locate the module using TypeScript's previous search paths. These include "baseUrl" and "paths".
               const failedModule =
-                info.project.getResolvedModuleWithFailedLookupLocationsFromCache(
+                info.languageServiceHost.getResolvedModuleWithFailedLookupLocationsFromCache(
                   moduleName,
                   containingFile,
                 );

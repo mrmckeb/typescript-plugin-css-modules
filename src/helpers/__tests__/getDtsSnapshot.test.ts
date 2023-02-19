@@ -331,11 +331,11 @@ describe('helpers / cssSnapshots', () => {
     });
   });
 
-  describe('with additonalData enabled', () => {
+  describe('with additionalData enabled', () => {
     const fileName = join(__dirname, 'fixtures', 'test.module.scss');
     const css = readFileSync(fileName, 'utf8');
     const options: Options = {
-      additonalData: '.my-data {\n  color: red;\n}\n\n',
+      additionalData: '.my-data {\n  color: red;\n}\n\n',
     };
 
     const cssExports = getCssExports({

@@ -99,7 +99,7 @@ Please note that no options are required. However, depending on your configurati
 
 | Option                     | Default value                      | Description                                                                    |
 | -------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ |
-| `additonalData`            | `undefined`                        | An optional string to append to the top of source files.                       |
+| `additionalData`           | `undefined`                        | An optional string to append to the top of source files.                       |
 | `allowUnknownClassnames`   | `false`                            | Disables TypeScript warnings on unknown classnames (for default imports only). |
 | `classnameTransform`       | `"asIs"`                           | See [`classnameTransform`](#classnameTransform) below.                         |
 | `customMatcher`            | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                        |

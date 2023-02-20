@@ -76,16 +76,30 @@ export default classes;
       .filter(([classname]) => isValidVariable(classname));
 
     filteredClasses.forEach(([classname, originalClassname]) => {
-      const classRegexp = new RegExp(`${originalClassname}[\\s{]`, 'g');
+      let matchedLine;
+      let matchedColumn;
 
-      const matchedLine = cssLines.findIndex((line) => classRegexp.test(line));
-      const matchedColumn =
-        matchedLine && cssLines[matchedLine].indexOf(originalClassname);
+      for (let i = 0; i < cssLines.length; i++) {
+        const match = new RegExp(
+          // NOTE: This excludes any match not starting with:
+          // - `.` for classnames,
+          // - `:` or ` ` for animation names,
+          // and any matches followed by valid CSS selector characters.
+          `[:.\\s]${originalClassname}(?![_a-zA-Z0-9-])`,
+          'g',
+        ).exec(cssLines[i]);
+
+        if (match) {
+          matchedLine = i;
+          matchedColumn = match.index;
+          break;
+        }
+      }
 
       const { line: lineNumber } = smc.originalPositionFor({
         // Lines start at 1, not 0.
-        line: matchedLine >= 0 ? matchedLine + 1 : 1,
-        column: matchedColumn >= 0 ? matchedColumn : 0,
+        line: matchedLine ? matchedLine + 1 : 1,
+        column: matchedColumn ? matchedColumn : 0,
       });
 
       dtsLines[lineNumber ? lineNumber - 1 : 0] +=

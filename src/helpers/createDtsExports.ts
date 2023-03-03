@@ -42,18 +42,7 @@ export const createDtsExports = ({
     .filter(isValidVariable)
     .map(classnameToNamedExport);
 
-  let dts = `\
-declare let classes: {
-  ${processedClasses.map(classnameToProperty).join('\n  ')}${
-    options.allowUnknownClassnames ? '\n  [key: string]: string;' : ''
-  }
-};
-export default classes;
-`;
-
-  if (options.namedExports !== false && filteredClasses.length) {
-    dts += filteredClasses.join('\n') + '\n';
-  }
+  let dts = '';
 
   if (options.goToDefinition && cssExports.sourceMap) {
     // Create a new source map consumer.
@@ -107,6 +96,23 @@ export default classes;
     });
 
     dts = dtsLines.join('\n');
+  }
+
+  dts += `\
+declare let _classes: {
+  ${processedClasses.map(classnameToProperty).join('\n  ')}${
+    options.allowUnknownClassnames ? '\n  [key: string]: string;' : ''
+  }
+};
+export default _classes;
+`;
+
+  if (
+    !options.goToDefinition &&
+    options.namedExports !== false &&
+    filteredClasses.length
+  ) {
+    dts += filteredClasses.join('\n') + '\n';
   }
 
   if (options.customTemplate) {

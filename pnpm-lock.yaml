@@ -6,6 +6,7 @@ specifiers:
   '@types/less': ^3.0.3
   '@types/lodash.camelcase': ^4.3.7
   '@types/node': ^18.14.0
+  '@types/postcss-modules-extract-imports': ^3.0.2
   '@types/postcss-modules-local-by-default': ^4.0.0
   '@types/postcss-modules-scope': ^3.0.1
   '@types/reserved-words': ^0.1.0
@@ -27,6 +28,7 @@ specifiers:
   postcss: ^8.4.21
   postcss-import-sync2: ^1.2.0
   postcss-load-config: ^3.1.4
+  postcss-modules-extract-imports: ^3.0.0
   postcss-modules-local-by-default: ^4.0.0
   postcss-modules-scope: ^3.0.0
   postcss-nested: ^4.2.3
@@ -50,6 +52,7 @@ dependencies:
   lodash.camelcase: 4.3.0
   postcss: 8.4.21
   postcss-load-config: 3.1.4_postcss@8.4.21
+  postcss-modules-extract-imports: 3.0.0_postcss@8.4.21
   postcss-modules-local-by-default: 4.0.0_postcss@8.4.21
   postcss-modules-scope: 3.0.0_postcss@8.4.21
   reserved-words: 0.1.2
@@ -64,6 +67,7 @@ devDependencies:
   '@types/less': 3.0.3
   '@types/lodash.camelcase': 4.3.7
   '@types/node': 18.14.0
+  '@types/postcss-modules-extract-imports': 3.0.2
   '@types/reserved-words': 0.1.0
   '@types/sass': 1.43.1
   '@types/stylus': 0.48.38
@@ -1134,6 +1138,12 @@ packages:
 
   /@types/node/18.14.0:
     resolution: {integrity: sha512-5EWrvLmglK+imbCJY0+INViFWUHg1AHel1sq4ZVSfdcNqGy9Edv3UB9IIzzg+xPaUcAgZYcfVs2fBcwDeZzU0A==}
+    dev: true
+
+  /@types/postcss-modules-extract-imports/3.0.2:
+    resolution: {integrity: sha512-w9WrPL5+Re98Jw7Bbtm4oprmp0wFbtCJBfEAjpEE9XX8gs10pLH4AdrYqAzzPL7oSjZUoNTaW9WOFYojejN+FA==}
+    dependencies:
+      postcss: 8.4.21
     dev: true
 
   /@types/postcss-modules-local-by-default/4.0.0:
@@ -3692,6 +3702,15 @@ packages:
     dependencies:
       postcss: 8.4.21
     dev: true
+
+  /postcss-modules-extract-imports/3.0.0_postcss@8.4.21:
+    resolution: {integrity: sha512-bdHleFnP3kZ4NYDhuGlVK+CMrQ/pqUm8bx/oGL93K6gVwiclvX5x0n76fYMKuIGKzlABOy13zsvqjb0f92TEXw==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      postcss: 8.4.21
+    dev: false
 
   /postcss-modules-local-by-default/4.0.0_postcss@8.4.21:
     resolution: {integrity: sha512-sT7ihtmGSF9yhm6ggikHdV0hlziDTX7oFoXtuVWeDd3hHObNkcHRo9V3yg7vCAY7cONyxJC/XXCmmiHHcvX7bQ==}

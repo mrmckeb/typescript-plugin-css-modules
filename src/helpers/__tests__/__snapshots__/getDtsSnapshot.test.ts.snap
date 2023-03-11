@@ -163,6 +163,8 @@ exports[`helpers / cssSnapshots with file 'import.module.css' createExports shou
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'composed': string;
+  'composed-from-other-file': string;
   'fadeIn': string;
 };
 export default _classes;
@@ -173,6 +175,7 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let composed: string;
 export let fadeIn: string;
 "
 `;
@@ -185,6 +188,8 @@ exports[`helpers / cssSnapshots with file 'import.module.css' getCssExports shou
   "class-c": "class-c",
   "classA": "classA",
   "class_d": "class_d",
+  "composed": "composed classA",
+  "composed-from-other-file": "composed-from-other-file i__imported_className_1",
   "fadeIn": "fadeIn",
   "nestedChild": "nestedChild",
   "parent": "parent",
@@ -202,6 +207,8 @@ declare let _classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'composed': string;
+  'composed-from-other-file': string;
   'fadeIn': string;
 };
 export default _classes;
@@ -212,10 +219,11 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let composed: string;
 export let fadeIn: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'fadeIn';"
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'composed' | 'composed-from-other-file' | 'fadeIn';"
 `;
 
 exports[`helpers / cssSnapshots with file 'import.module.less' createExports should create an exports file 1`] = `
@@ -388,6 +396,8 @@ exports[`helpers / cssSnapshots with file 'test.module.css' createExports should
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'composed': string;
+  'composed-from-other-file': string;
   'fadeIn': string;
 };
 export default _classes;
@@ -398,6 +408,7 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let composed: string;
 export let fadeIn: string;
 "
 `;
@@ -410,6 +421,8 @@ exports[`helpers / cssSnapshots with file 'test.module.css' getCssExports should
   "class-c": "class-c",
   "classA": "classA",
   "class_d": "class_d",
+  "composed": "composed classA",
+  "composed-from-other-file": "composed-from-other-file i__imported_className_2",
   "fadeIn": "fadeIn",
   "nestedChild": "nestedChild",
   "parent": "parent",
@@ -427,6 +440,8 @@ declare let _classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'composed': string;
+  'composed-from-other-file': string;
   'fadeIn': string;
 };
 export default _classes;
@@ -437,10 +452,11 @@ export let parent: string;
 export let childA: string;
 export let childB: string;
 export let nestedChild: string;
+export let composed: string;
 export let fadeIn: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'fadeIn';"
+export type AllClassNames = 'classA' | 'ClassB' | 'class-c' | 'class_d' | 'parent' | 'childA' | 'childB' | 'nestedChild' | 'composed' | 'composed-from-other-file' | 'fadeIn';"
 `;
 
 exports[`helpers / cssSnapshots with file 'test.module.less' createExports should create an exports file 1`] = `
@@ -729,7 +745,7 @@ export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' 
 `;
 
 exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should return a line-accurate dts file 1`] = `
-"export let classA: string;
+"export let classA: string;export let composed: string;export let composedFromOtherFile: string;
 
 
 
@@ -763,6 +779,13 @@ export let fadeIn: string;
 
 
 
+
+
+
+
+
+
+
 declare let _classes: {
   'classA': string;
   'classB': string;
@@ -772,6 +795,8 @@ declare let _classes: {
   'childA': string;
   'childB': string;
   'nestedChild': string;
+  'composed': string;
+  'composedFromOtherFile': string;
   'fadeIn': string;
 };
 export default _classes;
@@ -787,6 +812,8 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should retu
     "class-c": "class-c",
     "classA": "classA",
     "class_d": "class_d",
+    "composed": "composed classA",
+    "composed-from-other-file": "composed-from-other-file i__imported_className_0",
     "fadeIn": "fadeIn",
     "nestedChild": "nestedChild",
     "parent": "parent",
@@ -825,10 +852,17 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should retu
   }
 }
 
+.composed {
+  display: block;
+}
+
+.composed-from-other-file {
+}
+
 /*# sourceMappingURL=src/helpers/__tests__/fixtures/test.module.css.map */",
   "sourceMap": {
     "file": "src/helpers/__tests__/fixtures/test.module.css",
-    "mappings": "AAAA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;EACpB,oBAAoB;AACtB;;AAGE;IACE,oBAAoB;EACtB;;AAEE;MACE,oBAAoB;IACtB;;AAIJ;EACE;IACE,UAAU;EACZ;EACA;IACE,UAAU;EACZ;AACF",
+    "mappings": "AAAA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,oBAAoB;EACpB,oBAAoB;AACtB;;AAGE;IACE,oBAAoB;EACtB;;AAEE;MACE,oBAAoB;IACtB;;AAIJ;EACE;IACE,UAAU;EACZ;EACA;IACE,UAAU;EACZ;AACF;;AAEA;EAEE,cAAc;AAChB;;AAEA;AAEA",
     "names": [],
     "sources": [
       "src/helpers/__tests__/fixtures/test.module.css",
@@ -869,6 +903,15 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should retu
   to {
     opacity: 1;
   }
+}
+
+.composed {
+  composes: classA;
+  display: block;
+}
+
+.composed-from-other-file {
+  composes: className from './_composed.css';
 }
 ",
     ],

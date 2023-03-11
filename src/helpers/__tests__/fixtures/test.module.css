@@ -34,3 +34,12 @@
     opacity: 1;
   }
 }
+
+.composed {
+  composes: classA;
+  display: block;
+}
+
+.composed-from-other-file {
+  composes: className from './_composed.css';
+}

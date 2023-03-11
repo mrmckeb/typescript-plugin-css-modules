@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import tsModule from 'typescript/lib/tsserverlibrary';
 import { Options } from '../options';
 import { getCssExports } from './getCssExports';
@@ -9,23 +10,12 @@ export const getDtsSnapshot = (
   ts: typeof tsModule,
   processor: Processor,
   fileName: string,
-  scriptSnapshot: ts.IScriptSnapshot,
   options: Options,
   logger: Logger,
   compilerOptions: tsModule.CompilerOptions,
   directory: string,
 ): tsModule.IScriptSnapshot => {
-  const css = scriptSnapshot.getText(0, scriptSnapshot.getLength());
-
-  /*
-   * TODO: Temporary workaround for:
-   * https://github.com/mrmckeb/typescript-plugin-css-modules/issues/41
-   * Needs investigation for a more elegant solution.
-   */
-  if (css.includes('export default classes')) {
-    return scriptSnapshot;
-  }
-
+  const css = readFileSync(fileName, 'utf-8');
   const cssExports = getCssExports({
     css,
     fileName,

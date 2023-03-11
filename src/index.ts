@@ -3,7 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { AcceptedPlugin } from 'postcss';
 import postcssrc from 'postcss-load-config';
-import tsModule from 'typescript/lib/tsserverlibrary';
+import { server } from 'typescript/lib/tsserverlibrary';
 import { Options } from './options';
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
@@ -11,6 +11,14 @@ import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
 import { getProcessor } from './helpers/getProcessor';
 import { filterPlugins } from './helpers/filterPlugins';
+import {
+  createLanguageService,
+  Extension,
+  LanguageService,
+  LanguageServiceHost,
+  ResolvedModuleFull,
+  ScriptKind,
+} from 'typescript';
 
 const getPostCssConfigPlugins = (directory: string) => {
   try {
@@ -20,13 +28,25 @@ const getPostCssConfigPlugins = (directory: string) => {
   }
 };
 
-function init({ typescript: ts }: { typescript: typeof tsModule }) {
+const init: server.PluginModuleFactory = ({ typescript: ts }) => {
   let _isCSS: isCSSFn;
 
-  function create(info: ts.server.PluginCreateInfo) {
+  function create(info: server.PluginCreateInfo): LanguageService {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();
+
+    const languageServiceHost = {} as Partial<LanguageServiceHost>;
+
+    const languageServiceHostProxy = new Proxy(info.languageServiceHost, {
+      get(target, key: keyof LanguageServiceHost) {
+        return languageServiceHost[key]
+          ? languageServiceHost[key]
+          : target[key];
+      },
+    });
+
+    const languageService = createLanguageService(languageServiceHostProxy);
 
     // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
     process.chdir(directory);
@@ -101,73 +121,136 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
     const { isCSS, isRelativeCSS } = createMatchers(logger, options);
     _isCSS = isCSS;
 
-    // Creates new virtual source files for the CSS modules.
-    const _createLanguageServiceSourceFile = ts.createLanguageServiceSourceFile;
-    ts.createLanguageServiceSourceFile = (
-      fileName,
-      scriptSnapshot,
-      ...rest
-    ): ts.SourceFile => {
+    languageServiceHost.getScriptKind = (fileName) => {
+      if (!info.languageServiceHost.getScriptKind) {
+        return ScriptKind.Unknown;
+      }
       if (isCSS(fileName)) {
-        scriptSnapshot = getDtsSnapshot(
+        return ScriptKind.TS;
+      }
+      return info.languageServiceHost.getScriptKind(fileName);
+    };
+
+    languageServiceHost.getScriptSnapshot = (fileName) => {
+      if (isCSS(fileName)) {
+        return getDtsSnapshot(
           ts,
           processor,
           fileName,
-          scriptSnapshot,
           options,
           logger,
           compilerOptions,
           directory,
         );
       }
-      const sourceFile = _createLanguageServiceSourceFile(
-        fileName,
-        scriptSnapshot,
-        ...rest,
-      );
-      if (isCSS(fileName)) {
-        sourceFile.isDeclarationFile = true;
-      }
-      return sourceFile;
+      return info.languageServiceHost.getScriptSnapshot(fileName);
     };
 
-    // Updates virtual source files as files update.
-    const _updateLanguageServiceSourceFile = ts.updateLanguageServiceSourceFile;
-    ts.updateLanguageServiceSourceFile = (
-      sourceFile,
-      scriptSnapshot,
-      ...rest
-    ): ts.SourceFile => {
-      if (isCSS(sourceFile.fileName)) {
-        scriptSnapshot = getDtsSnapshot(
-          ts,
-          processor,
-          sourceFile.fileName,
-          scriptSnapshot,
-          options,
-          logger,
-          compilerOptions,
-          directory,
+    const createModuleResolver =
+      (containingFile: string) =>
+      (moduleName: string): ResolvedModuleFull | undefined => {
+        if (isRelativeCSS(moduleName)) {
+          return {
+            extension: Extension.Dts,
+            isExternalLibraryImport: false,
+            resolvedFileName: path.resolve(
+              path.dirname(containingFile),
+              moduleName,
+            ),
+          };
+        } else if (
+          isCSS(moduleName) &&
+          languageServiceHost.getResolvedModuleWithFailedLookupLocationsFromCache
+        ) {
+          // TODO: Move this section to a separate file and add basic tests.
+          // Attempts to locate the module using TypeScript's previous search paths. These include "baseUrl" and "paths".
+          const failedModule =
+            languageServiceHost.getResolvedModuleWithFailedLookupLocationsFromCache(
+              moduleName,
+              containingFile,
+            );
+          const baseUrl = info.project.getCompilerOptions().baseUrl;
+          const match = '/index.ts';
+
+          // An array of paths TypeScript searched for the module. All include .ts, .tsx, .d.ts, or .json extensions.
+          // NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unknown.
+          // https://github.com/microsoft/TypeScript/issues/28770
+          const failedLocations: readonly string[] = (
+            failedModule as unknown as {
+              failedLookupLocations: readonly string[];
+            }
+          ).failedLookupLocations;
+
+          // Filter to only one extension type, and remove that extension. This leaves us with the actual file name.
+          // Example: "usr/person/project/src/dir/File.module.css/index.d.ts" > "usr/person/project/src/dir/File.module.css"
+          const normalizedLocations = failedLocations.reduce<string[]>(
+            (locations, location) => {
+              if (
+                (baseUrl ? location.includes(baseUrl) : true) &&
+                location.endsWith(match)
+              ) {
+                return [...locations, location.replace(match, '')];
+              }
+              return locations;
+            },
+            [],
+          );
+
+          // Find the imported CSS module, if it exists.
+          const cssModulePath = normalizedLocations.find((location) =>
+            fs.existsSync(location),
+          );
+
+          if (cssModulePath) {
+            return {
+              extension: Extension.Dts,
+              isExternalLibraryImport: false,
+              resolvedFileName: path.resolve(cssModulePath),
+            };
+          }
+        }
+      };
+
+    // TypeScript 5.x
+    if (info.languageServiceHost.resolveModuleNameLiterals) {
+      const _resolveModuleNameLiterals =
+        info.languageServiceHost.resolveModuleNameLiterals.bind(
+          info.languageServiceHost,
         );
-      }
-      sourceFile = _updateLanguageServiceSourceFile(
-        sourceFile,
-        scriptSnapshot,
-        ...rest,
-      );
-      if (isCSS(sourceFile.fileName)) {
-        sourceFile.isDeclarationFile = true;
-      }
-      return sourceFile;
-    };
 
-    if (info.languageServiceHost.resolveModuleNames) {
+      languageServiceHost.resolveModuleNameLiterals = (
+        moduleNames,
+        containingFile,
+        ...rest
+      ) => {
+        const resolvedModules = _resolveModuleNameLiterals(
+          moduleNames,
+          containingFile,
+          ...rest,
+        );
+
+        const moduleResolver = createModuleResolver(containingFile);
+
+        return moduleNames.map(({ text: moduleName }, index) => {
+          try {
+            const resolvedModule = moduleResolver(moduleName);
+            if (resolvedModule) return { resolvedModule };
+          } catch (e) {
+            logger.error(e);
+            return resolvedModules[index];
+          }
+          return resolvedModules[index];
+        });
+      };
+    }
+    // TypeScript 4.x
+    else if (info.languageServiceHost.resolveModuleNames) {
       const _resolveModuleNames =
         info.languageServiceHost.resolveModuleNames.bind(
           info.languageServiceHost,
         );
 
-      info.languageServiceHost.resolveModuleNames = (
+      languageServiceHost.resolveModuleNames = (
         moduleNames,
         containingFile,
         ...rest
@@ -178,65 +261,12 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
           ...rest,
         );
 
+        const moduleResolver = createModuleResolver(containingFile);
+
         return moduleNames.map((moduleName, index) => {
           try {
-            if (isRelativeCSS(moduleName)) {
-              return {
-                extension: tsModule.Extension.Dts,
-                isExternalLibraryImport: false,
-                resolvedFileName: path.resolve(
-                  path.dirname(containingFile),
-                  moduleName,
-                ),
-              };
-            } else if (isCSS(moduleName)) {
-              // TODO: Move this section to a separate file and add basic tests.
-              // Attempts to locate the module using TypeScript's previous search paths. These include "baseUrl" and "paths".
-              const failedModule =
-                info.project.getResolvedModuleWithFailedLookupLocationsFromCache(
-                  moduleName,
-                  containingFile,
-                );
-              const baseUrl = info.project.getCompilerOptions().baseUrl;
-              const match = '/index.ts';
-
-              // An array of paths TypeScript searched for the module. All include .ts, .tsx, .d.ts, or .json extensions.
-              // NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unkown.
-              // https://github.com/microsoft/TypeScript/issues/28770
-              const failedLocations: readonly string[] = (
-                failedModule as unknown as {
-                  failedLookupLocations: readonly string[];
-                }
-              ).failedLookupLocations;
-
-              // Filter to only one extension type, and remove that extension. This leaves us with the actual filename.
-              // Example: "usr/person/project/src/dir/File.module.css/index.d.ts" > "usr/person/project/src/dir/File.module.css"
-              const normalizedLocations = failedLocations.reduce<string[]>(
-                (locations, location) => {
-                  if (
-                    (baseUrl ? location.includes(baseUrl) : true) &&
-                    location.endsWith(match)
-                  ) {
-                    return [...locations, location.replace(match, '')];
-                  }
-                  return locations;
-                },
-                [],
-              );
-
-              // Find the imported CSS module, if it exists.
-              const cssModulePath = normalizedLocations.find((location) =>
-                fs.existsSync(location),
-              );
-
-              if (cssModulePath) {
-                return {
-                  extension: tsModule.Extension.Dts,
-                  isExternalLibraryImport: false,
-                  resolvedFileName: path.resolve(cssModulePath),
-                };
-              }
-            }
+            const resolvedModule = moduleResolver(moduleName);
+            if (resolvedModule) return resolvedModule;
           } catch (e) {
             logger.error(e);
             return resolvedModules[index];
@@ -246,14 +276,14 @@ function init({ typescript: ts }: { typescript: typeof tsModule }) {
       };
     }
 
-    return info.languageService;
+    return languageService;
   }
 
-  function getExternalFiles(project: tsModule.server.ConfiguredProject) {
+  function getExternalFiles(project: server.ConfiguredProject): string[] {
     return project.getFileNames().filter(_isCSS);
   }
 
   return { create, getExternalFiles };
-}
+};
 
 export = init;

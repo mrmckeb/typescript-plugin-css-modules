@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import tsModule from 'typescript/lib/tsserverlibrary';
+import type tsModule from 'typescript/lib/tsserverlibrary';
 import { Options } from '../options';
 import { getCssExports } from './getCssExports';
 import { createDtsExports } from './createDtsExports';

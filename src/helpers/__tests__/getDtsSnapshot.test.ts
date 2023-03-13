@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import postcssImportSync from 'postcss-import-sync2';
 import postcssPresetEnv from 'postcss-preset-env';
-import tsModule from 'typescript/lib/tsserverlibrary';
+import type tsModule from 'typescript/lib/tsserverlibrary';
 import { CSSExportsWithSourceMap, getCssExports } from '../getCssExports';
 import { createDtsExports } from '../createDtsExports';
 import { Logger } from '../logger';

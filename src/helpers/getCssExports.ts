@@ -5,7 +5,7 @@ import sass from 'sass';
 import stylus from 'stylus';
 import { CSSExports, extractICSS } from 'icss-utils';
 import { RawSourceMap } from 'source-map-js';
-import tsModule from 'typescript/lib/tsserverlibrary';
+import type tsModule from 'typescript/lib/tsserverlibrary';
 import { createMatchPath } from 'tsconfig-paths';
 import { sassTildeImporter } from '../importers/sassTildeImporter';
 import { Options, CustomRenderer } from '../options';

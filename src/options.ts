@@ -1,5 +1,5 @@
 import { Options as SassOptions } from 'sass';
-import tsModule from 'typescript/lib/tsserverlibrary';
+import type tsModule from 'typescript/lib/tsserverlibrary';
 import { DotenvConfigOptions } from 'dotenv';
 import { CSSExports } from 'icss-utils';
 import stylus from 'stylus';

@@ -3,7 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { AcceptedPlugin } from 'postcss';
 import postcssrc from 'postcss-load-config';
-import { server } from 'typescript/lib/tsserverlibrary';
+import type tsModule from 'typescript/lib/tsserverlibrary';
 import { Options } from './options';
 import { createMatchers } from './helpers/createMatchers';
 import { isCSSFn } from './helpers/cssExtensions';
@@ -11,14 +11,6 @@ import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
 import { getProcessor } from './helpers/getProcessor';
 import { filterPlugins } from './helpers/filterPlugins';
-import {
-  createLanguageService,
-  Extension,
-  LanguageService,
-  LanguageServiceHost,
-  ResolvedModuleFull,
-  ScriptKind,
-} from 'typescript';
 
 const getPostCssConfigPlugins = (directory: string) => {
   try {
@@ -28,25 +20,27 @@ const getPostCssConfigPlugins = (directory: string) => {
   }
 };
 
-const init: server.PluginModuleFactory = ({ typescript: ts }) => {
+const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
   let _isCSS: isCSSFn;
 
-  function create(info: server.PluginCreateInfo): LanguageService {
+  function create(
+    info: tsModule.server.PluginCreateInfo,
+  ): tsModule.LanguageService {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();
 
-    const languageServiceHost = {} as Partial<LanguageServiceHost>;
+    const languageServiceHost = {} as Partial<tsModule.LanguageServiceHost>;
 
     const languageServiceHostProxy = new Proxy(info.languageServiceHost, {
-      get(target, key: keyof LanguageServiceHost) {
+      get(target, key: keyof tsModule.LanguageServiceHost) {
         return languageServiceHost[key]
           ? languageServiceHost[key]
           : target[key];
       },
     });
 
-    const languageService = createLanguageService(languageServiceHostProxy);
+    const languageService = ts.createLanguageService(languageServiceHostProxy);
 
     // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
     process.chdir(directory);
@@ -123,10 +117,10 @@ const init: server.PluginModuleFactory = ({ typescript: ts }) => {
 
     languageServiceHost.getScriptKind = (fileName) => {
       if (!info.languageServiceHost.getScriptKind) {
-        return ScriptKind.Unknown;
+        return ts.ScriptKind.Unknown;
       }
       if (isCSS(fileName)) {
-        return ScriptKind.TS;
+        return ts.ScriptKind.TS;
       }
       return info.languageServiceHost.getScriptKind(fileName);
     };
@@ -148,10 +142,10 @@ const init: server.PluginModuleFactory = ({ typescript: ts }) => {
 
     const createModuleResolver =
       (containingFile: string) =>
-      (moduleName: string): ResolvedModuleFull | undefined => {
+      (moduleName: string): tsModule.ResolvedModuleFull | undefined => {
         if (isRelativeCSS(moduleName)) {
           return {
-            extension: Extension.Dts,
+            extension: ts.Extension.Dts,
             isExternalLibraryImport: false,
             resolvedFileName: path.resolve(
               path.dirname(containingFile),
@@ -203,7 +197,7 @@ const init: server.PluginModuleFactory = ({ typescript: ts }) => {
 
           if (cssModulePath) {
             return {
-              extension: Extension.Dts,
+              extension: ts.Extension.Dts,
               isExternalLibraryImport: false,
               resolvedFileName: path.resolve(cssModulePath),
             };
@@ -279,7 +273,9 @@ const init: server.PluginModuleFactory = ({ typescript: ts }) => {
     return languageService;
   }
 
-  function getExternalFiles(project: server.ConfiguredProject): string[] {
+  function getExternalFiles(
+    project: tsModule.server.ConfiguredProject,
+  ): string[] {
     return project.getFileNames().filter(_isCSS);
   }
 

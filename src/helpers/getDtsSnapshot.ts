@@ -15,16 +15,21 @@ export const getDtsSnapshot = (
   compilerOptions: tsModule.CompilerOptions,
   directory: string,
 ): tsModule.IScriptSnapshot => {
-  const css = readFileSync(fileName, 'utf-8');
-  const cssExports = getCssExports({
-    css,
-    fileName,
-    logger,
-    options,
-    processor,
-    compilerOptions,
-    directory,
-  });
-  const dts = createDtsExports({ cssExports, fileName, logger, options });
-  return ts.ScriptSnapshot.fromString(dts);
+  try {
+    const css = readFileSync(fileName, 'utf-8');
+    const cssExports = getCssExports({
+      css,
+      fileName,
+      logger,
+      options,
+      processor,
+      compilerOptions,
+      directory,
+    });
+    const dts = createDtsExports({ cssExports, fileName, logger, options });
+    return ts.ScriptSnapshot.fromString(dts);
+  }
+  catch (e) {
+    logger.error(e);
+  }
 };

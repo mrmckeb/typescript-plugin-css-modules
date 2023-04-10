@@ -126,8 +126,7 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
     };
 
     languageServiceHost.getScriptSnapshot = (fileName) => {
-      const fileExists = fs.existsSync(fileName);
-      if (fileExists && isCSS(fileName)) {
+      if (isCSS(fileName) && fs.existsSync(fileName)) {
         return getDtsSnapshot(
           ts,
           processor,

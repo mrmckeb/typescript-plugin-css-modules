@@ -142,7 +142,12 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
 
     const createModuleResolver =
       (containingFile: string) =>
-      (moduleName: string): tsModule.ResolvedModuleFull | undefined => {
+      (
+        moduleName: string,
+        resolveModule: () =>
+          | tsModule.ResolvedModuleWithFailedLookupLocations
+          | undefined,
+      ): tsModule.ResolvedModuleFull | undefined => {
         if (isRelativeCSS(moduleName)) {
           return {
             extension: ts.Extension.Dts,
@@ -152,17 +157,13 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
               moduleName,
             ),
           };
-        } else if (
-          isCSS(moduleName) &&
-          languageServiceHost.getResolvedModuleWithFailedLookupLocationsFromCache
-        ) {
+        }
+        if (isCSS(moduleName)) {
           // TODO: Move this section to a separate file and add basic tests.
           // Attempts to locate the module using TypeScript's previous search paths. These include "baseUrl" and "paths".
-          const failedModule =
-            languageServiceHost.getResolvedModuleWithFailedLookupLocationsFromCache(
-              moduleName,
-              containingFile,
-            );
+          const resolvedModule = resolveModule();
+          if (!resolvedModule) return;
+
           const baseUrl = info.project.getCompilerOptions().baseUrl;
           const match = '/index.ts';
 
@@ -170,7 +171,7 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
           // NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unknown.
           // https://github.com/microsoft/TypeScript/issues/28770
           const failedLocations: readonly string[] = (
-            failedModule as unknown as {
+            resolvedModule as unknown as {
               failedLookupLocations: readonly string[];
             }
           ).failedLookupLocations;
@@ -227,7 +228,10 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
 
         return moduleNames.map(({ text: moduleName }, index) => {
           try {
-            const resolvedModule = moduleResolver(moduleName);
+            const resolvedModule = moduleResolver(
+              moduleName,
+              () => resolvedModules[index],
+            );
             if (resolvedModule) return { resolvedModule };
           } catch (e) {
             logger.error(e);
@@ -259,7 +263,12 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
 
         return moduleNames.map((moduleName, index) => {
           try {
-            const resolvedModule = moduleResolver(moduleName);
+            const resolvedModule = moduleResolver(moduleName, () =>
+              languageServiceHost.getResolvedModuleWithFailedLookupLocationsFromCache?.(
+                moduleName,
+                containingFile,
+              ),
+            );
             if (resolvedModule) return resolvedModule;
           } catch (e) {
             logger.error(e);

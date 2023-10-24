@@ -282,6 +282,10 @@ If you're not using Visual Studio Code or are having trouble with the above meth
 
 You can include these logs with any issues you open for this project.
 
+### Disabling the plugin
+
+If your project uses the plugin but you are experiencing issues with it, you can disable it for yourself by defining the environment variable `TS_PLUGIN_CSS_MODULES_DISALBED`.
+
 ## About this project
 
 This project was inspired by a Create React App [issue](https://github.com/facebook/create-react-app/issues/5677)

@@ -64,11 +64,17 @@ export const getCssExports = ({
     if (options.customRenderer) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const customRenderer = require(options.customRenderer) as CustomRenderer;
-      transformedCss = customRenderer(rawCss, {
+      const customResult = customRenderer(rawCss, {
         fileName,
         logger,
         compilerOptions,
       });
+      if (typeof customResult === 'string') {
+        transformedCss = customResult;
+      } else if (customResult.css) {
+        transformedCss = customResult.css;
+        sourceMap = customResult.map;
+      }
     } else {
       switch (fileType) {
         case FileType.less:

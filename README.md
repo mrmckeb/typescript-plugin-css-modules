@@ -153,6 +153,11 @@ module.exports = (css, { fileName, logger }) => {
   try {
     // ...process your css here.
     return renderedCss;
+    // css and sourceMap
+    return {
+      css: renderedCss,
+      map: sourceMap,
+    };
   } catch (error) {
     logger.error(error.message);
   }

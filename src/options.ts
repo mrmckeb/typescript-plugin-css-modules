@@ -4,6 +4,7 @@ import { DotenvConfigOptions } from 'dotenv';
 import { CSSExports } from 'icss-utils';
 import stylus from 'stylus';
 import { Logger } from './helpers/logger';
+import type { RawSourceMap } from 'source-map-js';
 
 // NOTE: Stylus doesn't directly export RenderOptions.
 type StylusRenderOptions = Parameters<typeof stylus>[1];
@@ -52,7 +53,12 @@ export interface CustomRendererOptions {
 export type CustomRenderer = (
   css: string,
   options: CustomRendererOptions,
-) => string;
+) =>
+  | string
+  | {
+      css: string;
+      map?: RawSourceMap;
+    };
 
 export interface CustomTemplateOptions {
   classes: CSSExports;

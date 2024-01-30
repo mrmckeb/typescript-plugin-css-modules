@@ -114,10 +114,30 @@ export const getCssExports = ({
 
           const aliasImporter: sass.FileImporter<'sync'> = {
             findFileUrl(url) {
-              const newUrl =
+              let newUrl =
                 matchPath !== null
                   ? matchPath(url, undefined, undefined, ['.sass', '.scss'])
                   : undefined;
+
+              if (newUrl) {
+                return new URL(`file://${newUrl}`);
+              }
+
+              /**
+               * In the case we didn't find the file, we can retry with
+               * `_` prepended to the filename's import
+               */
+              const partialName = path.basename(url);
+              const partialDirName = path.dirname(url);
+              const partialUrl = path.join(partialDirName, `_${partialName}`);
+              newUrl =
+                matchPath !== null
+                  ? matchPath(partialUrl, undefined, undefined, [
+                      '.sass',
+                      '.scss',
+                    ])
+                  : undefined;
+
               return newUrl ? new URL(`file://${newUrl}`) : null;
             },
           };

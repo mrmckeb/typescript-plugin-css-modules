@@ -114,31 +114,57 @@ export const getCssExports = ({
 
           const aliasImporter: sass.FileImporter<'sync'> = {
             findFileUrl(url) {
-              let newUrl =
+              const exactFileUrl =
                 matchPath !== null
                   ? matchPath(url, undefined, undefined, ['.sass', '.scss'])
                   : undefined;
 
-              if (newUrl) {
-                return new URL(`file://${newUrl}`);
+              if (exactFileUrl) {
+                return new URL(`file://${exactFileUrl}`);
               }
 
               /**
-               * In the case we didn't find the file, we can retry with
-               * `_` prepended to the filename's import
+               * In case it didn't file the exact file it'll proceed to
+               * check other files matching the import process of SASS
+               * guidelines.
+               * @see {@link https://sass-lang.com/documentation/at-rules/import/#partials}
+               * @see {@link https://sass-lang.com/documentation/at-rules/import/#index-files}
                */
-              const partialName = path.basename(url);
+
+              // Checks for partials
+              const partialFileName = path.basename(url);
               const partialDirName = path.dirname(url);
-              const partialUrl = path.join(partialDirName, `_${partialName}`);
-              newUrl =
+              const partialFilePath = path.join(
+                partialDirName,
+                `_${partialFileName}`,
+              );
+              const partialFileUrl =
                 matchPath !== null
-                  ? matchPath(partialUrl, undefined, undefined, [
+                  ? matchPath(partialFilePath, undefined, undefined, [
                       '.sass',
                       '.scss',
                     ])
                   : undefined;
 
-              return newUrl ? new URL(`file://${newUrl}`) : null;
+              if (partialFileUrl) {
+                return new URL(`file://${partialFileUrl}`);
+              }
+
+              // Checks for an _index file
+              const indexFilePath = path.join(
+                partialDirName,
+                partialFileName,
+                `_index`,
+              );
+              const indexFileUrl =
+                matchPath !== null
+                  ? matchPath(indexFilePath, undefined, undefined, [
+                      '.sass',
+                      '.scss',
+                    ])
+                  : undefined;
+
+              return indexFileUrl ? new URL(`file://${indexFileUrl}`) : null;
             },
           };
 

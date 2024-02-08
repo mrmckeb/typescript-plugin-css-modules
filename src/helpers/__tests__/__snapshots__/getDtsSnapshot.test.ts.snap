@@ -34,6 +34,7 @@ exports[`helpers / cssSnapshots with allowUnknownClassnames enabled should retur
   'appLogo': string;
   'appLogo': string;
   'myAnimation': string;
+  'myFolderIndex': string;
   [key: string]: string;
 };
 export default _classes;
@@ -58,6 +59,7 @@ export let classWithMixin: string;
 export let appLogo: string;
 export let appLogo: string;
 export let myAnimation: string;
+export let myFolderIndex: string;
 "
 `;
 
@@ -618,6 +620,7 @@ exports[`helpers / cssSnapshots with file 'test.module.scss' createExports shoul
   'App_logo': string;
   'App-logo': string;
   'my-animation': string;
+  'my-folder-index': string;
 };
 export default _classes;
 export let App_logo: string;
@@ -637,6 +640,7 @@ exports[`helpers / cssSnapshots with file 'test.module.scss' getCssExports shoul
   "local-class-inside-global": "local-class-inside-global",
   "local-class-inside-local": "local-class-inside-local",
   "my-animation": "my-animation",
+  "my-folder-index": "my-folder-index",
   "nested-class-parent": "nested-class-parent",
   "nested-class-parent--extended": "nested-class-parent--extended",
   "reserved-words": "reserved-words",
@@ -678,12 +682,13 @@ declare let _classes: {
   'App_logo': string;
   'App-logo': string;
   'my-animation': string;
+  'my-folder-index': string;
 };
 export default _classes;
 export let App_logo: string;
 
 export const __cssModule: true;
-export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin' | 'App_logo' | 'App-logo' | 'my-animation';"
+export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin' | 'App_logo' | 'App-logo' | 'my-animation' | 'my-folder-index';"
 `;
 
 exports[`helpers / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
@@ -1034,7 +1039,7 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Less should ret
 exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should return a line-accurate dts file 1`] = `
 "
 
-
+export let myFolderIndex: string;
 
 
 export let localClassInsideGlobal: string;
@@ -1119,6 +1124,11 @@ export let myAnimation: string;
 
 
 
+
+
+
+
+
 declare let _classes: {
   'localClassInsideGlobal': string;
   'localClass': string;
@@ -1143,6 +1153,7 @@ declare let _classes: {
   'appLogo': string;
   'appLogo': string;
   'myAnimation': string;
+  'myFolderIndex': string;
 };
 export default _classes;
 "
@@ -1162,6 +1173,7 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should ret
     "local-class-inside-global": "local-class-inside-global",
     "local-class-inside-local": "local-class-inside-local",
     "my-animation": "my-animation",
+    "my-folder-index": "my-folder-index",
     "nested-class-parent": "nested-class-parent",
     "nested-class-parent--extended": "nested-class-parent--extended",
     "reserved-words": "reserved-words",
@@ -1262,15 +1274,21 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should ret
 .commented-parent-class {
   .commented-child-class
 }
-*/",
+*/
+
+.my-folder-index {
+  text-indent: 9999px;
+  margin: 10px;
+}",
   "sourceMap": {
     "file": "src/helpers/__tests__/fixtures/test.module.scss",
-    "mappings": "AAAA;EACE,oBAAA;ACCF;;ADGE;EACE,oBAAA;ACAJ;;ADIA;EACE,oBAAA;ACDF;;ADKE;EACE,oBAAA;ACFJ;;ADOE;EACE,oBAAA;ACJJ;;ADME;EACE,oBAAA;ACJJ;;ADSE;EACE,oBAAA;ACNJ;;ADQE;EACE,oBAAA;ACNJ;;ADaE;EACE,oBAJI;ACNR;;ADSE;EACE,oBAJI;ACFR;;ADKE;EACE,oBAJI;ACER;;ADCE;EACE,oBAJI;ACMR;;ADHE;EACE,oBAJI;ACUR;;ADPE;EACE,oBAJI;ACcR;;ADXE;EACE,oBAJI;ACkBR;;ADfE;EACE,oBAJI;ACsBR;;ADnBE;EACE,oBAJI;AC0BR;;ADhBA;EE/CE,SFgDoB;ACmBtB;;ADhBA;EACE,cAAA;EACA,oBAAA;ACmBF;;ADhBA;EACE;IACE,2CAAA;ECmBF;AACF;;ADZA;;;;CAAA",
+    "mappings": "AAAA;EACE,oBAAA;ACCF;;ADGE;EACE,oBAAA;ACAJ;;ADIA;EACE,oBAAA;ACDF;;ADKE;EACE,oBAAA;ACFJ;;ADOE;EACE,oBAAA;ACJJ;;ADME;EACE,oBAAA;ACJJ;;ADSE;EACE,oBAAA;ACNJ;;ADQE;EACE,oBAAA;ACNJ;;ADaE;EACE,oBAJI;ACNR;;ADSE;EACE,oBAJI;ACFR;;ADKE;EACE,oBAJI;ACER;;ADCE;EACE,oBAJI;ACMR;;ADHE;EACE,oBAJI;ACUR;;ADPE;EACE,oBAJI;ACcR;;ADXE;EACE,oBAJI;ACkBR;;ADfE;EACE,oBAJI;ACsBR;;ADnBE;EACE,oBAJI;AC0BR;;ADhBA;EE/CE,SFgDoB;ACmBtB;;ADhBA;EACE,cAAA;EACA,oBAAA;ACmBF;;ADhBA;EACE;IACE,2CAAA;ECmBF;AACF;;ADZA;;;;CAAA;;AGjEA;EACE,mBAAA;EDFA,YCGoB;AFoFtB",
     "names": [],
     "sources": [
       "file://[cwd]/src/helpers/__tests__/fixtures/test.module.scss",
       "src/helpers/__tests__/fixtures/test.module.scss",
       "file://[cwd]/src/helpers/__tests__/fixtures/_mixin.scss",
+      "file://[cwd]/src/helpers/__tests__/fixtures/my-folder/_index.scss",
     ],
     "version": 3,
   },
@@ -1316,6 +1334,7 @@ exports[`helpers / cssSnapshots with noUncheckedIndexedAccess enabled should ret
   'appLogo'?: string;
   'appLogo'?: string;
   'myAnimation'?: string;
+  'myFolderIndex'?: string;
 };
 export default _classes;
 export let localClassInsideGlobal: string | undefined;
@@ -1339,5 +1358,6 @@ export let classWithMixin: string | undefined;
 export let appLogo: string | undefined;
 export let appLogo: string | undefined;
 export let myAnimation: string | undefined;
+export let myFolderIndex: string | undefined;
 "
 `;

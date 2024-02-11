@@ -7,7 +7,10 @@ const getAbsoluteFileUrl = (expected: string) =>
 describe('importers / sassTildeImporter', () => {
   it('should return null when not a tilde import', () => {
     expect(
-      sassTildeImporter.findFileUrl('color.scss', { fromImport: true }),
+      sassTildeImporter.findFileUrl('color.scss', {
+        fromImport: true,
+        containingUrl: null,
+      }),
     ).toBeNull();
   });
 
@@ -15,6 +18,7 @@ describe('importers / sassTildeImporter', () => {
     expect(
       sassTildeImporter.findFileUrl('~made_up_module/color.scss', {
         fromImport: true,
+        containingUrl: null,
       }),
     ).toBeNull();
   });
@@ -24,6 +28,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/scss/bootstrap', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/bootstrap/scss/bootstrap.scss'));
@@ -34,6 +39,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/scss/_grid.scss', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/bootstrap/scss/_grid.scss'));
@@ -41,6 +47,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/scss/_grid', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/bootstrap/scss/_grid.scss'));
@@ -49,6 +56,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/scss/grid.scss', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/bootstrap/scss/_grid.scss'));
@@ -56,6 +64,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/scss/grid', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/bootstrap/scss/_grid.scss'));
@@ -70,7 +79,7 @@ describe('importers / sassTildeImporter', () => {
   it('should resolve index files', () => {
     expect(
       sassTildeImporter
-        .findFileUrl('~sass-svg', { fromImport: true })
+        .findFileUrl('~sass-svg', { fromImport: true, containingUrl: null })
         ?.toString(),
     ).toBe(getAbsoluteFileUrl('node_modules/sass-svg/_index.scss'));
   });
@@ -80,6 +89,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/dist/css/bootstrap-grid.css', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(
@@ -89,6 +99,7 @@ describe('importers / sassTildeImporter', () => {
       sassTildeImporter
         .findFileUrl('~bootstrap/dist/css/bootstrap-grid', {
           fromImport: true,
+          containingUrl: null,
         })
         ?.toString(),
     ).toBe(

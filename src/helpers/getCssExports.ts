@@ -114,21 +114,21 @@ export const getCssExports = ({
 
           const aliasImporter: sass.FileImporter<'sync'> = {
             findFileUrl(url) {
-              const exactFileUrl =
-                matchPath !== null
-                  ? matchPath(url, undefined, undefined, ['.sass', '.scss'])
-                  : undefined;
+              const exactFileUrl = matchPath?.(url, undefined, undefined, [
+                '.sass',
+                '.scss',
+              ]);
 
               if (exactFileUrl) {
                 return new URL(`file://${exactFileUrl}`);
               }
 
-              /**
-               * In case it didn't file the exact file it'll proceed to
-               * check other files matching the import process of SASS
-               * guidelines.
-               * @see {@link https://sass-lang.com/documentation/at-rules/import/#partials}
-               * @see {@link https://sass-lang.com/documentation/at-rules/import/#index-files}
+              /*
+               * In case it didn't find the exact file it'll proceed to
+               * check other files matching the import process of Sass
+               * guidelines:
+               * https://sass-lang.com/documentation/at-rules/import/#partials
+               * https://sass-lang.com/documentation/at-rules/import/#index-files
                */
 
               // Checks for partials

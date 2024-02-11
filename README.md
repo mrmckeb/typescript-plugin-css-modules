@@ -97,20 +97,20 @@ const b = styles['my_other-class'];
 
 Please note that no options are required. However, depending on your configuration, you may need to customise these options.
 
-| Option                     | Default value                      | Description                                                                                                                                  |
-| -------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `additionalData`           | `undefined`                        | An optional string to append to the top of source files.                                                                                     |
-| `allowUnknownClassnames`   | `false`                            | Disables TypeScript warnings on unknown classnames (for default imports only).                                                               |
-| `classnameTransform`       | `"asIs"`                           | See [`classnameTransform`](#classnameTransform) below.                                                                                       |
-| `customMatcher`            | `"\\.module\\.(c\|le\|sa\|sc)ss$"` | Changes the file extensions that this plugin processes.                                                                                      |
-| `customRenderer`           | `false`                            | See [`customRenderer`](#customRenderer) below.                                                                                               |
-| `customTemplate`           | `false`                            | See [`customTemplate`](#customTemplate) below.                                                                                               |
-| `goToDefinition`           | `false`                            | Enables jump to definition. See [`goToDefinition`](#goToDefinition) below.                                                                   |
-| `noUncheckedIndexedAccess` | `false`                            | Enable for compatibility with TypeScript's `noUncheckedIndexedAccess`.                                                                       |
-| `namedExports`             | `true`                             | Enables named exports for compatible classnames.                                                                                             |
-| `dotenvOptions`            | `{}`                               | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). Note that this plugin only accepts a `string` value for `path`. |
-| `postcssOptions`           | `{}`                               | See [`postcssOptions`](#postcssOptions) below.                                                                                               |
-| `rendererOptions`          | `{}`                               | See [`rendererOptions`](#rendererOptions) below.                                                                                             |
+| Option                     | Default value                              | Description                                                                                                                                  |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `additionalData`           | `undefined`                                | An optional string to append to the top of source files.                                                                                     |
+| `allowUnknownClassnames`   | `false`                                    | Disables TypeScript warnings on unknown classnames (for default imports only).                                                               |
+| `classnameTransform`       | `"asIs"`                                   | See [`classnameTransform`](#classnameTransform) below.                                                                                       |
+| `customMatcher`            | `"\\.module\\.((c\|le\|sa\|sc)ss\|styl)$"` | Changes the file extensions that this plugin processes.                                                                                      |
+| `customRenderer`           | `false`                                    | See [`customRenderer`](#customRenderer) below.                                                                                               |
+| `customTemplate`           | `false`                                    | See [`customTemplate`](#customTemplate) below.                                                                                               |
+| `goToDefinition`           | `false`                                    | Enables jump to definition. See [`goToDefinition`](#goToDefinition) below.                                                                   |
+| `noUncheckedIndexedAccess` | `false`                                    | Enable for compatibility with TypeScript's `noUncheckedIndexedAccess`.                                                                       |
+| `namedExports`             | `true`                                     | Enables named exports for compatible classnames.                                                                                             |
+| `dotenvOptions`            | `{}`                                       | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). Note that this plugin only accepts a `string` value for `path`. |
+| `postcssOptions`           | `{}`                                       | See [`postcssOptions`](#postcssOptions) below.                                                                                               |
+| `rendererOptions`          | `{}`                                       | See [`rendererOptions`](#rendererOptions) below.                                                                                             |
 
 ```json
 {

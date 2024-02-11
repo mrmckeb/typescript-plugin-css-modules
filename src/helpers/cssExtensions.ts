@@ -1,7 +1,7 @@
 export type isCSSFn = (fileName: string) => boolean;
 export type isRelativeCSSFn = (fileName: string) => boolean;
 
-const DEFAULT_REGEXP = /\.module\.(((c|le|sa|sc)ss)|styl)$/;
+const DEFAULT_REGEXP = /\.module\.((c|le|sa|sc)ss|styl)$/;
 
 const isRelative = (fileName: string) => /^\.\.?($|[\\/])/.test(fileName);
 

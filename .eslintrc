@@ -2,14 +2,18 @@
   "extends": [
     "eslint:recommended",
     "prettier",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:@typescript-eslint/strict"
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:@typescript-eslint/strict-type-checked",
   ],
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "project": ["./tsconfig.json"],
   },
-  "ignorePatterns": ["dist", "jest.config.js", "src/helpers/__tests__/fixtures"]
+  "ignorePatterns": [
+    "dist",
+    "jest.config.js",
+    "src/helpers/__tests__/fixtures",
+  ],
 }

@@ -1,0 +1,6 @@
+@import '../mixin';
+
+.my-folder-index {
+  text-indent: 9999px;
+  @include set-margin(10px);
+}

@@ -114,11 +114,57 @@ export const getCssExports = ({
 
           const aliasImporter: sass.FileImporter<'sync'> = {
             findFileUrl(url) {
-              const newUrl =
+              const exactFileUrl = matchPath?.(url, undefined, undefined, [
+                '.sass',
+                '.scss',
+              ]);
+
+              if (exactFileUrl) {
+                return new URL(`file://${exactFileUrl}`);
+              }
+
+              /*
+               * In case it didn't find the exact file it'll proceed to
+               * check other files matching the import process of Sass
+               * guidelines:
+               * https://sass-lang.com/documentation/at-rules/import/#partials
+               * https://sass-lang.com/documentation/at-rules/import/#index-files
+               */
+
+              // Checks for partials
+              const partialFileName = path.basename(url);
+              const partialDirName = path.dirname(url);
+              const partialFilePath = path.join(
+                partialDirName,
+                `_${partialFileName}`,
+              );
+              const partialFileUrl =
                 matchPath !== null
-                  ? matchPath(url, undefined, undefined, ['.sass', '.scss'])
+                  ? matchPath(partialFilePath, undefined, undefined, [
+                      '.sass',
+                      '.scss',
+                    ])
                   : undefined;
-              return newUrl ? new URL(`file://${newUrl}`) : null;
+
+              if (partialFileUrl) {
+                return new URL(`file://${partialFileUrl}`);
+              }
+
+              // Checks for an _index file
+              const indexFilePath = path.join(
+                partialDirName,
+                partialFileName,
+                `_index`,
+              );
+              const indexFileUrl =
+                matchPath !== null
+                  ? matchPath(indexFilePath, undefined, undefined, [
+                      '.sass',
+                      '.scss',
+                    ])
+                  : undefined;
+
+              return indexFileUrl ? new URL(`file://${indexFileUrl}`) : null;
             },
           };
 

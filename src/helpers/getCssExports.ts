@@ -64,16 +64,16 @@ export const getCssExports = ({
     if (options.customRenderer) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const customRenderer = require(options.customRenderer) as CustomRenderer;
-      const customResult = customRenderer(rawCss, {
+      const result = customRenderer(rawCss, {
         fileName,
         logger,
         compilerOptions,
       });
-      if (typeof customResult === 'string') {
-        transformedCss = customResult;
-      } else if (customResult.css) {
-        transformedCss = customResult.css;
-        sourceMap = customResult.map;
+      if (typeof result === 'string') {
+        transformedCss = result;
+      } else if (result.css) {
+        transformedCss = result.css;
+        sourceMap = result.sourceMap;
       }
     } else {
       switch (fileType) {

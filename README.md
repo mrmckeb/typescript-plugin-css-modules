@@ -284,7 +284,7 @@ You can include these logs with any issues you open for this project.
 
 ### Disabling the plugin
 
-If your project uses the plugin but you are experiencing issues with it, you can disable it for yourself by defining the environment variable `TS_PLUGIN_CSS_MODULES_DISALBED`.
+If your project uses this plugin, but you need to disable it in a specific scenario, providing the `DISABLE_TS_PLUGIN_CSS_MODULES` environment variable will cause the plugin to return before it initializes - effectively disabling it.
 
 ## About this project
 

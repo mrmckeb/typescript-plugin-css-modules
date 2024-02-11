@@ -21,15 +21,17 @@ const getPostCssConfigPlugins = (directory: string) => {
 };
 
 const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
+  if (process.env.DISABLE_TS_PLUGIN_CSS_MODULES !== undefined) {
+    return {
+      create: (info: tsModule.server.PluginCreateInfo) => info.languageService,
+    };
+  }
+
   let _isCSS: isCSSFn;
 
   function create(
     info: tsModule.server.PluginCreateInfo,
   ): tsModule.LanguageService {
-    if (process.env.TS_PLUGIN_CSS_MODULES_DISALBED !== undefined) {
-      return info.languageService;
-    }
-
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();

@@ -1,4 +1,9 @@
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "noEmit": false,
+    "outDir": "dist"
+  },
   "exclude": ["dist", "src/**/__tests__", "src/setup-tests.ts"]
 }

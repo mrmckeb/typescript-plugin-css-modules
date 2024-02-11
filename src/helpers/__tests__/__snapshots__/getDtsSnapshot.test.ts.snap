@@ -921,7 +921,7 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should retu
 `;
 
 exports[`helpers / cssSnapshots with goToDefinition enabled with Less should return a line-accurate dts file 1`] = `
-"export let nestedClassParent: string;export let childClass: string;export let selectorBlue: string;export let selectorGreen: string;export let selectorRed: string;export let column1: string;export let column2: string;export let column3: string;export let column4: string;
+"export let nestedClassParent: string;export let childClass: string;
 
 
 
@@ -932,13 +932,13 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Less should ret
 
 
 
+export let selectorBlue: string;export let selectorGreen: string;export let selectorRed: string;
 
 
 
 
 
-
-
+export let column1: string;export let column2: string;export let column3: string;export let column4: string;
 
 
 
@@ -1020,7 +1020,7 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Less should ret
 ",
   "sourceMap": {
     "file": "src/helpers/__tests__/fixtures/test.module.less",
-    "mappings": "AAAA;EACE,YAAA;ACCF;ADFA;EAII,eAAA;ACCJ;ADLC;EAYG,QAAA;ACJJ;ADRC;EAYG,QAAA;ACDJ;ADXC;EAYG,QAAA;ACEJ;ADdC;EAkBG,YAAA;ACDJ;ADjBC;EAkBG,aAAA;ACEJ;ADpBC;EAkBG,aAAA;ACKJ;ADvBC;EAkBG,aAAA;ACQJ;AACA,oBAAoB;ADEpB;EAEI,WAAA;EAAA,YAAA;EAAA,YAAA;ACCJ",
+    "mappings": "AAAA;EACE,YAAA;ACCF;ADFA;EAII,eAAA;ACCJ;ADMG;EACC,QAAA;ACJJ;ADGG;EACC,QAAA;ACDJ;ADAG;EACC,QAAA;ACEJ;ADGG;EACC,YAAA;ACDJ;ADAG;EACC,aAAA;ACEJ;ADHG;EACC,aAAA;ACKJ;ADNG;EACC,aAAA;ACQJ;AACA,oBAAoB;ADEpB;EAEI,WAAA;EAAA,YAAA;EAAA,YAAA;ACCJ",
     "names": [],
     "sources": [
       "[cwd]/src/helpers/__tests__/fixtures/test.module.less",

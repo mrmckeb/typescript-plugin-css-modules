@@ -1,0 +1,5 @@
+@use 'partial';
+
+.class-with-partial {
+  background-color: partial.$primary-color;
+}

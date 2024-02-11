@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["esnext", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
+    "noEmit": true,
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "dist",
     "resolveJsonModule": true,
     "rootDir": "src",
     "skipLibCheck": true,

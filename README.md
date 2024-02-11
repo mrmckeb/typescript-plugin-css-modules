@@ -153,7 +153,7 @@ module.exports = (css, { fileName, logger }) => {
   try {
     // ...process your css here.
 
-    // Return the final string here.
+    // `string`
     return renderedCss;
   } catch (error) {
     logger.error(error.message);
@@ -169,7 +169,9 @@ module.exports = (css, { fileName, logger }) => {
     // ...process your css here.
 
     return {
+      // `string`
       css: renderedCss,
+      // `RawSourceMap`
       sourceMap: sourceMap,
     };
   } catch (error) {

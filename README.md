@@ -152,11 +152,25 @@ The custom renderer itself should be a JavaScript file. The function will be cal
 module.exports = (css, { fileName, logger }) => {
   try {
     // ...process your css here.
+
+    // Return the final string here.
     return renderedCss;
-    // css and sourceMap
+  } catch (error) {
+    logger.error(error.message);
+  }
+};
+```
+
+If you want to return a a source map, you can return an object from your exported function.
+
+```js
+module.exports = (css, { fileName, logger }) => {
+  try {
+    // ...process your css here.
+
     return {
       css: renderedCss,
-      map: sourceMap,
+      sourceMap: sourceMap,
     };
   } catch (error) {
     logger.error(error.message);

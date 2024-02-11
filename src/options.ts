@@ -57,7 +57,7 @@ export type CustomRenderer = (
   | string
   | {
       css: string;
-      map?: RawSourceMap;
+      sourceMap?: RawSourceMap;
     };
 
 export interface CustomTemplateOptions {

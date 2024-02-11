@@ -152,6 +152,26 @@ describe('helpers / cssSnapshots', () => {
     });
   });
 
+  describe('with sass @use and a partial', () => {
+    const fileName = join(__dirname, 'fixtures', 'partial.module.scss');
+    const css = readFileSync(fileName, 'utf8');
+
+    it('should find external file from loadPaths', () => {
+      const cssExports = getCssExports({
+        css,
+        fileName,
+        logger,
+        options,
+        processor,
+        compilerOptions,
+        directory: __dirname,
+      });
+
+      expect(cssExports.classes).toMatchSnapshot();
+      expect(cssExports.css).toMatchSnapshot();
+    });
+  });
+
   describe('with loadPaths in sass options', () => {
     const fileName = join(__dirname, 'fixtures', 'include-path.module.scss');
     const css = readFileSync(fileName, 'utf8');

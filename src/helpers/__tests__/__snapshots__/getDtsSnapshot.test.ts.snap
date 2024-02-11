@@ -1361,3 +1361,15 @@ export let myAnimation: string | undefined;
 export let myFolderIndex: string | undefined;
 "
 `;
+
+exports[`helpers / cssSnapshots with sass @use and a partial should find external file from loadPaths 1`] = `
+{
+  "class-with-partial": "class-with-partial",
+}
+`;
+
+exports[`helpers / cssSnapshots with sass @use and a partial should find external file from loadPaths 2`] = `
+".class-with-partial {
+  background-color: rebeccapurple;
+}"
+`;

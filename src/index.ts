@@ -11,6 +11,7 @@ import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
 import { getProcessor } from './helpers/getProcessor';
 import { filterPlugins } from './helpers/filterPlugins';
+import { IScriptSnapshot } from 'typescript/lib/tsserverlibrary';
 
 const getPostCssConfigPlugins = (directory: string) => {
   try {
@@ -35,6 +36,7 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
     const logger = createLogger(info);
     const directory = info.project.getCurrentDirectory();
     const compilerOptions = info.project.getCompilerOptions();
+    const scriptSnapshotCache = new WeakMap<IScriptSnapshot, IScriptSnapshot>();
 
     const languageServiceHost = {} as Partial<tsModule.LanguageServiceHost>;
 
@@ -132,8 +134,16 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
     };
 
     languageServiceHost.getScriptSnapshot = (fileName) => {
-      if (isCSS(fileName) && fs.existsSync(fileName)) {
-        return getDtsSnapshot(
+      const existingSnapshot =
+        info.languageServiceHost.getScriptSnapshot(fileName);
+      if (!isCSS(fileName) || !fs.existsSync(fileName)) return existingSnapshot;
+
+      const cachedSnapshot =
+        existingSnapshot && scriptSnapshotCache.get(existingSnapshot);
+      if (cachedSnapshot && options.caching === 'always') {
+        return cachedSnapshot;
+      } else {
+        const newSnapshot = getDtsSnapshot(
           ts,
           processor,
           fileName,
@@ -142,8 +152,10 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
           compilerOptions,
           directory,
         );
+        if (existingSnapshot)
+          scriptSnapshotCache.set(existingSnapshot, newSnapshot);
+        return newSnapshot;
       }
-      return info.languageServiceHost.getScriptSnapshot(fileName);
     };
 
     const createModuleResolver =

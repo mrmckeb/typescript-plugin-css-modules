@@ -295,6 +295,15 @@ declare module '*.module.styl' {
 }
 ```
 
+#### @typescript-eslint not picking up global declarations
+`@typescript-eslint` may require explicit typings even if you have global declarations in your library.
+The full declaration above may clash in such a case. To make everything work together, just add something like this instead of the explicit declarations above:
+```ts
+/// <reference path="../node_modules/vite/client.d.ts" />
+```
+That sample is for [vite](https://vitejs.dev). You need to use the proper path for your project.
+You can find the correct path through your Editor if everything else works correctly.
+
 ## Troubleshooting
 
 For troubleshooting and debugging, you can view the TypeScript Server Log in Visual Studio Code by entering `Typescript: Open TS Server log` in the [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).

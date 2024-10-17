@@ -214,21 +214,14 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
 
     // TypeScript 5.x
     if (info.languageServiceHost.resolveModuleNameLiterals) {
-      const _resolveModuleNameLiterals =
-        info.languageServiceHost.resolveModuleNameLiterals.bind(
-          info.languageServiceHost,
-        );
-
       languageServiceHost.resolveModuleNameLiterals = (
         moduleNames,
         containingFile,
         ...rest
       ) => {
-        const resolvedModules = _resolveModuleNameLiterals(
-          moduleNames,
-          containingFile,
-          ...rest,
-        );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const resolvedModules = info.languageServiceHost
+          .resolveModuleNameLiterals!(moduleNames, containingFile, ...rest);
 
         const moduleResolver = createModuleResolver(containingFile);
 

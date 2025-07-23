@@ -29,7 +29,9 @@ export const createDtsExports = ({
   const possiblyUndefined = Boolean(options.noUncheckedIndexedAccess);
 
   const classnameToProperty = (classname: string) =>
-    `'${classname}'${possiblyUndefined ? '?' : ''}: string;`;
+    `interface classes { '${classname}'${
+      possiblyUndefined ? '?' : ''
+    }: string; };`;
   const classnameToNamedExport = (classname: string) =>
     `export let ${classname}: string${
       possiblyUndefined ? ' | undefined' : ''
@@ -55,16 +57,16 @@ export const createDtsExports = ({
     const dtsLines = Array.from(Array(cssLines.length), () => '');
 
     // Create a list of filtered classnames and hashed classnames.
-    const filteredClasses = Object.entries(cssExports.classes)
-      .map(([classname, originalClassname]) => [
+    const transformedClasses = Object.entries(cssExports.classes).map(
+      ([classname, originalClassname]) => [
         // TODO: Improve this. It may return multiple valid classnames and we
         // want to handle all of those.
         transformClasses(options.classnameTransform)(classname)[0],
         originalClassname,
-      ])
-      .filter(([classname]) => isValidVariable(classname));
+      ],
+    );
 
-    filteredClasses.forEach(([classname, originalClassname]) => {
+    transformedClasses.forEach(([classname, originalClassname]) => {
       let matchedLine;
       let matchedColumn;
 
@@ -91,29 +93,36 @@ export const createDtsExports = ({
         column: matchedColumn ? matchedColumn : 0,
       });
 
+      if (isValidVariable(classname)) {
+        dtsLines[lineNumber ? lineNumber - 1 : 0] +=
+          classnameToNamedExport(classname);
+      }
+
       dtsLines[lineNumber ? lineNumber - 1 : 0] +=
-        classnameToNamedExport(classname);
+        classnameToProperty(classname);
     });
 
     dts = dtsLines.join('\n');
+  } else {
+    dts += processedClasses.map(classnameToProperty).join('\n  ');
+    if (
+      !options.goToDefinition &&
+      options.namedExports !== false &&
+      filteredClasses.length
+    ) {
+      dts += filteredClasses.join('\n') + '\n';
+    }
   }
 
-  dts += `\
-declare let _classes: {
-  ${processedClasses.map(classnameToProperty).join('\n  ')}${
-    options.allowUnknownClassnames ? '\n  [key: string]: string;' : ''
+  if (options.allowUnknownClassnames) {
+    dts += `
+  interface classes { [key: string]: string };
+    `;
   }
-};
-export default _classes;
-`;
 
-  if (
-    !options.goToDefinition &&
-    options.namedExports !== false &&
-    filteredClasses.length
-  ) {
-    dts += filteredClasses.join('\n') + '\n';
-  }
+  dts = `interface classes { }; declare let _classes: classes; ${dts}
+    export default _classes;
+    `;
 
   if (options.customTemplate) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires

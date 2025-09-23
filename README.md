@@ -235,7 +235,7 @@ This is experimental, and may not always work as expected. It currently supports
 | Option   | Default value | Description                                                                          |
 | -------- | ------------- | ------------------------------------------------------------------------------------ |
 | `less`   | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
-| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
+| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api/interfaces/options/). |
 | `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).          |
 
 > For convenience, `loadPaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.

@@ -46,7 +46,16 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
       },
     });
 
-    const languageService = ts.createLanguageService(languageServiceHostProxy);
+    const languageService = ts.createLanguageService(
+      languageServiceHostProxy,
+      // documentRegistry exists at runtime but is typed as private.
+      (
+        info.project.projectService as unknown as {
+          documentRegistry: tsModule.DocumentRegistry;
+        }
+      ).documentRegistry,
+      info.project.projectService.serverMode,
+    );
 
     // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
     process.chdir(directory);

@@ -129,6 +129,35 @@ describe('helpers / cssSnapshots', () => {
     });
   });
 
+  /**
+   * When fileB.module.css `@import`s fileA.module.css, Vite (and css-loader)
+   * expose classes from both files on the fileB module export. The plugin's
+   * default processor does not inline `@import`, so class1 is missing from
+   * types even though it works at runtime.
+   */
+  describe('with a CSS modules @import of another CSS modules file', () => {
+    const fileName = join(__dirname, 'fixtures', 'fileB.module.css');
+    const css = readFileSync(fileName, 'utf8');
+    const defaultProcessor = getProcessor();
+
+    it('should include classes from both the importing and imported files', () => {
+      const cssExports = getCssExports({
+        css,
+        fileName,
+        logger,
+        options,
+        processor: defaultProcessor,
+        compilerOptions,
+        directory: __dirname,
+      });
+
+      expect(cssExports.classes).toEqual({
+        class1: 'class1',
+        class2: 'class2',
+      });
+    });
+  });
+
   describe('with a custom renderer', () => {
     const fileName = 'exampleFileContents';
     const css = 'exampleFileName';

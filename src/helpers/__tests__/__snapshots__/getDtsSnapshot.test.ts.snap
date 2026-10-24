@@ -885,13 +885,12 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Less should ret
   two-2: green;
   three-3: red;
 }
-",
+/*# sourceMappingURL=src/helpers/__tests__/fixtures/test.module.less.map */",
   "sourceMap": {
     "file": "src/helpers/__tests__/fixtures/test.module.less",
-    "mappings": "AAAA;EACE,YAAA;ACCF;ADFA;EAII,eAAA;ACCJ;ADMG;EACC,QAAA;ACJJ;ADGG;EACC,QAAA;ACDJ;ADAG;EACC,QAAA;ACEJ;ADGG;EACC,YAAA;ACDJ;ADAG;EACC,aAAA;ACEJ;ADHG;EACC,aAAA;ACKJ;ADNG;EACC,aAAA;ACQJ;AACA,oBAAoB;ADEpB;EAEI,WAAA;EAAA,YAAA;EAAA,YAAA;ACCJ",
+    "mappings": "AAAA;EACE,YAAA;AACF;AAFA;EAII,eAAA;AACJ;AAMG;EACC,QAAA;AAJJ;AAGG;EACC,QAAA;AADJ;AAAG;EACC,QAAA;AAEJ;AAGG;EACC,YAAA;AADJ;AAAG;EACC,aAAA;AAEJ;AAHG;EACC,aAAA;AAKJ;AANG;EACC,aAAA;AAQJ;AACA,oBAAoB;AAEpB;EAEI,WAAA;EAAA,YAAA;EAAA,YAAA;AACJ",
     "names": [],
     "sources": [
-      "[cwd]/src/helpers/__tests__/fixtures/test.module.less",
       "src/helpers/__tests__/fixtures/test.module.less",
     ],
     "version": 3,

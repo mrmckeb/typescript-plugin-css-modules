@@ -111,6 +111,7 @@ Please note that no options are required. However, depending on your configurati
 | `dotenvOptions`            | `{}`                                       | Provides options for [`dotenv`](https://github.com/motdotla/dotenv#options). Note that this plugin only accepts a `string` value for `path`. |
 | `postcssOptions`           | `{}`                                       | See [`postcssOptions`](#postcssOptions) below.                                                                                               |
 | `rendererOptions`          | `{}`                                       | See [`rendererOptions`](#rendererOptions) below.                                                                                             |
+| `caching`                  | `"never"`                                  | See [`caching`](#caching) below                                                                                                              |
 
 ```json
 {
@@ -232,13 +233,26 @@ This is experimental, and may not always work as expected. It currently supports
 
 #### `rendererOptions`
 
-| Option   | Default value | Description                                                                          |
-| -------- | ------------- | ------------------------------------------------------------------------------------ |
-| `less`   | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).             |
-| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api#options). |
-| `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).          |
+| Option   | Default value | Description                                                                                      |
+| -------- | ------------- | ------------------------------------------------------------------------------------------------ |
+| `less`   | `{}`          | Set [renderer options for Less](http://lesscss.org/usage/#less-options).                         |
+| `sass`   | `{}`          | Set [renderer options for Sass](https://sass-lang.com/documentation/js-api/interfaces/options/). |
+| `stylus` | `{}`          | Set [renderer options for Stylus](https://stylus.bootcss.com/docs/js.html).                      |
 
 > For convenience, `loadPaths` for Sass are extended, not replaced. The defaults are the path of the current file, and `'node_modules'`.
+
+#### `caching`
+
+Enables or disables caching.
+
+`"always"` will cache everything. This is overly agressive, and will cause stale types when CSS imported by CSS is modified.
+The cache key is the filename of the CSS file directly imported by TypeScript. Restarting the TypeScript server will clear the cache.
+
+`"never"` (default) regenerates types for every CSS file, every time any file is changed. This causes significant latency in editor
+operations (autocomplete, import suggestions, etc) in large projects, even when editing non-CSS files.
+
+Unfortunately, there's no balanced option or correct invalidation possible, due to typescript and the various CSS tools having
+different module loading systems.
 
 ### Visual Studio Code
 

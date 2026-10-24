@@ -35,14 +35,13 @@ export interface Options {
   /** @deprecated To align with naming in other projects. */
   postCssOptions?: PostcssOptions;
   rendererOptions?: RendererOptions;
+  caching?: CachingOptions;
 }
 
+export type CachingOptions = 'always' | 'never';
+
 export type ClassnameTransformOptions =
-  | 'asIs'
-  | 'camelCase'
-  | 'camelCaseOnly'
-  | 'dashes'
-  | 'dashesOnly';
+  'asIs' | 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly';
 
 export interface CustomRendererOptions {
   fileName: string;

@@ -2,7 +2,6 @@ import path from 'path';
 import Processor from 'postcss/lib/processor';
 import less from 'less';
 import sass from 'sass';
-import stylus from 'stylus';
 import { CSSExports, extractICSS } from 'icss-utils';
 import { RawSourceMap } from 'source-map-js';
 import type tsModule from 'typescript/lib/tsserverlibrary';
@@ -190,12 +189,15 @@ export const getCssExports = ({
           break;
         }
 
-        case FileType.styl:
+        case FileType.styl: {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          const stylus = require('stylus') as typeof import('stylus');
           transformedCss = stylus(rawCss, {
             ...(rendererOptions.stylus ?? {}),
             filename: fileName,
           }).render();
           break;
+        }
 
         default:
           transformedCss = rawCss;

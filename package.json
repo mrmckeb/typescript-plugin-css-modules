@@ -101,5 +101,8 @@
         "node-sass"
       ]
     }
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

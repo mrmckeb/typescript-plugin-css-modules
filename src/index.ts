@@ -163,8 +163,7 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
       (
         moduleName: string,
         resolveModule: () =>
-          | tsModule.ResolvedModuleWithFailedLookupLocations
-          | undefined,
+          tsModule.ResolvedModuleWithFailedLookupLocations | undefined,
       ): tsModule.ResolvedModuleFull | undefined => {
         if (isRelativeCSS(moduleName)) {
           return {

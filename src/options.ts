@@ -41,11 +41,7 @@ export interface Options {
 export type CachingOptions = 'always' | 'never';
 
 export type ClassnameTransformOptions =
-  | 'asIs'
-  | 'camelCase'
-  | 'camelCaseOnly'
-  | 'dashes'
-  | 'dashesOnly';
+  'asIs' | 'camelCase' | 'camelCaseOnly' | 'dashes' | 'dashesOnly';
 
 export interface CustomRendererOptions {
   fileName: string;

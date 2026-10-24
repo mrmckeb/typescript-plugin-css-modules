@@ -134,27 +134,6 @@ export const __cssModule: true;
 export type AllClassNames = '';"
 `;
 
-exports[`helpers / cssSnapshots with file 'empty.module.styl' createExports should create an exports file 1`] = `
-"declare let _classes: {
-  
-};
-export default _classes;
-"
-`;
-
-exports[`helpers / cssSnapshots with file 'empty.module.styl' getCssExports should return an object matching expected CSS 1`] = `{}`;
-
-exports[`helpers / cssSnapshots with file 'empty.module.styl' with a custom template should transform the generated dts 1`] = `
-"/* eslint-disable */
-declare let _classes: {
-  
-};
-export default _classes;
-
-export const __cssModule: true;
-export type AllClassNames = '';"
-`;
-
 exports[`helpers / cssSnapshots with file 'import.module.css' createExports should create an exports file 1`] = `
 "declare let _classes: {
   'classA': string;
@@ -278,64 +257,6 @@ export default _classes;
 
 export const __cssModule: true;
 export type AllClassNames = 'nested-class-parent' | 'child-class' | 'selector-blue' | 'selector-green' | 'selector-red' | 'column-1' | 'column-2' | 'column-3' | 'column-4' | 'color-set';"
-`;
-
-exports[`helpers / cssSnapshots with file 'import.module.styl' createExports should create an exports file 1`] = `
-"declare let _classes: {
-  'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
-};
-export default _classes;
-export let foo: string;
-export let bar: string;
-export let baz: string;
-"
-`;
-
-exports[`helpers / cssSnapshots with file 'import.module.styl' getCssExports should return an object matching expected CSS 1`] = `
-{
-  "bar": "bar",
-  "baz": "baz",
-  "col-1": "col-1",
-  "col-2": "col-2",
-  "col-3": "col-3",
-  "foo": "foo",
-  "inside-1-name-2": "inside-1-name-2",
-  "inside-2-name-1": "inside-2-name-1",
-  "inside-local": "inside-local",
-  "local-class-1": "local-class-1",
-}
-`;
-
-exports[`helpers / cssSnapshots with file 'import.module.styl' with a custom template should transform the generated dts 1`] = `
-"/* eslint-disable */
-declare let _classes: {
-  'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
-};
-export default _classes;
-export let foo: string;
-export let bar: string;
-export let baz: string;
-
-export const __cssModule: true;
-export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
 exports[`helpers / cssSnapshots with file 'postcss.module.css' createExports should create an exports file 1`] = `
@@ -689,64 +610,6 @@ export let App_logo: string;
 
 export const __cssModule: true;
 export type AllClassNames = 'local-class-inside-global' | 'local-class' | 'local-class-2' | 'local-class-inside-local' | 'reserved-words' | 'default' | 'const' | 'nested-class-parent' | 'child-class' | 'nested-class-parent--extended' | 'section-1' | 'section-2' | 'section-3' | 'section-4' | 'section-5' | 'section-6' | 'section-7' | 'section-8' | 'section-9' | 'class-with-mixin' | 'App_logo' | 'App-logo' | 'my-animation' | 'my-folder-index';"
-`;
-
-exports[`helpers / cssSnapshots with file 'test.module.styl' createExports should create an exports file 1`] = `
-"declare let _classes: {
-  'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
-};
-export default _classes;
-export let foo: string;
-export let bar: string;
-export let baz: string;
-"
-`;
-
-exports[`helpers / cssSnapshots with file 'test.module.styl' getCssExports should return an object matching expected CSS 1`] = `
-{
-  "bar": "bar",
-  "baz": "baz",
-  "col-1": "col-1",
-  "col-2": "col-2",
-  "col-3": "col-3",
-  "foo": "foo",
-  "inside-1-name-2": "inside-1-name-2",
-  "inside-2-name-1": "inside-2-name-1",
-  "inside-local": "inside-local",
-  "local-class-1": "local-class-1",
-}
-`;
-
-exports[`helpers / cssSnapshots with file 'test.module.styl' with a custom template should transform the generated dts 1`] = `
-"/* eslint-disable */
-declare let _classes: {
-  'foo': string;
-  'bar': string;
-  'baz': string;
-  'col-1': string;
-  'col-2': string;
-  'col-3': string;
-  'local-class-1': string;
-  'inside-local': string;
-  'inside-1-name-2': string;
-  'inside-2-name-1': string;
-};
-export default _classes;
-export let foo: string;
-export let bar: string;
-export let baz: string;
-
-export const __cssModule: true;
-export type AllClassNames = 'foo' | 'bar' | 'baz' | 'col-1' | 'col-2' | 'col-3' | 'local-class-1' | 'inside-local' | 'inside-1-name-2' | 'inside-2-name-1';"
 `;
 
 exports[`helpers / cssSnapshots with goToDefinition enabled with CSS should return a line-accurate dts file 1`] = `

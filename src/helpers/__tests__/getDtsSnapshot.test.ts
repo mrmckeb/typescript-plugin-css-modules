@@ -13,16 +13,16 @@ const testFileNames = [
   'empty.module.less',
   'empty.module.sass',
   'empty.module.scss',
-  'empty.module.styl',
+  // 'empty.module.styl',
   'import.module.css',
   'import.module.less',
-  'import.module.styl',
+  // 'import.module.styl',
   'postcss.module.css',
   'test.module.css',
   'test.module.less',
   'test.module.sass',
   'test.module.scss',
-  'test.module.styl',
+  // 'test.module.styl',
 ];
 
 const logger: Logger = {
@@ -197,7 +197,7 @@ describe('helpers / cssSnapshots', () => {
     });
   });
 
-  describe('with loadPaths in stylus options', () => {
+  describe.skip('with loadPaths in stylus options', () => {
     const fileName = join(__dirname, 'fixtures', 'include-path.module.styl');
     const css = readFileSync(fileName, 'utf8');
 

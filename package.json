@@ -1,6 +1,6 @@
 {
   "name": "typescript-plugin-css-modules",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "main": "dist/index.js",
   "author": "Brody McKee <mrmckeb@hotmail.com>",
   "license": "MIT",
@@ -60,8 +60,10 @@
     "reserved-words": "^0.1.2",
     "sass": "^1.70.0",
     "source-map-js": "^1.0.2",
-    "stylus": "^0.62.0",
     "tsconfig-paths": "^4.2.0"
+  },
+  "optionalDependencies": {
+    "stylus": "^0.62.0"
   },
   "devDependencies": {
     "@types/icss-utils": "^5.1.2",

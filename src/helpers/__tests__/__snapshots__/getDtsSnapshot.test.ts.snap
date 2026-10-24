@@ -988,10 +988,6 @@ export let myAnimation: string;
 
 
 
-
-
-
-
 declare let _classes: {
   'localClassInsideGlobal': string;
   'localClass': string;
@@ -1069,7 +1065,6 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should ret
 .reserved-words .default {
   color: rebeccapurple;
 }
-
 .reserved-words .const {
   color: rebeccapurple;
 }
@@ -1077,7 +1072,6 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should ret
 .nested-class-parent .child-class {
   color: rebeccapurple;
 }
-
 .nested-class-parent--extended {
   color: rebeccapurple;
 }
@@ -1132,20 +1126,18 @@ exports[`helpers / cssSnapshots with goToDefinition enabled with Sass should ret
     animation: my-animation infinite 20s linear;
   }
 }
-
 /*
 .commented-parent-class {
   .commented-child-class
 }
 */
-
 .my-folder-index {
   text-indent: 9999px;
   margin: 10px;
 }",
   "sourceMap": {
     "file": "src/helpers/__tests__/fixtures/test.module.scss",
-    "mappings": "AAAA;EACE,oBAAA;ACCF;;ADGE;EACE,oBAAA;ACAJ;;ADIA;EACE,oBAAA;ACDF;;ADKE;EACE,oBAAA;ACFJ;;ADOE;EACE,oBAAA;ACJJ;;ADME;EACE,oBAAA;ACJJ;;ADSE;EACE,oBAAA;ACNJ;;ADQE;EACE,oBAAA;ACNJ;;ADaE;EACE,oBAJI;ACNR;;ADSE;EACE,oBAJI;ACFR;;ADKE;EACE,oBAJI;ACER;;ADCE;EACE,oBAJI;ACMR;;ADHE;EACE,oBAJI;ACUR;;ADPE;EACE,oBAJI;ACcR;;ADXE;EACE,oBAJI;ACkBR;;ADfE;EACE,oBAJI;ACsBR;;ADnBE;EACE,oBAJI;AC0BR;;ADhBA;EE/CE,SFgDoB;ACmBtB;;ADhBA;EACE,cAAA;EACA,oBAAA;ACmBF;;ADhBA;EACE;IACE,2CAAA;ECmBF;AACF;;ADZA;;;;CAAA;;AGjEA;EACE,mBAAA;EDFA,YCGoB;AFoFtB",
+    "mappings": "AAAA;EACE,oBAAA;ACCF;;ADGE;EACE,oBAAA;ACAJ;;ADIA;EACE,oBAAA;ACDF;;ADKE;EACE,oBAAA;ACFJ;;ADOE;EACE,oBAAA;ACJJ;ADME;EACE,oBAAA;ACJJ;;ADSE;EACE,oBAAA;ACNJ;ADQE;EACE,oBAAA;ACNJ;;ADaE;EACE,oBAJI;ACNR;;ADSE;EACE,oBAJI;ACFR;;ADKE;EACE,oBAJI;ACER;;ADCE;EACE,oBAJI;ACMR;;ADHE;EACE,oBAJI;ACUR;;ADPE;EACE,oBAJI;ACcR;;ADXE;EACE,oBAJI;ACkBR;;ADfE;EACE,oBAJI;ACsBR;;ADnBE;EACE,oBAJI;AC0BR;;ADhBA;EE/CE,SFgDoB;ACmBtB;;ADhBA;EACE,cAAA;EACA,oBAAA;ACmBF;;ADhBA;EACE;IACE,2CAAA;ECmBF;AACF;ADZA;;;;CAAA;AGjEA;EACE,mBAAA;EDFA,YCGoB;AFoFtB",
     "names": [],
     "sources": [
       "file://[cwd]/src/helpers/__tests__/fixtures/test.module.scss",

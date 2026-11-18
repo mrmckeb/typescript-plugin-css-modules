@@ -21,6 +21,21 @@ const getPostCssConfigPlugins = (directory: string) => {
   }
 };
 
+type HostMethods = Pick<
+  tsModule.LanguageServiceHost,
+  | 'getScriptKind'
+  | 'getScriptSnapshot'
+  | 'resolveModuleNameLiterals'
+  | 'resolveModuleNames'
+  | 'getResolvedModuleWithFailedLookupLocationsFromCache'
+>;
+
+// tsserver can initialize the plugin again on the same host after a config edit.
+const hostMethods = new WeakMap<
+  tsModule.LanguageServiceHost,
+  { original: HostMethods; overrides: HostMethods }
+>();
+
 const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
   if (process.env.DISABLE_TS_PLUGIN_CSS_MODULES !== undefined) {
     return {
@@ -38,17 +53,38 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
     const compilerOptions = info.project.getCompilerOptions();
     const scriptSnapshotCache = new WeakMap<IScriptSnapshot, IScriptSnapshot>();
 
-    const languageServiceHost = {} as Partial<tsModule.LanguageServiceHost>;
-
-    const languageServiceHostProxy = new Proxy(info.languageServiceHost, {
-      get(target, key: keyof tsModule.LanguageServiceHost) {
-        return languageServiceHost[key]
-          ? languageServiceHost[key]
-          : target[key];
-      },
-    });
-
-    const languageService = ts.createLanguageService(languageServiceHostProxy);
+    // Keep the project's language service and its current program in sync.
+    const host = info.languageServiceHost;
+    let methods = hostMethods.get(host);
+    if (!methods) {
+      const original: HostMethods = {
+        getScriptKind: host.getScriptKind?.bind(host),
+        getScriptSnapshot: host.getScriptSnapshot.bind(host),
+        resolveModuleNameLiterals: host.resolveModuleNameLiterals?.bind(host),
+        resolveModuleNames: host.resolveModuleNames?.bind(host),
+        getResolvedModuleWithFailedLookupLocationsFromCache:
+          host.getResolvedModuleWithFailedLookupLocationsFromCache?.bind(host),
+      };
+      const overrides = { ...original };
+      methods = { original, overrides };
+      hostMethods.set(host, methods);
+      host.getScriptKind = (fileName) =>
+        overrides.getScriptKind?.(fileName) ?? ts.ScriptKind.Unknown;
+      host.getScriptSnapshot = (fileName) =>
+        overrides.getScriptSnapshot(fileName);
+      if (original.resolveModuleNameLiterals) {
+        const resolve = original.resolveModuleNameLiterals;
+        host.resolveModuleNameLiterals = (...args) =>
+          (overrides.resolveModuleNameLiterals ?? resolve)(...args);
+      } else if (original.resolveModuleNames) {
+        const resolve = original.resolveModuleNames;
+        host.resolveModuleNames = (...args) =>
+          (overrides.resolveModuleNames ?? resolve)(...args);
+      }
+    }
+    const languageServiceHost = methods.overrides;
+    const { getScriptKind, getScriptSnapshot, resolveModuleNameLiterals } =
+      methods.original;
 
     // TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
     process.chdir(directory);
@@ -124,18 +160,17 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
     _isCSS = isCSS;
 
     languageServiceHost.getScriptKind = (fileName) => {
-      if (!info.languageServiceHost.getScriptKind) {
+      if (!getScriptKind) {
         return ts.ScriptKind.Unknown;
       }
       if (isCSS(fileName)) {
         return ts.ScriptKind.TS;
       }
-      return info.languageServiceHost.getScriptKind(fileName);
+      return getScriptKind(fileName);
     };
 
     languageServiceHost.getScriptSnapshot = (fileName) => {
-      const existingSnapshot =
-        info.languageServiceHost.getScriptSnapshot(fileName);
+      const existingSnapshot = getScriptSnapshot(fileName);
       if (!isCSS(fileName) || !fs.existsSync(fileName)) return existingSnapshot;
 
       const cachedSnapshot =
@@ -224,15 +259,17 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
       };
 
     // TypeScript 5.x
-    if (info.languageServiceHost.resolveModuleNameLiterals) {
+    if (resolveModuleNameLiterals) {
       languageServiceHost.resolveModuleNameLiterals = (
         moduleNames,
         containingFile,
         ...rest
       ) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const resolvedModules = info.languageServiceHost
-          .resolveModuleNameLiterals!(moduleNames, containingFile, ...rest);
+        const resolvedModules = resolveModuleNameLiterals(
+          moduleNames,
+          containingFile,
+          ...rest,
+        );
 
         const moduleResolver = createModuleResolver(containingFile);
 
@@ -252,11 +289,8 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
       };
     }
     // TypeScript 4.x
-    else if (info.languageServiceHost.resolveModuleNames) {
-      const _resolveModuleNames =
-        info.languageServiceHost.resolveModuleNames.bind(
-          info.languageServiceHost,
-        );
+    else if (methods.original.resolveModuleNames) {
+      const _resolveModuleNames = methods.original.resolveModuleNames;
 
       languageServiceHost.resolveModuleNames = (
         moduleNames,
@@ -289,7 +323,7 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
       };
     }
 
-    return languageService;
+    return info.languageService;
   }
 
   function getExternalFiles(

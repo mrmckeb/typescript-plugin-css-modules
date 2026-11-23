@@ -7,6 +7,8 @@
 A [TypeScript language service plugin](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)
 for [CSS Modules](https://github.com/css-modules/css-modules).
 
+> **Using TypeScript 7?** Use the new content mapper packages: [`css-modules-content-mapper`](https://www.npmjs.com/package/css-modules-content-mapper), [`sass-content-mapper`](https://www.npmjs.com/package/sass-content-mapper) or [`less-content-mapper`](https://www.npmjs.com/package/less-content-mapper). See [TypeScript 7 support](#typescript-7-support) for details.
+
 <img src="https://raw.githubusercontent.com/mrmckeb/typescript-plugin-css-modules/main/.github/images/example.gif" alt="typescript-plugin-css-modules example" />
 
 ## Table of contents
@@ -14,6 +16,7 @@ for [CSS Modules](https://github.com/css-modules/css-modules).
 - [typescript-plugin-css-modules](#typescript-plugin-css-modules)
   - [Table of contents](#about-this-plugin)
   - [About this plugin](#table-of-contents)
+  - [TypeScript 7 support](#typescript-7-support)
   - [Installation](#installation)
     - [Importing CSS](#importing-css)
     - [Options](#options)
@@ -44,6 +47,16 @@ If you need a different solution, these projects might help:
 
 - For Jest support, see https://www.npmjs.com/package/jest-css-modules-transform (one of a few options).
 - For Webpack configuration, see https://webpack.js.org/loaders/css-loader/#pure-css-css-modules-and-postcss for an example.
+
+## TypeScript 7 support
+
+TypeScript 7 doesn't currently support language service plugins, so this plugin won't work with it. For TypeScript 7.1 and newer, use these content mapper packages, built as the successor to this plugin. They also check your CSS module types when you run `tsc`, not just in your editor:
+
+- [`css-modules-content-mapper`](https://www.npmjs.com/package/css-modules-content-mapper) for plain CSS modules
+- [`sass-content-mapper`](https://www.npmjs.com/package/sass-content-mapper) for `.scss`/`.sass` CSS modules
+- [`less-content-mapper`](https://www.npmjs.com/package/less-content-mapper) for `.less` CSS modules
+
+This plugin will continue to be supported for TypeScript 6 and older, but new feature work will prioritise the content mappers. See [issue #304](https://github.com/mrmckeb/typescript-plugin-css-modules/issues/304) for more details.
 
 ## Installation
 

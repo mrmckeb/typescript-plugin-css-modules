@@ -11,6 +11,7 @@ import { getDtsSnapshot } from './helpers/getDtsSnapshot';
 import { createLogger } from './helpers/logger';
 import { getProcessor } from './helpers/getProcessor';
 import { filterPlugins } from './helpers/filterPlugins';
+import { resolveSubpathImport } from './helpers/resolveSubpathImport';
 import { IScriptSnapshot } from 'typescript/lib/tsserverlibrary';
 
 const getPostCssConfigPlugins = (directory: string) => {
@@ -209,6 +210,19 @@ const init: tsModule.server.PluginModuleFactory = ({ typescript: ts }) => {
               moduleName,
             ),
           };
+        }
+        if (moduleName.startsWith('#')) {
+          const subpathImportPath = resolveSubpathImport(
+            moduleName,
+            containingFile,
+          );
+          if (subpathImportPath && isCSS(subpathImportPath)) {
+            return {
+              extension: ts.Extension.Dts,
+              isExternalLibraryImport: false,
+              resolvedFileName: subpathImportPath,
+            };
+          }
         }
         if (isCSS(moduleName)) {
           // TODO: Move this section to a separate file and add basic tests.

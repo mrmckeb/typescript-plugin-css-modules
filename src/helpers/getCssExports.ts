@@ -111,11 +111,10 @@ export const getCssExports = ({
         case FileType.sass: {
           const filePath = getFilePath(fileName);
           const { loadPaths, ...sassOptions } = rendererOptions.sass ?? {};
-          const { baseUrl = directory, paths } = compilerOptions;
-          const matchPath =
-            baseUrl && paths
-              ? createMatchPath(path.resolve(baseUrl), paths)
-              : null;
+          const { baseUrl = directory, paths = {} } = compilerOptions;
+          const matchPath = baseUrl
+            ? createMatchPath(path.resolve(baseUrl), paths)
+            : null;
 
           const aliasImporter: sass.FileImporter<'sync'> = {
             findFileUrl(url) {

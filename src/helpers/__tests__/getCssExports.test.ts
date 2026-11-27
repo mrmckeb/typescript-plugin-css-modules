@@ -229,6 +229,16 @@ describe('helpers / getCssExports', () => {
       expect(logger.error).not.toHaveBeenCalled();
     });
 
+    it('should resolve SCSS imports relative to baseUrl when paths is omitted', () => {
+      const result = run({
+        css: "@import 'external/package/public.module.scss';",
+        fileName,
+        compilerOptions: { baseUrl: __dirname },
+      });
+      expect(result.classes).not.toEqual({});
+      expect(logger.error).not.toHaveBeenCalled();
+    });
+
     it('should fail gracefully when an alias does not match anything', () => {
       const result = run({
         css: "@import '@scss/nope';",
